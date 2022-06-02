@@ -1,0 +1,42 @@
+.oncard {
+    color: #FF317B;
+    background: rgba(255, 49, 125, 0.1);
+}
+
+.Cashback {
+    color: #3A86FF;
+    background: rgba(58, 133, 255, 0.1);
+}
+
+.Instore, .Online, .online {
+    color: #120078;
+    background: rgba(0, 0, 0, 0.06);
+}
+
+.Prize.Draw {
+    color: #FB5607;
+    background: rgba(251, 86, 7, .1);
+
+}
+
+.coupon, .Coupon {
+    color: #8338EC;
+    background: rgba(131, 56, 236, 0.1);
+}
+
+.cardbadge {
+    border-radius: 4px;
+    width: -moz-fit-content;
+    width: fit-content;
+    padding: 0.2rem .3rem;
+    margin: 0.5rem 0rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 15px;
+    text-transform: uppercase;
+
+}

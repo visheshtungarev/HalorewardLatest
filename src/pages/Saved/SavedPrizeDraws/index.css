@@ -1,0 +1,8 @@
+.dealicon_img_frame {
+    height: 70px;
+    width: 70px;
+    object-fit: contain;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px;
+}

@@ -1,0 +1,50 @@
+.headingFancy {
+    display: flex;
+    margin-bottom: 1rem;
+}
+
+.filterSection {
+    display: flex;
+}
+
+.filterSection>select, .filterSection>input, .filterSection>div {
+    margin-left: .5rem;
+}
+
+button.filterBtn, .ant-select>.ant-select-selector {
+    background: transparent !important;
+    border-radius: .5rem !important;
+    border: 1px solid #ddd !important;
+    height: 35px !important;
+    display: flex;
+    align-items: center;
+
+}
+
+.list_action a {
+    color: #000;
+}
+
+button.filterBtn {
+    display: none;
+}
+
+.list_title>.subheading {
+    font-size: 1rem;
+    margin-top: 0;
+}
+
+@media only screen and (max-width: 993px) {
+
+    button.filterBtn {
+        display: block;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .list_title {
+        /* width: 100%; */
+        margin-top: 1rem;
+    }
+
+}

@@ -1,0 +1,29 @@
+img.dealicon_img_frame {
+    border: 1px solid #ddd;
+    /* padding: 5px; */
+}
+
+.DrwaCount {
+    background: #8338EC;
+    color: #fff;
+    font-weight: bold;
+    height: 30px;
+    width: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50px;
+}
+
+ul.sideMenu.devider>li {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding: .3rem 0;
+}
+
+.savedcolor {
+    color: #3A86FF !important;
+}
+
+.logoutColor {
+    color: #FB5607 !important;
+}

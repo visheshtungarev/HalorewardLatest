@@ -1,0 +1,23 @@
+.greyBox {
+    height: 50px;
+    width: 50px;
+    border-radius: .5rem;
+    background: #F7F7F7;
+    margin: .3rem auto;
+    display: block;
+}
+
+.subheading {
+    font-weight: 300;
+    margin-top: .5rem;
+}
+
+.brandWall {
+    height: 200px;
+
+}
+
+.brandInfo {
+
+    margin-top: 90px;
+}

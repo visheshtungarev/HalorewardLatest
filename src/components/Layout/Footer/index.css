@@ -1,0 +1,91 @@
+.text-yellow {
+    color: #FFBE0B;
+}
+
+footer ul {
+    list-style: none;
+    padding-left: 0px;
+}
+
+footer ul a {
+    color: #fff;
+    font-weight: 300;
+    display: block;
+    padding: .5rem 0;
+}
+
+footer .ant-input-group input {
+    background: transparent;
+    border: 1px solid rgba(255, 255, 255, .3);
+    border-radius: .7rem 0rem 0rem .7rem !important;
+    height: 40px;
+}
+
+footer .ant-input-group input::-webkit-input-placeholder {
+    /* Edge */
+    color: #fff;
+}
+
+footer .ant-input-group input:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: #fff;
+}
+
+footer .ant-input-group input::placeholder {
+    color: #fff;
+}
+
+.customInputGroup {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(255, 255, 255, .3);
+    height: 48px;
+    border-radius: .7rem;
+    overflow: hidden;
+}
+
+.customInputGroup span.countryCode {
+    color: #fff;
+    font-size: 1.1rem;
+    display: inline-block;
+    padding: 0 1rem;
+}
+
+.customInputGroup input {
+    width: 100%;
+    background: transparent;
+    border-width: 0;
+    border-left: 1px solid rgba(255, 255, 255, .3);
+    padding-left: 1rem;
+}
+
+.customInputGroup button {
+    background: #fff;
+    border-width: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    aspect-ratio: 1/1;
+}
+
+.visibledesktop {
+    display: block;
+}
+
+.visiblemobile {
+    display: none !important;
+}
+
+@media only screen and (max-width: 993px) {
+
+
+    .visiblemobile {
+        display: block !important;
+    }
+
+    .visibledesktop {
+        display: none !important;
+    }
+
+}

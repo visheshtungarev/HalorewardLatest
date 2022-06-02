@@ -1,0 +1,179 @@
+.logo {
+    height: 70px;
+    width: 70px;
+    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: .5rem;
+    padding: .5rem;
+    margin: 0 auto;
+}
+
+.couponFrame {
+    padding: 2rem 5rem;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    margin: 2rem auto;
+    max-width: 900px;
+    border-radius: 1rem;
+    position: relative;
+    width: 100%;
+}
+
+.theme-color {
+    color: #120078;
+}
+
+.stepicons {
+    height: 50px;
+    width: 50px;
+    border: 2px solid rgba(0, 0, 0, 0.2);
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 1rem;
+}
+
+.stepicons>img {
+    height: 50%;
+    width: 50%;
+}
+
+.stepicons+h6 {
+    color: #6E6C7B;
+}
+
+.steps {
+    display: flex;
+    align-items: center;
+    position: relative;
+
+    padding-bottom: 40px;
+}
+
+.steps.finished .stepicons, .steps.finished:after {
+    border-color: #2EC193 !important;
+}
+
+.steps.finished+.steps .stepicons {
+    border-color: #120078
+}
+
+.steps:after {
+    content: "";
+    display: block;
+    height: 40px;
+    border: 1px dashed rgba(0, 0, 0, 0.2);
+    position: absolute;
+    top: 50px;
+    left: 24px;
+}
+
+.steps:last-child:after {
+    display: none;
+}
+
+.steps:last-child {
+    padding-bottom: 0px !important;
+}
+
+.codeIntruction {
+    color: #FB5607;
+}
+
+.ant-collapse {
+    background: #fff !important;
+    border: 0 solid !important;
+    padding: 0 !important;
+
+}
+
+.ant-collapse>.ant-collapse-item, .ant-collapse-content {
+    border-width: 0 !important;
+}
+
+.ant-collapse>.ant-collapse-item>.ant-collapse-header {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+}
+
+.ant-collapse-content>.ant-collapse-content-box, .ant-collapse>.ant-collapse-item>.ant-collapse-header {
+    padding: 0px !important;
+}
+
+.threeSteps {
+    display: flex;
+    flex-direction: column;
+}
+
+.steps .text-muted {
+    color: #CDCDCD;
+}
+
+@media only screen and (max-width: 993px) {
+
+    .couponFrame * {
+        text-align: left !important;
+    }
+
+    .couponFrame {
+        padding: 1rem !important;
+        margin: 1rem auto;
+    }
+
+    .couponFrame>div.d-flex {
+        justify-content: flex-start !important;
+    }
+
+    .couponFrame button {
+        width: 100%;
+    }
+
+    .threeSteps {
+        flex-direction: row;
+        /* justify-content: space-between; */
+    }
+
+    .steps>div {
+        padding: 0 !important;
+    }
+
+    .steps:after {
+        content: "";
+        display: block;
+        border: 1px dashed rgba(0, 0, 0, 0.2);
+        position: absolute;
+        top: 24px !important;
+        width: 100%;
+        height: 0 !important;
+        left: 50% !important;
+    }
+
+    .stepicons {
+        position: relative;
+        z-index: 1;
+        background: #fff;
+        margin: 0 !important;
+
+    }
+
+    .steps {
+        flex-direction: column;
+        padding-bottom: 0 !important;
+        margin-bottom: 1rem;
+        flex-grow: 1;
+    }
+
+    .steps>div {
+        flex-direction: column;
+    }
+
+    .stepicons+h6, .steps>h6 {
+        display: none;
+    }
+
+    .stepsText h6>span.text-muted {
+        color: #CDCDCD !important;
+    }
+}

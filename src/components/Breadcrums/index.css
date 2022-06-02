@@ -1,0 +1,37 @@
+.breadcrums {
+    font-weight: 600;
+
+}
+
+.breadcrums a {
+    color: #6E6C7B;
+}
+
+.devider {
+    font-weight: 600;
+}
+
+.breadcrums a:last-child {
+    color: #000;
+}
+
+.breadcrums>a:after {
+    content: "/";
+    font-weight: 600;
+    display: inline-block;
+    padding: 0 .3rem;
+}
+
+.breadcrums>a:last-child:after {
+    display: none;
+}
+
+.breadcrums>a:last-child {
+    color: #000;
+}
+
+@media only screen and (max-width: 993px) {
+    .breadcrums {
+        display: none;
+    }
+}

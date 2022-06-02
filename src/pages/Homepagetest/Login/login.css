@@ -1,0 +1,32 @@
+.h3-main {
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: normal;
+  font-size: 32px;
+  line-height: 40px;
+  text-align: left;
+  color: #120078;
+}
+.input-main {
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  border-radius: 0em;
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  color: "rgba(133, 133, 133, 0.8)";
+}
+.div-account {
+  font-family: "Lexend";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 12px;
+  line-height: 15px;
+  color: "#1D1C24";
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
