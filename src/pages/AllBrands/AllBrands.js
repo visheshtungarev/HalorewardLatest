@@ -117,422 +117,422 @@ const sidebarData = [
 	}
 ]
 
-const allTredingBrandsTwo =[
+const allTredingBrandsTwo = [
 	{
-			"merchantId": 1,
-			"merchantRank": 1,
-			"merchantName": "Nike",
-			"status": "Active",
-			"onCard": false,
-			"provider": "DX United",
-			"modifiedDate": "2022-05-31 08:07:17.16864",
-			"customerRebate": "2.5%",
-			"merchantLogo1": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAp1JREFUeNqEU21IU1EYfu7unW5Ty6aBszYs6MeUjGVYokHYyH5E1B9rZWFEFPQnAwmy6Hc/oqhfJsRKSSZGH1JIIX3MNCsqLTD9o1Oj6ebnnDfvvefezrnbdCHhCw/n433P8z7nPe/hBEEAtX0U7hc164uwuvVSXKwZLoOmaRDim+7m9vZa0WiEKSUFFpNpCWlmMyypqTDRuYn6t3k8vmQ2gRDCxs0t9fW45F52aBTROJLtZl7nEZad2m+KtoQCQ0FBARyOCGRZ/q92I1WgqqXlfdd95VsrK8/pChIEqqpCkiQsiCII0aBQZZoWl8lzFDwsFjMl0DBLY8Lj41hBwK4jSQrWOIphL6xYyhwJDWGo6wFSaH1Y3PTCAsITE1oyAa8flhWkbSiCLX8vun11eiGIpiJ/z2nYdx5HqLdVV7elrOzsuqysL3rmBIGiKPizKCHHWY4PLVeQbnXAdegqdhy+hu8dDTBnbqQJZJ1A7u+vz7RaiymWCZgCRSF6Edk8b9cx+B/W6WuVxPaZnyiqXoPpyUmVYvkKTIFClHigEieKjYuSvETUllaF4GAUM1NT6ooaJDKx+aDfC9fByxj90REb+9ppmIoAscH/6leg8MS9DJXPAM9xHCM443K57C6biMjcHDaVVCHw9RmCA2/RGC5C00AqXk/m4p20HZK4CM/J3Zk9n0ecMBhDQnJHcrTisyMfdQXOilrdMfxcwoHq/fg5R59TiQV3hYGKo6X2J/c7LyQIjOx9GXhOw/zoJ8wEevRGyp53o/lGMNYsBgPtEwLecwov7/jGDKa1twT6o3KpL4MdZgGsWZLtfPr7f1q58k1JNHy7YYaM+J+K3Y2PmAIbRavX66229hrGVvvL5uzsHDEUvUu+NT1my78CDAAMK1a8/QaZCgAAAABJRU5ErkJggg",
-			"merchantUrl": "http://www.cafecoffeeday.com",
-			"categories": [
-					{
-							"categoryId": 3,
-							"name": "Baby & Kids Wear"
-					},
-					{
-							"categoryId": 5,
-							"name": "Clothing"
-					},
-					{
-							"categoryId": 10,
-							"name": "Gifts & Occassions"
-					},
-					{
-							"categoryId": 16,
-							"name": "Shoes & Handbags"
-					}
-			],
-			"contentTypes": [
-					{
-							"name": "Prize Draws",
-							"size": 4
-					},
-					{
-							"name": "Cashbacks",
-							"size": 4
-					},
-					{
-							"name": "Coupons",
-							"size": 4
-					}
-			]
+		"merchantId": 1,
+		"merchantRank": 1,
+		"merchantName": "Nike",
+		"status": "Active",
+		"onCard": false,
+		"provider": "DX United",
+		"modifiedDate": "2022-05-31 08:07:17.16864",
+		"customerRebate": "2.5%",
+		"merchantLogo1": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAp1JREFUeNqEU21IU1EYfu7unW5Ty6aBszYs6MeUjGVYokHYyH5E1B9rZWFEFPQnAwmy6Hc/oqhfJsRKSSZGH1JIIX3MNCsqLTD9o1Oj6ebnnDfvvefezrnbdCHhCw/n433P8z7nPe/hBEEAtX0U7hc164uwuvVSXKwZLoOmaRDim+7m9vZa0WiEKSUFFpNpCWlmMyypqTDRuYn6t3k8vmQ2gRDCxs0t9fW45F52aBTROJLtZl7nEZad2m+KtoQCQ0FBARyOCGRZ/q92I1WgqqXlfdd95VsrK8/pChIEqqpCkiQsiCII0aBQZZoWl8lzFDwsFjMl0DBLY8Lj41hBwK4jSQrWOIphL6xYyhwJDWGo6wFSaH1Y3PTCAsITE1oyAa8flhWkbSiCLX8vun11eiGIpiJ/z2nYdx5HqLdVV7elrOzsuqysL3rmBIGiKPizKCHHWY4PLVeQbnXAdegqdhy+hu8dDTBnbqQJZJ1A7u+vz7RaiymWCZgCRSF6Edk8b9cx+B/W6WuVxPaZnyiqXoPpyUmVYvkKTIFClHigEieKjYuSvETUllaF4GAUM1NT6ooaJDKx+aDfC9fByxj90REb+9ppmIoAscH/6leg8MS9DJXPAM9xHCM443K57C6biMjcHDaVVCHw9RmCA2/RGC5C00AqXk/m4p20HZK4CM/J3Zk9n0ecMBhDQnJHcrTisyMfdQXOilrdMfxcwoHq/fg5R59TiQV3hYGKo6X2J/c7LyQIjOx9GXhOw/zoJ8wEevRGyp53o/lGMNYsBgPtEwLecwov7/jGDKa1twT6o3KpL4MdZgGsWZLtfPr7f1q58k1JNHy7YYaM+J+K3Y2PmAIbRavX66229hrGVvvL5uzsHDEUvUu+NT1my78CDAAMK1a8/QaZCgAAAABJRU5ErkJggg",
+		"merchantUrl": "http://www.cafecoffeeday.com",
+		"categories": [
+			{
+				"categoryId": 3,
+				"name": "Baby & Kids Wear"
+			},
+			{
+				"categoryId": 5,
+				"name": "Clothing"
+			},
+			{
+				"categoryId": 10,
+				"name": "Gifts & Occassions"
+			},
+			{
+				"categoryId": 16,
+				"name": "Shoes & Handbags"
+			}
+		],
+		"contentTypes": [
+			{
+				"name": "Prize Draws",
+				"size": 4
+			},
+			{
+				"name": "Cashbacks",
+				"size": 4
+			},
+			{
+				"name": "Coupons",
+				"size": 4
+			}
+		]
 	},
 	{
-			"merchantId": 2,
-			"merchantRank": 2,
-			"merchantName": "Myntra",
-			"status": "Active",
-			"onCard": false,
-			"provider": "DX United",
-			"modifiedDate": "2022-05-31 08:07:17.16864",
-			"customerRebate": "2.5%",
-			"merchantLogo1": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAp1JREFUeNqEU21IU1EYfu7unW5Ty6aBszYs6MeUjGVYokHYyH5E1B9rZWFEFPQnAwmy6Hc/oqhfJsRKSSZGH1JIIX3MNCsqLTD9o1Oj6ebnnDfvvefezrnbdCHhCw/n433P8z7nPe/hBEEAtX0U7hc164uwuvVSXKwZLoOmaRDim+7m9vZa0WiEKSUFFpNpCWlmMyypqTDRuYn6t3k8vmQ2gRDCxs0t9fW45F52aBTROJLtZl7nEZad2m+KtoQCQ0FBARyOCGRZ/q92I1WgqqXlfdd95VsrK8/pChIEqqpCkiQsiCII0aBQZZoWl8lzFDwsFjMl0DBLY8Lj41hBwK4jSQrWOIphL6xYyhwJDWGo6wFSaH1Y3PTCAsITE1oyAa8flhWkbSiCLX8vun11eiGIpiJ/z2nYdx5HqLdVV7elrOzsuqysL3rmBIGiKPizKCHHWY4PLVeQbnXAdegqdhy+hu8dDTBnbqQJZJ1A7u+vz7RaiymWCZgCRSF6Edk8b9cx+B/W6WuVxPaZnyiqXoPpyUmVYvkKTIFClHigEieKjYuSvETUllaF4GAUM1NT6ooaJDKx+aDfC9fByxj90REb+9ppmIoAscH/6leg8MS9DJXPAM9xHCM443K57C6biMjcHDaVVCHw9RmCA2/RGC5C00AqXk/m4p20HZK4CM/J3Zk9n0ecMBhDQnJHcrTisyMfdQXOilrdMfxcwoHq/fg5R59TiQV3hYGKo6X2J/c7LyQIjOx9GXhOw/zoJ8wEevRGyp53o/lGMNYsBgPtEwLecwov7/jGDKa1twT6o3KpL4MdZgGsWZLtfPr7f1q58k1JNHy7YYaM+J+K3Y2PmAIbRavX66229hrGVvvL5uzsHDEUvUu+NT1my78CDAAMK1a8/QaZCgAAAABJRU5ErkJggg",
-			"merchantUrl": "http://www.cafecoffeeday.com",
-			"categories": [
-					{
-							"categoryId": 1,
-							"name": "Accessories"
-					},
-					{
-							"categoryId": 12,
-							"name": "Home"
-					},
-					{
-							"categoryId": 13,
-							"name": "Home Appliances"
-					},
-					{
-							"categoryId": 15,
-							"name": "Pet Supplies"
-					},
-					{
-							"categoryId": 3,
-							"name": "Baby & Kids Wear"
-					},
-					{
-							"categoryId": 5,
-							"name": "Clothing"
-					},
-					{
-							"categoryId": 16,
-							"name": "Shoes & Handbags"
-					}
-			],
-			"contentTypes": [
-					{
-							"name": "Prize Draws",
-							"size": 5
-					},
-					{
-							"name": "Cashbacks",
-							"size": 4
-					},
-					{
-							"name": "Coupons",
-							"size": 3
-					}
-			]
+		"merchantId": 2,
+		"merchantRank": 2,
+		"merchantName": "Myntra",
+		"status": "Active",
+		"onCard": false,
+		"provider": "DX United",
+		"modifiedDate": "2022-05-31 08:07:17.16864",
+		"customerRebate": "2.5%",
+		"merchantLogo1": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAp1JREFUeNqEU21IU1EYfu7unW5Ty6aBszYs6MeUjGVYokHYyH5E1B9rZWFEFPQnAwmy6Hc/oqhfJsRKSSZGH1JIIX3MNCsqLTD9o1Oj6ebnnDfvvefezrnbdCHhCw/n433P8z7nPe/hBEEAtX0U7hc164uwuvVSXKwZLoOmaRDim+7m9vZa0WiEKSUFFpNpCWlmMyypqTDRuYn6t3k8vmQ2gRDCxs0t9fW45F52aBTROJLtZl7nEZad2m+KtoQCQ0FBARyOCGRZ/q92I1WgqqXlfdd95VsrK8/pChIEqqpCkiQsiCII0aBQZZoWl8lzFDwsFjMl0DBLY8Lj41hBwK4jSQrWOIphL6xYyhwJDWGo6wFSaH1Y3PTCAsITE1oyAa8flhWkbSiCLX8vun11eiGIpiJ/z2nYdx5HqLdVV7elrOzsuqysL3rmBIGiKPizKCHHWY4PLVeQbnXAdegqdhy+hu8dDTBnbqQJZJ1A7u+vz7RaiymWCZgCRSF6Edk8b9cx+B/W6WuVxPaZnyiqXoPpyUmVYvkKTIFClHigEieKjYuSvETUllaF4GAUM1NT6ooaJDKx+aDfC9fByxj90REb+9ppmIoAscH/6leg8MS9DJXPAM9xHCM443K57C6biMjcHDaVVCHw9RmCA2/RGC5C00AqXk/m4p20HZK4CM/J3Zk9n0ecMBhDQnJHcrTisyMfdQXOilrdMfxcwoHq/fg5R59TiQV3hYGKo6X2J/c7LyQIjOx9GXhOw/zoJ8wEevRGyp53o/lGMNYsBgPtEwLecwov7/jGDKa1twT6o3KpL4MdZgGsWZLtfPr7f1q58k1JNHy7YYaM+J+K3Y2PmAIbRavX66229hrGVvvL5uzsHDEUvUu+NT1my78CDAAMK1a8/QaZCgAAAABJRU5ErkJggg",
+		"merchantUrl": "http://www.cafecoffeeday.com",
+		"categories": [
+			{
+				"categoryId": 1,
+				"name": "Accessories"
+			},
+			{
+				"categoryId": 12,
+				"name": "Home"
+			},
+			{
+				"categoryId": 13,
+				"name": "Home Appliances"
+			},
+			{
+				"categoryId": 15,
+				"name": "Pet Supplies"
+			},
+			{
+				"categoryId": 3,
+				"name": "Baby & Kids Wear"
+			},
+			{
+				"categoryId": 5,
+				"name": "Clothing"
+			},
+			{
+				"categoryId": 16,
+				"name": "Shoes & Handbags"
+			}
+		],
+		"contentTypes": [
+			{
+				"name": "Prize Draws",
+				"size": 5
+			},
+			{
+				"name": "Cashbacks",
+				"size": 4
+			},
+			{
+				"name": "Coupons",
+				"size": 3
+			}
+		]
 	},
 	{
-			"merchantId": 3,
-			"merchantRank": 3,
-			"merchantName": "Marks & Spencers",
-			"status": "Active",
-			"onCard": false,
-			"provider": "DX United",
-			"modifiedDate": "2022-05-31 08:07:17.16864",
-			"customerRebate": "2.5%",
-			"merchantLogo1": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAp1JREFUeNqEU21IU1EYfu7unW5Ty6aBszYs6MeUjGVYokHYyH5E1B9rZWFEFPQnAwmy6Hc/oqhfJsRKSSZGH1JIIX3MNCsqLTD9o1Oj6ebnnDfvvefezrnbdCHhCw/n433P8z7nPe/hBEEAtX0U7hc164uwuvVSXKwZLoOmaRDim+7m9vZa0WiEKSUFFpNpCWlmMyypqTDRuYn6t3k8vmQ2gRDCxs0t9fW45F52aBTROJLtZl7nEZad2m+KtoQCQ0FBARyOCGRZ/q92I1WgqqXlfdd95VsrK8/pChIEqqpCkiQsiCII0aBQZZoWl8lzFDwsFjMl0DBLY8Lj41hBwK4jSQrWOIphL6xYyhwJDWGo6wFSaH1Y3PTCAsITE1oyAa8flhWkbSiCLX8vun11eiGIpiJ/z2nYdx5HqLdVV7elrOzsuqysL3rmBIGiKPizKCHHWY4PLVeQbnXAdegqdhy+hu8dDTBnbqQJZJ1A7u+vz7RaiymWCZgCRSF6Edk8b9cx+B/W6WuVxPaZnyiqXoPpyUmVYvkKTIFClHigEieKjYuSvETUllaF4GAUM1NT6ooaJDKx+aDfC9fByxj90REb+9ppmIoAscH/6leg8MS9DJXPAM9xHCM443K57C6biMjcHDaVVCHw9RmCA2/RGC5C00AqXk/m4p20HZK4CM/J3Zk9n0ecMBhDQnJHcrTisyMfdQXOilrdMfxcwoHq/fg5R59TiQV3hYGKo6X2J/c7LyQIjOx9GXhOw/zoJ8wEevRGyp53o/lGMNYsBgPtEwLecwov7/jGDKa1twT6o3KpL4MdZgGsWZLtfPr7f1q58k1JNHy7YYaM+J+K3Y2PmAIbRavX66229hrGVvvL5uzsHDEUvUu+NT1my78CDAAMK1a8/QaZCgAAAABJRU5ErkJggg",
-			"merchantUrl": "http://www.cafecoffeeday.com",
-			"categories": [
-					{
-							"categoryId": 4,
-							"name": "Books & Media"
-					},
-					{
-							"categoryId": 1,
-							"name": "Accessories"
-					},
-					{
-							"categoryId": 12,
-							"name": "Home"
-					},
-					{
-							"categoryId": 13,
-							"name": "Home Appliances"
-					},
-					{
-							"categoryId": 3,
-							"name": "Baby & Kids Wear"
-					},
-					{
-							"categoryId": 6,
-							"name": "Electronics"
-					},
-					{
-							"categoryId": 5,
-							"name": "Clothing"
-					}
-			],
-			"contentTypes": [
-					{
-							"name": "Prize Draws",
-							"size": 3
-					},
-					{
-							"name": "Cashbacks",
-							"size": 4
-					},
-					{
-							"name": "Coupons",
-							"size": 5
-					}
-			]
+		"merchantId": 3,
+		"merchantRank": 3,
+		"merchantName": "Marks & Spencers",
+		"status": "Active",
+		"onCard": false,
+		"provider": "DX United",
+		"modifiedDate": "2022-05-31 08:07:17.16864",
+		"customerRebate": "2.5%",
+		"merchantLogo1": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAp1JREFUeNqEU21IU1EYfu7unW5Ty6aBszYs6MeUjGVYokHYyH5E1B9rZWFEFPQnAwmy6Hc/oqhfJsRKSSZGH1JIIX3MNCsqLTD9o1Oj6ebnnDfvvefezrnbdCHhCw/n433P8z7nPe/hBEEAtX0U7hc164uwuvVSXKwZLoOmaRDim+7m9vZa0WiEKSUFFpNpCWlmMyypqTDRuYn6t3k8vmQ2gRDCxs0t9fW45F52aBTROJLtZl7nEZad2m+KtoQCQ0FBARyOCGRZ/q92I1WgqqXlfdd95VsrK8/pChIEqqpCkiQsiCII0aBQZZoWl8lzFDwsFjMl0DBLY8Lj41hBwK4jSQrWOIphL6xYyhwJDWGo6wFSaH1Y3PTCAsITE1oyAa8flhWkbSiCLX8vun11eiGIpiJ/z2nYdx5HqLdVV7elrOzsuqysL3rmBIGiKPizKCHHWY4PLVeQbnXAdegqdhy+hu8dDTBnbqQJZJ1A7u+vz7RaiymWCZgCRSF6Edk8b9cx+B/W6WuVxPaZnyiqXoPpyUmVYvkKTIFClHigEieKjYuSvETUllaF4GAUM1NT6ooaJDKx+aDfC9fByxj90REb+9ppmIoAscH/6leg8MS9DJXPAM9xHCM443K57C6biMjcHDaVVCHw9RmCA2/RGC5C00AqXk/m4p20HZK4CM/J3Zk9n0ecMBhDQnJHcrTisyMfdQXOilrdMfxcwoHq/fg5R59TiQV3hYGKo6X2J/c7LyQIjOx9GXhOw/zoJ8wEevRGyp53o/lGMNYsBgPtEwLecwov7/jGDKa1twT6o3KpL4MdZgGsWZLtfPr7f1q58k1JNHy7YYaM+J+K3Y2PmAIbRavX66229hrGVvvL5uzsHDEUvUu+NT1my78CDAAMK1a8/QaZCgAAAABJRU5ErkJggg",
+		"merchantUrl": "http://www.cafecoffeeday.com",
+		"categories": [
+			{
+				"categoryId": 4,
+				"name": "Books & Media"
+			},
+			{
+				"categoryId": 1,
+				"name": "Accessories"
+			},
+			{
+				"categoryId": 12,
+				"name": "Home"
+			},
+			{
+				"categoryId": 13,
+				"name": "Home Appliances"
+			},
+			{
+				"categoryId": 3,
+				"name": "Baby & Kids Wear"
+			},
+			{
+				"categoryId": 6,
+				"name": "Electronics"
+			},
+			{
+				"categoryId": 5,
+				"name": "Clothing"
+			}
+		],
+		"contentTypes": [
+			{
+				"name": "Prize Draws",
+				"size": 3
+			},
+			{
+				"name": "Cashbacks",
+				"size": 4
+			},
+			{
+				"name": "Coupons",
+				"size": 5
+			}
+		]
 	},
 	{
-			"merchantId": 4,
-			"merchantRank": 4,
-			"merchantName": "Nykaa",
-			"status": "Active",
-			"onCard": false,
-			"provider": "DX United",
-			"modifiedDate": "2022-05-31 08:07:17.16864",
-			"customerRebate": "2.5%",
-			"merchantLogo1": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAp1JREFUeNqEU21IU1EYfu7unW5Ty6aBszYs6MeUjGVYokHYyH5E1B9rZWFEFPQnAwmy6Hc/oqhfJsRKSSZGH1JIIX3MNCsqLTD9o1Oj6ebnnDfvvefezrnbdCHhCw/n433P8z7nPe/hBEEAtX0U7hc164uwuvVSXKwZLoOmaRDim+7m9vZa0WiEKSUFFpNpCWlmMyypqTDRuYn6t3k8vmQ2gRDCxs0t9fW45F52aBTROJLtZl7nEZad2m+KtoQCQ0FBARyOCGRZ/q92I1WgqqXlfdd95VsrK8/pChIEqqpCkiQsiCII0aBQZZoWl8lzFDwsFjMl0DBLY8Lj41hBwK4jSQrWOIphL6xYyhwJDWGo6wFSaH1Y3PTCAsITE1oyAa8flhWkbSiCLX8vun11eiGIpiJ/z2nYdx5HqLdVV7elrOzsuqysL3rmBIGiKPizKCHHWY4PLVeQbnXAdegqdhy+hu8dDTBnbqQJZJ1A7u+vz7RaiymWCZgCRSF6Edk8b9cx+B/W6WuVxPaZnyiqXoPpyUmVYvkKTIFClHigEieKjYuSvETUllaF4GAUM1NT6ooaJDKx+aDfC9fByxj90REb+9ppmIoAscH/6leg8MS9DJXPAM9xHCM443K57C6biMjcHDaVVCHw9RmCA2/RGC5C00AqXk/m4p20HZK4CM/J3Zk9n0ecMBhDQnJHcrTisyMfdQXOilrdMfxcwoHq/fg5R59TiQV3hYGKo6X2J/c7LyQIjOx9GXhOw/zoJ8wEevRGyp53o/lGMNYsBgPtEwLecwov7/jGDKa1twT6o3KpL4MdZgGsWZLtfPr7f1q58k1JNHy7YYaM+J+K3Y2PmAIbRavX66229hrGVvvL5uzsHDEUvUu+NT1my78CDAAMK1a8/QaZCgAAAABJRU5ErkJggg",
-			"merchantUrl": "http://www.cafecoffeeday.com",
-			"categories": [
-					{
-							"categoryId": 1,
-							"name": "Accessories"
-					},
-					{
-							"categoryId": 3,
-							"name": "Baby & Kids Wear"
-					},
-					{
-							"categoryId": 6,
-							"name": "Electronics"
-					},
-					{
-							"categoryId": 5,
-							"name": "Clothing"
-					}
-			],
-			"contentTypes": [
-					{
-							"name": "Prize Draws",
-							"size": 4
-					},
-					{
-							"name": "Cashbacks",
-							"size": 5
-					},
-					{
-							"name": "Coupons",
-							"size": 4
-					}
-			]
+		"merchantId": 4,
+		"merchantRank": 4,
+		"merchantName": "Nykaa",
+		"status": "Active",
+		"onCard": false,
+		"provider": "DX United",
+		"modifiedDate": "2022-05-31 08:07:17.16864",
+		"customerRebate": "2.5%",
+		"merchantLogo1": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAp1JREFUeNqEU21IU1EYfu7unW5Ty6aBszYs6MeUjGVYokHYyH5E1B9rZWFEFPQnAwmy6Hc/oqhfJsRKSSZGH1JIIX3MNCsqLTD9o1Oj6ebnnDfvvefezrnbdCHhCw/n433P8z7nPe/hBEEAtX0U7hc164uwuvVSXKwZLoOmaRDim+7m9vZa0WiEKSUFFpNpCWlmMyypqTDRuYn6t3k8vmQ2gRDCxs0t9fW45F52aBTROJLtZl7nEZad2m+KtoQCQ0FBARyOCGRZ/q92I1WgqqXlfdd95VsrK8/pChIEqqpCkiQsiCII0aBQZZoWl8lzFDwsFjMl0DBLY8Lj41hBwK4jSQrWOIphL6xYyhwJDWGo6wFSaH1Y3PTCAsITE1oyAa8flhWkbSiCLX8vun11eiGIpiJ/z2nYdx5HqLdVV7elrOzsuqysL3rmBIGiKPizKCHHWY4PLVeQbnXAdegqdhy+hu8dDTBnbqQJZJ1A7u+vz7RaiymWCZgCRSF6Edk8b9cx+B/W6WuVxPaZnyiqXoPpyUmVYvkKTIFClHigEieKjYuSvETUllaF4GAUM1NT6ooaJDKx+aDfC9fByxj90REb+9ppmIoAscH/6leg8MS9DJXPAM9xHCM443K57C6biMjcHDaVVCHw9RmCA2/RGC5C00AqXk/m4p20HZK4CM/J3Zk9n0ecMBhDQnJHcrTisyMfdQXOilrdMfxcwoHq/fg5R59TiQV3hYGKo6X2J/c7LyQIjOx9GXhOw/zoJ8wEevRGyp53o/lGMNYsBgPtEwLecwov7/jGDKa1twT6o3KpL4MdZgGsWZLtfPr7f1q58k1JNHy7YYaM+J+K3Y2PmAIbRavX66229hrGVvvL5uzsHDEUvUu+NT1my78CDAAMK1a8/QaZCgAAAABJRU5ErkJggg",
+		"merchantUrl": "http://www.cafecoffeeday.com",
+		"categories": [
+			{
+				"categoryId": 1,
+				"name": "Accessories"
+			},
+			{
+				"categoryId": 3,
+				"name": "Baby & Kids Wear"
+			},
+			{
+				"categoryId": 6,
+				"name": "Electronics"
+			},
+			{
+				"categoryId": 5,
+				"name": "Clothing"
+			}
+		],
+		"contentTypes": [
+			{
+				"name": "Prize Draws",
+				"size": 4
+			},
+			{
+				"name": "Cashbacks",
+				"size": 5
+			},
+			{
+				"name": "Coupons",
+				"size": 4
+			}
+		]
 	},
 	{
-			"merchantId": 5,
-			"merchantRank": 5,
-			"merchantName": "Target",
-			"status": "Active",
-			"onCard": false,
-			"provider": "DX United",
-			"modifiedDate": "2022-05-31 08:07:17.16864",
-			"customerRebate": "2.5%",
-			"merchantLogo1": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAp1JREFUeNqEU21IU1EYfu7unW5Ty6aBszYs6MeUjGVYokHYyH5E1B9rZWFEFPQnAwmy6Hc/oqhfJsRKSSZGH1JIIX3MNCsqLTD9o1Oj6ebnnDfvvefezrnbdCHhCw/n433P8z7nPe/hBEEAtX0U7hc164uwuvVSXKwZLoOmaRDim+7m9vZa0WiEKSUFFpNpCWlmMyypqTDRuYn6t3k8vmQ2gRDCxs0t9fW45F52aBTROJLtZl7nEZad2m+KtoQCQ0FBARyOCGRZ/q92I1WgqqXlfdd95VsrK8/pChIEqqpCkiQsiCII0aBQZZoWl8lzFDwsFjMl0DBLY8Lj41hBwK4jSQrWOIphL6xYyhwJDWGo6wFSaH1Y3PTCAsITE1oyAa8flhWkbSiCLX8vun11eiGIpiJ/z2nYdx5HqLdVV7elrOzsuqysL3rmBIGiKPizKCHHWY4PLVeQbnXAdegqdhy+hu8dDTBnbqQJZJ1A7u+vz7RaiymWCZgCRSF6Edk8b9cx+B/W6WuVxPaZnyiqXoPpyUmVYvkKTIFClHigEieKjYuSvETUllaF4GAUM1NT6ooaJDKx+aDfC9fByxj90REb+9ppmIoAscH/6leg8MS9DJXPAM9xHCM443K57C6biMjcHDaVVCHw9RmCA2/RGC5C00AqXk/m4p20HZK4CM/J3Zk9n0ecMBhDQnJHcrTisyMfdQXOilrdMfxcwoHq/fg5R59TiQV3hYGKo6X2J/c7LyQIjOx9GXhOw/zoJ8wEevRGyp53o/lGMNYsBgPtEwLecwov7/jGDKa1twT6o3KpL4MdZgGsWZLtfPr7f1q58k1JNHy7YYaM+J+K3Y2PmAIbRavX66229hrGVvvL5uzsHDEUvUu+NT1my78CDAAMK1a8/QaZCgAAAABJRU5ErkJggg",
-			"merchantUrl": "http://www.cafecoffeeday.com",
-			"categories": [
-					{
-							"categoryId": 4,
-							"name": "Books & Media"
-					},
-					{
-							"categoryId": 7,
-							"name": "Events & Activities"
-					},
-					{
-							"categoryId": 1,
-							"name": "Accessories"
-					},
-					{
-							"categoryId": 2,
-							"name": "Auto & Tires"
-					},
-					{
-							"categoryId": 5,
-							"name": "Clothing"
-					},
-					{
-							"categoryId": 9,
-							"name": "Food & Restaurants"
-					},
-					{
-							"categoryId": 11,
-							"name": "Health & Beauty"
-					},
-					{
-							"categoryId": 8,
-							"name": "Flowers & Florists"
-					}
-			],
-			"contentTypes": [
-					{
-							"name": "Prize Draws",
-							"size": 1
-					},
-					{
-							"name": "Cashbacks",
-							"size": 5
-					},
-					{
-							"name": "Coupons",
-							"size": 3
-					}
-			]
+		"merchantId": 5,
+		"merchantRank": 5,
+		"merchantName": "Target",
+		"status": "Active",
+		"onCard": false,
+		"provider": "DX United",
+		"modifiedDate": "2022-05-31 08:07:17.16864",
+		"customerRebate": "2.5%",
+		"merchantLogo1": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAp1JREFUeNqEU21IU1EYfu7unW5Ty6aBszYs6MeUjGVYokHYyH5E1B9rZWFEFPQnAwmy6Hc/oqhfJsRKSSZGH1JIIX3MNCsqLTD9o1Oj6ebnnDfvvefezrnbdCHhCw/n433P8z7nPe/hBEEAtX0U7hc164uwuvVSXKwZLoOmaRDim+7m9vZa0WiEKSUFFpNpCWlmMyypqTDRuYn6t3k8vmQ2gRDCxs0t9fW45F52aBTROJLtZl7nEZad2m+KtoQCQ0FBARyOCGRZ/q92I1WgqqXlfdd95VsrK8/pChIEqqpCkiQsiCII0aBQZZoWl8lzFDwsFjMl0DBLY8Lj41hBwK4jSQrWOIphL6xYyhwJDWGo6wFSaH1Y3PTCAsITE1oyAa8flhWkbSiCLX8vun11eiGIpiJ/z2nYdx5HqLdVV7elrOzsuqysL3rmBIGiKPizKCHHWY4PLVeQbnXAdegqdhy+hu8dDTBnbqQJZJ1A7u+vz7RaiymWCZgCRSF6Edk8b9cx+B/W6WuVxPaZnyiqXoPpyUmVYvkKTIFClHigEieKjYuSvETUllaF4GAUM1NT6ooaJDKx+aDfC9fByxj90REb+9ppmIoAscH/6leg8MS9DJXPAM9xHCM443K57C6biMjcHDaVVCHw9RmCA2/RGC5C00AqXk/m4p20HZK4CM/J3Zk9n0ecMBhDQnJHcrTisyMfdQXOilrdMfxcwoHq/fg5R59TiQV3hYGKo6X2J/c7LyQIjOx9GXhOw/zoJ8wEevRGyp53o/lGMNYsBgPtEwLecwov7/jGDKa1twT6o3KpL4MdZgGsWZLtfPr7f1q58k1JNHy7YYaM+J+K3Y2PmAIbRavX66229hrGVvvL5uzsHDEUvUu+NT1my78CDAAMK1a8/QaZCgAAAABJRU5ErkJggg",
+		"merchantUrl": "http://www.cafecoffeeday.com",
+		"categories": [
+			{
+				"categoryId": 4,
+				"name": "Books & Media"
+			},
+			{
+				"categoryId": 7,
+				"name": "Events & Activities"
+			},
+			{
+				"categoryId": 1,
+				"name": "Accessories"
+			},
+			{
+				"categoryId": 2,
+				"name": "Auto & Tires"
+			},
+			{
+				"categoryId": 5,
+				"name": "Clothing"
+			},
+			{
+				"categoryId": 9,
+				"name": "Food & Restaurants"
+			},
+			{
+				"categoryId": 11,
+				"name": "Health & Beauty"
+			},
+			{
+				"categoryId": 8,
+				"name": "Flowers & Florists"
+			}
+		],
+		"contentTypes": [
+			{
+				"name": "Prize Draws",
+				"size": 1
+			},
+			{
+				"name": "Cashbacks",
+				"size": 5
+			},
+			{
+				"name": "Coupons",
+				"size": 3
+			}
+		]
 	},
 	{
-			"merchantId": 6,
-			"merchantRank": 6,
-			"merchantName": "Dell",
-			"status": "Active",
-			"onCard": false,
-			"provider": "DX United",
-			"modifiedDate": "2022-05-31 08:07:17.16864",
-			"customerRebate": "2.5%",
-			"merchantLogo1": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAp1JREFUeNqEU21IU1EYfu7unW5Ty6aBszYs6MeUjGVYokHYyH5E1B9rZWFEFPQnAwmy6Hc/oqhfJsRKSSZGH1JIIX3MNCsqLTD9o1Oj6ebnnDfvvefezrnbdCHhCw/n433P8z7nPe/hBEEAtX0U7hc164uwuvVSXKwZLoOmaRDim+7m9vZa0WiEKSUFFpNpCWlmMyypqTDRuYn6t3k8vmQ2gRDCxs0t9fW45F52aBTROJLtZl7nEZad2m+KtoQCQ0FBARyOCGRZ/q92I1WgqqXlfdd95VsrK8/pChIEqqpCkiQsiCII0aBQZZoWl8lzFDwsFjMl0DBLY8Lj41hBwK4jSQrWOIphL6xYyhwJDWGo6wFSaH1Y3PTCAsITE1oyAa8flhWkbSiCLX8vun11eiGIpiJ/z2nYdx5HqLdVV7elrOzsuqysL3rmBIGiKPizKCHHWY4PLVeQbnXAdegqdhy+hu8dDTBnbqQJZJ1A7u+vz7RaiymWCZgCRSF6Edk8b9cx+B/W6WuVxPaZnyiqXoPpyUmVYvkKTIFClHigEieKjYuSvETUllaF4GAUM1NT6ooaJDKx+aDfC9fByxj90REb+9ppmIoAscH/6leg8MS9DJXPAM9xHCM443K57C6biMjcHDaVVCHw9RmCA2/RGC5C00AqXk/m4p20HZK4CM/J3Zk9n0ecMBhDQnJHcrTisyMfdQXOilrdMfxcwoHq/fg5R59TiQV3hYGKo6X2J/c7LyQIjOx9GXhOw/zoJ8wEevRGyp53o/lGMNYsBgPtEwLecwov7/jGDKa1twT6o3KpL4MdZgGsWZLtfPr7f1q58k1JNHy7YYaM+J+K3Y2PmAIbRavX66229hrGVvvL5uzsHDEUvUu+NT1my78CDAAMK1a8/QaZCgAAAABJRU5ErkJggg",
-			"merchantUrl": "http://www.cafecoffeeday.com",
-			"categories": [
-					{
-							"categoryId": 7,
-							"name": "Events & Activities"
-					},
-					{
-							"categoryId": 6,
-							"name": "Electronics"
-					}
-			],
-			"contentTypes": [
-					{
-							"name": "Prize Draws",
-							"size": 3
-					},
-					{
-							"name": "Cashbacks",
-							"size": 4
-					},
-					{
-							"name": "Coupons",
-							"size": 2
-					}
-			]
+		"merchantId": 6,
+		"merchantRank": 6,
+		"merchantName": "Dell",
+		"status": "Active",
+		"onCard": false,
+		"provider": "DX United",
+		"modifiedDate": "2022-05-31 08:07:17.16864",
+		"customerRebate": "2.5%",
+		"merchantLogo1": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAp1JREFUeNqEU21IU1EYfu7unW5Ty6aBszYs6MeUjGVYokHYyH5E1B9rZWFEFPQnAwmy6Hc/oqhfJsRKSSZGH1JIIX3MNCsqLTD9o1Oj6ebnnDfvvefezrnbdCHhCw/n433P8z7nPe/hBEEAtX0U7hc164uwuvVSXKwZLoOmaRDim+7m9vZa0WiEKSUFFpNpCWlmMyypqTDRuYn6t3k8vmQ2gRDCxs0t9fW45F52aBTROJLtZl7nEZad2m+KtoQCQ0FBARyOCGRZ/q92I1WgqqXlfdd95VsrK8/pChIEqqpCkiQsiCII0aBQZZoWl8lzFDwsFjMl0DBLY8Lj41hBwK4jSQrWOIphL6xYyhwJDWGo6wFSaH1Y3PTCAsITE1oyAa8flhWkbSiCLX8vun11eiGIpiJ/z2nYdx5HqLdVV7elrOzsuqysL3rmBIGiKPizKCHHWY4PLVeQbnXAdegqdhy+hu8dDTBnbqQJZJ1A7u+vz7RaiymWCZgCRSF6Edk8b9cx+B/W6WuVxPaZnyiqXoPpyUmVYvkKTIFClHigEieKjYuSvETUllaF4GAUM1NT6ooaJDKx+aDfC9fByxj90REb+9ppmIoAscH/6leg8MS9DJXPAM9xHCM443K57C6biMjcHDaVVCHw9RmCA2/RGC5C00AqXk/m4p20HZK4CM/J3Zk9n0ecMBhDQnJHcrTisyMfdQXOilrdMfxcwoHq/fg5R59TiQV3hYGKo6X2J/c7LyQIjOx9GXhOw/zoJ8wEevRGyp53o/lGMNYsBgPtEwLecwov7/jGDKa1twT6o3KpL4MdZgGsWZLtfPr7f1q58k1JNHy7YYaM+J+K3Y2PmAIbRavX66229hrGVvvL5uzsHDEUvUu+NT1my78CDAAMK1a8/QaZCgAAAABJRU5ErkJggg",
+		"merchantUrl": "http://www.cafecoffeeday.com",
+		"categories": [
+			{
+				"categoryId": 7,
+				"name": "Events & Activities"
+			},
+			{
+				"categoryId": 6,
+				"name": "Electronics"
+			}
+		],
+		"contentTypes": [
+			{
+				"name": "Prize Draws",
+				"size": 3
+			},
+			{
+				"name": "Cashbacks",
+				"size": 4
+			},
+			{
+				"name": "Coupons",
+				"size": 2
+			}
+		]
 	},
 	{
-			"merchantId": 7,
-			"merchantRank": 7,
-			"merchantName": "Flipkart",
-			"status": "Active",
-			"onCard": false,
-			"provider": "Manual",
-			"modifiedDate": "2022-05-31 08:07:17.16864",
-			"customerRebate": "2.5%",
-			"merchantLogo1": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAp1JREFUeNqEU21IU1EYfu7unW5Ty6aBszYs6MeUjGVYokHYyH5E1B9rZWFEFPQnAwmy6Hc/oqhfJsRKSSZGH1JIIX3MNCsqLTD9o1Oj6ebnnDfvvefezrnbdCHhCw/n433P8z7nPe/hBEEAtX0U7hc164uwuvVSXKwZLoOmaRDim+7m9vZa0WiEKSUFFpNpCWlmMyypqTDRuYn6t3k8vmQ2gRDCxs0t9fW45F52aBTROJLtZl7nEZad2m+KtoQCQ0FBARyOCGRZ/q92I1WgqqXlfdd95VsrK8/pChIEqqpCkiQsiCII0aBQZZoWl8lzFDwsFjMl0DBLY8Lj41hBwK4jSQrWOIphL6xYyhwJDWGo6wFSaH1Y3PTCAsITE1oyAa8flhWkbSiCLX8vun11eiGIpiJ/z2nYdx5HqLdVV7elrOzsuqysL3rmBIGiKPizKCHHWY4PLVeQbnXAdegqdhy+hu8dDTBnbqQJZJ1A7u+vz7RaiymWCZgCRSF6Edk8b9cx+B/W6WuVxPaZnyiqXoPpyUmVYvkKTIFClHigEieKjYuSvETUllaF4GAUM1NT6ooaJDKx+aDfC9fByxj90REb+9ppmIoAscH/6leg8MS9DJXPAM9xHCM443K57C6biMjcHDaVVCHw9RmCA2/RGC5C00AqXk/m4p20HZK4CM/J3Zk9n0ecMBhDQnJHcrTisyMfdQXOilrdMfxcwoHq/fg5R59TiQV3hYGKo6X2J/c7LyQIjOx9GXhOw/zoJ8wEevRGyp53o/lGMNYsBgPtEwLecwov7/jGDKa1twT6o3KpL4MdZgGsWZLtfPr7f1q58k1JNHy7YYaM+J+K3Y2PmAIbRavX66229hrGVvvL5uzsHDEUvUu+NT1my78CDAAMK1a8/QaZCgAAAABJRU5ErkJggg",
-			"merchantUrl": "http://www.cafecoffeeday.com",
-			"categories": [
-					{
-							"categoryId": 4,
-							"name": "Books & Media"
-					},
-					{
-							"categoryId": 7,
-							"name": "Events & Activities"
-					},
-					{
-							"categoryId": 1,
-							"name": "Accessories"
-					},
-					{
-							"categoryId": 2,
-							"name": "Auto & Tires"
-					},
-					{
-							"categoryId": 3,
-							"name": "Baby & Kids Wear"
-					},
-					{
-							"categoryId": 6,
-							"name": "Electronics"
-					},
-					{
-							"categoryId": 5,
-							"name": "Clothing"
-					},
-					{
-							"categoryId": 8,
-							"name": "Flowers & Florists"
-					}
-			],
-			"contentTypes": [
-					{
-							"name": "Prize Draws",
-							"size": 2
-					},
-					{
-							"name": "Cashbacks",
-							"size": 3
-					},
-					{
-							"name": "Coupons",
-							"size": 3
-					}
-			]
+		"merchantId": 7,
+		"merchantRank": 7,
+		"merchantName": "Flipkart",
+		"status": "Active",
+		"onCard": false,
+		"provider": "Manual",
+		"modifiedDate": "2022-05-31 08:07:17.16864",
+		"customerRebate": "2.5%",
+		"merchantLogo1": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAp1JREFUeNqEU21IU1EYfu7unW5Ty6aBszYs6MeUjGVYokHYyH5E1B9rZWFEFPQnAwmy6Hc/oqhfJsRKSSZGH1JIIX3MNCsqLTD9o1Oj6ebnnDfvvefezrnbdCHhCw/n433P8z7nPe/hBEEAtX0U7hc164uwuvVSXKwZLoOmaRDim+7m9vZa0WiEKSUFFpNpCWlmMyypqTDRuYn6t3k8vmQ2gRDCxs0t9fW45F52aBTROJLtZl7nEZad2m+KtoQCQ0FBARyOCGRZ/q92I1WgqqXlfdd95VsrK8/pChIEqqpCkiQsiCII0aBQZZoWl8lzFDwsFjMl0DBLY8Lj41hBwK4jSQrWOIphL6xYyhwJDWGo6wFSaH1Y3PTCAsITE1oyAa8flhWkbSiCLX8vun11eiGIpiJ/z2nYdx5HqLdVV7elrOzsuqysL3rmBIGiKPizKCHHWY4PLVeQbnXAdegqdhy+hu8dDTBnbqQJZJ1A7u+vz7RaiymWCZgCRSF6Edk8b9cx+B/W6WuVxPaZnyiqXoPpyUmVYvkKTIFClHigEieKjYuSvETUllaF4GAUM1NT6ooaJDKx+aDfC9fByxj90REb+9ppmIoAscH/6leg8MS9DJXPAM9xHCM443K57C6biMjcHDaVVCHw9RmCA2/RGC5C00AqXk/m4p20HZK4CM/J3Zk9n0ecMBhDQnJHcrTisyMfdQXOilrdMfxcwoHq/fg5R59TiQV3hYGKo6X2J/c7LyQIjOx9GXhOw/zoJ8wEevRGyp53o/lGMNYsBgPtEwLecwov7/jGDKa1twT6o3KpL4MdZgGsWZLtfPr7f1q58k1JNHy7YYaM+J+K3Y2PmAIbRavX66229hrGVvvL5uzsHDEUvUu+NT1my78CDAAMK1a8/QaZCgAAAABJRU5ErkJggg",
+		"merchantUrl": "http://www.cafecoffeeday.com",
+		"categories": [
+			{
+				"categoryId": 4,
+				"name": "Books & Media"
+			},
+			{
+				"categoryId": 7,
+				"name": "Events & Activities"
+			},
+			{
+				"categoryId": 1,
+				"name": "Accessories"
+			},
+			{
+				"categoryId": 2,
+				"name": "Auto & Tires"
+			},
+			{
+				"categoryId": 3,
+				"name": "Baby & Kids Wear"
+			},
+			{
+				"categoryId": 6,
+				"name": "Electronics"
+			},
+			{
+				"categoryId": 5,
+				"name": "Clothing"
+			},
+			{
+				"categoryId": 8,
+				"name": "Flowers & Florists"
+			}
+		],
+		"contentTypes": [
+			{
+				"name": "Prize Draws",
+				"size": 2
+			},
+			{
+				"name": "Cashbacks",
+				"size": 3
+			},
+			{
+				"name": "Coupons",
+				"size": 3
+			}
+		]
 	},
 	{
-			"merchantId": 8,
-			"merchantRank": 8,
-			"merchantName": "GAP",
-			"status": "Active",
-			"onCard": false,
-			"provider": "Manual",
-			"modifiedDate": "2022-05-31 08:07:17.16864",
-			"customerRebate": "2.5%",
-			"merchantLogo1": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAp1JREFUeNqEU21IU1EYfu7unW5Ty6aBszYs6MeUjGVYokHYyH5E1B9rZWFEFPQnAwmy6Hc/oqhfJsRKSSZGH1JIIX3MNCsqLTD9o1Oj6ebnnDfvvefezrnbdCHhCw/n433P8z7nPe/hBEEAtX0U7hc164uwuvVSXKwZLoOmaRDim+7m9vZa0WiEKSUFFpNpCWlmMyypqTDRuYn6t3k8vmQ2gRDCxs0t9fW45F52aBTROJLtZl7nEZad2m+KtoQCQ0FBARyOCGRZ/q92I1WgqqXlfdd95VsrK8/pChIEqqpCkiQsiCII0aBQZZoWl8lzFDwsFjMl0DBLY8Lj41hBwK4jSQrWOIphL6xYyhwJDWGo6wFSaH1Y3PTCAsITE1oyAa8flhWkbSiCLX8vun11eiGIpiJ/z2nYdx5HqLdVV7elrOzsuqysL3rmBIGiKPizKCHHWY4PLVeQbnXAdegqdhy+hu8dDTBnbqQJZJ1A7u+vz7RaiymWCZgCRSF6Edk8b9cx+B/W6WuVxPaZnyiqXoPpyUmVYvkKTIFClHigEieKjYuSvETUllaF4GAUM1NT6ooaJDKx+aDfC9fByxj90REb+9ppmIoAscH/6leg8MS9DJXPAM9xHCM443K57C6biMjcHDaVVCHw9RmCA2/RGC5C00AqXk/m4p20HZK4CM/J3Zk9n0ecMBhDQnJHcrTisyMfdQXOilrdMfxcwoHq/fg5R59TiQV3hYGKo6X2J/c7LyQIjOx9GXhOw/zoJ8wEevRGyp53o/lGMNYsBgPtEwLecwov7/jGDKa1twT6o3KpL4MdZgGsWZLtfPr7f1q58k1JNHy7YYaM+J+K3Y2PmAIbRavX66229hrGVvvL5uzsHDEUvUu+NT1my78CDAAMK1a8/QaZCgAAAABJRU5ErkJggg",
-			"merchantUrl": "http://www.cafecoffeeday.com",
-			"categories": [
-					{
-							"categoryId": 12,
-							"name": "Home"
-					},
-					{
-							"categoryId": 13,
-							"name": "Home Appliances"
-					},
-					{
-							"categoryId": 15,
-							"name": "Pet Supplies"
-					},
-					{
-							"categoryId": 14,
-							"name": "Office Supplies"
-					},
-					{
-							"categoryId": 10,
-							"name": "Gifts & Occassions"
-					},
-					{
-							"categoryId": 9,
-							"name": "Food & Restaurants"
-					},
-					{
-							"categoryId": 11,
-							"name": "Health & Beauty"
-					},
-					{
-							"categoryId": 8,
-							"name": "Flowers & Florists"
-					}
-			],
-			"contentTypes": [
-					{
-							"name": "Prize Draws",
-							"size": 2
-					},
-					{
-							"name": "Cashbacks",
-							"size": 4
-					},
-					{
-							"name": "Coupons",
-							"size": 3
-					}
-			]
+		"merchantId": 8,
+		"merchantRank": 8,
+		"merchantName": "GAP",
+		"status": "Active",
+		"onCard": false,
+		"provider": "Manual",
+		"modifiedDate": "2022-05-31 08:07:17.16864",
+		"customerRebate": "2.5%",
+		"merchantLogo1": "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAp1JREFUeNqEU21IU1EYfu7unW5Ty6aBszYs6MeUjGVYokHYyH5E1B9rZWFEFPQnAwmy6Hc/oqhfJsRKSSZGH1JIIX3MNCsqLTD9o1Oj6ebnnDfvvefezrnbdCHhCw/n433P8z7nPe/hBEEAtX0U7hc164uwuvVSXKwZLoOmaRDim+7m9vZa0WiEKSUFFpNpCWlmMyypqTDRuYn6t3k8vmQ2gRDCxs0t9fW45F52aBTROJLtZl7nEZad2m+KtoQCQ0FBARyOCGRZ/q92I1WgqqXlfdd95VsrK8/pChIEqqpCkiQsiCII0aBQZZoWl8lzFDwsFjMl0DBLY8Lj41hBwK4jSQrWOIphL6xYyhwJDWGo6wFSaH1Y3PTCAsITE1oyAa8flhWkbSiCLX8vun11eiGIpiJ/z2nYdx5HqLdVV7elrOzsuqysL3rmBIGiKPizKCHHWY4PLVeQbnXAdegqdhy+hu8dDTBnbqQJZJ1A7u+vz7RaiymWCZgCRSF6Edk8b9cx+B/W6WuVxPaZnyiqXoPpyUmVYvkKTIFClHigEieKjYuSvETUllaF4GAUM1NT6ooaJDKx+aDfC9fByxj90REb+9ppmIoAscH/6leg8MS9DJXPAM9xHCM443K57C6biMjcHDaVVCHw9RmCA2/RGC5C00AqXk/m4p20HZK4CM/J3Zk9n0ecMBhDQnJHcrTisyMfdQXOilrdMfxcwoHq/fg5R59TiQV3hYGKo6X2J/c7LyQIjOx9GXhOw/zoJ8wEevRGyp53o/lGMNYsBgPtEwLecwov7/jGDKa1twT6o3KpL4MdZgGsWZLtfPr7f1q58k1JNHy7YYaM+J+K3Y2PmAIbRavX66229hrGVvvL5uzsHDEUvUu+NT1my78CDAAMK1a8/QaZCgAAAABJRU5ErkJggg",
+		"merchantUrl": "http://www.cafecoffeeday.com",
+		"categories": [
+			{
+				"categoryId": 12,
+				"name": "Home"
+			},
+			{
+				"categoryId": 13,
+				"name": "Home Appliances"
+			},
+			{
+				"categoryId": 15,
+				"name": "Pet Supplies"
+			},
+			{
+				"categoryId": 14,
+				"name": "Office Supplies"
+			},
+			{
+				"categoryId": 10,
+				"name": "Gifts & Occassions"
+			},
+			{
+				"categoryId": 9,
+				"name": "Food & Restaurants"
+			},
+			{
+				"categoryId": 11,
+				"name": "Health & Beauty"
+			},
+			{
+				"categoryId": 8,
+				"name": "Flowers & Florists"
+			}
+		],
+		"contentTypes": [
+			{
+				"name": "Prize Draws",
+				"size": 2
+			},
+			{
+				"name": "Cashbacks",
+				"size": 4
+			},
+			{
+				"name": "Coupons",
+				"size": 3
+			}
+		]
 	}
 ]
 
@@ -624,7 +624,7 @@ const AllBrands = () => {
 			let response = await Get_Call(`${getCategoriesByClientID}/clients/1/brands`);
 			if (response.status === 200) {
 				console.log(response)
-			//	setBrandData(response)
+				//	setBrandData(response)
 			}
 		} catch (error) {
 			console.error(error);
@@ -637,7 +637,7 @@ const AllBrands = () => {
 			let response = await Get_Call(`${getCategoriesByClientID}/clients/1/categories`);
 			if (response.status === 200) {
 				console.log(response)
-			//	setCategoryData(response)
+				//	setCategoryData(response)
 			}
 		} catch (error) {
 			console.error(error);
@@ -650,7 +650,7 @@ const AllBrands = () => {
 		setMyValu(key)
 	}
 
-	useEffect(()=>{
+	useEffect(() => {
 		let filterarray = [];
 		let array = [...brandData];
 		array.forEach((val) => {
@@ -660,12 +660,12 @@ const AllBrands = () => {
 				}
 			})
 		})
-		if(filterarray.length > 0) {
+		if (filterarray.length > 0) {
 			setBrandData(filterarray)
-		}else{
+		} else {
 			setBrandData(array)
 		}
-	},[myValu])
+	}, [myValu])
 
 	return (
 		<div className="home_container">
@@ -742,7 +742,7 @@ const AllBrands = () => {
 					<Col span={24} lg={{ span: 18 }}>
 						<Row align="middle" justify="space-around" >
 							{
-								Array.isArray(brandData) && brandData.length > 0 &&  brandData.map((item, i) => {
+								Array.isArray(brandData) && brandData.length > 0 && brandData.map((item, i) => {
 									return (
 
 										<Col key={i} className="  overflow-hidden featuredOffers mb-4" span={24}>
@@ -761,25 +761,33 @@ const AllBrands = () => {
 															<Col span={24} md={{ span: 18 }} className="flex-grow-1">
 
 																<p className="deals_content ml-3 mb-0">
-																	{item?.contentTypes.map((val)=>{
-																		return val.name + ", "
-																	
-																})}
+																	{item?.contentTypes.map((val) => {
+																		if (val.name === "Cashbacks") {
+																			return (
+																				<span>{"Upto " + val.size + "%" + " " + val.name}, </span>
+																			)
+																		} else {
+																			return (
+																				<span>{val.size + " " + val.name}, </span>
+																			)
+																		}
+
+																	})}
 																</p>
 															</Col>
 
 														</Row>
 													</Col>
 													{
-														item.onCard && 
-													<div className="fixed-top-right">
-														<Badge
-															position={''}
-															badgeType={item?.modeType}
-															badgeText={item?.modeText}
-															badgeIcon={item.modeIcon}
-														/>
-													</div>
+														item.onCard &&
+														<div className="fixed-top-right">
+															<Badge
+																position={''}
+																badgeType={item?.modeType}
+																badgeText={item?.modeText}
+																badgeIcon={item.modeIcon}
+															/>
+														</div>
 													}
 												</Row>
 											</Card>
