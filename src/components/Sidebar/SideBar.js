@@ -2,7 +2,7 @@ import React, { } from 'react'
 import { Row, Col, Card } from 'antd'
 import { Link } from 'react-router-dom'
 import "./index.css"
-export default function SideBar({ type, mainTitle, subTitle, data, closePanel, devider }) {
+export default function SideBar({ type, mainTitle, subTitle, data, closePanel, devider, filterPanel  }) {
 
 
     return (
@@ -29,7 +29,7 @@ export default function SideBar({ type, mainTitle, subTitle, data, closePanel, d
                             <ul className={devider ? 'sideMenu devider' : 'sideMenu'}>
                                 {
                                     data && data.map((item, i) => {
-                                        return (<li key={i} ><Link to={item.link}>{item.title}</Link></li>)
+                                        return (<li key={i} onClick={()=>filterPanel(item.categoryId)} ><a href='#'>{item.name}</a></li>)
                                     })
                                 }
 
