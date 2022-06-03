@@ -22,7 +22,7 @@ export default function Login({ goToRegister, forgotPwd }) {
    actions.Login({
     emailId:email,
     password: password,
-    username: email
+    username: 'sb22'
 })
   };
   return (
