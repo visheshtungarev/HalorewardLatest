@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import Axios from "axios";
 import { constVariable } from "../Constants/String";
 
@@ -12,6 +13,7 @@ export const Post_call = async (
       method: "POST",
       // data: payload ? { query: JSON.stringify(payload) } : {}
       data: payload ? JSON.stringify(payload) : {},
+     
       type: type,
     });
     return response;
@@ -55,7 +57,7 @@ export const Get_Call = async (endpoint, payload = {}) => {
     const response = await Axios({
       url: endpoint,
       method: "get",
-      data: {},
+      params: { query: payload },
     });
     return response;
   } catch (error) {
@@ -111,7 +113,7 @@ export const getConfig = async (config) => {
         ? "text/plain"
         : "application/json",
     Authorization: await getToken(config?.url),
-    "tenant-id": 1,
+    "tenant-id": '1',
   };
   return config;
 };

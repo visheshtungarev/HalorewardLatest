@@ -27,7 +27,7 @@ const Login = (payload) => async (dispatch) => {
   const { customerAuth } = values;
   try {
     //start loader with dispatch
-    let response = await Post_call(`${customerAuth}/login`,JSON.stringify(payload));
+    let response = await Post_call(`${customerAuth}/login`,payload);
     console.log("response...",response)
     if (response.status === 200) {
       setToken("accessToken",response.data.data.access_token);

@@ -620,8 +620,9 @@ const AllBrands = () => {
 
 
 	const getBrandList = async () => {
+		var data = '{\n    brands(siteId: 1) {\n        merchantId\n        merchantRank\n        merchantName\n        status\n        onCard\n        provider\n        modifiedDate\n        customerRebate\n        merchantLogo1\n        merchantUrl\n        categories {\n            categoryId\n            name\n        }\n        contentTypes {\n            name\n            size\n        }\n    }\n}\n';
 		try {
-			let response = await Get_Call(`${getCategoriesByClientID}/clients/1/brands`);
+			let response = await Get_Call(`${getCategoriesByClientID}/clients/1/brands`,data);
 			if (response.status === 200) {
 				console.log(response)
 				//	setBrandData(response)
