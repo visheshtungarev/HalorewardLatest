@@ -57,7 +57,7 @@ export const Get_Call = async (endpoint, payload = {}) => {
     const response = await Axios({
       url: endpoint,
       method: "get",
-      params: { query: payload },
+    //  params: { query: payload },
     });
     return response;
   } catch (error) {

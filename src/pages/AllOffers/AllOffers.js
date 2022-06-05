@@ -124,7 +124,6 @@ export default function AllOffers() {
     const [sideMenuItems,] = useState(sidebarData)
     const [openSidePanel, setOpenSidePanel] = useState(false)
     const { Option } = Select;
-
     const closeSidebar = () => {
         !openSidePanel ? setOpenSidePanel(true) : setOpenSidePanel(false)
     }
@@ -133,9 +132,37 @@ export default function AllOffers() {
         if (window.innerWidth > 993) {
             setOpenSidePanel(true)
         }
+
+        // let OfferQuery = `
+        // {
+        //     products(siteId: 1, merchantId: 1) {
+        //         merchantId
+        //         merchantName
+        //         provider
+        //         categories {
+        //             categoryId
+        //             name
+        //         }
+        //         products {
+        //             productId
+        //             status
+        //             contentType
+        //             subcontentType
+        //             expirationDate
+        //             productMetaData {
+        //                 key
+        //                 value
+        //             }
+        //         }
+        //     }
+        // }
+        // `
+
+        // let productData = getOfferAction(OfferQuery)
+        // console.log("productService ---> ", productData)
     }, [])
 
-    console.log(dataArr)
+    console.log("dataarr ....",dataArr)
     return (
         <div className="home_container">
             <Row align="middle" className="list_view mb-0 pb-0">
