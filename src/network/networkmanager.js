@@ -12,7 +12,7 @@ export const Post_call = async (
       url: endpoint,
       method: "POST",
       // data: payload ? { query: JSON.stringify(payload) } : {}
-      data: payload ? JSON.stringify(payload) : {},
+      data: payload,
 
     });
     return response;
