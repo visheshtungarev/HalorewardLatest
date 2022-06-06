@@ -618,15 +618,16 @@ const AllBrands = () => {
   }, []);
 
   const getBrandList = async () => {
-	var raw = "{\n    brands(siteId: 1) {\n        merchantId\n        merchantRank\n        merchantName\n        status\n        onCard\n        provider\n        modifiedDate\n        customerRebate\n        merchantLogo1\n        merchantUrl\n        categories {\n            categoryId\n            name\n        }\n        contentTypes {\n            name\n            size\n        }\n    }\n}\n\n";
+    var raw =
+      "{\n    brands(siteId: 1) {\n        merchantId\n        merchantRank\n        merchantName\n        status\n        onCard\n        provider\n        modifiedDate\n        customerRebate\n        merchantLogo1\n        merchantUrl\n        categories {\n            categoryId\n            name\n        }\n        contentTypes {\n            name\n            size\n        }\n    }\n}\n\n";
     try {
       let response = await Post_call(
         `${getCategoriesByClientID}/clients/1/brands`,
-		raw
-        ,false
+        raw,
+        false
       );
       if (response.status === 200) {
-        console.log("response>>",response);
+        console.log("response>>", response);
         //	setBrandData(response)
       }
     } catch (error) {
@@ -636,11 +637,13 @@ const AllBrands = () => {
   };
 
   const getCategoryList = async () => {
-	var raw = "{\n    categories(siteId: 1)  {\n        categoryId\n        name\n        description\n        status\n    }\n}";
+    var raw =
+      "{\n    categories(siteId: 1)  {\n        categoryId\n        name\n        description\n        status\n    }\n}";
     try {
       let response = await Post_call(
         `${getCategoriesByClientID}/clients/1/categories`,
-		raw,false
+        raw,
+        false
       );
       if (response.status === 200) {
         console.log(response);
