@@ -24,7 +24,7 @@ const getOfferAction = (payload) => {
     // };
 
   fetch(`${getCategoriesByClientID}/clients/1/products?query=${param}`,{
-    method: 'GET',
+    method: 'POST',
     headers:{
         // Accept: "application/json",
         "Accept":"*/*",
