@@ -8,6 +8,8 @@ import Breadcurms from '../../components/Breadcrums/Breadcurms';
 import { Row, Col, Card, Select } from 'antd';
 import Badge from '../../components/Badge/Badge';
 import SideBar from '../../components/Sidebar/SideBar';
+import { Post_call } from '../../network/networkmanager';
+import env from '../../enviroment';
 const allTredingOffers = [
     {
         image: "/Images/flipkart.png",
@@ -118,6 +120,10 @@ const sidebarData = [
     }
 
 ]
+
+const values = env();
+const { getCategoriesByClientID } = values;
+
 export default function AllOffers() {
     const [dataArr,] = useState(allTredingOffers)
 
@@ -132,35 +138,26 @@ export default function AllOffers() {
         if (window.innerWidth > 993) {
             setOpenSidePanel(true)
         }
-
-        // let OfferQuery = `
-        // {
-        //     products(siteId: 1, merchantId: 1) {
-        //         merchantId
-        //         merchantName
-        //         provider
-        //         categories {
-        //             categoryId
-        //             name
-        //         }
-        //         products {
-        //             productId
-        //             status
-        //             contentType
-        //             subcontentType
-        //             expirationDate
-        //             productMetaData {
-        //                 key
-        //                 value
-        //             }
-        //         }
-        //     }
-        // }
-        // `
-
-        // let productData = getOfferAction(OfferQuery)
-        // console.log("productService ---> ", productData)
+        getOfferList();
     }, [])
+
+    const getOfferList = async () => {
+        var data = "{\n    products(siteId: 1, merchantId: 1) {\n        merchantId\n        merchantName\n        provider\n        categories {\n            categoryId\n            name\n        }\n        products {\n            productId\n            status\n            contentType\n            subcontentType\n            expirationDate\n            productMetaData {\n                key\n                value\n            }\n        }\n    }\n}\n";
+  
+      try {
+        let response = await Post_call(
+          `${getCategoriesByClientID}/clients/1/products`,
+          data,
+          false
+        );
+        if (response.status === 200) {
+          console.log(response)
+        }
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
+    }
 
     console.log("dataarr ....",dataArr)
     return (
