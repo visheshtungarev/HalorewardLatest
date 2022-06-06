@@ -7,10 +7,14 @@ import { store, persistor } from "./store";
 import ErrorBoundary from "./components/ErrorBoundary";
 import "antd/dist/antd.css";
 import "./App.css";
+
+
 function App() {
 
   return (
     <>
+
+
       <Provider store={store}>
         <PersistGate loading={null} persistor={persistor}>
           <ErrorBoundary>
@@ -22,6 +26,7 @@ function App() {
           </ErrorBoundary>
         </PersistGate>
       </Provider>
+
     </>
   );
 }

@@ -12,9 +12,8 @@ export const Post_call = async (
       url: endpoint,
       method: "POST",
       // data: payload ? { query: JSON.stringify(payload) } : {}
-      data: payload ? JSON.stringify(payload) : {},
-     
-      type: type,
+      data: payload,
+
     });
     return response;
   } catch (error) {
@@ -56,8 +55,9 @@ export const Get_Call = async (endpoint, payload = {}) => {
   try {
     const response = await Axios({
       url: endpoint,
-      method: "get",
-    //  params: { query: payload },
+      method: "GET",
+      params: { query: payload },
+      // data:{payload}
     });
     return response;
   } catch (error) {
@@ -101,6 +101,11 @@ const getToken = async (url) => {
   }
 };
 export const getConfig = async (config) => {
+  console.log(">>>>>>>>>>>>>>>>>",config)
+  if(config.url=='https://tenant-products-query.dxxrewards.click/api/clients/1/brands'){
+
+    console.log("config",config)
+  }
   let token = (await localStorage.getItem("accessToken"))
     ? localStorage.getItem("accessToken")
     : "Basic YXBpLXVzZXI6YWRtaW4xMjM=";
@@ -109,7 +114,7 @@ export const getConfig = async (config) => {
     // Accept: "application/json",
     "Accept":"*/*",
     "Content-Type":
-      config?.type === constVariable.FETCHDATA && (config?.url.includes("/customers/login")===false)
+      (config?.type === constVariable.FETCHDATA && (config?.url.includes("/customers/login")===false)||config.url=="https://tenant-products-query.dxxrewards.click/api/clients/1/brands")
         ? "text/plain"
         : "application/json",
     Authorization: await getToken(config?.url),
