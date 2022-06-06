@@ -598,12 +598,13 @@ const { getCategoriesByClientID } = values;
 
 const AllBrands = () => {
   const { Option } = Select;
+  console.log(sidebarData, allTredingBrandsTwo);
   //const [sideMenuItems,] = useState(sidebarData)
   const [dataArr] = useState(allTredingBrands);
   const [openSidePanel, setOpenSidePanel] = useState(false);
   const [myValu, setMyValu] = useState(false);
-  const [brandData, setBrandData] = useState(allTredingBrandsTwo);
-  const [categoryData] = useState(sidebarData);
+  const [brandData, setBrandData] = useState([]);
+  const [categoryData,] = useState(sidebarData);
 
   const closeSidebar = () => {
     !openSidePanel ? setOpenSidePanel(true) : setOpenSidePanel(false);
@@ -617,7 +618,7 @@ const AllBrands = () => {
     getCategoryList();
   }, []);
 
-  const getBrandList = async () => {
+  const getBrandList = async (value) => {
     var raw =
       "{\n    brands(siteId: 1) {\n        merchantId\n        merchantRank\n        merchantName\n        status\n        onCard\n        provider\n        modifiedDate\n        customerRebate\n        merchantLogo1\n        merchantUrl\n        categories {\n            categoryId\n            name\n        }\n        contentTypes {\n            name\n            size\n        }\n    }\n}\n\n";
     try {
@@ -627,8 +628,21 @@ const AllBrands = () => {
         false
       );
       if (response.status === 200) {
-        console.log("response>>", response);
-        //	setBrandData(response)
+        let filterarray = [];
+        response?.data?.forEach((val) => {
+          val.categories.filter((itm) => {
+            if (itm.categoryId === value) {
+              filterarray.push(val);
+            }
+          });
+        });
+        if (filterarray.length > 0) {
+          setBrandData(filterarray);
+        } else {
+          setBrandData(response?.data);
+        }
+
+        // setBrandData(response?.data);
       }
     } catch (error) {
       console.error(error);
@@ -637,17 +651,17 @@ const AllBrands = () => {
   };
 
   const getCategoryList = async () => {
-    var raw =
-      "{\n    categories(siteId: 1)  {\n        categoryId\n        name\n        description\n        status\n    }\n}";
+    var data = '{\n    categories(siteId: 1)  {\n        categoryId\n        name\n        description\n        status\n    }\n}';
+
     try {
       let response = await Post_call(
         `${getCategoriesByClientID}/clients/1/categories`,
-        raw,
+        data,
         false
       );
       if (response.status === 200) {
-        console.log(response);
-        //	setCategoryData(response)
+        console.log(response)
+       // setCategoryData(response?.data);
       }
     } catch (error) {
       console.error(error);
@@ -656,26 +670,30 @@ const AllBrands = () => {
   };
 
   const filterHandler = (key) => {
-    setBrandData(allTredingBrandsTwo);
+    // setBrandData(allTredingBrandsTwo);
     setMyValu(key);
+    getBrandList(key)
   };
 
-  useEffect(() => {
-    let filterarray = [];
-    let array = [...brandData];
-    array.forEach((val) => {
-      val.categories.filter((itm) => {
-        if (itm.categoryId === myValu) {
-          filterarray.push(val);
-        }
-      });
-    });
-    if (filterarray.length > 0) {
-      setBrandData(filterarray);
-    } else {
-      setBrandData(array);
-    }
-  }, [myValu]);
+  console.log(myValu)
+
+
+  // useEffect(() => {
+  //   let filterarray = [];
+  //   let array = [...brandData];
+  //   array.forEach((val) => {
+  //     val.categories.filter((itm) => {
+  //       if (itm.categoryId === myValu) {
+  //         filterarray.push(val);
+  //       }
+  //     });
+  //   });
+  //   if (filterarray.length > 0) {
+  //     setBrandData(filterarray);
+  //   } else {
+  //     setBrandData(array);
+  //   }
+  // }, [myValu]);
 
   return (
     <div className="home_container">
