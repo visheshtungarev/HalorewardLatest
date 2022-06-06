@@ -1,14 +1,24 @@
 import React from "react";
 import "./index.css";
 import { Card, Col, Row, Button } from "antd";
-import { HomeConstant } from '../../Constants'
+// import { HomeConstant } from '../../Constants'
 import Badge from "../Badge/Badge";
-
+import { offerArray } from '../../actions/getOfferAction';
+import {
+    GlobalOutlined,
+    CopyOutlined,
+    //ShopOutlined,
+    //ShoppingOutlined
+    
+  } from "@ant-design/icons";
 
 export default function PopularOffers() {
+
+    const offerData = offerArray.data.products.products;
+
     return (
         <Row align="middle" justify="space-around" gutter={30}>
-            {HomeConstant?.popularOffers?.map((item, key) =>
+            {offerData.map((item, key) =>
                 <Col key={key} className="deals_box featuredOffers mb-4" span={12} lg={{ span: 12 }}>
                     <Card
                         className="deals_container popularOffers"
@@ -18,7 +28,7 @@ export default function PopularOffers() {
                     >
                         <div className="d-flex w-100 ">
                             <div>
-                                <img className="dealicon_img_frame_lg" src={item.image} />
+                                <img className="dealicon_img_frame_lg" src="/Images/flipkart.png" />
                             </div>
                             <div className="flex-grow-1">
                                 <div>
@@ -26,27 +36,33 @@ export default function PopularOffers() {
                                         <div className="d-md-flex">
                                             <Badge
                                                 position={''}
-                                                badgeType={item.offer}
-                                                badgeText={item.offer}
-                                                badgeIcon={item.offerIcon}
+                                                badgeType={item.contentType}
+                                                badgeText={item.contentType}
+                                               badgeIcon={<CopyOutlined />}
                                             />
                                             <Badge
                                                 position={''}
-                                                badgeType={item.mode}
-                                                badgeText={item.mode}
-                                                badgeIcon={item.modeIcon}
+                                                badgeType={item.subcontentType}
+                                                badgeText={item.subcontentType}
+                                                badgeIcon={<GlobalOutlined/>}
                                             />
                                         </div>
-                                        <p className="mb-0 viewAllOffer">{item.viewAll}</p>
+                                        <p className="mb-0 viewAllOffer">{`view all offer (${item.productMetaData.length})`}</p>
                                     </div>
                                     <div className="py-3 py-md-0">
-                                        <img className="dealicon_img_frame_lg_mobile" src={item.image} />
+                                        <img className="dealicon_img_frame_lg_mobile" src="/Images/flipkart.png" />
                                     </div>
-                                    <p className="deals_title">{item.title}</p>
+                                    <p className="deals_title">{
+                                    item.productMetaData.map((element)=>{
+                                        if(element.key === "productDescription"){
+                                            return element.value
+                                        }
+                                    })
+                                    }</p>
                                 </div>
-                                <Row key="time" className="featured_offer_action ">
+                                {/* <Row key="time" className="featured_offer_action ">
                                     <span>{item.time}</span>
-                                </Row>
+                                </Row> */}
                                 <Button type="primary" className="w-100">Reveal Code</Button>
                             </div>
                         </div>
@@ -56,3 +72,16 @@ export default function PopularOffers() {
         </Row>
     )
 }
+
+{/* <Badge
+position={''}
+badgeType={item.offer}
+badgeText={item.offer}
+badgeIcon={item.offerIcon}
+/>
+<Badge
+position={''}
+badgeType={item.mode}
+badgeText={item.mode}
+badgeIcon={item.modeIcon}
+/> */}
