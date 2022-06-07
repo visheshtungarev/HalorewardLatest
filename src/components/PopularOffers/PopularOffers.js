@@ -3,7 +3,6 @@ import "./index.css";
 import { Card, Col, Row, Button } from "antd";
 // import { HomeConstant } from '../../Constants'
 import Badge from "../Badge/Badge";
-import { offerArray } from '../../actions/getOfferAction';
 import {
     GlobalOutlined,
     CopyOutlined,
@@ -12,13 +11,10 @@ import {
     
   } from "@ant-design/icons";
 
-export default function PopularOffers() {
-
-    const offerData = offerArray.data.products.products;
-
+export default function PopularOffers({offerData}) {
     return (
         <Row align="middle" justify="space-around" gutter={30}>
-            {offerData.map((item, key) =>
+            {offerData && offerData.products && offerData.products.length > 0 && offerData.products.map((item, key) =>
                 <Col key={key} className="deals_box featuredOffers mb-4" span={12} lg={{ span: 12 }}>
                     <Card
                         className="deals_container popularOffers"
