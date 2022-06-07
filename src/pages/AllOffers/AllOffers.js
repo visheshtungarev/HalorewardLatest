@@ -8,8 +8,9 @@ import Breadcurms from '../../components/Breadcrums/Breadcurms';
 import { Row, Col, Card, Select } from 'antd';
 import Badge from '../../components/Badge/Badge';
 import SideBar from '../../components/Sidebar/SideBar';
-import { Post_call } from '../../network/networkmanager';
-import env from '../../enviroment';
+// import { Post_call } from '../../network/networkmanager';
+// import env from '../../enviroment';
+import { getOfferAction } from '../../actions/getOfferAction';
 const allTredingOffers = [
     {
         image: "/Images/flipkart.png",
@@ -121,14 +122,16 @@ const sidebarData = [
 
 ]
 
-const values = env();
-const { getCategoriesByClientID } = values;
+// const values = env();
+// const { getCategoriesByClientID } = values;
 
 export default function AllOffers() {
     const [dataArr,] = useState(allTredingOffers)
 
     const [sideMenuItems,] = useState(sidebarData)
     const [openSidePanel, setOpenSidePanel] = useState(false)
+    const [offerData, setOfferData] = useState([])
+    
     const { Option } = Select;
     const closeSidebar = () => {
         !openSidePanel ? setOpenSidePanel(true) : setOpenSidePanel(false)
@@ -138,26 +141,16 @@ export default function AllOffers() {
         if (window.innerWidth > 993) {
             setOpenSidePanel(true)
         }
-        getOfferList();
+
+        let offerResult = getOfferAction()
+        offerResult.then((data)=>{
+            console.log(data)
+            setOfferData(data?.products)
+        })   
     }, [])
 
-    const getOfferList = async () => {
-        var data = "{\n    products(siteId: 1, merchantId: 1) {\n        merchantId\n        merchantName\n        provider\n        categories {\n            categoryId\n            name\n        }\n        products {\n            productId\n            status\n            contentType\n            subcontentType\n            expirationDate\n            productMetaData {\n                key\n                value\n            }\n        }\n    }\n}\n";
-  
-      try {
-        let response = await Post_call(
-          `${getCategoriesByClientID}/clients/1/products`,
-          data,
-          false
-        );
-        if (response.status === 200) {
-          console.log(response)
-        }
-      } catch (error) {
-        console.error(error);
-        throw error;
-      }
-    }
+    console.log("offerdata.....", offerData)
+
 
     console.log("dataarr ....",dataArr)
     return (
@@ -239,7 +232,7 @@ export default function AllOffers() {
 
 
 
-                        <PopularOffers />
+                        <PopularOffers offerData={offerData}/>
                     </Col>
                 </Row>
 

@@ -60,8 +60,9 @@ const allTredingOffers = [
         time: "1d 2h 21m"
     }
 ]
-export default function Cashback() {
-    const [dataArr,] = useState(allTredingOffers)
+export default function Cashback({cashbackList}) {
+    console.log(allTredingOffers);
+    // const [dataArr,] = useState(allTredingOffers)
 
     const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -76,6 +77,9 @@ export default function Cashback() {
     const handleCancel = () => {
         setIsModalVisible(false);
     };
+
+    // console.log("cashbackList.........", cashbackList)
+
     return (
         <>
             <ModalComp
@@ -106,7 +110,7 @@ export default function Cashback() {
             />
 
             <Row align="middle" className="" justify="space-around" gutter={30}>
-                {dataArr && dataArr.map((item, i) =>
+                {cashbackList && cashbackList.map((item, i) =>
                     <Col key={i} className="deals_box featuredOffers mb-4" span={12} lg={{ span: 24 }}>
                         <Card
                             className="deals_container popularOffers"
@@ -125,13 +129,19 @@ export default function Cashback() {
                                         <div className='d-flex flex-grow-1'>
                                             <div className=''>
                                                 <div className="w-100 align-items-center justify-content-between  d-lg-flex d-none">
-                                                    <p className="mb-0">{item.tag}</p>
-                                                    <p className="mb-0 viewAllOffer">{item.viewAll}</p>
+                                                    <p className="mb-0">Generic  </p>
+                                                    {/* <p className="mb-0 viewAllOffer">{item.viewAll}</p> */}
                                                 </div>
-                                                <div className=' d-lg-flex d-none'>
+                                                {/* <div className=' d-lg-flex d-none'>
                                                     <img className="dealicon_img_frame_lg_mobile" src={item.image} />
-                                                </div>
-                                                <p className="deals_title mt-0">{item.content}</p>
+                                                </div> */}
+                                                <p className="deals_title mt-0">{
+                                                    item.productMetaData.map((element)=>{
+                                                        if(element.key === "productDescription") {
+                                                            return element.value
+                                                        }
+                                                    })
+                                                }</p>
                                                 <p className='text-muted h5 d-block d-lg-none' style={{ fontWeight: 300 }}>Upfront cost must be £50+</p>
                                             </div>
 
@@ -158,3 +168,7 @@ export default function Cashback() {
         </>
     )
 }
+
+
+// site wide
+// category

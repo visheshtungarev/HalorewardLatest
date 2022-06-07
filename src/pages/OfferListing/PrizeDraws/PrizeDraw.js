@@ -73,8 +73,9 @@ const allTredingOffers = [
 ]
 
 
-export default function PrizeDraw() {
-    const [dataArr,] = useState(allTredingOffers)
+export default function PrizeDraw({prizeList}) {
+    // const [dataArr,] = useState(allTredingOffers)
+    console.log(allTredingOffers)
 
     const [isModalVisible, setIsModalVisible] = useState(false);
 
@@ -124,7 +125,7 @@ export default function PrizeDraw() {
             />
 
             <Row align="middle" className="" justify="space-around" gutter={30}>
-                {dataArr && dataArr.map((item, i) =>
+                {prizeList && prizeList.map((item, i) =>
                     <Col key={i} className="deals_box featuredOffers mb-4" span={12} lg={{ span: 24 }} >
                         <Card
                             className="deals_container popularOffers"
@@ -140,21 +141,27 @@ export default function PrizeDraw() {
                                     <div className=''>
                                         <div className="w-100 d-lg-flex d-none align-items-center justify-content-between">
 
-                                            <p className=' mb-0'>{item.tag}</p>
+                                            <p className=' mb-0'>Category</p>
 
                                             <p className="mb-0 viewAllOffer">{item.viewAll}</p>
                                         </div>
                                         <div className='d-none d-lg-block'>
                                             <img className="dealicon_img_frame_lg_mobile" src={item.image} />
                                         </div>
-                                        <p className="deals_title mt-0">{item.content}</p>
+                                        <p className="deals_title mt-0">{
+                                             item.productMetaData.map((element)=>{
+                                                if(element.key === "productDescription") {
+                                                    return element.value
+                                                }
+                                            })
+                                        }</p>
                                         <p className='text-muted h5 d-block d-lg-none mb-3' style={{ fontWeight: 300 }}>Expires Sep 4, 2021</p>
 
                                     </div>
                                     <Row align='center' className='w-100 mt-auto d-lg-flex d-none' justify='between'>
                                         <Row key="time" className="">
                                             <Link to='' className='d-flex align-items-center mr-3'> Show Details</Link>
-                                            <span className='d-flex align-items-center'> <FiClock /> &nbsp; {item.time}</span>
+                                            <span className='d-flex align-items-center'> <FiClock /> &nbsp; {item.expirationDate}</span>
                                         </Row>
                                         <Button type="primary" className="px-md-5 px-3 ml-auto" onClick={showModal}>Enter draw</Button>
 

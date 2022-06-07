@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
+import {Link} from "react-router-dom";
 import "./index.css";
 import { Col, Row, Card, Select } from "antd";
-
 // import PopularOffers from "../../components/PopularOffers/PopularOffers";
 import Breadcurms from "../../components/Breadcrums/Breadcurms";
 import env from "../../enviroment";
@@ -771,6 +771,7 @@ const AllBrands = () => {
                       className="  overflow-hidden featuredOffers mb-4"
                       span={24}
                     >
+                      <Link to={`/brand?id=${item.merchantId}`}>
                       <Card className="deals_container popularOffers rounded1">
                         <Row align="middle" className="w-100 flex-nowrap">
                           <div>
@@ -832,6 +833,7 @@ const AllBrands = () => {
                           )}
                         </Row>
                       </Card>
+                      </Link>
                     </Col>
                   );
                 })}

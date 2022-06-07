@@ -114,7 +114,7 @@ export const getConfig = async (config) => {
     // Accept: "application/json",
     "Accept":"*/*",
     "Content-Type":
-      (config?.type === constVariable.FETCHDATA && (config?.url.includes("/customers/login")===false)||config.url=="https://tenant-products-query.dxxrewards.click/api/clients/1/brands"||config.url=="https://tenant-products-query.dxxrewards.click/api/clients/1/categories")
+      (config?.type === constVariable.FETCHDATA && (config?.url.includes("/customers/login")===false)||config.url=="https://tenant-products-query.dxxrewards.click/api/clients/1/brands"||config.url=="https://tenant-products-query.dxxrewards.click/api/clients/1/categories" || config.url=="https://tenant-products-query.dxxrewards.click/api/clients/1/products")
         ? "text/plain"
         : "application/json",
     Authorization: await getToken(config?.url),
