@@ -3,12 +3,13 @@ import "./index.css";
 import Heading from "../../components/Heading/Heading";
 import { CreditCardOutlined } from "@ant-design/icons";
 import Breadcurms from "../../components/Breadcrums/Breadcurms";
-import { Row, Col, Card, Tabs } from "antd";
+import { Row, Col, Card } from "antd";
 import Badge from "../../components/Badge/Badge";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Coupon from "./Coupon/Coupon";
 import PrizeDraw from "./PrizeDraws/PrizeDraw";
 import Cashback from "./CashBack/Cashback";
+import { Link } from "react-scroll";
 import { getOfferAction } from "../../actions/getOfferAction";
 // import Coupon from './PrizeDraws/PrizeDraw';
 
@@ -63,10 +64,10 @@ const allTredingOffers = [
   },
 ];
 export default function BrandDetails() {
-  const { TabPane } = Tabs;
-  function callback(key) {
-    console.log(key);
-  }
+  // const { TabPane } = Tabs;
+  // function callback(key) {
+  //   console.log(key);
+  // }
   const [dataArr] = useState(allTredingOffers);
   const [offerData, setOfferData] = useState(allTredingOffers);
   const [countofOffer, setCountofOffer] = useState({});
@@ -177,50 +178,69 @@ export default function BrandDetails() {
                 {countofOffer?.prize} prize draws
               </p>
 
-              <Tabs defaultActiveKey="1" onChange={callback}>
-                <TabPane
-                  tab={
-                    <div className="d-flex align-items-center py-2">
+              <ul className="list-group list-group-horizontal p-0">
+                <li className="list-group-item bg-transparent border-0 pl-0">
+                  <Link
+                    activeClass="active"
+                    to="cashback"
+                    spy={true}
+                    smooth={true}
+                  >
+                    <div className="d-flex align-items-center">
                       <img src="/Images/cashback.svg" height={40} /> &nbsp;{" "}
                       <h6 className="mb-0">Cashbacks</h6>
                     </div>
-                  }
-                  key="2"
-                >
-                  <div className="onCardOfferBanner mb-4">
-                    <h4 className="mb-2">On Card Offers</h4>
-                    <p className="mb-4">Upfront cost must be £50+</p>
-                    <h3 className="d-inline-block">10% OFF </h3>{" "}
-                    <small>Terms and Conditions*</small>
-                  </div>
+                  </Link>
+                </li>
 
-                  <Cashback cashbackList={offerArrayData?.cashback} />
-                </TabPane>
-
-                <TabPane
-                  tab={
-                    <div className="d-flex align-items-center py-2">
+                <li className="list-group-item bg-transparent border-0 pl-0">
+                  <Link
+                    activeClass="active"
+                    to="coupon"
+                    spy={true}
+                    smooth={true}
+                  >
+                    <div className="d-flex align-items-center">
                       <img src="/Images/coupon.svg" height={40} /> &nbsp;{" "}
                       <h6 className="mb-0">Coupon</h6>
                     </div>
-                  }
-                  key="3"
-                >
-                  <Coupon couponList={offerArrayData?.coupon} />
-                </TabPane>
+                  </Link>
+                </li>
 
-                <TabPane
-                  tab={
-                    <div className="d-flex align-items-center py-2">
+                <li className="list-group-item bg-transparent border-0 pl-0">
+                  <Link
+                    activeClass="active"
+                    to="prizedraw"
+                    spy={true}
+                    smooth={true}
+                  >
+                    <div className="d-flex align-items-center">
                       <img src="/Images/prizeDraw.svg" height={40} /> &nbsp;{" "}
                       <h6 className="mb-0">PrizeDraw</h6>
                     </div>
-                  }
-                  key="1"
-                >
-                  <PrizeDraw prizeList={offerArrayData?.prize}/>
-                </TabPane>
-              </Tabs>
+                  </Link>
+                </li>
+              </ul>
+
+              <div className="onCardOfferBanner mb-4">
+                <h4 className="mb-2">On Card Offers</h4>
+                <p className="mb-4">Upfront cost must be £50+</p>
+                <h3 className="d-inline-block">10% OFF </h3>{" "}
+                <small>Terms and Conditions*</small>
+              </div>
+
+              <Cashback
+                idname={"cashback"}
+                cashbackList={offerArrayData?.cashback}
+                brandName={offerData?.merchantName}
+              />
+              <Coupon idname={"coupon"} couponList={offerArrayData?.coupon} 
+               brandName={offerData?.merchantName} />
+              <PrizeDraw
+                idname={"prizedraw"}
+                prizeList={offerArrayData?.prize}
+                brandName={offerData?.merchantName}
+              />
             </Col>
           </Row>
         </div>
@@ -265,4 +285,34 @@ export default function BrandDetails() {
       </div>
     </div>
   );
+}
+
+{
+  /* <Tabs defaultActiveKey="1" onChange={callback}>
+<TabPane
+  tab={
+   
+  }
+  key="2"
+>
+
+</TabPane>
+
+  <TabPane
+    tab={
+    
+    }
+    key="3"
+  >
+  </TabPane>
+
+  <TabPane
+    tab={
+      
+    }
+    key="1"
+  >
+    
+  </TabPane>
+</Tabs> */
 }

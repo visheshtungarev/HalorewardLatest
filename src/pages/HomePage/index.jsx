@@ -124,7 +124,7 @@ const index = () => {
         <Heading
           HeadingText="Trending Brands"
           actionText="View All"
-          actionLink="/all-offers"
+          actionLink="/all-brands"
         />
         <TrendingBrands span={4} />
 

@@ -9,11 +9,14 @@ import {
 import Heading from "../../components/Heading/Heading";
 import { HomeConstant } from "../../Constants";
 import Badge from "../../components/Badge/Badge";
+import { useLocation } from "react-router-dom";
 
 
 export default function Coupon() {
 
     const [codeType,] = useState('qrcode')
+    const location = useLocation();
+    console.log("getdetail.......", location.state)
     const [addBookmark, setAddBookmark] = useState(true)
 
     const addBookmarkEvent = () => {
@@ -59,7 +62,7 @@ export default function Coupon() {
                                         <div className="logo">
                                             <img src="Images/myntra.png" width="100%" />
                                         </div>
-                                        <h5 className="mb-0 ml-3">Myntra</h5>
+                                        <h5 className="mb-0 ml-3">{location?.state?.name}</h5>
                                     </div>
                                 </div>
                                 <h5 className="text-center fw-bold py-4">Sitewide Savings: upto 11% off + extra 20% off + Avail

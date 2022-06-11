@@ -4,7 +4,7 @@ import { FiClock } from 'react-icons/fi'
 // import Heading from '../../components/Heading/Heading'
 import { Row, Col, Card, Button } from 'antd'
 import "./index.css";
-import { Link } from 'react-router-dom';
+import {  useNavigate } from 'react-router-dom';
 import Heading from '../../../components/Heading/Heading';
 import ModalComp from '../../../components/Modals/ModalComp';
 
@@ -73,10 +73,10 @@ const allTredingOffers = [
 ]
 
 
-export default function PrizeDraw({prizeList}) {
+export default function PrizeDraw({idname, prizeList, brandName}) {
     // const [dataArr,] = useState(allTredingOffers)
     console.log(allTredingOffers)
-
+    const navigate = useNavigate()
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const showModal = () => {
@@ -117,6 +117,7 @@ export default function PrizeDraw({prizeList}) {
                 }
             />
 
+            <div id={idname}>
 
             <Heading
                 HeadingText="Prize Draws"
@@ -134,8 +135,10 @@ export default function PrizeDraw({prizeList}) {
                             ]}
                         >
                             <div className="d-flex w-100 ">
-                                <div className='prizeDraw_box d-none d-lg-block'>
-                                    <img className="" src="/Images/prize.svg" height={50} />
+                                <div className='prizeDraw_box'>
+                                {/* <div className='cashbackImg prizeDraw_box'> */}
+                                    <img className="" src="/Images/prize.svg" height={40} />
+                                {/* </div> */}
                                 </div>
                                 <Row align='space-between' className="flex-grow-1">
                                     <div className=''>
@@ -160,7 +163,7 @@ export default function PrizeDraw({prizeList}) {
                                     </div>
                                     <Row align='center' className='w-100 mt-auto d-lg-flex d-none' justify='between'>
                                         <Row key="time" className="">
-                                            <Link to='' className='d-flex align-items-center mr-3'> Show Details</Link>
+                                            <a href="#" onClick={()=> navigate(`/prizedraw?id=${item.productId}`,{state: {item: item, name: brandName}})} className='d-flex align-items-center mr-3'> Show Details</a>
                                             <span className='d-flex align-items-center'> <FiClock /> &nbsp; {item.expirationDate}</span>
                                         </Row>
                                         <Button type="primary" className="px-md-5 px-3 ml-auto" onClick={showModal}>Enter draw</Button>
@@ -172,6 +175,7 @@ export default function PrizeDraw({prizeList}) {
                     </Col>
                 )}
             </Row>
+            </div>
 
 
         </>

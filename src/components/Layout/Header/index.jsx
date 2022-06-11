@@ -19,6 +19,8 @@ import SetPwd from "../../Auth/SetPwd";
 import ResetPwd from "../../Auth/ResetPwd";
 import PwdChangedSuccsessfully from "../../Auth/PwdChangedSuccsessfully";
 import action from "../../../actions";
+import { useDispatch } from "react-redux";
+import { brandSearchAction } from "../../../actions/brandAction";
 const { Search } = Input;
 
 const Index = () => {
@@ -34,6 +36,8 @@ const Index = () => {
     getAuthentication();
   }, []);
 
+  const dispatch = useDispatch();
+
   const [second, setSecond] = useState(59);
   const [minute, setMinute] = useState(1);
   const [searchOpen, setSearchOpen] = useState(false);
@@ -41,6 +45,12 @@ const Index = () => {
   const [heartActive, setHeartActive] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const navigate = useNavigate();
+
+  const [searchValue, setSearchValue] = useState({
+    name: "",
+    typing: false,
+    typingTimeout: 0,
+  });
 
   const location = useLocation();
   console.log(location.pathname.split("/")[1]);
@@ -67,10 +77,6 @@ const Index = () => {
     setModalChange("login");
     setSecond(59);
     setMinute(1);
-  };
-
-  const searchQuery = (e) => {
-    e.target.value ? setSearchOpen(true) : setSearchOpen(false);
   };
 
   React.useEffect(() => {
@@ -100,6 +106,32 @@ const Index = () => {
   const makeFav = () => {
     !heartActive ? setHeartActive(true) : setHeartActive(false);
   };
+
+  function getData(e) {
+    dispatch(brandSearchAction(e));
+    e ? setSearchOpen(true) : setSearchOpen(false);
+  }
+
+  const searchQuery = (e) => {
+    // let timer;
+    if (e.target.value) {
+      if (searchValue.typingTimeout) clearTimeout(searchValue.typingTimeout);
+      setSearchValue({
+        name: e.target.value,
+        typing: false,
+        typingTimeout: setTimeout(() => {
+          getData(e.target.value);
+        }, 1000),
+      });
+    } else {
+      let timer;
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(() => {
+        getData(e.target.value);
+      }, 1000)
+    }
+  };
+
   return (
     <>
       {location.pathname !== "/" && location.pathname !== "/saved" ? (
@@ -154,7 +186,7 @@ const Index = () => {
                 size="large"
                 placeholder="Search stores"
                 enterButton
-                onChange={() => setSearchOpen(true)}
+                onChange={() => searchQuery(true)}
               />
             </Col>
           </Row>

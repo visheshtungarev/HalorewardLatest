@@ -3,9 +3,10 @@ import React, { useState } from 'react'
 import { FiClock } from 'react-icons/fi'
 import { Row, Col, Card, Button } from 'antd'
 import "./index.css"
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import Heading from '../../../components/Heading/Heading'
 import ModalComp from '../../../components/Modals/ModalComp'
+import { useNavigate } from 'react-router-dom'
 
 const allTredingOffers = [
     {
@@ -64,10 +65,11 @@ const allTredingOffers = [
 ]
 
 
-export default function Coupon({couponList}) {
+export default function Coupon({idname,couponList, brandName}) {
     console.log(allTredingOffers);
     // const [dataArr,] = useState(allTredingOffers)
     const [isModalVisible, setIsModalVisible] = useState(false);
+    const navigate = useNavigate()
 
     const showModal = () => {
         setIsModalVisible(true);
@@ -108,7 +110,8 @@ export default function Coupon({couponList}) {
                     </div>
                 }
             />
-            <Heading
+          <div id={idname}>
+          <Heading
                 HeadingText="Coupon"
             // actionText="View All"
             // actionLink="/Trending-offers"
@@ -128,8 +131,9 @@ export default function Coupon({couponList}) {
                             <div className="d-flex w-100 ">
                                 <div className='d-none d-lg-block'>
                                     <div className='offerImg'>
-                                        <h4 className='mb-0'>30%</h4>
-                                        <p className='mb-0'>off</p>
+                                    <img src="/Images/coupon.svg" height={40} />
+                                        {/* <h4 className='mb-0'>30%</h4>
+                                        <p className='mb-0'>off</p> */}
                                     </div>
                                 </div>
                                 <Row className='flex-grow-1'>
@@ -170,7 +174,9 @@ export default function Coupon({couponList}) {
 
                                     <Row align='center' className='w-100 mt-auto' justify='between'>
                                         <Row key="time" className="d-none d-lg-flex">
-                                            <Link to='' className='d-flex align-items-center mr-3'> Show Details</Link>
+                                            {/* <Link to='' className='d-flex align-items-center mr-3'> Show Details</Link> */}
+                                            <a href='#' className='d-flex align-items-center mr-3'  onClick={()=> navigate(`/coupon?id=${item.productId}`,{state: {item: item, name: brandName}})} >
+                                            Show Details </a>
                                             <span className='d-flex align-items-center'> <FiClock /> 
                                             &nbsp;
                                              {/* {item.time} */}
@@ -187,6 +193,7 @@ export default function Coupon({couponList}) {
                     </Col>
                 )}
             </Row>
+          </div>
         </>
     )
 }

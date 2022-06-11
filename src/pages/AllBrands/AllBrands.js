@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import "./index.css";
 import { Col, Row, Card, Select } from "antd";
 // import PopularOffers from "../../components/PopularOffers/PopularOffers";
@@ -14,6 +14,8 @@ import Badge from "../../components/Badge/Badge";
 import Heading from "../../components/Heading/Heading";
 import SideBar from "../../components/Sidebar/SideBar";
 import { Post_call } from "../../network/networkmanager";
+import { useDispatch, useSelector } from "react-redux";
+import { brandListAction } from "../../actions/brandAction";
 // import { render } from "@testing-library/react";
 // const { Meta } = Card;
 
@@ -605,6 +607,10 @@ const AllBrands = () => {
   const [brandData, setBrandData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
 
+  const dispatch = useDispatch()
+  const getBrandData = useSelector((state)=> state.auth)
+  console.log("getBrandData ......", getBrandData)
+
   const closeSidebar = () => {
     !openSidePanel ? setOpenSidePanel(true) : setOpenSidePanel(false);
   };
@@ -613,39 +619,40 @@ const AllBrands = () => {
     if (window.innerWidth > 993) {
       setOpenSidePanel(true);
     }
-    getBrandList();
+    dispatch(brandListAction)
     getCategoryList();
+    setBrandData([])
   }, []);
 
-  const getBrandList = async (value) => {
-    var raw =
-      "{\n    brands(siteId: 1) {\n        merchantId\n        merchantRank\n        merchantName\n        status\n        onCard\n        provider\n        modifiedDate\n        customerRebate\n        merchantLogo1\n        merchantUrl\n        categories {\n            categoryId\n            name\n        }\n        contentTypes {\n            name\n            size\n        }\n    }\n}\n\n";
-    try {
-      let response = await Post_call(
-        `${getCategoriesByClientID}/clients/1/brands`,
-        raw,
-        false
-      );
-      if (response.status === 200) {
-        if (value) {
-          let filterarray = [];
-          response?.data?.forEach((val) => {
-            val.categories.filter((itm) => {
-              if (itm.categoryId === value) {
-                filterarray.push(val);
-              }
-            });
-          });
-          setBrandData(filterarray);
-        } else {
-          setBrandData(response?.data);
-        }
-      }
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  };
+  // const getBrandList = async (value) => {
+  //   var raw =
+  //     "{\n    brands(siteId: 1) {\n        merchantId\n        merchantRank\n        merchantName\n        status\n        onCard\n        provider\n        modifiedDate\n        customerRebate\n        merchantLogo1\n        merchantUrl\n        categories {\n            categoryId\n            name\n        }\n        contentTypes {\n            name\n            size\n        }\n    }\n}\n\n";
+  //   try {
+  //     let response = await Post_call(
+  //       `${getCategoriesByClientID}/clients/1/brands`,
+  //       raw,
+  //       false
+  //     );
+  //     if (response.status === 200) {
+  //       if (value) {
+  //         let filterarray = [];
+  //         response?.data?.forEach((val) => {
+  //           val.categories.filter((itm) => {
+  //             if (itm.categoryId === value) {
+  //               filterarray.push(val);
+  //             }
+  //           });
+  //         });
+  //         setBrandData(filterarray);
+  //       } else {
+  //         setBrandData(response?.data);
+  //       }
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     throw error;
+  //   }
+  // };
 
   const getCategoryList = async () => {
     var data =
@@ -671,7 +678,7 @@ const AllBrands = () => {
   };
 
   const filterHandler = (key) => {
-    getBrandList(key);
+    dispatch(brandListAction(key))
   };
 
   return (
@@ -772,67 +779,67 @@ const AllBrands = () => {
                       span={24}
                     >
                       <Link to={`/brand?id=${item.merchantId}`}>
-                      <Card className="deals_container popularOffers rounded1">
-                        <Row align="middle" className="w-100 flex-nowrap">
-                          <div>
-                            <img
-                              className="dealicon_img_frame"
-                              src="/Images/logo.png"
-                            />
-                          </div>
-                          <Col className="flex-grow-1">
-                            <Row align="middle" justify="around">
-                              <Col
-                                span={24}
-                                md={{ span: 6 }}
-                                className="d-flex align-items-center"
-                              >
-                                <p className="deals_title ml-3 my-0">
-                                  {item.merchantName}
-                                </p>
-                              </Col>
-                              <Col
-                                span={24}
-                                md={{ span: 18 }}
-                                className="flex-grow-1"
-                              >
-                                <p className="deals_content ml-3 mb-0">
-                                  {item?.contentTypes.map((val) => {
-                                    if (val.name === "Cashbacks") {
-                                      return (
-                                        <span>
-                                          {"Upto " +
-                                            val.size +
-                                            "%" +
-                                            " " +
-                                            val.name}
-                                          ,{" "}
-                                        </span>
-                                      );
-                                    } else {
-                                      return (
-                                        <span>
-                                          {val.size + " " + val.name},{" "}
-                                        </span>
-                                      );
-                                    }
-                                  })}
-                                </p>
-                              </Col>
-                            </Row>
-                          </Col>
-                          {item.onCard && (
-                            <div className="fixed-top-right">
-                              <Badge
-                                position={""}
-                                badgeType={item?.modeType}
-                                badgeText={item?.modeText}
-                                badgeIcon={item.modeIcon}
+                        <Card className="deals_container popularOffers rounded1">
+                          <Row align="middle" className="w-100 flex-nowrap">
+                            <div>
+                              <img
+                                className="dealicon_img_frame"
+                                src="/Images/logo.png"
                               />
                             </div>
-                          )}
-                        </Row>
-                      </Card>
+                            <Col className="flex-grow-1">
+                              <Row align="middle" justify="around">
+                                <Col
+                                  span={24}
+                                  md={{ span: 6 }}
+                                  className="d-flex align-items-center"
+                                >
+                                  <p className="deals_title ml-3 my-0">
+                                    {item.merchantName}
+                                  </p>
+                                </Col>
+                                <Col
+                                  span={24}
+                                  md={{ span: 18 }}
+                                  className="flex-grow-1"
+                                >
+                                  <p className="deals_content ml-3 mb-0">
+                                    {item?.contentTypes.map((val) => {
+                                      if (val.name === "Cashbacks") {
+                                        return (
+                                          <span>
+                                            {"Upto " +
+                                              val.size +
+                                              "%" +
+                                              " " +
+                                              val.name}
+                                            ,{" "}
+                                          </span>
+                                        );
+                                      } else {
+                                        return (
+                                          <span>
+                                            {val.size + " " + val.name},{" "}
+                                          </span>
+                                        );
+                                      }
+                                    })}
+                                  </p>
+                                </Col>
+                              </Row>
+                            </Col>
+                            {item.onCard && (
+                              <div className="fixed-top-right">
+                                <Badge
+                                  position={""}
+                                  badgeType={item?.modeType}
+                                  badgeText={item?.modeText}
+                                  badgeIcon={item.modeIcon}
+                                />
+                              </div>
+                            )}
+                          </Row>
+                        </Card>
                       </Link>
                     </Col>
                   );

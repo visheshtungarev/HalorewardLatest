@@ -1,9 +1,9 @@
-import { LOGINSUCCESS } from "../Constants/ActionsConstants";
+import { BRANDLIST, BRANDSEARCH, LOGINSUCCESS } from "../Constants/ActionsConstants";
 
 const INITIAL_STATE = {
-  user: {
-   
-  },
+  user: {},
+  brand:[],
+  brandList:[]
 };
 
 const AuthReducer = (state = INITIAL_STATE, action) => {
@@ -15,6 +15,12 @@ const AuthReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
   case LOGINSUCCESS:{
     return {...state,user:action.payload}
+  }
+  case BRANDSEARCH:{
+    return {...state,brand:action.payload}
+  }
+  case BRANDLIST:{
+    return {...state,brand:action.payload}
   }
     default:
       return state;
