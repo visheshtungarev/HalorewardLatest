@@ -1,8 +1,9 @@
-import { BRANDLIST, BRANDSEARCH, LOGINSUCCESS } from "../Constants/ActionsConstants";
+import { BRANDENTER, BRANDLIST, BRANDSEARCH, LOGINSUCCESS } from "../Constants/ActionsConstants";
 
 const INITIAL_STATE = {
   user: {},
   brand:[],
+  all_brand:[],
   brandList:[]
 };
 
@@ -19,8 +20,11 @@ const AuthReducer = (state = INITIAL_STATE, action) => {
   case BRANDSEARCH:{
     return {...state,brand:action.payload}
   }
+  case BRANDENTER:{
+    return {...state,all_brand:action.payload}
+  }
   case BRANDLIST:{
-    return {...state,brand:action.payload}
+    return {...state,brandList:action.payload}
   }
     default:
       return state;

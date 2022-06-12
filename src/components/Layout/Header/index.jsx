@@ -19,7 +19,7 @@ import SetPwd from "../../Auth/SetPwd";
 import ResetPwd from "../../Auth/ResetPwd";
 import PwdChangedSuccsessfully from "../../Auth/PwdChangedSuccsessfully";
 import action from "../../../actions";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { brandSearchAction } from "../../../actions/brandAction";
 const { Search } = Input;
 
@@ -45,6 +45,10 @@ const Index = () => {
   const [heartActive, setHeartActive] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const navigate = useNavigate();
+  const getSearchData = useSelector((state)=> state.auth?.brand);
+  const urlLocation = window.location.pathname
+  let params = new URLSearchParams(urlLocation);
+  const currentUrl = params.has("/all-brands")
 
   const [searchValue, setSearchValue] = useState({
     name: "",
@@ -108,8 +112,19 @@ const Index = () => {
   };
 
   function getData(e) {
-    dispatch(brandSearchAction(e));
+   dispatch(brandSearchAction(e, "search"));
     e ? setSearchOpen(true) : setSearchOpen(false);
+  }
+
+  const pressSearchHandler = (event) => {
+    if(event.key === "Enter"){
+      if(currentUrl){
+        dispatch(brandSearchAction(event.target.value, "enter"));
+      }else{
+        dispatch(brandSearchAction(event.target.value, "enter"));
+        navigate("/all-brands")
+      }
+    }
   }
 
   const searchQuery = (e) => {
@@ -213,13 +228,14 @@ const Index = () => {
             placeholder="Search stores"
             enterButton
             onChange={(e) => searchQuery(e)}
+            onKeyPress={(e) => pressSearchHandler(e)}
           />
           <div
             className={
               searchOpen ? "searchHolder openSearchPanel" : "searchHolder"
             }
           >
-            <SearchResult />
+            <SearchResult getSearchData={getSearchData}/>
           </div>
         </Col>
 
