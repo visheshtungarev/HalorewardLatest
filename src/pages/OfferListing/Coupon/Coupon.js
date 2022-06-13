@@ -141,7 +141,7 @@ export default function Coupon({idname,couponList, brandName}) {
                                         <div className='d-flex flex-grow-1'>
                                             <div className=''>
                                                 <div className="w-100 d-flex align-items-center justify-content-between">
-                                                    <p className="mb-0 d-none d-lg-block">Side wide</p>
+                                                    <p className="mb-0 d-none d-lg-block">{item.subcontentType}</p>
                                                     {/* <p className="mb-0 viewAllOffer">{item.viewAll}</p> */}
                                                 </div>
                                                 <div className='d-none d-lg-block'>
@@ -175,7 +175,7 @@ export default function Coupon({idname,couponList, brandName}) {
                                     <Row align='center' className='w-100 mt-auto' justify='between'>
                                         <Row key="time" className="d-none d-lg-flex">
                                             {/* <Link to='' className='d-flex align-items-center mr-3'> Show Details</Link> */}
-                                            <a href='#' className='d-flex align-items-center mr-3'  onClick={()=> navigate(`/coupon?id=${item.productId}`,{state: {item: item, name: brandName}})} >
+                                            <a href='javascript:void(0)' className='d-flex align-items-center mr-3'  onClick={()=> navigate(`/coupon?id=${item.productId}`,{state: {item: item, name: brandName}})} >
                                             Show Details </a>
                                             <span className='d-flex align-items-center'> <FiClock /> 
                                             &nbsp;

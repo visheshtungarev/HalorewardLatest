@@ -132,7 +132,7 @@ export default function Cashback({idname, cashbackList, brandName}) {
                                         <div className='d-flex flex-grow-1'>
                                             <div className=''>
                                                 <div className="w-100 align-items-center justify-content-between  d-lg-flex d-none">
-                                                    <p className="mb-0">Generic  </p>
+                                                    <p className="mb-0">{item.subcontentType}  </p>
                                                     {/* <p className="mb-0 viewAllOffer">{item.viewAll}</p> */}
                                                 </div>
                                                 {/* <div className=' d-lg-flex d-none'>
@@ -156,7 +156,7 @@ export default function Cashback({idname, cashbackList, brandName}) {
                                     <Row align='center' className='w-100 mt-auto d-lg-flex d-none' justify='between'>
                                         <Row key="time" className="">
                                             {/* <Link to='' className='d-flex align-items-center mr-3'> Show Details</Link> */}
-                                            <a href='#' className='d-flex align-items-center mr-3'  onClick={()=> navigate(`/cashback?id=${item.productId}`,{state: {item: item, name: brandName}})} >
+                                            <a href='javascript:void()' className='d-flex align-items-center mr-3'  onClick={()=> navigate(`/cashback?id=${item.productId}`,{state: {item: item, name: brandName}})} >
                                             Show Details
                                             </a>
                                             {/* <span className='d-flex align-items-center'> <FiClock /> &nbsp; {item.time}</span> */}

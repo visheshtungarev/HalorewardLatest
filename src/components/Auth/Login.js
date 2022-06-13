@@ -14,16 +14,22 @@ export default function Login({ goToRegister, forgotPwd }) {
   const [password, setPassword] = useState(null);
 
   const handleLogin = async () => {
-    console.log("email", RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}').test(email));
+    console.log("email", RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}").test(email));
     console.log("password", password);
-   if(!RegExp('[a-z0-9]+@[a-z]+\.[a-z]{2,3}').test(email)){
-     message.error("Please enter the valid email.")
-   }
-   actions.Login({
-    emailId:email,
-    password: password,
-    username: 'sb22'
-})
+    if (!RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}").test(email)) {
+      message.error("Please enter the valid email.");
+    }
+   let result = actions.Login({
+      emailId: email,
+      password: password,
+      username: "sb22",
+    });
+
+    result.then((res)=>{
+      if(res.success === true){
+        window.location.reload();
+      }
+    })
   };
   return (
     <Form autoComplete="new-password">

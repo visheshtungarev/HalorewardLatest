@@ -20,7 +20,7 @@ import ResetPwd from "../../Auth/ResetPwd";
 import PwdChangedSuccsessfully from "../../Auth/PwdChangedSuccsessfully";
 import action from "../../../actions";
 import { useDispatch, useSelector } from "react-redux";
-import { brandSearchAction } from "../../../actions/brandAction";
+import { brandSearchAction, resetMerchantAction } from "../../../actions/brandAction";
 const { Search } = Input;
 
 const Index = () => {
@@ -40,7 +40,7 @@ const Index = () => {
 
   const [second, setSecond] = useState(59);
   const [minute, setMinute] = useState(1);
-  const [searchOpen, setSearchOpen] = useState(false);
+  // const [searchOpen, setSearchOpen] = useState(false);
   const [modalChange, setModalChange] = useState("login");
   const [heartActive, setHeartActive] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -50,11 +50,13 @@ const Index = () => {
   let params = new URLSearchParams(urlLocation);
   const currentUrl = params.has("/all-brands")
 
-  const [searchValue, setSearchValue] = useState({
-    name: "",
-    typing: false,
-    typingTimeout: 0,
-  });
+  let systemToken = localStorage.getItem("accessToken");
+
+  // const [searchValue, setSearchValue] = useState({
+  //   name: "",
+  //   typing: false,
+  //   typingTimeout: 0,
+  // });
 
   const location = useLocation();
   console.log(location.pathname.split("/")[1]);
@@ -111,10 +113,10 @@ const Index = () => {
     !heartActive ? setHeartActive(true) : setHeartActive(false);
   };
 
-  function getData(e) {
-   dispatch(brandSearchAction(e, "search"));
-    e ? setSearchOpen(true) : setSearchOpen(false);
-  }
+  // function getData(e) {
+  //  dispatch(brandSearchAction(e, "search"));
+  //   e ? setSearchOpen(true) : setSearchOpen(false);
+  // }
 
   const pressSearchHandler = (event) => {
     if(event.key === "Enter"){
@@ -128,24 +130,33 @@ const Index = () => {
   }
 
   const searchQuery = (e) => {
-    // let timer;
-    if (e.target.value) {
-      if (searchValue.typingTimeout) clearTimeout(searchValue.typingTimeout);
-      setSearchValue({
-        name: e.target.value,
-        typing: false,
-        typingTimeout: setTimeout(() => {
-          getData(e.target.value);
-        }, 1000),
-      });
-    } else {
-      let timer;
-      if (timer) clearTimeout(timer);
-      timer = setTimeout(() => {
-        getData(e.target.value);
-      }, 1000)
+    const {value} = e.target;
+    if (value.length > 2) {
+      dispatch(brandSearchAction(value, "search"));
+      // if (searchValue.typingTimeout) clearTimeout(searchValue.typingTimeout);
+      // setSearchValue({
+      //   name: e.target.value,
+      //   typing: false,
+      //   typingTimeout: setTimeout(() => {
+      //     getData(e.target.value);
+      //   }, 1000),
+      // });
+    } else if(!value) {
+      dispatch(resetMerchantAction);
+      dispatch(brandSearchAction(value, "search"));
+      // dispatch(resetMerchantAction)
+      // let timer;
+      // if (timer) clearTimeout(timer);
+      // timer = setTimeout(() => {
+      //   getData(e.target.value);
+      // }, 1000)
     }
   };
+
+  const handleLogout = () => {
+    localStorage.clear();
+    window.location.href = "/"
+  }
 
   return (
     <>
@@ -232,7 +243,7 @@ const Index = () => {
           />
           <div
             className={
-              searchOpen ? "searchHolder openSearchPanel" : "searchHolder"
+              getSearchData.length > 0 ? "searchHolder openSearchPanel" : "searchHolder"
             }
           >
             <SearchResult getSearchData={getSearchData}/>
@@ -240,6 +251,17 @@ const Index = () => {
         </Col>
 
         <Col>
+        {
+          systemToken ?
+          <Row align="middle" justify="">
+          {/* <Button className="mr-2" type="primary">
+            User
+          </Button> */}
+          <Button type="primary" onClick={() => handleLogout()} size="large">
+           Logout
+          </Button>
+        </Row> 
+        :
           <Row align="middle" justify="">
             <Button type="link" onClick={showModal}>
               Sign In
@@ -248,6 +270,7 @@ const Index = () => {
               Join Now
             </Button>
           </Row>
+        }
         </Col>
       </Row>
 

@@ -11,6 +11,7 @@ import PrizeDraw from "./PrizeDraws/PrizeDraw";
 import Cashback from "./CashBack/Cashback";
 import { Link } from "react-scroll";
 import { getOfferAction } from "../../actions/getOfferAction";
+import { useLocation } from "react-router-dom";
 // import Coupon from './PrizeDraws/PrizeDraw';
 
 const allTredingOffers = [
@@ -78,11 +79,14 @@ export default function BrandDetails() {
   });
   console.log(dataArr);
 
+  const getData = useLocation();
+  let ids = getData?.state?.ids
+
   useEffect(() => {
-    let offerResult = getOfferAction();
+    let offerResult = getOfferAction(ids);
     let prizeDrawCount = 0,
       couponCount = 0,
-      cashbackCount = 0;
+      cashbackCount = 0;  
 
     let cashbackArray = [],
       couponArray = [],
@@ -156,11 +160,9 @@ export default function BrandDetails() {
               <div className="whiteFrame">
                 <h5>About {offerData?.merchantName}</h5>
                 <p>
-                  {
-                    "While myntra was founded Germany, it has influence and roots all over the world. You'll find employees from over 100 nations working at its company headquarters in Her..."
-                  }
+                  {getData.state.description}
                 </p>
-                <Link to="">Show more</Link>
+                {/* <Link to="">Show more</Link> */}
               </div>
             </Col>
             <Col className="brandInfo" span={24} lg={{ span: 18 }}>
@@ -172,7 +174,7 @@ export default function BrandDetails() {
                 {offerData?.merchantName}
               </h4>
               <p className="align-items-center d-none d-lg-flex">
-                upto {countofOffer?.cashback}% cashback{" "}
+                upto {getData.state.totalCashback} cashback{" "}
                 <span className="deviderWhite"></span> {countofOffer?.coupon}{" "}
                 coupons <span className="deviderWhite"></span>{" "}
                 {countofOffer?.prize} prize draws

@@ -16,7 +16,7 @@ export default function Cashback() {
     const { Panel } = Collapse;
 
     const location = useLocation();
-    console.log("getdetail.......", location.state)
+    const objectItem = location?.state?.item;
     const [addBookmark, setAddBookmark] = useState(true)
 
     const addBookmarkEvent = () => {
@@ -67,8 +67,15 @@ export default function Cashback() {
                                         <h5 className="mb-0 ml-3">{location?.state?.name}</h5>
                                     </div>
                                 </div>
-                                <h5 className="text-center fw-bold py-4">Sitewide Savings: upto 11% off + extra 20% off + Avail
-                                    no cost EMI with HDFC credit card </h5>
+                                <h5 className="text-center fw-bold py-4">{objectItem?.subcontentType}: &nbsp; 
+                                {
+                                    objectItem?.productMetaData.map(item=>{
+                                        if(item.key === "productDescription"){
+                                            return item.value
+                                        }
+                                    })
+                                }
+                                </h5>
 
 
                                 <Button type="primary" className="px-5 justify-content-center align-items-center d-flex mx-auto">Apply & GO to site</Button>

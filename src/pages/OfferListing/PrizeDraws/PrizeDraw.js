@@ -144,7 +144,7 @@ export default function PrizeDraw({idname, prizeList, brandName}) {
                                     <div className=''>
                                         <div className="w-100 d-lg-flex d-none align-items-center justify-content-between">
 
-                                            <p className=' mb-0'>Category</p>
+                                            <p className=' mb-0'>{item.subcontentType}</p>
 
                                             <p className="mb-0 viewAllOffer">{item.viewAll}</p>
                                         </div>
@@ -163,7 +163,7 @@ export default function PrizeDraw({idname, prizeList, brandName}) {
                                     </div>
                                     <Row align='center' className='w-100 mt-auto d-lg-flex d-none' justify='between'>
                                         <Row key="time" className="">
-                                            <a href="#" onClick={()=> navigate(`/prizedraw?id=${item.productId}`,{state: {item: item, name: brandName}})} className='d-flex align-items-center mr-3'> Show Details</a>
+                                            <a href="javascript:void(0)" onClick={()=> navigate(`/prizedraw?id=${item.productId}`,{state: {item: item, name: brandName}})} className='d-flex align-items-center mr-3'> Show Details</a>
                                             <span className='d-flex align-items-center'> <FiClock /> &nbsp; {item.expirationDate}</span>
                                         </Row>
                                         <Button type="primary" className="px-md-5 px-3 ml-auto" onClick={showModal}>Enter draw</Button>

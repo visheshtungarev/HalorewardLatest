@@ -80,81 +80,37 @@ export default function SearchResult({ getSearchData }) {
       {/* ============search Results============ */}
 
       {/* ============recent search Results============ */}
-      <div className="recentSearch">
-        <h5 className="fw-bold mb-3">Recent searches</h5>
-        <Row gutter={15}>
-          {getSearchData &&
-            getSearchData.length > 0 &&
-            getSearchData.map((element, key) => {
-              return (
-                <Col key={key} lg={{ span: 12 }} className="mb-3">
-                  <Card className="searchedResult">
-                    <div className="Brandlogo">
-                      <img src="Images/myntra.png" height={50} />
-                    </div>
-                    <div className="flex-grow-1 pl-3">
-                      <div className="d-flex">
-                        <h5 className="flex-grow-1">{element.merchantName}</h5>
-                        <img src="Images/arrow_up_.svg" height={15} />
+      {getSearchData && getSearchData.length > 0 && (
+        <div className="recentSearch">
+          <h5 className="fw-bold mb-3">Recent searches</h5>
+          <Row gutter={15}>
+            {getSearchData &&
+              getSearchData.length > 0 &&
+              getSearchData.map((element, key) => {
+                return (
+                  <Col key={key} lg={{ span: 12 }} className="mb-3">
+                    <Card className="searchedResult">
+                      <div className="Brandlogo">
+                        <img src="Images/myntra.png" height={50} />
                       </div>
-                      <p className="mb-0">
-                        upto 70% cashback, 4 coupons, 2 Prize Draws
-                      </p>
-                    </div>
-                  </Card>
-                </Col>
-              );
-            })}
-          {/* <Col lg={{ span: 12 }} className="mb-3">
-            <Card className="searchedResult">
-              <div className="Brandlogo">
-                <img src="Images/myntra.png" height={50} />
-              </div>
-              <div className="flex-grow-1 pl-3">
-                <div className="d-flex">
-                  <h5 className="flex-grow-1">Nike</h5>
-                  <img src="Images/arrow_up_.svg" height={15} />
-                </div>
-                <p className="mb-0">
-                  upto 70% cashback, 4 coupons, 2 Prize Draws
-                </p>
-              </div>
-            </Card>
-          </Col>
-          <Col lg={{ span: 12 }} className="mb-3">
-            <Card className="searchedResult">
-              <div className="Brandlogo">
-                <img src="Images/myntra.png" height={50} />
-              </div>
-              <div className="flex-grow-1 pl-3">
-                <div className="d-flex">
-                  <h5 className="flex-grow-1">Nike</h5>
-                  <img src="Images/arrow_up_.svg" height={15} />
-                </div>
-                <p className="mb-0">
-                  upto 70% cashback, 4 coupons, 2 Prize Draws
-                </p>
-              </div>
-            </Card>
-          </Col>
-          <Col lg={{ span: 12 }} className="mb-3">
-            <Card className="searchedResult">
-              <div className="Brandlogo">
-                <img src="Images/myntra.png" height={50} />
-              </div>
-              <div className="flex-grow-1 pl-3">
-                <div className="d-flex">
-                  <h5 className="flex-grow-1">Nike</h5>
-                  <img src="Images/arrow_up_.svg" height={15} />
-                </div>
-                <p className="mb-0">
-                  upto 70% cashback, 4 coupons, 2 Prize Draws
-                </p>
-              </div>
-            </Card>
-          </Col> */}
-        </Row>
-      </div>
+                      <div className="flex-grow-1 pl-3">
+                        <div className="d-flex">
+                          <h5 className="flex-grow-1">
+                            {element.merchantName}
+                          </h5>
+                          <img src="Images/arrow_up_.svg" height={15} />
+                        </div>
+                        <p className="mb-0">
+                          upto 70% cashback, 4 coupons, 2 Prize Draws
+                        </p>
+                      </div>
+                    </Card>
+                  </Col>
+                );
+              })}
+          </Row>
+        </div>
+      )}
       {/* ============recent search Results============ */}
 
       {/* ============trending search Results============ */}

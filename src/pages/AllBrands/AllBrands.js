@@ -14,7 +14,8 @@ import Badge from "../../components/Badge/Badge";
 import Heading from "../../components/Heading/Heading";
 import SideBar from "../../components/Sidebar/SideBar";
 import { Post_call } from "../../network/networkmanager";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { resetMerchantAction } from "../../actions/brandAction";
 // import { brandListAction } from "../../actions/brandAction";
 // import actions from "../../actions";
 // import { render } from "@testing-library/react";
@@ -605,15 +606,18 @@ const AllBrands = () => {
   console.log(sidebarData, allTredingBrandsTwo);
   const [dataArr] = useState(allTredingBrands);
   const [openSidePanel, setOpenSidePanel] = useState(false);
+  // const [brandBoolean, setBrandBoolean] = useState(false);
   const [brandData, setBrandData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const [merchantList, setMerchantList] = useState([]);
+  const dispatch = useDispatch();
 
   const closeSidebar = () => {
     !openSidePanel ? setOpenSidePanel(true) : setOpenSidePanel(false);
   };
 
-  console.log("merchantList", merchantList)
+  console.log("merchantList", merchantList);
+
 
   // const getBrandListData = async () => {
   //   try {
@@ -631,15 +635,14 @@ const AllBrands = () => {
     }
     getCategoryList();
     getBrandList();
-    setMerchantList(getMerachandData)
+    setMerchantList(getMerachandData);
   }, []);
 
-  useEffect(()=>{
-    getBrandList()
-  },[merchantList])
+  useEffect(() => {
+    getBrandList();
+  }, [getMerachandData]);
 
-  // console.log("getMerachandData....", getMerachandData)
-
+  console.log("getMerachandData....", getMerachandData)
 
   // useEffect(()=>{
   //   if(getMerachandData  && getMerachandData.length > 0){
@@ -655,18 +658,21 @@ const AllBrands = () => {
   //     console.log("filter_array......", filter_array)
   //     setBrandData(filter_array);
   //   }
-  // },[getMerachandData])
+  // },[getMerachandData, brandBoolean])
+
+  // console.log("brandData .....", brandData);
 
   const getBrandList = async (value) => {
     var raw =
-      "{\n    brands(siteId: 1) {\n        merchantId\n        merchantRank\n        merchantName\n        status\n        onCard\n        provider\n        modifiedDate\n        customerRebate\n        merchantLogo1\n        merchantUrl\n        categories {\n            categoryId\n            name\n        }\n        contentTypes {\n            name\n            size\n        }\n    }\n}\n\n";
+      "{\n    brands(siteId: 1) {\n        merchantId\n        merchantRank\n        merchantName\n        merchantDescription\n        status\n        onCard\n        provider\n        modifiedDate\n        customerRebate\n        merchantLogo1\n        merchantUrl\n        categories {\n            categoryId\n            name\n        }\n        contentTypes {\n            name\n            size\n        }\n    }\n}\n";
     try {
       let response = await Post_call(
         `${getCategoriesByClientID}/clients/1/brands`,
         raw,
         false
       );
-      if (response.status === 200){
+      if (response.status === 200) {
+        // setBrandBoolean(true)
         let filterarray = [];
         if (value) {
           response?.data?.forEach((val) => {
@@ -676,26 +682,28 @@ const AllBrands = () => {
               }
             });
           });
-        }else if (Array.isArray(merchantList )&& merchantList.length > 0) {
+        } else if (
+          Array.isArray(getMerachandData) &&
+          getMerachandData.length > 0
+        ) {
           response?.data?.forEach((val) => {
-            merchantList.filter((itm) => {
+            getMerachandData.filter((itm) => {
               if (val.merchantId === itm.merchantId) {
                 filterarray.push(val);
               }
             });
           });
         }
-        filterarray && filterarray.length > 0 ?  setBrandData(filterarray) :  setBrandData(response.data);
-        console.log(filterarray)
+        filterarray && filterarray.length > 0
+          ? setBrandData(filterarray)
+          : setBrandData(response.data);
+        console.log(filterarray);
       }
     } catch (error) {
       console.error(error);
       throw error;
     }
-    
   };
-
-  // console.log("branddata .....", brandData)
 
   const getCategoryList = async () => {
     var data =
@@ -721,8 +729,10 @@ const AllBrands = () => {
   };
 
   const filterHandler = (key) => {
-    setMerchantList([])
+    // setMerchantList([])
+    dispatch(resetMerchantAction);
     getBrandList(key);
+
     // dispatch(brandListAction(key))
   };
 
@@ -781,6 +791,9 @@ const AllBrands = () => {
       </div>
 
       <div className="list_view">
+        {/* {getMerachandData && getMerachandData.length > 0 && (
+          <div className="list_title">{getMerachandData.length} </div>
+        )} */}
         <Heading
           HeadingText="Brands"
           filter={
@@ -796,6 +809,7 @@ const AllBrands = () => {
               </Select>
             </>
           }
+          getMerachandData={getMerachandData}
         />
 
         <Row justify="space-around" gutter={20}>
@@ -823,7 +837,10 @@ const AllBrands = () => {
                       className="  overflow-hidden featuredOffers mb-4"
                       span={24}
                     >
-                      <Link to={`/brand?id=${item.merchantId}`}>
+                      <Link
+                        to={`/brand?id=${item.merchantId}`}
+                        state={{totalCashback: item.customerRebate, description: item.merchantDescription, ids: item.merchantId}}
+                      >
                         <Card className="deals_container popularOffers rounded1">
                           <Row align="middle" className="w-100 flex-nowrap">
                             <div>
