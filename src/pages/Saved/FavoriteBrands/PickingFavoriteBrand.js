@@ -76,6 +76,7 @@ export default function PickingFavoriteBrand() {
         false
       );
       if (response.status === 200) {
+        let array = 
         setBrandList(response.data);
       }
     } catch (error) {
