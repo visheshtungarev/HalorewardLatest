@@ -10,10 +10,13 @@ import Heading from "../../components/Heading/Heading";
 import { HomeConstant } from "../../Constants";
 import Badge from "../../components/Badge/Badge";
 import { Collapse } from 'antd';
+import { useLocation } from "react-router-dom";
 
 export default function Cashback() {
     const { Panel } = Collapse;
 
+    const location = useLocation();
+    const objectItem = location?.state?.item;
     const [addBookmark, setAddBookmark] = useState(true)
 
     const addBookmarkEvent = () => {
@@ -61,11 +64,18 @@ export default function Cashback() {
                                         <div className="logo">
                                             <img src="Images/myntra.png" width="100%" />
                                         </div>
-                                        <h5 className="mb-0 ml-3">Myntra</h5>
+                                        <h5 className="mb-0 ml-3">{location?.state?.name}</h5>
                                     </div>
                                 </div>
-                                <h5 className="text-center fw-bold py-4">Sitewide Savings: upto 11% off + extra 20% off + Avail
-                                    no cost EMI with HDFC credit card </h5>
+                                <h5 className="text-center fw-bold py-4">{objectItem?.subcontentType}: &nbsp; 
+                                {
+                                    objectItem?.productMetaData.map(item=>{
+                                        if(item.key === "productDescription"){
+                                            return item.value
+                                        }
+                                    })
+                                }
+                                </h5>
 
 
                                 <Button type="primary" className="px-5 justify-content-center align-items-center d-flex mx-auto">Apply & GO to site</Button>

@@ -1,7 +1,7 @@
-import React, { } from "react";
+import React from "react";
 import { Route, Routes } from "react-router-dom";
 import HomePage from "./pages/HomePage";
-import Footer from "./components/Layout/Footer/index"
+import Footer from "./components/Layout/Footer/index";
 import AllBrands from "./pages/AllBrands/AllBrands";
 import AllPopularOffers from "./pages/PopularOffers/AllPopularOffers";
 import Header from "./components/Layout/Header";
@@ -21,7 +21,6 @@ import PickingFavoriteBrand from "./pages/Saved/FavoriteBrands/PickingFavoriteBr
 import LoginPage from "./components/Auth/LoginPage";
 
 const RouterApp = () => {
-
   return (
     <React.Fragment>
       <Header />
@@ -31,7 +30,7 @@ const RouterApp = () => {
         <Route path="/about" element={<About />} />
         <Route path="/popular-offers" element={<AllPopularOffers />} />
         <Route path="/all-offers" element={<AllOffers />} />
-        <Route path="/all-brands/category" element={< BrandCategory />} />
+        <Route path="/all-brands/category" element={<BrandCategory />} />
         <Route path="/brand" element={<BrandDetails />} />
         <Route path="/coupon" element={<Coupon />} />
         <Route path="/cashback" element={<Cashback />} />
@@ -41,9 +40,11 @@ const RouterApp = () => {
         <Route path="/saved/saved-coupon" element={<SavedCoupon />} />
         <Route path="/saved/favorite-brand" element={<FavoriteBrands />} />
         <Route path="/saved/prize-draws" element={<SavedPrizeDraws />} />
-        <Route path="/saved/picking-favorite-brand" element={<PickingFavoriteBrand />} />
+        <Route
+          path="/saved/picking-favorite-brand"
+          element={<PickingFavoriteBrand />}
+        />
         <Route path="/login" element={<LoginPage />} />
-
       </Routes>
       <Footer />
     </React.Fragment>

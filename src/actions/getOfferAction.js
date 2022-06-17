@@ -5,9 +5,9 @@ import { Post_call } from "../network/networkmanager";
 const values = env();
 const { getCategoriesByClientID } = values;
 
-const getOfferAction = async () => {
+const getOfferAction = async (ids) => {
     
-    var data = "{\n    products(siteId: 1, merchantId: 1) {\n        merchantId\n        merchantName\n        provider\n        categories {\n            categoryId\n            name\n        }\n        products {\n            productId\n            status\n            contentType\n            subcontentType\n            expirationDate\n            productMetaData {\n                key\n                value\n            }\n        }\n    }\n}\n";
+    var data = `{\n    products(siteId: 1, merchantId: ${ids ? ids : 1}) {\n        merchantId\n        merchantName\n        provider\n        categories {\n            categoryId\n            name\n        }\n        products {\n            productId\n            status\n            contentType\n            subcontentType\n            expirationDate\n            productMetaData {\n                key\n                value\n            }\n        }\n    }\n}\n`;
   
     try {
       let response = await Post_call(

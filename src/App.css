@@ -37,6 +37,12 @@ body {
   color: #61dafb;
 }
 
+.list-group-horizontal .list-group-item .active {
+  border-bottom: 1px solid #1890ff;
+  padding-bottom: 10px;
+  display: block;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

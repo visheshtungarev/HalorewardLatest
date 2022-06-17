@@ -2,9 +2,10 @@ import React, { useState } from 'react'
 // import Heading from '../../components/Heading/Heading'
 import { Row, Col, Card, Button } from 'antd'
 import "./index.css"
-import { Link } from 'react-router-dom'
+// import { Link } from 'react-router-dom'
 import Heading from '../../../components/Heading/Heading'
 import ModalComp from '../../../components/Modals/ModalComp'
+import { useNavigate } from 'react-router-dom'
 const allTredingOffers = [
     {
 
@@ -60,10 +61,10 @@ const allTredingOffers = [
         time: "1d 2h 21m"
     }
 ]
-export default function Cashback({cashbackList}) {
+export default function Cashback({idname, cashbackList, brandName}) {
     console.log(allTredingOffers);
     // const [dataArr,] = useState(allTredingOffers)
-
+    const navigate = useNavigate()
     const [isModalVisible, setIsModalVisible] = useState(false);
 
     const showModal = () => {
@@ -104,7 +105,8 @@ export default function Cashback({cashbackList}) {
                     </div>
                 }
             />
-            <Heading
+           <div id={idname}>
+           <Heading
                 HeadingText="Cashback"
 
             />
@@ -121,7 +123,8 @@ export default function Cashback({cashbackList}) {
                             <div className="d-lg-flex w-100 ">
                                 <div className=' d-lg-flex d-none'>
                                     <div className='cashbackImg'>
-                                        <h4 className='mb-0'>30%</h4>
+                                        {/* <h4 className='mb-0'>30%</h4> */}
+                                        <img src="/Images/cashback.svg" height={40} />
                                     </div>
                                 </div>
                                 <Row className='flex-grow-1'>
@@ -129,13 +132,13 @@ export default function Cashback({cashbackList}) {
                                         <div className='d-flex flex-grow-1'>
                                             <div className=''>
                                                 <div className="w-100 align-items-center justify-content-between  d-lg-flex d-none">
-                                                    <p className="mb-0">Generic  </p>
+                                                    <p className="mb-0">{item.subcontentType}  </p>
                                                     {/* <p className="mb-0 viewAllOffer">{item.viewAll}</p> */}
                                                 </div>
                                                 {/* <div className=' d-lg-flex d-none'>
                                                     <img className="dealicon_img_frame_lg_mobile" src={item.image} />
                                                 </div> */}
-                                                <p className="deals_title mt-0">{
+                                                <p className="deals_title mt-0 mb-0">{
                                                     item.productMetaData.map((element)=>{
                                                         if(element.key === "productDescription") {
                                                             return element.value
@@ -148,11 +151,14 @@ export default function Cashback({cashbackList}) {
                                         </div>
 
                                     </Row>
-                                    <Row className="d-lg-none d-flex cashback_info w-100">upto 11% cashback</Row>
+                                    {/* <Row className="d-lg-none d-flex cashback_info w-100">upto 11% cashback</Row> */}
 
                                     <Row align='center' className='w-100 mt-auto d-lg-flex d-none' justify='between'>
                                         <Row key="time" className="">
-                                            <Link to='' className='d-flex align-items-center mr-3'> Show Details</Link>
+                                            {/* <Link to='' className='d-flex align-items-center mr-3'> Show Details</Link> */}
+                                            <a href='javascript:void()' className='d-flex align-items-center mr-3'  onClick={()=> navigate(`/cashback?id=${item.productId}`,{state: {item: item, name: brandName}})} >
+                                            Show Details
+                                            </a>
                                             {/* <span className='d-flex align-items-center'> <FiClock /> &nbsp; {item.time}</span> */}
                                         </Row>
                                         <Button type="primary" className="px-lg-5 px-3 ml-auto" onClick={() => showModal()}>Go to site</Button>
@@ -165,6 +171,7 @@ export default function Cashback({cashbackList}) {
                     </Col>
                 )}
             </Row>
+           </div>
         </>
     )
 }

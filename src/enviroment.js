@@ -18,3 +18,5 @@ const env = (type = "dev") => {
 };
 
 export default env;
+
+// http://customers-service.dxxrewards.click/api/customers/18/brands/1
