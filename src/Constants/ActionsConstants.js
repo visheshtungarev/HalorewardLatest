@@ -5,5 +5,7 @@ export const BRANDSEARCH ="BRAND_SEARCH";
 export const BRANDENTER ="BRAND_ENTER";
 export const BRANDLIST ="BRAND_LIST";
 export const RESETBRAND ="RESET_BRAND";
+export const TOGGLELOADING ="TOGGLE_LOADING";
+
 
 

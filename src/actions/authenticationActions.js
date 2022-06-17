@@ -36,6 +36,8 @@ const Login = (payload) => async (dispatch) => {
         payload: response.data.data,
       });
       return({success:true,message:"Login Successful"})
+    }else{
+      return({success:false,message:response.error})
     }
   } catch (error) {
     console.error(error);

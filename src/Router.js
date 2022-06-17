@@ -19,6 +19,7 @@ import FavoriteBrands from "./pages/Saved/FavoriteBrands/FavoriteBrands";
 import SavedPrizeDraws from "./pages/Saved/SavedPrizeDraws/SavedPrizeDraws";
 import PickingFavoriteBrand from "./pages/Saved/FavoriteBrands/PickingFavoriteBrand";
 import LoginPage from "./components/Auth/LoginPage";
+import OfferSearch from "./pages/AllOffers/OfferSearch";
 
 const RouterApp = () => {
   return (
@@ -30,6 +31,9 @@ const RouterApp = () => {
         <Route path="/about" element={<About />} />
         <Route path="/popular-offers" element={<AllPopularOffers />} />
         <Route path="/all-offers" element={<AllOffers />} />
+        <Route path="/search-offers/:id" element={<OfferSearch />} />
+
+        
         <Route path="/all-brands/category" element={<BrandCategory />} />
         <Route path="/brand" element={<BrandDetails />} />
         <Route path="/coupon" element={<Coupon />} />

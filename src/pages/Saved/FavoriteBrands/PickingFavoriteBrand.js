@@ -5,7 +5,7 @@ import Heading from "../../../components/Heading/Heading";
 import Breadcurms from "../../../components/Breadcrums/Breadcurms";
 import ModalComp from "../../../components/Modals/ModalComp";
 import env from "../../../enviroment";
-import { Patch_call, Post_call } from "../../../network/networkmanager";
+import { Post_call } from "../../../network/networkmanager";
 
 // import {
 //     GlobalOutlined,
@@ -17,7 +17,7 @@ import { Patch_call, Post_call } from "../../../network/networkmanager";
 // import Heading from "../../../components/Heading/Heading";
 
 const values = env();
-const { getCategoriesByClientID, customerAuth } = values;
+const { getCategoriesByClientID } = values;
 
 // customerAuth
 
@@ -50,21 +50,35 @@ export default function PickingFavoriteBrand() {
     getBrandList();
   }, []);
 
-  const pickBrandHandler = async (id) => {
-  try {
-    let response = await Patch_call(
-      `${customerAuth}18/brands/${id}`,
-      false
-    );
-    if (response.status === 200) {
-    //   setBrandList(response.data);
-    console.log(response)
-    }
-  } catch (error) {
-    console.error(error);
-    throw error;
-  }
-  }
+  // const pickBrandHandler = async (id) => {
+  // var myHeaders = new Headers();
+  //  myHeaders.append("Cookie", "JSESSIONID=199836D58E8CA1C695724471E76FDBF5");
+
+  //   var requestOptions = {
+  //     method: "PATCH",
+  //  //   headers: myHeaders,
+  //     redirect: "follow",
+  //   };
+
+  //   fetch(
+  //     `http://customers-service.dxxrewards.click/api/customers/18/brands/${id}`,
+  //     requestOptions
+  //   )
+  //     .then((response) => response.text())
+  //     .then((result) => console.log(result))
+  //     .catch((error) => console.log("error", error));
+
+  // try {
+  //   let response = await Patch_call(`${customerAuth}18/brands/${id}`, false);
+  //   if (response.status === 200) {
+  //     //   setBrandList(response.data);
+  //     console.log(response);
+  //   }
+  // } catch (error) {
+  //   console.error(error);
+  //   throw error;
+  // }
+  // };
 
   const getBrandList = async () => {
     var raw =
@@ -76,7 +90,9 @@ export default function PickingFavoriteBrand() {
         false
       );
       if (response.status === 200) {
-        let array = 
+        response.data.map((item) => {
+          item["isChecked"] = false;
+        });
         setBrandList(response.data);
       }
     } catch (error) {
@@ -84,6 +100,31 @@ export default function PickingFavoriteBrand() {
       throw error;
     }
   };
+
+  const handleOnChange = (key) => {
+    // const { checked } = e.target;
+    let array = [...brandList];
+    array.filter((item, k) => {
+      if (key === k) {
+        item.isChecked = !item.isChecked;
+      }
+    });
+    setBrandList(array);
+    getNoPick();
+  };
+
+  function getNoPick() {
+    let isNoPick = true;
+    brandList &&
+      brandList.length > 0 &&
+      brandList.find((item) => {
+        if (item.isChecked) {
+          isNoPick = false;
+        }
+      });
+    return isNoPick;
+  }
+  const isNoPickResult = getNoPick();
 
   return (
     <div className="home_container">
@@ -146,80 +187,55 @@ export default function PickingFavoriteBrand() {
               <h5 className="fw-bold mb-0">Your Picks</h5>
 
               {/* shows when you haven’t selected any brand ============*/}
-
-              <div className="text-center my-4" style={{ display: "none" }}>
-                <img src="/Images/no_coupon.svg" height={150} />
-                <p>You haven’t selected any brand.</p>
-              </div>
+              {isNoPickResult && (
+                <div className="text-center my-4">
+                  <img src="/Images/no_coupon.svg" height={150} />
+                  <p>You haven’t selected any brand.</p>
+                </div>
+              )}
 
               {/* shows when you haven’t selected any brand ============*/}
 
-              <Row>
-                <Col span={8} className="p-3">
-                  <div className="selectedBrands">
-                    <img
-                      src="/images/close.svg"
-                      className="crossicon"
-                      height={20}
-                    />
-                    <img src="/images/logo (3).png" className="logoimg" />
-                  </div>
-                </Col>
-                <Col span={8} className="p-3">
-                  <div className="selectedBrands">
-                    <img
-                      src="/images/close.svg"
-                      className="crossicon"
-                      height={20}
-                    />
-                    <img src="/images/logo (3).png" className="logoimg" />
-                  </div>
-                </Col>
-                <Col span={8} className="p-3">
-                  <div className="selectedBrands">
-                    <img
-                      src="/images/close.svg"
-                      className="crossicon"
-                      height={20}
-                    />
-                    <img src="/images/logo (3).png" className="logoimg" />
-                  </div>
-                </Col>
-                <Col span={8} className="p-3">
-                  <div className="selectedBrands">
-                    <img
-                      src="/images/close.svg"
-                      className="crossicon"
-                      height={20}
-                    />
-                    <img src="/images/logo (3).png" className="logoimg" />
-                  </div>
-                </Col>
-                <Col span={8} className="p-3">
-                  <div className="selectedBrands">
-                    <img
-                      src="/images/close.svg"
-                      className="crossicon"
-                      height={20}
-                    />
-                    <img src="/images/logo (3).png" className="logoimg" />
-                  </div>
-                </Col>
-              </Row>
+              {brandList && brandList.length > 0 && (
+                <Row>
+                  {brandList.map((element, id) => {
+                    if (element.isChecked) {
+                      return (
+                        <Col key={id} span={8} className="p-3">
+                          <div className="selectedBrands">
+                            <span onClick={() => handleOnChange(id)}>
+                              <img
+                                src="/images/close.svg"
+                                className="crossicon"
+                                height={20}
+                              />
+                            </span>
+                            {/* <img
+                              src="/images/logo (3).png"
+                              className="logoimg"
+                            /> */}
+                            <h5>{element.merchantName}</h5>
+                          </div>
+                        </Col>
+                      );
+                    }
+                  })}
+                </Row>
+              )}
             </Card>
           </Col>
           <Col span={24} lg={{ span: 18 }}>
             <Card className="deals_container popularOffers rounded1 px-md-4 ">
               <div className="d-flex justify-content-between align-items-center">
                 <h5 className="fw-bold mb-0">Brands</h5>
-                <div className="searchBar">
+                {/* <div className="searchBar">
                   <img
                     src="/Images/search.svg"
                     height={20}
                     className="searchIcon"
                   />
                   <input type="text" placeholder="Search for a brand" />
-                </div>
+                </div> */}
               </div>
 
               <ul className="sideMenu devider">
@@ -238,15 +254,22 @@ export default function PickingFavoriteBrand() {
                           <h5 className="pl-3">{item.merchantName}</h5>
                         </div>
                         <div>
-                          <span className="favoriteBtn" onClick={()=>pickBrandHandler(item.merchantId)}>
-                            <input name="makeFav" type="checkbox" />
+                          <span
+                            className="favoriteBtn"
+                            // onClick={() => pickBrandHandler(item.merchantId)}
+                          >
+                            <input
+                              name="makeFav"
+                              type="checkbox"
+                              checked={item.isChecked}
+                              onChange={() => handleOnChange(key)}
+                            />
                             <span className="checkimg"></span>
                           </span>
                         </div>
                       </li>
                     );
                   })}
-               
               </ul>
             </Card>
           </Col>

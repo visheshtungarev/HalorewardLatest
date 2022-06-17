@@ -1,50 +1,92 @@
 /* eslint-disable no-useless-escape */
-import { Button, Checkbox, Col, Form, Input, message, Row } from "antd";
+import { Button, Checkbox, Col, Input, Row } from "antd";
 import React, { useState } from "react";
-import { EyeOutlined } from "@ant-design/icons";
+import { EyeOutlined, EyeInvisibleOutlined } from "@ant-design/icons";
 import "./index.css";
 import { Link } from "react-router-dom";
 import actions from "../../actions";
+import { toast } from "react-toastify";
+import { useFormik } from "formik";
+import * as Yup from "yup";
 
-export default function Login({ goToRegister, forgotPwd }) {
+export default function Login({ goToRegister, forgotPwd, setModalVisibel }) {
   function onChange(e) {
     console.log(`checked = ${e.target.checked}`);
   }
-  const [email, setEmail] = useState(null);
-  const [password, setPassword] = useState(null);
 
-  const handleLogin = async () => {
-    console.log("email", RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}").test(email));
-    console.log("password", password);
-    if (!RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}").test(email)) {
-      message.error("Please enter the valid email.");
-    }
-   let result = actions.Login({
-      emailId: email,
-      password: password,
-      username: "sb22",
-    });
+  const [revealPassword, setRevealPassword] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  // const [email, setEmail] = useState(null);
+  // const [password, setPassword] = useState(null);
 
-    result.then((res)=>{
-      if(res.success === true){
-        window.location.reload();
-      }
-    })
+  // const handleLogin = async () => {
+  //   // console.log("email", RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}").test(email));
+  //   // console.log("password", password);
+  //   // if (!RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}").test(email)) {
+  //   //   message.error("Please enter the valid email.");
+  //   // }
+
+  // };
+
+  console.log(isSubmitting);
+
+  const initvalues = {
+    email: "",
+    password: "",
   };
+
+  const validationschema = Yup.object({
+    password: Yup.string().required("Password is required"),
+    email: Yup.string()
+      .email("Invalid email address")
+      .required("Email is required"),
+  });
+
+  const formik = useFormik({
+    initialValues: initvalues,
+    validationSchema: validationschema,
+    onSubmit: (values) => {
+      setIsSubmitting(true);
+      let result = actions.Login({
+        emailId: values.email,
+        password: values.password,
+        username: "sb22",
+      });
+
+      result.then((res) => {
+        if (res.success === true) {
+          setIsSubmitting(false);
+          toast.success(res.message);
+          setModalVisibel(false);
+        } else {
+          toast.success("something went wrong");
+          setIsSubmitting(false);
+        }
+      });
+      // alert(JSON.stringify(values, null, 2));
+    },
+  });
+
+  const { values, handleChange, handleBlur, handleSubmit, touched, errors } =
+    formik;
   return (
-    <Form autoComplete="new-password">
+    <form onSubmit={handleSubmit}>
       <div className="mb-4">
         <label>Email</label>
         <div className="lineinput">
           <Input
             placeholder="Email"
-            onChange={(e) => {
-              setEmail(e.target.value);
-            }}
+            name="email"
+            id="email"
+            onChange={handleChange}
+            value={values.email}
             autoComplete="new-password"
             type={"email"}
-            value={email}
+            onBlur={handleBlur}
           />
+          {touched.email && errors.email ? (
+            <div className="text-danger">{errors.email}</div>
+          ) : null}
         </div>
       </div>
       <div className="mb-4">
@@ -53,11 +95,27 @@ export default function Login({ goToRegister, forgotPwd }) {
           <Input
             placeholder="Password"
             autoComplete="new-password"
-            type={"password"}
-            onChange={(e) => setPassword(e.target.value)}
-            value={password}
-            suffix={<EyeOutlined />}
+            type={revealPassword ? "text" : "password"}
+            name="password"
+            id="password"
+            onBlur={handleBlur}
+            onChange={handleChange}
+            value={values.password}
+            suffix={
+              revealPassword ? (
+                <EyeInvisibleOutlined
+                  onClick={() => setRevealPassword(!revealPassword)}
+                />
+              ) : (
+                <EyeOutlined
+                  onClick={() => setRevealPassword(!revealPassword)}
+                />
+              )
+            }
           />
+          {touched.password && errors.password ? (
+            <div className="text-danger">{errors.password}</div>
+          ) : null}
         </div>
       </div>
       <Row className="pb-4">
@@ -76,12 +134,11 @@ export default function Login({ goToRegister, forgotPwd }) {
       </Row>
       <div className="mb-4">
         <Button
-          onClick={() => {
-            handleLogin();
-          }}
+          htmlType="submit"
           type="primary"
           className="w-100"
           size="large"
+          loading={isSubmitting}
         >
           Login
         </Button>
@@ -106,6 +163,6 @@ export default function Login({ goToRegister, forgotPwd }) {
           Register
         </Link>
       </div>
-    </Form>
+    </form>
   );
 }

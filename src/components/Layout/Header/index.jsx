@@ -20,7 +20,11 @@ import ResetPwd from "../../Auth/ResetPwd";
 import PwdChangedSuccsessfully from "../../Auth/PwdChangedSuccsessfully";
 import action from "../../../actions";
 import { useDispatch, useSelector } from "react-redux";
-import { brandSearchAction, resetMerchantAction } from "../../../actions/brandAction";
+import {
+  brandSearchAction,
+  resetMerchantAction,
+} from "../../../actions/brandAction";
+import { TOGGLELOADING } from "../../../Constants/ActionsConstants";
 const { Search } = Input;
 
 const Index = () => {
@@ -45,18 +49,18 @@ const Index = () => {
   const [heartActive, setHeartActive] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const navigate = useNavigate();
-  const getSearchData = useSelector((state)=> state.auth?.brand);
-  const urlLocation = window.location.pathname
+  const getSearchData = useSelector((state) => state.auth?.brand);
+  const isLoading = useSelector((state) => state.auth?.isLoading);
+
+  console.log("isLoading ...", isLoading)
+  
+  const urlLocation = window.location.pathname;
   let params = new URLSearchParams(urlLocation);
-  const currentUrl = params.has("/all-brands")
+  const currentUrl = params.has("/search-offers/:id");
 
   let systemToken = localStorage.getItem("accessToken");
 
-  // const [searchValue, setSearchValue] = useState({
-  //   name: "",
-  //   typing: false,
-  //   typingTimeout: 0,
-  // });
+  const [searchValue, setSearchValue] = useState();
 
   const location = useLocation();
   console.log(location.pathname.split("/")[1]);
@@ -113,50 +117,48 @@ const Index = () => {
     !heartActive ? setHeartActive(true) : setHeartActive(false);
   };
 
-  // function getData(e) {
-  //  dispatch(brandSearchAction(e, "search"));
-  //   e ? setSearchOpen(true) : setSearchOpen(false);
-  // }
-
   const pressSearchHandler = (event) => {
-    if(event.key === "Enter"){
-      if(currentUrl){
+    if (event.key === "Enter") {
+      if (currentUrl) {
+        dispatch({type: TOGGLELOADING})
         dispatch(brandSearchAction(event.target.value, "enter"));
-      }else{
+        setSearchValue("")
+      } else {
+        dispatch({type: TOGGLELOADING})
         dispatch(brandSearchAction(event.target.value, "enter"));
-        navigate("/all-brands")
+        setSearchValue("")
+        navigate(`/search-offers/${searchValue}`);
       }
     }
-  }
+  };
 
   const searchQuery = (e) => {
-    const {value} = e.target;
+    const { value } = e.target;
+    setSearchValue(value);
     if (value.length > 2) {
+      dispatch({type: TOGGLELOADING})
       dispatch(brandSearchAction(value, "search"));
-      // if (searchValue.typingTimeout) clearTimeout(searchValue.typingTimeout);
-      // setSearchValue({
-      //   name: e.target.value,
-      //   typing: false,
-      //   typingTimeout: setTimeout(() => {
-      //     getData(e.target.value);
-      //   }, 1000),
-      // });
-    } else if(!value) {
+    } else if (!value) {
+      dispatch({type: TOGGLELOADING})
+      setSearchValue(value);
       dispatch(resetMerchantAction);
       dispatch(brandSearchAction(value, "search"));
-      // dispatch(resetMerchantAction)
-      // let timer;
-      // if (timer) clearTimeout(timer);
-      // timer = setTimeout(() => {
-      //   getData(e.target.value);
-      // }, 1000)
     }
   };
 
   const handleLogout = () => {
     localStorage.clear();
-    window.location.href = "/"
-  }
+    window.location.href = "/";
+  };
+
+  // const searchClickHandler = () => {
+  //   if (currentUrl) {
+  //     dispatch(brandSearchAction(searchValue, "enter"));
+  //   } else {
+  //     dispatch(brandSearchAction(searchValue, "enter"));
+  //     navigate("/all-brands");
+  //   }
+  // };
 
   return (
     <>
@@ -238,39 +240,45 @@ const Index = () => {
             size="large"
             placeholder="Search stores"
             enterButton
+            value={searchValue}
             onChange={(e) => searchQuery(e)}
             onKeyPress={(e) => pressSearchHandler(e)}
+            // onClick={() => searchClickHandler()}
+            loading={isLoading}
           />
           <div
             className={
-              getSearchData.length > 0 ? "searchHolder openSearchPanel" : "searchHolder"
+              searchValue ? "searchHolder openSearchPanel" : "searchHolder"
             }
           >
-            <SearchResult getSearchData={getSearchData}/>
+            <SearchResult getSearchData={getSearchData} value={searchValue} setValue={setSearchValue} currentUrl={currentUrl}/>
           </div>
         </Col>
 
         <Col>
-        {
-          systemToken ?
-          <Row align="middle" justify="">
-          {/* <Button className="mr-2" type="primary">
+          {systemToken ? (
+            <Row align="middle" justify="">
+              {/* <Button className="mr-2" type="primary">
             User
           </Button> */}
-          <Button type="primary" onClick={() => handleLogout()} size="large">
-           Logout
-          </Button>
-        </Row> 
-        :
-          <Row align="middle" justify="">
-            <Button type="link" onClick={showModal}>
-              Sign In
-            </Button>
-            <Button type="primary" onClick={() => joinModal()} size="large">
-              Join Now
-            </Button>
-          </Row>
-        }
+              <Button
+                type="primary"
+                onClick={() => handleLogout()}
+                size="large"
+              >
+                Logout
+              </Button>
+            </Row>
+          ) : (
+            <Row align="middle" justify="">
+              <Button type="link" onClick={showModal}>
+                Sign In
+              </Button>
+              <Button type="primary" onClick={() => joinModal()} size="large">
+                Join Now
+              </Button>
+            </Row>
+          )}
         </Col>
       </Row>
 
@@ -311,6 +319,7 @@ const Index = () => {
             <Login
               goToRegister={() => setModalChange("register")}
               forgotPwd={() => setModalChange("forgotPwd")}
+              setModalVisibel={setIsModalVisible}
             />
           ) : modalChange === "register" ? (
             <Register
@@ -346,3 +355,12 @@ const Index = () => {
 };
 
 export default Index;
+
+// if (searchValue.typingTimeout) clearTimeout(searchValue.typingTimeout);
+// setSearchValue({
+//   name: e.target.value,
+//   typing: false,
+//   typingTimeout: setTimeout(() => {
+//     getData(e.target.value);
+//   }, 1000),
+// });
