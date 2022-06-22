@@ -1,5 +1,5 @@
 
-import { LOGINSUCCESS, } from "../Constants/ActionsConstants";
+import { LOGINSUCCESS, PASSWORDSUCCESS, SIGNUPSUCCESS, } from "../Constants/ActionsConstants";
 import env from "../enviroment";
 import { Post_call, setToken } from "../network/networkmanager"
 
@@ -47,4 +47,51 @@ const Login = (payload) => async (dispatch) => {
   }
 };
 
-export { getSystemToken,Login };
+
+const SignUp = (payload) => async (dispatch) => {
+  console.log("payload",payload)
+  const { customerAuth } = values;
+  try {
+    //start loader with dispatch
+    let response = await Post_call(`${customerAuth}/signup`,payload);
+    // console.log("response...",response)
+    if (response.status === 201) {
+     // setToken("accessToken",response.data.data.access_token);
+      dispatch({
+        type: SIGNUPSUCCESS,
+        payload: response,
+      });
+      return({success:true,message:"Signup Successful ! now please login to continue"})
+    }else{
+      return({success:false,message:response.error})
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+const resetPassword = (payload) => async (dispatch) => {
+  console.log("payload",payload)
+  const { customerAuth } = values;
+  try {
+    //start loader with dispatch
+    let response = await Post_call(`${customerAuth}/password`,payload);
+    // console.log("response...",response)
+    if (response.status === 201) {
+     // setToken("accessToken",response.data.data.access_token);
+      dispatch({
+        type: PASSWORDSUCCESS,
+        payload: response,
+      });
+      return({success:true,message:"Password changed successfully ! now please login to continue"})
+    }else{
+      return({success:false,message:response.error})
+    }
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export { getSystemToken,Login, SignUp, resetPassword };

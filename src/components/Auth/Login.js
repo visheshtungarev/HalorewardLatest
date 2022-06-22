@@ -16,19 +16,6 @@ export default function Login({ goToRegister, forgotPwd, setModalVisibel }) {
 
   const [revealPassword, setRevealPassword] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
-  // const [email, setEmail] = useState(null);
-  // const [password, setPassword] = useState(null);
-
-  // const handleLogin = async () => {
-  //   // console.log("email", RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}").test(email));
-  //   // console.log("password", password);
-  //   // if (!RegExp("[a-z0-9]+@[a-z]+.[a-z]{2,3}").test(email)) {
-  //   //   message.error("Please enter the valid email.");
-  //   // }
-
-  // };
-
-  console.log(isSubmitting);
 
   const initvalues = {
     email: "",
@@ -58,12 +45,39 @@ export default function Login({ goToRegister, forgotPwd, setModalVisibel }) {
           setIsSubmitting(false);
           toast.success(res.message);
           setModalVisibel(false);
+          setTimeout(() => {
+            window.location.reload()
+          }, 500);
         } else {
           toast.success("something went wrong");
           setIsSubmitting(false);
         }
       });
-      // alert(JSON.stringify(values, null, 2));
+
+      // var myHeaders = new Headers();
+      // myHeaders.append("tenant-id", "1");
+      // myHeaders.append("Content-Type", "application/json");
+
+      // var raw = JSON.stringify({
+      //   emailId: values.email,
+      //   password: values.password,
+      //   username: "sb22",
+      // });
+
+      // var requestOptions = {
+      //   method: "POST",
+      //   headers: myHeaders,
+      //   body: raw,
+      //   redirect: "follow",
+      // };
+
+      // fetch(
+      //   "https://customers-service.dxxrewards.click/api/customers/login",
+      //   requestOptions
+      // )
+      //   .then((response) => response.text())
+      //   .then((result) => console.log(result))
+      //   .catch((error) => console.log("error", error));
     },
   });
 

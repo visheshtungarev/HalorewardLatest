@@ -11,6 +11,14 @@ import { getOfferAction } from "../../actions/getOfferAction";
 import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
+// import {
+//   // GlobalOutlined,
+//   CopyOutlined,
+//   //ShopOutlined,
+//   //ShoppingOutlined
+// } from "@ant-design/icons";
+// import Badge from "../../components/Badge/Badge";
+
 // const values = env();
 // const { getCategoriesByClientID } = values;
 
@@ -194,42 +202,133 @@ export default function OfferSearch() {
               <Row align="middle" gutter={30}>
                 {getMerachandData.map((item, key) => {
                   return (
+                    // <Col
+                    //   key={key}
+                    //   className="deals_box featuredOffers mb-4"
+                    //   span={6}
+                    //   lg={{ span: 6 }}
+                    // >
+                    //   <Card className="deals_container popularOffers">
+                    //     <div className="d-flex w-100 mb-3">
+                    //       <div className="py-3 py-md-0 pr-3 border-right">
+                    //         <img src="/Images/myntra.png" height={50} />
+                    //       </div>
+
+                    //       <div className="flex-grow-1 pl-3">
+                    //         <p className="deals_title">{item.merchantName}</p>
+
+                    //         {/* <Row key="time" className="featured_offer_action ">
+                    //                 <span>{item.time}</span>
+                    //             </Row> */}
+                    //       </div>
+                    //     </div>
+                    //     <Button
+                    //       type="primary"
+                    //       className="w-100"
+                    //       onClick={() =>
+                    //         navigate(`/brand?id=${item.merchantId}`, {
+                    //           state: {
+                    //             totalCashback: "NA",
+                    //             description: "NA",
+                    //             ids: item.merchantId,
+                    //           },
+                    //         })
+                    //       }
+                    //       to={`/brand?id=${item.merchantId}`}
+                    //     >
+                    //       Go To Detail
+                    //     </Button>
+                    //   </Card>
+                    // </Col>
+
                     <Col
                       key={key}
                       className="deals_box featuredOffers mb-4"
-                      span={6}
-                      lg={{ span: 6 }}
+                      span={12}
+                      lg={{ span: 12 }}
                     >
-                      <Card className="deals_container popularOffers">
-                        <div className="d-flex w-100 mb-3">
-                          <div className="py-3 py-md-0 pr-3 border-right">
-                            <img src="/Images/myntra.png" height={50} />
+                      <Card
+                        className="deals_container popularOffers"
+                        actions={[]}
+                      >
+                        <div className="d-flex w-100 ">
+                          <div>
+                            <img
+                              className="dealicon_img_frame_lg"
+                              src={`data:image/png;base64,${item.merchantLogo1}`}
+                            />
                           </div>
+                          <div className="flex-grow-1">
+                            <div>
+                              <div className="w-100 d-flex align-items-center justify-content-between">
+                                <div className="d-md-flex">
+                                  {/* <Badge
+                                    position={""}
+                                    badgeType={"Cashback"}
+                                    badgeText={"Cashback"}
+                                    badgeIcon={<CopyOutlined />}
+                                  /> */}
 
-                          <div className="flex-grow-1 pl-3">
-                            <p className="deals_title">{item.merchantName}</p>
-
+                                  <Row
+                                    align="center"
+                                    className={` cardbadge Cashback mx-1`}
+                                  >
+                                    <Col
+                                      className="deals_offer_title m-0"
+                                    >
+                                      Cashback
+                                    </Col>
+                                    <Col>
+                                    <img width="25px" src="/Images/cashback.svg" />
+                                    </Col>
+                                  </Row>
+                                  {/* <Badge
+                                    position={""}
+                                    badgeType={"Coupon"}
+                                    badgeText={"Coupon"}
+                                    badgeIcon={<GlobalOutlined />}
+                                  /> */}
+                                </div>
+                                <p className="mb-0 viewAllOffer">
+                                  view all offer (24)
+                                </p>
+                              </div>
+                              <div className="py-3 py-md-0">
+                                <img
+                                  className="dealicon_img_frame_lg_mobile"
+                                  src="/Images/flipkart.png"
+                                />
+                              </div>
+                              <p className="deals_title">
+                                {/* {item.productMetaData.map((element) => {
+                                  if (element.key === "productDescription") {
+                                    return element.value;
+                                  }
+                                })} */}
+                                Sitewide Savings: up to 50% off + extra 20% off
+                                £50+ purchase!
+                              </p>
+                            </div>
                             {/* <Row key="time" className="featured_offer_action ">
                                     <span>{item.time}</span>
                                 </Row> */}
+                            <Button
+                              type="primary"
+                              className="px-5"
+                              onClick={() =>
+                                navigate(`/brand?id=${item.merchantId}`, {
+                                  state: {
+                                    totalCashback: "NA",
+                                    description: "NA",
+                                    ids: item.merchantId,
+                                  },
+                                })
+                              }
+                            >
+                              GO TO SITE
+                            </Button>
                           </div>
                         </div>
-                        <Button
-                          type="primary"
-                          className="w-100"
-                          onClick={() =>
-                            navigate(`/brand?id=${item.merchantId}`, {
-                              state: {
-                                totalCashback: "NA",
-                                description: "NA",
-                                ids: item.merchantId,
-                              },
-                            })
-                          }
-                          to={`/brand?id=${item.merchantId}`}
-                        >
-                          Go To Detail
-                        </Button>
                       </Card>
                     </Col>
                   );

@@ -5,17 +5,14 @@ import {
 } from "@ant-design/icons";
 import { Link } from 'react-router-dom';
 import "./index.css";
-export default function Heading({ HeadingText, subHeading, actionText, actionLink, filter, color, getMerachandData }) {
+export default function Heading({ HeadingText, subHeading, actionText, actionLink, filter, color }) {
 
     return (
         <Row className="headingFancy mt-md-4" align="middle" justify="space-between">
             {
                 HeadingText ?
                     <Col className={color ? `list_title ${color}` : `list_title`}>
-                        {HeadingText} {
-                            getMerachandData && getMerachandData.length > 0 && <span>
-                                {`: "${getMerachandData.length} items found"`}</span>
-                        }
+                        {HeadingText} 
                         {
                             subHeading ? <div className='subheading'>{subHeading}</div> : ''
                         }

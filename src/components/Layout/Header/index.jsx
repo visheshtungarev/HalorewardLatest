@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Row, Button, Input, Col } from "antd";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
@@ -36,6 +36,9 @@ const Index = () => {
       console.log("error", error);
     }
   };
+
+  // const getSystemToken = localStorage.getItem("accessToken")
+
   useEffect(() => {
     getAuthentication();
   }, []);
@@ -52,8 +55,8 @@ const Index = () => {
   const getSearchData = useSelector((state) => state.auth?.brand);
   const isLoading = useSelector((state) => state.auth?.isLoading);
 
-  console.log("isLoading ...", isLoading)
-  
+  console.log("isLoading ...", isLoading);
+
   const urlLocation = window.location.pathname;
   let params = new URLSearchParams(urlLocation);
   const currentUrl = params.has("/search-offers/:id");
@@ -120,13 +123,13 @@ const Index = () => {
   const pressSearchHandler = (event) => {
     if (event.key === "Enter") {
       if (currentUrl) {
-        dispatch({type: TOGGLELOADING})
+        dispatch({ type: TOGGLELOADING });
         dispatch(brandSearchAction(event.target.value, "enter"));
-        setSearchValue("")
+        setSearchValue("");
       } else {
-        dispatch({type: TOGGLELOADING})
+        dispatch({ type: TOGGLELOADING });
         dispatch(brandSearchAction(event.target.value, "enter"));
-        setSearchValue("")
+        setSearchValue("");
         navigate(`/search-offers/${searchValue}`);
       }
     }
@@ -136,10 +139,10 @@ const Index = () => {
     const { value } = e.target;
     setSearchValue(value);
     if (value.length > 2) {
-      dispatch({type: TOGGLELOADING})
+      dispatch({ type: TOGGLELOADING });
       dispatch(brandSearchAction(value, "search"));
     } else if (!value) {
-      dispatch({type: TOGGLELOADING})
+      dispatch({ type: TOGGLELOADING });
       setSearchValue(value);
       dispatch(resetMerchantAction);
       dispatch(brandSearchAction(value, "search"));
@@ -251,7 +254,12 @@ const Index = () => {
               searchValue ? "searchHolder openSearchPanel" : "searchHolder"
             }
           >
-            <SearchResult getSearchData={getSearchData} value={searchValue} setValue={setSearchValue} currentUrl={currentUrl}/>
+            <SearchResult
+              getSearchData={getSearchData}
+              value={searchValue}
+              setValue={setSearchValue}
+              currentUrl={currentUrl}
+            />
           </div>
         </Col>
 
@@ -261,13 +269,34 @@ const Index = () => {
               {/* <Button className="mr-2" type="primary">
             User
           </Button> */}
-              <Button
+              {/* <Button
                 type="primary"
                 onClick={() => handleLogout()}
                 size="large"
               >
                 Logout
-              </Button>
+              </Button> */}
+
+              <div className="dropdown">
+                <button
+                  className="btn btn-light bg-transparent dropdown-toggle"
+                  type="button"
+                  id="dropdownMenuButton"
+                  data-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  Account
+                </button>
+                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                  <Link className="dropdown-item" to="/saved">
+                    My Profile
+                  </Link>
+                  <a className="dropdown-item" href="javascript:void(0)" onClick={() => handleLogout()}>
+                   Logout
+                  </a>
+                
+                </div>
+              </div>
             </Row>
           ) : (
             <Row align="middle" justify="">

@@ -13,7 +13,6 @@ export const Post_call = async (
       method: "POST",
       // data: payload ? { query: JSON.stringify(payload) } : {}
       data: payload,
-
     });
     return response;
   } catch (error) {
@@ -87,40 +86,64 @@ export const setToken = async (type, token) => {
 };
 
 const getToken = async (url) => {
-
+  console.log("url ....", url)
   if (url.includes("auth/login")) {
     return "Basic YXBpLXVzZXI6YWRtaW4xMjM=";
+  } else if (url.includes("customers/signup")) {
+    let systemToken = await localStorage.getItem("systemToken");
+    return `Bearer ${systemToken}`;
   } else {
     let accessToken = await localStorage.getItem("accessToken");
-    if (accessToken) {
-      return `Bearer ${accessToken}`;
-    } else {
-      let systemToken = await localStorage.getItem("systemToken");
-      return `Bearer ${systemToken}`;
-    }
+    return `Bearer ${accessToken}`;
   }
 };
 export const getConfig = async (config) => {
-  console.log(">>>>>>>>>>>>>>>>>",config)
-  if(config.url=='https://tenant-products-query.dxxrewards.click/api/clients/1/brands'){
-
-    console.log("config",config)
+  console.log(">>>>>>>>>>>>>>>>>", config);
+  if (
+    config.url ==
+    "https://tenant-products-query.dxxrewards.click/api/clients/1/brands"
+  ) {
+    console.log("config", config);
   }
   let token = (await localStorage.getItem("accessToken"))
     ? localStorage.getItem("accessToken")
     : "Basic YXBpLXVzZXI6YWRtaW4xMjM=";
-    console.log("token",token)
+  console.log("token", token);
   config.headers = {
     // Accept: "application/json",
-    "Accept":"*/*",
+    Accept: "*/*",
     "Content-Type":
-      (config?.type === constVariable.FETCHDATA && (config?.url.includes("/customers/login")===false)||config.url=="https://tenant-products-query.dxxrewards.click/api/clients/1/brands"||config.url=="https://tenant-products-query.dxxrewards.click/api/clients/1/categories" || config.url=="https://tenant-products-query.dxxrewards.click/api/clients/1/products" || config.url=="https://merchants-query.dxxrewards.click/api/merchants" )
+      (config?.type === constVariable.FETCHDATA &&
+        config?.url.includes("/customers/login") === false) ||
+      config.url ==
+        "https://tenant-products-query.dxxrewards.click/api/clients/1/brands" ||
+      config.url ==
+        "https://tenant-products-query.dxxrewards.click/api/clients/1/categories" ||
+      config.url ==
+        "https://tenant-products-query.dxxrewards.click/api/clients/1/products" ||
+      config.url == "https://merchants-query.dxxrewards.click/api/merchants" ||
+      config.url ==
+        "https://tenant-products-query.dxxrewards.click/api/clients/carousels"
         ? "text/plain"
         : "application/json",
-   Authorization: await getToken(config?.url), 
-    "tenant-id": '1',
-    redirect: 'follow'
+    "tenant-id": "1",
+    // redirect: 'follow'
   };
+  if (
+    config.url ==
+      "https://tenant-products-query.dxxrewards.click/api/clients/1/brands" ||
+    config.url ==
+      "https://tenant-products-query.dxxrewards.click/api/clients/1/categories" ||
+    config.url ==
+      "https://tenant-products-query.dxxrewards.click/api/clients/1/products" ||
+    config.url == "https://merchants-query.dxxrewards.click/api/merchants" ||
+    config.url ==
+      "https://tenant-products-query.dxxrewards.click/api/clients/carousels" ||
+      config.url == "https://dx-auth-service.dxxrewards.click/auth/login" || 
+      config.url == "https://customers-service.dxxrewards.click/api/customers/signup"
+  ) {
+    config.headers["Authorization"] = await getToken(config?.url);
+  }
   return config;
 };
 

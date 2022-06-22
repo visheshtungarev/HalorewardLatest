@@ -102,6 +102,21 @@ export default function PickingFavoriteBrand() {
   };
 
   const handleOnChange = (key) => {
+
+    var myHeaders = new Headers();
+    myHeaders.append("Cookie", "JSESSIONID=8425F5C7DCFE4797B54799509881C26B");
+    
+    var requestOptions = {
+      method: 'PATCH',
+      headers: myHeaders,
+      redirect: 'follow'
+    };
+    
+    fetch("http://customers-service.dxxrewards.click/api/customers/18/brands/1", requestOptions)
+      .then(response => response.text())
+      .then(result => console.log(result))
+      .catch(error => console.log('error', error));
+
     // const { checked } = e.target;
     let array = [...brandList];
     array.filter((item, k) => {
@@ -210,11 +225,12 @@ export default function PickingFavoriteBrand() {
                                 height={20}
                               />
                             </span>
-                            {/* <img
-                              src="/images/logo (3).png"
+                            <img
+                              src={`data:image/png;base64,${element.merchantLogo1
+                              }`}
                               className="logoimg"
-                            /> */}
-                            <h5>{element.merchantName}</h5>
+                            />
+                            {/* <h5>{element.merchantName}</h5> */}
                           </div>
                         </Col>
                       );

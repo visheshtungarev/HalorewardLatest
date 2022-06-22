@@ -6,6 +6,11 @@ import {
   ShoppingOutlined
 } from "@ant-design/icons";
 
+export const singleConstant = {
+  trending_brand: "Trending Brands",
+  expiring_deals: "Expiring Deals"
+}
+
 export const promoList = [
   {
     icon: "/Images/makemytrip.png",
