@@ -1,4 +1,4 @@
-import { BRANDENTER, BRANDLIST, BRANDSEARCH, LOGINSUCCESS, RESETBRAND, TOGGLELOADING, GETCAROUSEL } from "../Constants/ActionsConstants";
+import { BRANDENTER, BRANDLIST, BRANDSEARCH, LOGINSUCCESS, RESETBRAND, TOGGLELOADING, GETCAROUSEL, GETMERCHANTBYID, GETPRODUCTBYID } from "../Constants/ActionsConstants";
 
 const INITIAL_STATE = {
   user: {},
@@ -6,7 +6,9 @@ const INITIAL_STATE = {
   all_brand:[],
   brandList:[],
   isLoading: false,
-  carousel: []
+  carousel: [],
+  merchantById: [],
+  productById: [],
 };
 
 const AuthReducer = (state = INITIAL_STATE, action) => {
@@ -33,6 +35,12 @@ const AuthReducer = (state = INITIAL_STATE, action) => {
   }
   case GETCAROUSEL:{
     return {...state,carousel:action.payload}
+  }
+  case GETMERCHANTBYID:{
+    return {...state,merchantById:action.payload}
+  }
+  case GETPRODUCTBYID:{
+    return {...state,productById:action.payload}
   }
   case RESETBRAND:{
     return  {...state,all_brand:[], brand:[]}

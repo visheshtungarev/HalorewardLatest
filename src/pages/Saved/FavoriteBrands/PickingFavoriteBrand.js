@@ -107,7 +107,7 @@ export default function PickingFavoriteBrand() {
     myHeaders.append("Cookie", "JSESSIONID=8425F5C7DCFE4797B54799509881C26B");
     
     var requestOptions = {
-      method: 'PATCH',
+      method: 'PUT',
       headers: myHeaders,
       redirect: 'follow'
     };

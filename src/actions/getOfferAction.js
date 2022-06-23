@@ -1,4 +1,5 @@
 
+import { GETPRODUCTBYID } from "../Constants/ActionsConstants";
 import env from "../enviroment";
 import { Post_call } from "../network/networkmanager";
 
@@ -1221,5 +1222,35 @@ const offerArray = {
     "extensions": null
 }
 
+const getProductAction = (payload) => async (dispatch) => {
+    const { productByproductId } = values;
+    console.log("payload ..", payload)
+    var data = `{
+        productsById(id: [1,2]) {
+            productId
+            status
+            contentType
+            subcontentType
+            expirationDate
+            productMetaData {
+                key
+                value
+            }
+            
+        }
+    }`
+    try {
+      //start loader with dispatch
+      let response = await Post_call(`${productByproductId}/products`, data, false);
+      dispatch({
+        type: GETPRODUCTBYID,
+        payload: response.data,
+      });
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
 
-export { getOfferAction, offerArray };
+
+export { getOfferAction, offerArray, getProductAction };

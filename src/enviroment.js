@@ -11,7 +11,9 @@ const env = (type = "dev") => {
       getCategoriesByClientID:"https://tenant-products-query.dxxrewards.click/api", //categories //brands
       productService:"https://products-service.dxxrewards.click/api/",
       productsCategories:"https://tenant-products.dxxrewards.click/api/clients",
-      customerAuth:"https://customers-service.dxxrewards.click/api/customers"
+      customerAuth:"https://customers-service.dxxrewards.click/api/customers",
+      customerDetailQuery: "https://customer-query.dxxrewards.click/api",
+      productByproductId: "https://products-query.dxxrewards.click/api",
     };
     return env_variables;
   }

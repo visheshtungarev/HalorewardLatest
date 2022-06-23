@@ -1,4 +1,5 @@
-import { constVariable } from "../constants/String";
+import { GETMERCHANTBYID } from "../Constants/ActionsConstants";
+import { constVariable } from "../Constants/String";
 import env from "../enviroment";
 import {
   Get_Call,
@@ -7,20 +8,38 @@ import {
   Put_call
 } from "../network/networkmanager";
 
+
 const values = env();
-const getMerchantAction = async (payload, callBack) => {
+
+const getMerchantAction = (payload) => async (dispatch) => {
   const { merchantquerry } = values;
+  console.log("payload ..", payload)
+  var raw = `{
+    merchantsById(id: [1,2,3,4,5,6,7,8]) {
+        merchantId 
+        merchantName 
+        merchantDescription 
+        merchantRank 
+        status 
+        customerMaxRebate 
+        provider
+        externalMaxRebate 
+        modifiedDate 
+        merchantLogo1 
+        merchantUrl 
+        createdDate
+    }
+}`
   try {
     //start loader with dispatch
-    let response = await Post_call(`${merchantquerry}/merchants`, payload);
-    if (response.status === 200) {
-      callBack(response.data);
-    }
+    let response = await Post_call(`${merchantquerry}/merchants`, raw, false);
+    dispatch({
+      type: GETMERCHANTBYID,
+      payload: response.data,
+    });
   } catch (error) {
     console.error(error);
     throw error;
-  } finally {
-    //end the loader with dispatch
   }
 };
 
@@ -85,7 +104,6 @@ const updateMerchantAction = async (payload, callBack) => {
   } catch (error) {
     console.error(error);
     throw error;
-  } finally {
   }
 };
 
@@ -110,8 +128,7 @@ const publishMerchantAction = async (payload, callBack) => {
   } catch (error) {
     console.error(error);
     throw error;
-  } finally {
-  }
+  } 
 };
 
 const getCategoriesByClientIDAction = async (payload, callBack) => {
@@ -226,8 +243,7 @@ const updateCategoriesStatusAction = async (payload, callBack) => {
   } catch (error) {
     console.error(error);
     throw error;
-  } finally {
-  }
+  } 
 };
 
 const getMerchantsById = async (payload, callBack) => {
@@ -255,6 +271,7 @@ const getMerchantsById = async (payload, callBack) => {
     //end the loader with dispatch
   }
 };
+
 
 export {
   getMerchantAction,
