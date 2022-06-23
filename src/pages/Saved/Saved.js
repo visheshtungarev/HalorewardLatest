@@ -110,9 +110,9 @@ export default function Saved() {
                                 <li><Link to={''}>Gift Cards</Link></li>
                                 <li><Link to={''}>Personalized</Link></li>
                                 <li><Link to={''}>Claims</Link></li>
-                                <li><Link className="savedcolor" to={''}>Saved</Link></li>
+                                <li><Link className="savedcolor" to={'/saved/picking-favorite-brand'}>Saved</Link></li>
                                 <li><Link to={''}>Help & Support</Link></li>
-                                <li><Link className="logoutColor" to={''}>Logout</Link></li>
+                                <li><a className="logoutColor" href="javascript:void(0)">Logout</a></li>
                             </ul>
                         </Card>
                     </Col>

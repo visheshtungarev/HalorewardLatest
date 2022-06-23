@@ -4,6 +4,8 @@ import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
 import Router from "./Router";
 import { store, persistor } from "./store";
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 import ErrorBoundary from "./components/ErrorBoundary";
 import "antd/dist/antd.css";
 import "./App.css";
@@ -20,6 +22,7 @@ function App() {
           <ErrorBoundary>
             <Suspense fallback={<h6>loading</h6>}>
               <BrowserRouter>
+              <ToastContainer />
                 <Router />
               </BrowserRouter>
             </Suspense>

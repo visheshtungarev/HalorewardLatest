@@ -2,8 +2,25 @@ import React from "react";
 import { Row, Col, Card } from "antd";
 
 import "./index.css";
-import { Link } from "react-router-dom";
-export default function SearchResult({ getSearchData }) {
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { brandSearchAction } from "../../actions/brandAction";
+export default function SearchResult({ getSearchData, value, setValue, currentUrl }) {
+
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
+
+  const searchHandler = () => {
+    if (currentUrl) {
+      dispatch(brandSearchAction(value, "enter"));
+      setValue("")
+    } else {
+      dispatch(brandSearchAction(value, "enter"));
+      setValue("")
+      navigate(`/search-offers/${value}`);
+    }
+  }
+
   return (
     <div className="searchSection">
       {/* ============search Results============ */}
@@ -80,37 +97,53 @@ export default function SearchResult({ getSearchData }) {
       {/* ============search Results============ */}
 
       {/* ============recent search Results============ */}
-      {getSearchData && getSearchData.length > 0 && (
-        <div className="recentSearch">
-          <h5 className="fw-bold mb-3">Recent searches</h5>
+
+      <div className="recentSearch">
+        {value && getSearchData && getSearchData.length > 0 && (
+          <div className="d-flex mb-3 align-items-center">
+            <h5 className="fw-bold mb-0 mr-3">Results with {`'${value}'`}</h5>
+            <a href="javascript:void(0)" onClick={()=>searchHandler()} style={{fontSize:"13px", fontWeight:"500"}} > See all results &nbsp; <img src="/images/arrow_next.svg" /> </a>
+          </div>
+        )}
+        {getSearchData && getSearchData.length > 0 && (
           <Row gutter={15}>
             {getSearchData &&
               getSearchData.length > 0 &&
               getSearchData.map((element, key) => {
                 return (
                   <Col key={key} lg={{ span: 12 }} className="mb-3">
-                    <Card className="searchedResult">
+                   <Link 
+                    to={`/brand?id=${element.merchantId}`}
+                    state={{totalCashback: "", description: "", ids: element.merchantId}}
+                    onClick={()=>setValue("")}
+                   >
+                   <Card className="searchedResult">
                       <div className="Brandlogo">
-                        <img src="Images/myntra.png" height={50} />
+                        <img src="/Images/myntra.png" height={50} />
                       </div>
                       <div className="flex-grow-1 pl-3">
                         <div className="d-flex">
                           <h5 className="flex-grow-1">
                             {element.merchantName}
                           </h5>
-                          <img src="Images/arrow_up_.svg" height={15} />
+                          <img src="/Images/arrow_up_.svg" height={15} />
                         </div>
                         <p className="mb-0">
                           upto 70% cashback, 4 coupons, 2 Prize Draws
                         </p>
                       </div>
                     </Card>
+                   </Link>
                   </Col>
                 );
               })}
           </Row>
-        </div>
-      )}
+        )}
+        {getSearchData && getSearchData.length <= 0 && (
+          <p>No results found for {`'${value}'`}</p>
+        )}
+      </div>
+
       {/* ============recent search Results============ */}
 
       {/* ============trending search Results============ */}

@@ -16,6 +16,7 @@ import SideBar from "../../components/Sidebar/SideBar";
 import { Post_call } from "../../network/networkmanager";
 import { useDispatch, useSelector } from "react-redux";
 import { resetMerchantAction } from "../../actions/brandAction";
+import { singleConstant } from "../../Constants/HomeConstant";
 // import { brandListAction } from "../../actions/brandAction";
 // import actions from "../../actions";
 // import { render } from "@testing-library/react";
@@ -605,11 +606,13 @@ const AllBrands = () => {
   const getMerachandData = useSelector((state) => state.auth?.all_brand);
   console.log(sidebarData, allTredingBrandsTwo);
   const [dataArr] = useState(allTredingBrands);
+  console.log("dataArr", dataArr)
   const [openSidePanel, setOpenSidePanel] = useState(false);
   // const [brandBoolean, setBrandBoolean] = useState(false);
   const [brandData, setBrandData] = useState([]);
   const [categoryData, setCategoryData] = useState([]);
   const [merchantList, setMerchantList] = useState([]);
+  const [trendingCarousel, setTrendingCarousel] = useState([]);
   const dispatch = useDispatch();
 
   const closeSidebar = () => {
@@ -618,15 +621,24 @@ const AllBrands = () => {
 
   console.log("merchantList", merchantList);
 
+  const carouselState = useSelector((state) => state.auth.carousel);
 
-  // const getBrandListData = async () => {
-  //   try {
-  //     let resp = await actions.brandListAction();
-  //     console.log("response>>>", resp);
-  //   } catch (error) {
-  //     console.log("error", error);
-  //   }
-  // };
+  useEffect(() => {
+    getCarouseItem();
+  }, [carouselState]);
+
+  const getCarouseItem = () => {
+    if (carouselState && carouselState.length >= 0) {
+      let trendingArray = [];
+      carouselState[0]?.carousels.map((element) => {
+        if (element.carouselName === singleConstant.trending_brand) {
+          return trendingArray.push(element);
+        }
+      });
+      setTrendingCarousel(trendingArray);
+    }
+  };
+
 
   useEffect(() => {
     console.log(window.innerWidth);
@@ -642,25 +654,6 @@ const AllBrands = () => {
     getBrandList();
   }, [getMerachandData]);
 
-  console.log("getMerachandData....", getMerachandData)
-
-  // useEffect(()=>{
-  //   if(getMerachandData  && getMerachandData.length > 0){
-  //     let filter_array = []
-  //     brandData && brandData.length > 0 &&
-  //     brandData.forEach((val) => {
-  //       getMerachandData.filter((itm) => {
-  //         if (val.merchantId === itm.merchantId) {
-  //           filter_array.push(val);
-  //         }
-  //       });
-  //     });
-  //     console.log("filter_array......", filter_array)
-  //     setBrandData(filter_array);
-  //   }
-  // },[getMerachandData, brandBoolean])
-
-  // console.log("brandData .....", brandData);
 
   const getBrandList = async (value) => {
     var raw =
@@ -678,17 +671,6 @@ const AllBrands = () => {
           response?.data?.forEach((val) => {
             val.categories.filter((itm) => {
               if (itm.categoryId === value) {
-                filterarray.push(val);
-              }
-            });
-          });
-        } else if (
-          Array.isArray(getMerachandData) &&
-          getMerachandData.length > 0
-        ) {
-          response?.data?.forEach((val) => {
-            getMerachandData.filter((itm) => {
-              if (val.merchantId === itm.merchantId) {
                 filterarray.push(val);
               }
             });
@@ -765,23 +747,26 @@ const AllBrands = () => {
           justify="space-around"
           gutter={20}
         >
-          {dataArr &&
-            dataArr.map((item, i) => (
+          {trendingCarousel &&
+            trendingCarousel.length &&
+            trendingCarousel[0].brands &&
+            trendingCarousel[0].brands.length > 0 &&
+            trendingCarousel[0].brands.map((item, i) => (
               <Col key={i} className="deals_box trending_brands mb-3 " span={4}>
                 <Card className="deals_container">
                   <Badge
                     position={"mx-auto"}
-                    badgeType={item?.modeType}
-                    badgeText={item?.modeText}
-                    badgeIcon={item.modeIcon}
+                    badgeType={"oncard"}
+                    badgeText={"ON CARD"}
+                    badgeIcon={"ON CARD"}
                   />
                   <>
-                    <img className="dealicon " src={item.image} />
+                    <img className="dealicon " src={`data:image/png;base64,${item.merchantLogo1}`} />
                     <p
                       className="deals_title text-center"
                       style={{ minHeight: "auto" }}
                     >
-                      {item.title}
+                      {item.merchantName}
                     </p>
                   </>
                 </Card>
@@ -809,7 +794,7 @@ const AllBrands = () => {
               </Select>
             </>
           }
-          getMerachandData={getMerachandData}
+          // getMerachandData={getMerachandData}
         />
 
         <Row justify="space-around" gutter={20}>
