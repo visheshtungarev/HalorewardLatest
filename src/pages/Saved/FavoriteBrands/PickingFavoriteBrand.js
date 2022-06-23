@@ -101,22 +101,26 @@ export default function PickingFavoriteBrand() {
     }
   };
 
-  const handleOnChange = (key) => {
+  const handleOnChange = async (key) => {
+  
 
-    var myHeaders = new Headers();
-    myHeaders.append("Cookie", "JSESSIONID=8425F5C7DCFE4797B54799509881C26B");
-    
-    var requestOptions = {
-      method: 'PATCH',
-      headers: myHeaders,
-      redirect: 'follow'
-    };
-    
-    fetch("http://customers-service.dxxrewards.click/api/customers/18/brands/1", requestOptions)
-      .then(response => response.text())
-      .then(result => console.log(result))
-      .catch(error => console.log('error', error));
-
+    let response = await fetch(
+      "https://customers-service.dxxrewards.click/api/customers/18/brands/1",
+      {
+        method:"put",
+        body:"",
+        headers:{
+          "Authorization": "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIxOFBWV1JRdFMzOVdoVFdxa0dWSUd0SUVRcWJIZWJESXlTOTI0dXFtMC1rIn0.eyJleHAiOjE2NTYwMzU2MzYsImlhdCI6MTY1NjAwNjgzNiwianRpIjoiY2VhZDYwNDItOTFiYy00Y2RhLTk0OWQtZWUwMDAwZmQ3MjE1IiwiaXNzIjoiaHR0cDovLzU0LjgzLjI4LjEwNDo4MDgwL2F1dGgvcmVhbG1zL21hc3RlciIsImF1ZCI6WyJtYXN0ZXItcmVhbG0iLCJhY2NvdW50Il0sInN1YiI6ImQ4NjVkZGViLTcyZTMtNDQ1YS1iMTA5LTQ4NGNlMzA5YTUyYyIsInR5cCI6IkJlYXJlciIsImF6cCI6InN6ZWxscy1zZXJ2ZXIiLCJzZXNzaW9uX3N0YXRlIjoiOWQzMDk2OTMtZDBiNC00YjkyLWIyYzctMDAzNjczYTU0YzU0IiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJjcmVhdGUtcmVhbG0iLCJkZWZhdWx0LXJvbGVzLW1hc3RlciIsIm9mZmxpbmVfYWNjZXNzIiwiYWRtaW4iLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7Im1hc3Rlci1yZWFsbSI6eyJyb2xlcyI6WyJ2aWV3LXJlYWxtIiwidmlldy1pZGVudGl0eS1wcm92aWRlcnMiLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsImNyZWF0ZS1jbGllbnQiLCJtYW5hZ2UtdXNlcnMiLCJxdWVyeS1yZWFsbXMiLCJ2aWV3LWF1dGhvcml6YXRpb24iLCJxdWVyeS1jbGllbnRzIiwicXVlcnktdXNlcnMiLCJtYW5hZ2UtZXZlbnRzIiwibWFuYWdlLXJlYWxtIiwidmlldy1ldmVudHMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWF1dGhvcml6YXRpb24iLCJtYW5hZ2UtY2xpZW50cyIsInF1ZXJ5LWdyb3VwcyJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiOWQzMDk2OTMtZDBiNC00YjkyLWIyYzctMDAzNjczYTU0YzU0IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInByZWZlcnJlZF91c2VybmFtZSI6ImhhbG9yZXdhcmRzQHRlc3QuY29tIn0.HZr7Vd3rq-N6mWNbfVvfIbZpb9dv8EB21qqXHZ0PcP5V2-GqNQOTVinEHzfcd_rLhOWJ98e9z42tDvYm9-S4zKeG1Hi0ozBYXVCl9r06qtlXc6GoXTOAPTTsxldNTmfceuy4z3RfB2rr2XBRx8616PRYnq1Aoooqc3cDAKqjad6KmuFNjMOqG4IyPIp1oIT_LiqFfcqpTXjnGsQDccuoLxJ0_FRqJd2q9SOEwA48e7PalA785TWvytDIAF1UCE_MZ97VTsNrMC2F06zJ6nwE4Vq0KneogOibtYbvIMjz1vbLQn6P8_Kv2vn3kSGJ9hcJnFzZNJ6ND2837czWn5JnEg",
+          "Content-Length": 0,
+          "accepts":"*/*",
+          "Accept-Encoding":"gzip, deflate, br"
+        }
+      }
+    )
+      .then((response) => response.text())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+    console.log("response", response);
     // const { checked } = e.target;
     let array = [...brandList];
     array.filter((item, k) => {
@@ -226,8 +230,7 @@ export default function PickingFavoriteBrand() {
                               />
                             </span>
                             <img
-                              src={`data:image/png;base64,${element.merchantLogo1
-                              }`}
+                              src={`data:image/png;base64,${element.merchantLogo1}`}
                               className="logoimg"
                             />
                             {/* <h5>{element.merchantName}</h5> */}
