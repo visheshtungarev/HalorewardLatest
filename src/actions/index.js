@@ -3,6 +3,7 @@ import { store } from "../store";
 
 import * as authActions from "./authenticationActions";
 import * as brandAction from "./brandAction";
+import { getCategoryAction } from "./CategoryAction";
 import * as getCarousel from "./getCarouselAction";
 import { getOfferAction } from "./getOfferAction";
 import { getMerchantAction } from "./merchantActions";
@@ -12,7 +13,8 @@ export const actions ={
     ...brandAction,
     ...getCarousel,
     ...getOfferAction,
-    ...getMerchantAction
+    ...getMerchantAction,
+    ...getCategoryAction
 }
 export default bindActionCreators(actions,store.dispatch);
 

@@ -169,11 +169,14 @@ const Index = () => {
         <div className="headerSm">
           <div className="d-flex">
             <div>
+            <Link to="/">
               <img
                 src="/Images/arrow_back.svg"
                 onClick={() => navigate(-1)}
                 height={20}
               />
+
+              </Link>
             </div>
             <div className="flex-grow-1 pageTitle pl-3">{pageTitle}</div>
             {location.pathname === "/brand" ? (
@@ -230,7 +233,9 @@ const Index = () => {
         justify="space-between"
       >
         <Col>
+        <Link to="/">
           <img width={100} src="/Images/logo.png" />
+          </Link>
         </Col>
         <Col>
           <Row align="middle" justify="center">

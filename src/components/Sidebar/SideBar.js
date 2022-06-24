@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import "./index.css"
 export default function SideBar({ type, mainTitle, subTitle, data, closePanel, devider, filterPanel  }) {
 
+    console.log("data ...", data)
 
     return (
         <Row className={mainTitle}>
@@ -40,7 +41,7 @@ export default function SideBar({ type, mainTitle, subTitle, data, closePanel, d
                                     {
                                         data && data.map((item, i) => {
                                             return (
-                                                <li key={i} className='pl-2'><label className='customCheckbox'><input type="checkbox" /> {item.title}</label></li>
+                                                <li key={i} className='pl-2'><label className='customCheckbox'><input type="checkbox" /> {item.name}</label></li>
                                             )
                                         })
                                     }

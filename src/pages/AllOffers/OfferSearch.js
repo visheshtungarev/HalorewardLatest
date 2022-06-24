@@ -3,7 +3,7 @@ import Heading from "../../components/Heading/Heading";
 // import PopularOffers from "../../components/PopularOffers/PopularOffers";
 import Breadcurms from "../../components/Breadcrums/Breadcurms";
 import { Row, Col, Select } from "antd";
-import SideBar from "../../components/Sidebar/SideBar";
+// import SideBar from "../../components/Sidebar/SideBar";
 // import { Post_call } from '../../network/networkmanager';
 // import env from '../../enviroment';
 import { Card, Button } from "antd";
@@ -22,83 +22,86 @@ import { useSelector } from "react-redux";
 // const values = env();
 // const { getCategoriesByClientID } = values;
 
-const sidebarData = [
-  {
-    title: "Accessories",
-    link: "",
-  },
-  {
-    title: "Auto & Tires",
-    link: "",
-  },
-  {
-    title: "Baby & Kids Gear",
-    link: "",
-  },
-  {
-    title: "Books & Media",
-    link: "",
-  },
-  {
-    title: "Clothing",
-    link: "",
-  },
-  {
-    title: "Electronics",
-    link: "",
-  },
-  {
-    title: "Events & Activities",
-    link: "",
-  },
-  {
-    title: "Flowers & Florists",
-    link: "",
-  },
-  {
-    title: "Food & Restaurants",
-    link: "",
-  },
-  {
-    title: "Gifts & Occasions",
-    link: "",
-  },
-  {
-    title: "Pet Supplies",
-    link: "",
-  },
-  {
-    title: "Books & Media",
-    link: "",
-  },
-  {
-    title: "Food & Restaurants",
-    link: "",
-  },
-  {
-    title: "Gifts & Occasions",
-    link: "",
-  },
-  {
-    title: "Health & Beauty",
-    link: "",
-  },
-  {
-    title: "Events & Activities",
-    link: "",
-  },
-];
+// const sidebarData = [
+//   {
+//     title: "Accessories",
+//     link: "",
+//   },
+//   {
+//     title: "Auto & Tires",
+//     link: "",
+//   },
+//   {
+//     title: "Baby & Kids Gear",
+//     link: "",
+//   },
+//   {
+//     title: "Books & Media",
+//     link: "",
+//   },
+//   {
+//     title: "Clothing",
+//     link: "",
+//   },
+//   {
+//     title: "Electronics",
+//     link: "",
+//   },
+//   {
+//     title: "Events & Activities",
+//     link: "",
+//   },
+//   {
+//     title: "Flowers & Florists",
+//     link: "",
+//   },
+//   {
+//     title: "Food & Restaurants",
+//     link: "",
+//   },
+//   {
+//     title: "Gifts & Occasions",
+//     link: "",
+//   },
+//   {
+//     title: "Pet Supplies",
+//     link: "",
+//   },
+//   {
+//     title: "Books & Media",
+//     link: "",
+//   },
+//   {
+//     title: "Food & Restaurants",
+//     link: "",
+//   },
+//   {
+//     title: "Gifts & Occasions",
+//     link: "",
+//   },
+//   {
+//     title: "Health & Beauty",
+//     link: "",
+//   },
+//   {
+//     title: "Events & Activities",
+//     link: "",
+//   },
+// ];
 
 export default function OfferSearch() {
   const [dataArr] = useState();
   const { id } = useParams();
-  const [sideMenuItems] = useState(sidebarData);
+  // const [sideMenuItems] = useState(sidebarData);
+  const [categoryData, setCategoryData] = useState([]);
+  const [merchantData, setMerchantData] = useState([]);
+
   const [openSidePanel, setOpenSidePanel] = useState(false);
   const [offerData, setOfferData] = useState([]);
+  const navigate = useNavigate();
 
   const getMerachandData = useSelector((state) => state.auth?.all_brand);
-
-  console.log("getMerachandData ...", getMerachandData);
+  const categorylist = useSelector((state) => state.auth.all_category);
 
   const { Option } = Select;
   const closeSidebar = () => {
@@ -117,30 +120,31 @@ export default function OfferSearch() {
     });
   }, []);
 
-  const navigate = useNavigate();
+  useEffect(() => {
+    setMerchantData(getMerachandData);
+    let objCategory = [];
+    getMerachandData.forEach((element) => {
+      element.categories.forEach((val)=>{
+        categorylist?.data?.filter((item) => {
+          if (Number(val) === item.categoryId) {
+            objCategory.push({ name: item.name, id: item.categoryId });
+          }
+        });
+      })
+    });
+    // console.log("objCategory", objCategory);
+    setCategoryData(objCategory);
+  }, [getMerachandData]);
 
-  // const getMerchantByIds = () => {
-  //   var myHeaders = new Headers();
-  //   myHeaders.append("Content-Type", "text/plain");
-  //   myHeaders.append("Cookie", "JSESSIONID=3054A8F6D1AED4F5314369EFD871CA30");
-
-  //   var raw =
-  //     "{\n    merchantsById(id: [1,2,3,4,5,6,7,8]) {\n        merchantId \n        merchantName \n        merchantDescription \n        merchantRank \n        status \n        customerMaxRebate \n        provider\n        externalMaxRebate \n        modifiedDate \n        merchantLogo1 \n        merchantUrl \n        createdDate\n    }\n}";
-
-  //   var requestOptions = {
-  //     method: "POST",
-  //     headers: myHeaders,
-  //     body: raw,
-  //     redirect: "follow",
-  //   };
-
-  //   fetch(
-  //     "https://merchants-query.dxxrewards.click/api/merchants",
-  //     requestOptions
-  //   )
-  //     .then((response) => response.text())
-  //     .then((result) => console.log(result))
-  //     .catch((error) => console.log("error", error));
+  // const filterHandler = (e) => {
+  //   const { value } = e.target;
+  //   let array = getMerachandData.filter((item) => {
+  //     if (item.merchantId === Number(value)) {
+  //       // alert("hey")
+  //       return item;
+  //     }
+  //   });
+  //   console.log(array);
   // };
 
   console.log("offerdata.....", offerData);
@@ -184,13 +188,56 @@ export default function OfferSearch() {
         />
         <Row justify="space-around" gutter={30}>
           <Col span={24} lg={{ span: 6 }}>
+            <div className="d-flex">
+              <h5 className="fw-bold mb-1 flex-grow-1">Filter</h5>
+              <span className="closeBtn">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="16"
+                  height="16"
+                  fill="currentColor"
+                  className="bi bi-x-lg"
+                  viewBox="0 0 16 16"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M13.854 2.146a.5.5 0 0 1 0 .708l-11 11a.5.5 0 0 1-.708-.708l11-11a.5.5 0 0 1 .708 0Z"
+                  />
+                  <path
+                    fillRule="evenodd"
+                    d="M2.146 2.146a.5.5 0 0 0 0 .708l11 11a.5.5 0 0 0 .708-.708l-11-11a.5.5 0 0 0-.708 0Z"
+                  />
+                </svg>
+              </span>
+            </div>
+            <hr />
+
             {openSidePanel ? (
-              <SideBar
-                closePanel={() => closeSidebar()}
-                type="checklist"
-                mainTitle="Filter"
-                data={sideMenuItems}
-              />
+              // <SideBar
+              //   closePanel={() => closeSidebar()}
+              //   type="checklist"
+              //   mainTitle="Filter"
+              //   data={categoryData}
+              // />
+
+              <ul className="sideMenu">
+                {/* <li><Link to="">{subTitle}</Link></li> */}
+                {categoryData &&
+                  categoryData.map((item, i) => {
+                    return (
+                      <li key={i} className="pl-2">
+                        <label className="customCheckbox">
+                          {/* <input
+                            type="checkbox"
+                            value={item.id}
+                            // onChange={(e) => filterHandler(e)}
+                          /> */}
+                          {item.name}
+                        </label>
+                      </li>
+                    );
+                  })}
+              </ul>
             ) : (
               ""
             )}
@@ -198,9 +245,9 @@ export default function OfferSearch() {
 
           <Col span={24} lg={{ span: 18 }}>
             {/* <PopularOffers offerData={offerData} /> */}
-            {getMerachandData && getMerachandData.length > 0 && (
+            {merchantData && merchantData.length > 0 && (
               <Row align="middle" gutter={30}>
-                {getMerachandData.map((item, key) => {
+                {merchantData.map((item, key) => {
                   return (
                     // <Col
                     //   key={key}
@@ -273,13 +320,14 @@ export default function OfferSearch() {
                                     align="center"
                                     className={` cardbadge Cashback mx-1`}
                                   >
-                                    <Col
-                                      className="deals_offer_title m-0"
-                                    >
+                                    <Col className="deals_offer_title m-0">
                                       Cashback
                                     </Col>
                                     <Col>
-                                    <img width="25px" src="/Images/cashback.svg" />
+                                      <img
+                                        width="25px"
+                                        src="/Images/cashback.svg"
+                                      />
                                     </Col>
                                   </Row>
                                   {/* <Badge
@@ -336,7 +384,7 @@ export default function OfferSearch() {
               </Row>
             )}
 
-            {getMerachandData && getMerachandData.length <= 0 && (
+            {merchantData && merchantData.length <= 0 && (
               <h4>No Search Found !</h4>
             )}
           </Col>

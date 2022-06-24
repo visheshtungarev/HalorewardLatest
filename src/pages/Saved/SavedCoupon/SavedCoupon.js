@@ -66,7 +66,7 @@ export default function SavedCoupon() {
               <h6 className="mb-0">Active</h6>
             </div>
           }
-          key="2"
+          key="1"
         >
           <Active  activeListing={activeListing}/>
         </TabPane>
@@ -77,7 +77,7 @@ export default function SavedCoupon() {
               <h6 className="mb-0">Claimed</h6>
             </div>
           }
-          key="3"
+          key="2"
         >
           <Claimed />
         </TabPane>
@@ -88,7 +88,7 @@ export default function SavedCoupon() {
               <h6 className="mb-0">Expired</h6>
             </div>
           }
-          key="1"
+          key="3"
         >
           <Expired />
         </TabPane>

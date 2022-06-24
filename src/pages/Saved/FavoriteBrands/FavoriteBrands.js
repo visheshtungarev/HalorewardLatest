@@ -51,7 +51,7 @@ export default function FavoriteBrands() {
                       src={`data:image/png;base64,${item.merchantLogo1}`}
                       height={50}
                     />
-                    <p className=" h5 mt-3 mb-4 pb-2">dfgdgdf</p>
+                    <p className=" h5 mt-3 mb-4 pb-2">{item.merchantName}</p>
 
                     <div className="doubleFrameSec">
                       <div className="flex-grow-1">upto 11% cashback</div>

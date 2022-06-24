@@ -17,6 +17,7 @@ import { Post_call } from "../../network/networkmanager";
 import { useDispatch, useSelector } from "react-redux";
 import { resetMerchantAction } from "../../actions/brandAction";
 import { singleConstant } from "../../Constants/HomeConstant";
+import { getCategoryAction } from "../../actions/CategoryAction";
 // import { brandListAction } from "../../actions/brandAction";
 // import actions from "../../actions";
 // import { render } from "@testing-library/react";
@@ -645,7 +646,8 @@ const AllBrands = () => {
     if (window.innerWidth > 993) {
       setOpenSidePanel(true);
     }
-    getCategoryList();
+    dispatch(getCategoryAction)
+    // getCategoryList();
     getBrandList();
     setMerchantList(getMerachandData);
   }, []);
@@ -653,6 +655,19 @@ const AllBrands = () => {
   useEffect(() => {
     getBrandList();
   }, [getMerachandData]);
+
+  const categorylist = useSelector((state)=> state.auth.all_category)
+
+  useEffect(()=>{
+    let objCategory = [{ name: "All" }];
+
+    categorylist?.data?.map((item) => {
+      return objCategory.push(item);
+    });
+    setCategoryData(objCategory);
+  },[categorylist])
+
+  // console.log("cateogrydata", categoryData)
 
 
   const getBrandList = async (value) => {
@@ -687,28 +702,28 @@ const AllBrands = () => {
     }
   };
 
-  const getCategoryList = async () => {
-    var data =
-      "{\n    categories(siteId: 1)  {\n        categoryId\n        name\n        description\n        status\n    }\n}";
+  // const getCategoryList = async () => {
+  //   var data =
+  //     "{\n    categories(siteId: 1)  {\n        categoryId\n        name\n        description\n        status\n    }\n}";
 
-    try {
-      let response = await Post_call(
-        `${getCategoriesByClientID}/clients/1/categories`,
-        data,
-        false
-      );
-      if (response.status === 200) {
-        let objCategory = [{ name: "All" }];
-        response?.data?.map((item) => {
-          return objCategory.push(item);
-        });
-        setCategoryData(objCategory);
-      }
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  };
+  //   try {
+  //     let response = await Post_call(
+  //       `${getCategoriesByClientID}/clients/1/categories`,
+  //       data,
+  //       false
+  //     );
+  //     if (response.status === 200) {
+  //       let objCategory = [{ name: "All" }];
+  //       response?.data?.map((item) => {
+  //         return objCategory.push(item);
+  //       });
+  //       setCategoryData(objCategory);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     throw error;
+  //   }
+  // };
 
   const filterHandler = (key) => {
     // setMerchantList([])
