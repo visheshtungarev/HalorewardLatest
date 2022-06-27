@@ -5,12 +5,10 @@ import Heading from "../../../components/Heading/Heading";
 import Breadcurms from "../../../components/Breadcrums/Breadcurms";
 import ModalComp from "../../../components/Modals/ModalComp";
 import env from "../../../enviroment";
-import {
-  Delete_call,
-  Put_call,
-} from "../../../network/networkmanager";
+import { Delete_call, Put_call } from "../../../network/networkmanager";
 import { getOfferAction } from "../../../actions/getOfferAction";
 import { useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 const values = env();
 const { customerAuth } = values;
@@ -21,7 +19,7 @@ export default function PickingFavoriteProduct() {
   const [, setOpenSidePanel] = useState(false);
   const [productList, setProductList] = useState([]);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   useEffect(() => {
     console.log(window.innerWidth);
@@ -31,6 +29,9 @@ export default function PickingFavoriteProduct() {
   }, []);
 
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  const getCustomer = useSelector((state) => state.auth.user);
+  let customerId = getCustomer?.customer?._id;
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -47,17 +48,18 @@ export default function PickingFavoriteProduct() {
   useEffect(() => {
     let offerResult = getOfferAction();
     offerResult.then((data) => {
-    data?.products?.products.map((item) => {
+      data?.products?.products.map((item) => {
         item["isChecked"] = false;
       });
       setProductList(data?.products?.products);
     });
   }, []);
 
-
   const handleOnChange = async (key, id) => {
     try {
-      let response = await Put_call(`${customerAuth}/18/products/${id}`);
+      let response = await Put_call(
+        `${customerAuth}/${customerId}/products/${id}`
+      );
       if (response.status === 202) {
         let array = [...productList];
         array.filter((item, k) => {
@@ -77,8 +79,8 @@ export default function PickingFavoriteProduct() {
   function getNoPick() {
     let isNoPick = true;
     productList &&
-    productList.length > 0 &&
-    productList.find((item) => {
+      productList.length > 0 &&
+      productList.find((item) => {
         if (item.isChecked) {
           isNoPick = false;
         }
@@ -153,15 +155,16 @@ export default function PickingFavoriteProduct() {
           HeadingText={"Pick your favorite Offers"}
           subHeading={"Select atleast 3 Offers"}
           filter={
-            !isNoPickResult &&
-            <Button
-              type="primary"
-              onClick={() => showModal()}
-              className="w-100"
-              size="large"
-            >
-              Save
-            </Button>
+            !isNoPickResult && (
+              <Button
+                type="primary"
+                onClick={() => showModal()}
+                className="w-100"
+                size="large"
+              >
+                Save
+              </Button>
+            )
           }
         />
         <Row justify="space-around" gutter={20}>
@@ -182,29 +185,22 @@ export default function PickingFavoriteProduct() {
               {productList && productList.length > 0 && (
                 <Row>
                   {productList.map((element, id) => {
-                    if(element.isChecked){
-                        return (
-                          <Col key={id} span={8} className="p-3">
-                            <div className="selectedBrands">
-                              <span
-                                onClick={() =>
-                                  removePickhandler(id, 1)
-                                }
-                              >
-                                <img
-                                  src="/images/close.svg"
-                                  className="crossicon"
-                                  height={20}
-                                />
-                              </span>
+                    if (element.isChecked) {
+                      return (
+                        <Col key={id} span={8} className="p-3">
+                          <div className="selectedBrands">
+                            <span onClick={() => removePickhandler(id, 1)}>
                               <img
-                                src="/Images/nykaa.png"
-                                className="logoimg"
+                                src="/images/close.svg"
+                                className="crossicon"
+                                height={20}
                               />
-                              {/* <h5>{element.merchantName}</h5> */}
-                            </div>
-                          </Col>
-                        );
+                            </span>
+                            <img src="/Images/nykaa.png" className="logoimg" />
+                            {/* <h5>{element.merchantName}</h5> */}
+                          </div>
+                        </Col>
+                      );
                     }
                   })}
                 </Row>
@@ -249,9 +245,7 @@ export default function PickingFavoriteProduct() {
                               name="makeFav"
                               type="checkbox"
                               checked={item.isChecked}
-                              onChange={() =>
-                                handleOnChange(key, 1)
-                              }
+                              onChange={() => handleOnChange(key, 1)}
                             />
                             <span className="checkimg"></span>
                           </span>

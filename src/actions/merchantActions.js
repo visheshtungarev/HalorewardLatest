@@ -5,17 +5,16 @@ import {
   Get_Call,
   Patch_call,
   Post_call,
-  Put_call
+  Put_call,
 } from "../network/networkmanager";
-
 
 const values = env();
 
 const getMerchantAction = (payload) => async (dispatch) => {
   const { merchantquerry } = values;
-  console.log("payload ..", payload)
+
   var raw = `{
-    merchantsById(id: [1,2,3,4,5,6,7,8]) {
+    merchantsById(id: [${payload}]) {
         merchantId 
         merchantName 
         merchantDescription 
@@ -29,7 +28,7 @@ const getMerchantAction = (payload) => async (dispatch) => {
         merchantUrl 
         createdDate
     }
-}`
+}`;
   try {
     //start loader with dispatch
     let response = await Post_call(`${merchantquerry}/merchants`, raw, false);
@@ -128,7 +127,7 @@ const publishMerchantAction = async (payload, callBack) => {
   } catch (error) {
     console.error(error);
     throw error;
-  } 
+  }
 };
 
 const getCategoriesByClientIDAction = async (payload, callBack) => {
@@ -243,7 +242,7 @@ const updateCategoriesStatusAction = async (payload, callBack) => {
   } catch (error) {
     console.error(error);
     throw error;
-  } 
+  }
 };
 
 const getMerchantsById = async (payload, callBack) => {
@@ -272,7 +271,6 @@ const getMerchantsById = async (payload, callBack) => {
   }
 };
 
-
 export {
   getMerchantAction,
   createMerchantAction,
@@ -283,5 +281,5 @@ export {
   updateCategoriesStatusAction,
   getMerchantsById,
   getCategories,
-  getReviewMerchantsByClientId
+  getReviewMerchantsByClientId,
 };

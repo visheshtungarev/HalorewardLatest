@@ -124,17 +124,20 @@ export default function OfferSearch() {
     setMerchantData(getMerachandData);
     let objCategory = [];
     getMerachandData.forEach((element) => {
-      element.categories.forEach((val)=>{
+      element.categories.forEach((val) => {
         categorylist?.data?.filter((item) => {
           if (Number(val) === item.categoryId) {
             objCategory.push({ name: item.name, id: item.categoryId });
           }
         });
-      })
+      });
     });
     // console.log("objCategory", objCategory);
     setCategoryData(objCategory);
   }, [getMerachandData]);
+
+  console.log("getMerachandData ...", getMerachandData);
+  console.log("categorylist ...", categorylist);
 
   // const filterHandler = (e) => {
   //   const { value } = e.target;

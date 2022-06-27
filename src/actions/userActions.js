@@ -52,27 +52,27 @@ const USERDETAILACTION = async (payload) => {
   }
 };
 
-const getCustomerInfoAction = async (dispatch) => {
+const getCustomerInfoAction = (payload) => async (dispatch) => {
   const { customerDetailQuery } = values;
   var raw = `{
-  customer(customerId: 18) {
-      customerId
-      prefix
-      firstName
-      salutation
-      middleName
-      lastName
-      gender
-      dateOfBirth
-      brands
-      products
-      categories
-      rewards {
-          totalCashback
-          totalPoints
-      }
+    customer(customerId: ${payload}) {
+        _id
+        prefix
+        firstName
+        salutation
+        middleName
+        lastName
+        gender
+        dateOfBirth
+        brands
+        products
+        categories
+        rewards {
+            totalCashback
+            totalPoints
+        }
 
-  }
+    }
 }`;
   try {
     //start loader with dispatch

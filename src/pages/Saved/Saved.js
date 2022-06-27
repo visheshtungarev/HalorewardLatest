@@ -15,8 +15,8 @@ import Heading from "../../components/Heading/Heading";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getMerchantAction } from "../../actions/merchantActions";
-// import { getCustomerInfoAction } from "../../actions/userActions";
 import { getProductAction } from "../../actions/getOfferAction";
+import { getCustomerInfoAction } from "../../actions/userActions";
 // import { render } from "@testing-library/react";
 // const { Meta } = Card;
 
@@ -100,27 +100,31 @@ export default function Saved() {
 
   const brandResult = useSelector((state) => state.auth.merchantById);
   const offerResult = useSelector((state) => state.auth.productById);
+  const getCustomer = useSelector((state) => state.auth.user);
+  const customerDetail = useSelector((state) => state.auth.customerDetail);
+
+  console.log("customerDetail ....", customerDetail);
 
   useEffect(() => {
     console.log(window.innerWidth);
     if (window.innerWidth > 993) {
       setOpenSidePanel(true);
     }
-    // dispatch(getCustomerInfoAction);
-    // console.log("result ...", customerResult);
-
-    setBrandList(brandResult);
-    setOfferListing(offerResult);
+    let customerId = getCustomer?.customer?._id;
+    dispatch(getCustomerInfoAction(customerId));
   }, []);
 
   useEffect(() => {
-    dispatch(getMerchantAction(["1", "2", "3"]));
-    dispatch(getProductAction(["1", "2", "3"]));
+    setBrandList(brandResult);
+    setOfferListing(offerResult);
+  }, [brandResult, offerResult]);
+
+  useEffect(() => {
+    dispatch(getMerchantAction(customerDetail?.customer?.brands));
+    dispatch(getProductAction(customerDetail?.customer?.products));
   }, []);
 
-//   const navigate = useNavigate()
-
-
+  //   const navigate = useNavigate()
 
   return (
     <div className="home_container">
@@ -234,8 +238,9 @@ export default function Saved() {
                 offerListing.length > 0 &&
                 offerListing.map((item, key) => (
                   <Col key={key} className="deals_box" span={6}>
-                    <Card className="deals_container" 
-                    // onClick={()=>navigate("/saved/saved-coupon")} 
+                    <Card
+                      className="deals_container"
+                      // onClick={()=>navigate("/saved/saved-coupon")}
                     >
                       <>
                         <img className="dealicon" src="/Images/flipkart.png" />
@@ -308,8 +313,9 @@ export default function Saved() {
                       className="deals_box trending_brands mb-3 text-left"
                       span={6}
                     >
-                      <Card className="deals_container" 
-                     // onClick={()=>navigate('/saved/favorite-brand')}
+                      <Card
+                        className="deals_container"
+                        // onClick={()=>navigate('/saved/favorite-brand')}
                       >
                         <>
                           <img

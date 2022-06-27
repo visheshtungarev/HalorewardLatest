@@ -86,7 +86,7 @@ export const setToken = async (type, token) => {
 };
 
 const getToken = async (url) => {
-  console.log("url ....", url)
+  console.log("url ....", url);
   if (url.includes("auth/login")) {
     return "Basic YXBpLXVzZXI6YWRtaW4xMjM=";
   } else if (url.includes("customers/signup")) {
@@ -124,8 +124,8 @@ export const getConfig = async (config) => {
       config.url == "https://merchants-query.dxxrewards.click/api/merchants" ||
       config.url ==
         "https://tenant-products-query.dxxrewards.click/api/clients/carousels" ||
-        config.url == "https://customer-query.dxxrewards.click/api/customers" ||
-        config.url == "https://products-query.dxxrewards.click/api/products" 
+      config.url == "https://customer-query.dxxrewards.click/api/customers" ||
+      config.url == "https://products-query.dxxrewards.click/api/products"
         ? "text/plain"
         : "application/json",
     "tenant-id": "1",
@@ -141,16 +141,15 @@ export const getConfig = async (config) => {
     config.url == "https://merchants-query.dxxrewards.click/api/merchants" ||
     config.url ==
       "https://tenant-products-query.dxxrewards.click/api/clients/carousels" ||
-      config.url == "https://dx-auth-service.dxxrewards.click/auth/login" || 
-      config.url == "https://customers-service.dxxrewards.click/api/customers/signup" ||
-      config.url == "https://customer-query.dxxrewards.click/api/customers" ||
-      config.url == "https://products-query.dxxrewards.click/api/products" ||
-      config.url.includes("api/customers/18/brands") || 
-      config.url.includes("api/customers/18/product")
+    config.url == "https://dx-auth-service.dxxrewards.click/auth/login" ||
+    config.url ==
+      "https://customers-service.dxxrewards.click/api/customers/signup" ||
+    config.url == "https://customer-query.dxxrewards.click/api/customers" ||
+    config.url == "https://products-query.dxxrewards.click/api/products" ||
+    config.url.includes("api/customers/34/brands") ||
+    config.url.includes("api/customers/34/product")
   ) {
     config.headers["Authorization"] = await getToken(config?.url);
   }
   return config;
 };
-
-

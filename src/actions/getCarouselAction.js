@@ -5,9 +5,9 @@ import { Post_call } from "../network/networkmanager";
 const values = env();
 const { getCategoriesByClientID } = values;
 
-export const getCarousel = () => async (dispatch) => {
+export const getCarousel = (payload) => async (dispatch) => {
   var raw = `{
-    carousels(siteId: 1){
+    carousels(siteId: 1, customerId: ${payload}){
         pageName
         carousels {
             carouselName
@@ -19,6 +19,10 @@ export const getCarousel = () => async (dispatch) => {
             startDate
             endDate
             modifiedBy
+            metadata {
+                key
+                value
+            }
             categoryType{
                 categoryType
                 categories{
@@ -37,17 +41,18 @@ export const getCarousel = () => async (dispatch) => {
                 provider
                 merchantLogo1
                 merchantUrl
-            }
-            products {
-                productId
-                contentType
-                subcontentType
-                expirationDate
-                productMetaData {
-                    key
-                    value
+                products {
+                    productId
+                    contentType
+                    subcontentType
+                    expirationDate
+                    productMetaData {
+                        key
+                        value
+                    }
                 }
             }
+            
         }
     }
 }`;
@@ -69,28 +74,25 @@ export const getCarousel = () => async (dispatch) => {
     throw error;
   }
 
+  // var myHeaders = new Headers();
+  // myHeaders.append("tenant-id", "1");
+  // myHeaders.append("Content-Type", "text/plain");
+  // myHeaders.append("Cookie", "JSESSIONID=522DB001151C8D5A7557921CE9F6C63D");
 
-// var myHeaders = new Headers();
-// myHeaders.append("tenant-id", "1");
-// myHeaders.append("Content-Type", "text/plain");
-// myHeaders.append("Cookie", "JSESSIONID=522DB001151C8D5A7557921CE9F6C63D");
+  // var requestOptions = {
+  //   method: 'POST',
+  //   headers: myHeaders,
+  //   body: raw,
+  //   redirect: 'follow'
+  // };
 
-
-
-// var requestOptions = {
-//   method: 'POST',
-//   headers: myHeaders,
-//   body: raw,
-//   redirect: 'follow'
-// };
-
-// fetch("https://tenant-products-query.dxxrewards.click/api/clients/carousels", requestOptions)
-//   .then(response => response.text())
-//   .then(result => console.log(
-//     dispatch({
-//       type: GETCAROUSEL,
-//       payload: result,
-//     })
-//   ))
-//   .catch(error => console.log('error', error));
+  // fetch("https://tenant-products-query.dxxrewards.click/api/clients/carousels", requestOptions)
+  //   .then(response => response.text())
+  //   .then(result => console.log(
+  //     dispatch({
+  //       type: GETCAROUSEL,
+  //       payload: result,
+  //     })
+  //   ))
+  //   .catch(error => console.log('error', error));
 };

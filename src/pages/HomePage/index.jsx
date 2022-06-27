@@ -22,13 +22,17 @@ const index = () => {
   const [expiringCarousel, setExpiringCarousel] = useState([]);
   const [trendingCarousel, setTrendingCarousel] = useState([]);
 
-  const accessToken = localStorage.getItem("accessToken")
+  const accessToken = localStorage.getItem("accessToken");
+
+  const getCustomer = useSelector((state) => state.auth.user);
+  let customerId = getCustomer?.customer?._id;
 
   useEffect(() => {
-    accessToken && dispatch(getCarousel());
+    accessToken && dispatch(getCarousel(customerId));
   }, []);
 
   const carouselState = useSelector((state) => state.auth.carousel);
+  // console.log("carouselState ....", carouselState);
 
   useEffect(() => {
     getCarouseItem();
@@ -136,37 +140,32 @@ const index = () => {
             trendingCarousel[0].products &&
             trendingCarousel[0].products.length > 0 &&
             trendingCarousel[0].products.splice(1, 6).map((item, key) => {
-            return  (
+              return (
                 <Col key={key} className="deals_box" span={4}>
                   <Card className="deals_container" actions={[]}>
                     <>
                       <Badge
                         position={""}
-                        badgeType={capitalizeFirstLetter(
-                          item.contentType
-                        )}
+                        badgeType={capitalizeFirstLetter(item.contentType)}
                         badgeText={item.contentType}
                         badgeIcon={item.contentType}
                       />
-  
+
                       <Badge
                         position={""}
                         badgeType={capitalizeFirstLetter(item.subcontentType)}
                         badgeText={item.subcontentType}
                         badgeIcon={item.subcontentType}
                       />
-  
-                      <img
-                        className="dealicon"
-                        src="/Images/flipkart.png"
-                      />
-                      <p className="deals_title">{
-                        item?.productMetaData?.map((element)=>{
-                          if(element.key === "title"){
-                            return element.value
+
+                      <img className="dealicon" src="/Images/flipkart.png" />
+                      <p className="deals_title">
+                        {item?.productMetaData?.map((element) => {
+                          if (element.key === "title") {
+                            return element.value;
                           }
-                        })
-                      }</p>
+                        })}
+                      </p>
                     </>
                     <Divider />
                     <Row align="middle" key="time" className="deals_action">
@@ -175,7 +174,7 @@ const index = () => {
                     </Row>
                   </Card>
                 </Col>
-              )
+              );
             })}
         </Row>
       </div>
@@ -259,7 +258,6 @@ const index = () => {
         />
         <TrendingBrands span={4} />
       </div> */}
-
 
       <div className="list_view themeBg">
         <Heading
