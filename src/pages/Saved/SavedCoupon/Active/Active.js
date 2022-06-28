@@ -1,5 +1,5 @@
-import { Card, Col, Row } from 'antd';
-import React from 'react';
+import { Card, Col, Row } from "antd";
+import React from "react";
 // import {
 //     CreditCardOutlined
 // } from "@ant-design/icons";
@@ -61,35 +61,41 @@ import React from 'react';
 
 //     }
 // ]
-export default function Active({activeListing}) {
+export default function Active({ activeListing }) {
+  console.log("activeListing", activeListing);
 
-    console.log("activeListing", activeListing)
-
-    return (
-        <div className='list_view'>
-
-            <Row align="middle" className="" justify="space-around" gutter={30}>
-                {activeListing && activeListing.map((item, i) =>
-                    <Col key={i} className="deals_box trending_brands mb-3 text-left" span={24} lg={{ span: 8 }}>
-                        <Card className="couponContainer">
-                            <div className='couponLogo'>
-                                <img src='/images/logo (3).png' height={50} />
-                            </div>
-                            <div className='flex-grow-1 pl-3 '>
-                                <p className='mb-0'>Grofers</p>
-                                <p className="fw-bold h6 my-2" style={{ minHeight: 'auto' }}>
-                                {item?.productMetaData?.map((element) => {
-                            if (element.key === "title") {
-                              return element.value;
-                            }
-                          })}
-                                </p>
-                                <small className='text-muted fw-300'>Expires {item.expirationDate}</small>
-                            </div>
-                        </Card>
-                    </Col>
-                )}
-            </Row>
-        </div>
-    )
+  return (
+    <div className="list_view">
+      <Row align="middle" className="" justify="space-around" gutter={30}>
+        {activeListing &&
+          activeListing.map((item, i) => (
+            <Col
+              key={i}
+              className="deals_box trending_brands mb-3 text-left"
+              span={24}
+              lg={{ span: 8 }}
+            >
+              <Card className="couponContainer">
+                <div className="couponLogo">
+                  <img src="/Images/logo (3).png" height={50} />
+                </div>
+                <div className="flex-grow-1 pl-3 ">
+                  <p className="mb-0">Grofers</p>
+                  <p className="fw-bold h6 my-2" style={{ minHeight: "auto" }}>
+                    {item?.productMetaData?.map((element) => {
+                      if (element.key === "title") {
+                        return element.value;
+                      }
+                    })}
+                  </p>
+                  <small className="text-muted fw-300">
+                    Expires {item.expirationDate}
+                  </small>
+                </div>
+              </Card>
+            </Col>
+          ))}
+      </Row>
+    </div>
+  );
 }

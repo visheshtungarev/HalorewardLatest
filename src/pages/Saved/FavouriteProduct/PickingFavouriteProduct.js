@@ -191,7 +191,7 @@ export default function PickingFavoriteProduct() {
                           <div className="selectedBrands">
                             <span onClick={() => removePickhandler(id, 1)}>
                               <img
-                                src="/images/close.svg"
+                                src="/Images/close.svg"
                                 className="crossicon"
                                 height={20}
                               />
@@ -230,7 +230,7 @@ export default function PickingFavoriteProduct() {
                         <div className="d-flex align-items-center flex-grow-1">
                           <div>
                             <img
-                              src="/images/logo.png"
+                              src="/Images/logo.png"
                               className="dealicon_img_frame_sm"
                             />
                           </div>

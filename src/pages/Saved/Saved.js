@@ -98,12 +98,8 @@ export default function Saved() {
 
   const dispatch = useDispatch();
 
-  const brandResult = useSelector((state) => state.auth.merchantById);
-  const offerResult = useSelector((state) => state.auth.productById);
   const getCustomer = useSelector((state) => state.auth.user);
   const customerDetail = useSelector((state) => state.auth.customerDetail);
-
-  console.log("customerDetail ....", customerDetail);
 
   useEffect(() => {
     console.log(window.innerWidth);
@@ -115,16 +111,23 @@ export default function Saved() {
   }, []);
 
   useEffect(() => {
-    setBrandList(brandResult);
-    setOfferListing(offerResult);
-  }, [brandResult, offerResult]);
-
-  useEffect(() => {
     dispatch(getMerchantAction(customerDetail?.customer?.brands));
     dispatch(getProductAction(customerDetail?.customer?.products));
   }, []);
 
+  const brandResult = useSelector((state) => state.auth.merchantById);
+  const offerResult = useSelector((state) => state.auth.productById);
+
+  useEffect(() => {
+    setBrandList(brandResult || []);
+    setOfferListing(offerResult);
+  }, [brandResult, offerResult]);
+
   //   const navigate = useNavigate()
+
+  // console.log("offerListing ....", offerListing);
+  // console.log("offerResult ....", offerResult);
+  console.log("brandList ....", brandList);
 
   return (
     <div className="home_container">
@@ -206,31 +209,33 @@ export default function Saved() {
               justify="space-around"
               gutter={30}
             >
-              {/* when no offer found ====================*/}
-
-              <Col className="deals_box" span={24} style={{ display: "none" }}>
-                <Card className="deals_container">
-                  <Row align="middle">
-                    <Col span={12} className="py-4 ">
-                      <img
-                        src="/Images/no_offer.svg"
-                        height={200}
-                        style={{ width: "70%" }}
-                      />
-                    </Col>
-                    <Col span={12}>
-                      <h5>You haven’t pinned any offers</h5>
-                      <p>
-                        Your preferences will help us keep you updated on offers
-                        relevant to your taste.
-                      </p>
-                      <Button type="primary" size="large">
-                        View All offers
-                      </Button>
-                    </Col>
-                  </Row>
-                </Card>
-              </Col>
+              {offerListing && offerListing.length <= 0 && (
+                <Col className="deals_box" span={24}>
+                  <Card className="deals_container">
+                    <Row align="middle">
+                      <Col span={12} className="py-4 ">
+                        <img
+                          src="/Images/no_offer.svg"
+                          height={200}
+                          style={{ width: "70%" }}
+                        />
+                      </Col>
+                      <Col span={12}>
+                        <h5>You haven’t pinned any offers</h5>
+                        <p>
+                          Your preferences will help us keep you updated on
+                          offers relevant to your taste.
+                        </p>
+                        <Link to="/all-brands">
+                          <Button type="primary" size="large">
+                            View All offers
+                          </Button>
+                        </Link>
+                      </Col>
+                    </Row>
+                  </Card>
+                </Col>
+              )}
 
               {/* when no offer found ====================*/}
 
@@ -278,29 +283,33 @@ export default function Saved() {
             >
               {/* when no coupon found ====================*/}
 
-              <Col className="deals_box" span={24} style={{ display: "none" }}>
-                <Card className="deals_container">
-                  <Row align="middle">
-                    <Col span={12} className="py-4 ">
-                      <img
-                        src="/Images/no_coupon.svg"
-                        height={200}
-                        style={{ width: "70%" }}
-                      />
-                    </Col>
-                    <Col span={12}>
-                      <h5>You haven’t pinned any coupons</h5>
-                      <p>
-                        Your preferences will help us keep you updated on offers
-                        relevant to your taste.
-                      </p>
-                      <Button type="primary" size="large">
-                        View All offers
-                      </Button>
-                    </Col>
-                  </Row>
-                </Card>
-              </Col>
+              {brandList && brandList.length <= 0 && (
+                <Col className="deals_box" span={24}>
+                  <Card className="deals_container">
+                    <Row align="middle">
+                      <Col span={12} className="py-4 ">
+                        <img
+                          src="/Images/no_coupon.svg"
+                          height={200}
+                          style={{ width: "70%" }}
+                        />
+                      </Col>
+                      <Col span={12}>
+                        <h5>You haven’t pinned any brands</h5>
+                        <p>
+                          Your preferences will help us keep you updated on
+                          offers relevant to your taste.
+                        </p>
+                        <Link to="/all-offers">
+                          <Button type="primary" size="large">
+                            View All Brand
+                          </Button>
+                        </Link>
+                      </Col>
+                    </Row>
+                  </Card>
+                </Col>
+              )}
 
               {/* when no coupon found ====================*/}
 

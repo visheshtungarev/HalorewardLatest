@@ -5,21 +5,25 @@ import "./index.css";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { brandSearchAction } from "../../actions/brandAction";
-export default function SearchResult({ getSearchData, value, setValue, currentUrl }) {
-
-  const dispatch = useDispatch()
+export default function SearchResult({
+  getSearchData,
+  value,
+  setValue,
+  currentUrl,
+}) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const searchHandler = () => {
     if (currentUrl) {
       dispatch(brandSearchAction(value, "enter"));
-      setValue("")
+      setValue("");
     } else {
       dispatch(brandSearchAction(value, "enter"));
-      setValue("")
+      setValue("");
       navigate(`/search-offers/${value}`);
     }
-  }
+  };
 
   return (
     <div className="searchSection">
@@ -102,7 +106,14 @@ export default function SearchResult({ getSearchData, value, setValue, currentUr
         {value && getSearchData && getSearchData.length > 0 && (
           <div className="d-flex mb-3 align-items-center">
             <h5 className="fw-bold mb-0 mr-3">Results with {`'${value}'`}</h5>
-            <a href="javascript:void(0)" onClick={()=>searchHandler()} style={{fontSize:"13px", fontWeight:"500"}} > See all results &nbsp; <img src="/images/arrow_next.svg" /> </a>
+            <a
+              href="javascript:void(0)"
+              onClick={() => searchHandler()}
+              style={{ fontSize: "13px", fontWeight: "500" }}
+            >
+              {" "}
+              See all results &nbsp; <img src="/Images/arrow_next.svg" />{" "}
+            </a>
           </div>
         )}
         {getSearchData && getSearchData.length > 0 && (
@@ -112,28 +123,32 @@ export default function SearchResult({ getSearchData, value, setValue, currentUr
               getSearchData.map((element, key) => {
                 return (
                   <Col key={key} lg={{ span: 12 }} className="mb-3">
-                   <Link 
-                    to={`/brand?id=${element.merchantId}`}
-                    state={{totalCashback: "", description: "", ids: element.merchantId}}
-                    onClick={()=>setValue("")}
-                   >
-                   <Card className="searchedResult">
-                      <div className="Brandlogo">
-                        <img src="/Images/myntra.png" height={50} />
-                      </div>
-                      <div className="flex-grow-1 pl-3">
-                        <div className="d-flex">
-                          <h5 className="flex-grow-1">
-                            {element.merchantName}
-                          </h5>
-                          <img src="/Images/arrow_up_.svg" height={15} />
+                    <Link
+                      to={`/brand?id=${element.merchantId}`}
+                      state={{
+                        totalCashback: "",
+                        description: "",
+                        ids: element.merchantId,
+                      }}
+                      onClick={() => setValue("")}
+                    >
+                      <Card className="searchedResult">
+                        <div className="Brandlogo">
+                          <img src="/Images/myntra.png" height={50} />
                         </div>
-                        <p className="mb-0">
-                          upto 70% cashback, 4 coupons, 2 Prize Draws
-                        </p>
-                      </div>
-                    </Card>
-                   </Link>
+                        <div className="flex-grow-1 pl-3">
+                          <div className="d-flex">
+                            <h5 className="flex-grow-1">
+                              {element.merchantName}
+                            </h5>
+                            <img src="/Images/arrow_up_.svg" height={15} />
+                          </div>
+                          <p className="mb-0">
+                            upto 70% cashback, 4 coupons, 2 Prize Draws
+                          </p>
+                        </div>
+                      </Card>
+                    </Link>
                   </Col>
                 );
               })}

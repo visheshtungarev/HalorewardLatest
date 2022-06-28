@@ -1,105 +1,104 @@
 .doubleFrameSec {
-    border: 2px solid rgb(0 0 0 / 20%);
-    border-radius: .5rem;
-    display: flex;
-    align-items: center;
+  border: 2px solid rgb(0 0 0 / 20%);
+  border-radius: 0.5rem;
+  display: flex;
+  align-items: center;
 }
 
-.doubleFrameSec>div:first-child {
-    border-right: 2px solid rgb(0 0 0 / 20%);
+.doubleFrameSec > div:first-child {
+  border-right: 2px solid rgb(0 0 0 / 20%);
 }
 
-.doubleFrameSec>div {
-    padding: .5rem;
-    color: #1D1C24;
-    font-weight: 400;
-    margin: .7rem 0;
+.doubleFrameSec > div {
+  padding: 0.5rem;
+  color: #1d1c24;
+  font-weight: 400;
+  margin: 0.7rem 0;
 }
 
 .searchBar {
-    position: relative;
-    display: flex;
-    align-items: center;
-    background-color: #8f8f8f29;
-    border-radius: .3rem;
-    padding: .5rem .5rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  background-color: #8f8f8f29;
+  border-radius: 0.3rem;
+  padding: 0.5rem 0.5rem;
 }
 
-.searchBar>input {
-    border-width: 0px;
-    background-color: transparent;
+.searchBar > input {
+  border-width: 0px;
+  background-color: transparent;
 }
 
 img.searchIcon {
-    margin: 0 .3rem;
+  margin: 0 0.3rem;
 }
 
 .dealicon_img_frame_sm {
-    height: 50px;
-    width: 50px;
-    object-fit: contain;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    padding: 10px;
+  height: 50px;
+  width: 50px;
+  object-fit: contain;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  padding: 10px;
 }
 
 .favoriteBtn {
-    height: 20px;
-    width: 20px;
-    display: block;
-    position: relative;
+  height: 20px;
+  width: 20px;
+  display: block;
+  position: relative;
 }
 
-.favoriteBtn>input {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    top: 0;
-    left: 0;
-    opacity: 0;
-    z-index: 1;
+.favoriteBtn > input {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  z-index: 1;
 }
 
-.favoriteBtn>input:checked~.checkimg {
-    background: url("/public/Images/heart_filled.svg");
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
-
-}
-
-.checkimg {
-    background: url("/public/Images/heart_notFilled.svg");
+.favoriteBtn > input:checked ~ .checkimg {
+  background: url("/public/Images/heart_filled.svg");
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .checkimg {
-    height: 100%;
-    width: 100%;
-    display: block;
-    background-size: contain;
-    background-position: center;
-    background-repeat: no-repeat;
+  background: url("/public/Images/heart_notFilled.svg");
+}
+
+.checkimg {
+  height: 100%;
+  width: 100%;
+  display: block;
+  background-size: contain;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .selectedBrands {
-    border-radius: .3rem;
-    padding: .3rem;
-    border: 1px solid #3A86FF;
-    aspect-ratio: 1/1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: relative;
+  border-radius: 0.3rem;
+  padding: 0.3rem;
+  border: 1px solid #3a86ff;
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 }
 
 .crossicon {
-    position: absolute;
-    top: -8px;
-    right: -8px;
+  position: absolute;
+  top: -8px;
+  right: -8px;
 }
 
 .selectedBrands .logoimg {
-    height: 70%;
-    width: 70%;
-    object-fit: contain;
+  height: 70%;
+  width: 70%;
+  object-fit: contain;
 }

@@ -80,13 +80,13 @@ export default function BrandDetails() {
   console.log(dataArr);
 
   const getData = useLocation();
-  let ids = getData?.state?.ids
+  let ids = getData?.state?.ids;
 
   useEffect(() => {
     let offerResult = getOfferAction(ids);
     let prizeDrawCount = 0,
       couponCount = 0,
-      cashbackCount = 0;  
+      cashbackCount = 0;
 
     let cashbackArray = [],
       couponArray = [],
@@ -159,9 +159,7 @@ export default function BrandDetails() {
               </div>
               <div className="whiteFrame">
                 <h5>About {offerData?.merchantName}</h5>
-                <p>
-                  {getData.state.description}
-                </p>
+                <p>{getData.state.description}</p>
                 {/* <Link to="">Show more</Link> */}
               </div>
             </Col>
@@ -236,8 +234,11 @@ export default function BrandDetails() {
                 cashbackList={offerArrayData?.cashback}
                 brandName={offerData?.merchantName}
               />
-              <Coupon idname={"coupon"} couponList={offerArrayData?.coupon} 
-               brandName={offerData?.merchantName} />
+              <Coupon
+                idname={"coupon"}
+                couponList={offerArrayData?.coupon}
+                brandName={offerData?.merchantName}
+              />
               <PrizeDraw
                 idname={"prizedraw"}
                 prizeList={offerArrayData?.prize}

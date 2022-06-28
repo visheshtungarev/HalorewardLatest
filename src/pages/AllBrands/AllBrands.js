@@ -607,7 +607,7 @@ const AllBrands = () => {
   const getMerachandData = useSelector((state) => state.auth?.all_brand);
   console.log(sidebarData, allTredingBrandsTwo);
   const [dataArr] = useState(allTredingBrands);
-  console.log("dataArr", dataArr)
+  console.log("dataArr", dataArr);
   const [openSidePanel, setOpenSidePanel] = useState(false);
   // const [brandBoolean, setBrandBoolean] = useState(false);
   const [brandData, setBrandData] = useState([]);
@@ -640,13 +640,12 @@ const AllBrands = () => {
     }
   };
 
-
   useEffect(() => {
     console.log(window.innerWidth);
     if (window.innerWidth > 993) {
       setOpenSidePanel(true);
     }
-    dispatch(getCategoryAction)
+    dispatch(getCategoryAction);
     // getCategoryList();
     getBrandList();
     setMerchantList(getMerachandData);
@@ -656,19 +655,18 @@ const AllBrands = () => {
     getBrandList();
   }, [getMerachandData]);
 
-  const categorylist = useSelector((state)=> state.auth.all_category)
+  const categorylist = useSelector((state) => state.auth.all_category);
 
-  useEffect(()=>{
+  useEffect(() => {
     let objCategory = [{ name: "All" }];
 
     categorylist?.data?.map((item) => {
       return objCategory.push(item);
     });
     setCategoryData(objCategory);
-  },[categorylist])
+  }, [categorylist]);
 
   // console.log("cateogrydata", categoryData)
-
 
   const getBrandList = async (value) => {
     var raw =
@@ -776,7 +774,10 @@ const AllBrands = () => {
                     badgeIcon={"ON CARD"}
                   />
                   <>
-                    <img className="dealicon " src={`data:image/png;base64,${item.merchantLogo1}`} />
+                    <img
+                      className="dealicon "
+                      src={`data:image/png;base64,${item.merchantLogo1}`}
+                    />
                     <p
                       className="deals_title text-center"
                       style={{ minHeight: "auto" }}
@@ -839,7 +840,11 @@ const AllBrands = () => {
                     >
                       <Link
                         to={`/brand?id=${item.merchantId}`}
-                        state={{totalCashback: item.customerRebate, description: item.merchantDescription, ids: item.merchantId}}
+                        state={{
+                          totalCashback: item.customerRebate,
+                          description: item.merchantDescription,
+                          ids: item.merchantId,
+                        }}
                       >
                         <Card className="deals_container popularOffers rounded1">
                           <Row align="middle" className="w-100 flex-nowrap">

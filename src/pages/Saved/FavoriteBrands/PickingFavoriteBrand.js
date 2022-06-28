@@ -11,7 +11,8 @@ import {
   Put_call,
 } from "../../../network/networkmanager";
 import { useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { getMerchantAction } from "../../../actions/merchantActions";
 
 // import {
 //     GlobalOutlined,
@@ -28,12 +29,21 @@ const { getCategoriesByClientID, customerAuth } = values;
 // customerAuth
 
 export default function PickingFavoriteBrand() {
+  const navigate = useNavigate();
   const [, setOpenSidePanel] = useState(false);
   const [brandList, setBrandList] = useState([]);
+
+  const dispatch = useDispatch();
+
   const getCustomer = useSelector((state) => state.auth.user);
   let customerId = getCustomer?.customer?._id;
+  const brandResult = useSelector((state) => state.auth.merchantById);
+  const [favouriteBrandList, setFavouriteBrandList] = useState(
+    brandResult || []
+  );
+  const customerDetail = useSelector((state) => state.auth.customerDetail);
 
-  const navigate = useNavigate();
+  // console.log("brandResult ....", brandResult);
 
   useEffect(() => {
     console.log(window.innerWidth);
@@ -56,6 +66,16 @@ export default function PickingFavoriteBrand() {
     setIsModalVisible(false);
   };
 
+  const navigateHandler = () => {
+    dispatch(getMerchantAction(customerDetail?.customer?.brands));
+    navigate("/saved");
+  };
+
+  // console.log(
+  //   "customerDetail?.customer?.brands ..",
+  //   customerDetail?.customer?.brands
+  // );
+
   useEffect(() => {
     getBrandList();
   }, []);
@@ -70,9 +90,16 @@ export default function PickingFavoriteBrand() {
         false
       );
       if (response.status === 200) {
-        response.data.map((item) => {
-          item["isChecked"] = false;
+        favouriteBrandList.forEach((item) => {
+          response.data.filter((element) => {
+            if (item.merchantId === element.merchantId) {
+              element["isChecked"] = true;
+            }
+          });
         });
+        // response.data.map((item) => {
+        //   item["isChecked"] = false;
+        // });
         setBrandList(response.data);
       }
     } catch (error) {
@@ -81,52 +108,100 @@ export default function PickingFavoriteBrand() {
     }
   };
 
-  const handleOnChange = async (key, id) => {
+  // useEffect(()=>{
+  //   brandResult.forEach((item) => {
+  //     response.data.filter((element) => {
+  //       if (item.merchantId === element.merchantId) {
+  //         alert("hello");
+  //         element["isChecked"] = false;
+  //       }
+  //     });
+  //   });
+  //   setBrandList()
+  // },[brandList])
+
+  const handleOnChange = async (key, id, isFav) => {
+    if (isFav === true) {
+      try {
+        let response = await Delete_call(
+          `${customerAuth}/${customerId}/brands/${id}`
+        );
+        if (response.status === 202) {
+          let array = [...brandList];
+          array.filter((item, k) => {
+            if (key === k) {
+              item.isChecked = false;
+            }
+          });
+          setBrandList(array);
+
+          // array2.filter((elem) => {
+          //   if (elem.merchantId = id) {
+          //     elem.merchantId !== id;
+          //   }
+          // });
+          let array2 = favouriteBrandList.filter(
+            (item) => item.merchantId !== id
+          );
+          setFavouriteBrandList(array2);
+          alert("hello");
+          // getNoPick();
+        }
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
+    } else {
+      try {
+        let response = await Put_call(
+          `${customerAuth}/${customerId}/brands/${id}`
+        );
+        if (response.status === 202) {
+          let array = [...brandList];
+          array.filter((item) => {
+            if (item.merchantId === id) {
+              item.isChecked = true;
+            }
+          });
+          setBrandList(array);
+          // getNoPick();
+        }
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
+    }
+  };
+
+  console.log("favouriteBrandList  ....", favouriteBrandList);
+
+  // function getNoPick() {
+  //   let isNoPick = true;
+  //   brandList &&
+  //     brandList.length > 0 &&
+  //     brandList.find((item) => {
+  //       if (item.isChecked) {
+  //         isNoPick = false;
+  //       }
+  //     });
+  //   return isNoPick;
+  // }
+  // const isNoPickResult = getNoPick();
+
+  const removePickhandler = async (id) => {
     try {
-      let response = await Put_call(
+      let response = await Delete_call(
         `${customerAuth}/${customerId}/brands/${id}`
       );
       if (response.status === 202) {
         let array = [...brandList];
-        array.filter((item, k) => {
-          if (key === k) {
-            item.isChecked = true;
-          }
-        });
-        setBrandList(array);
-        getNoPick();
-      }
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  };
-
-  function getNoPick() {
-    let isNoPick = true;
-    brandList &&
-      brandList.length > 0 &&
-      brandList.find((item) => {
-        if (item.isChecked) {
-          isNoPick = false;
-        }
-      });
-    return isNoPick;
-  }
-  const isNoPickResult = getNoPick();
-
-  const removePickhandler = async (key, id) => {
-    try {
-      let response = await Delete_call(`${customerAuth}/18/brands/${id}`);
-      if (response.status === 202) {
-        let array = [...brandList];
-        array.filter((item, k) => {
-          if (key === k) {
+        array.filter((item) => {
+          if (item.merchantId === id) {
             item.isChecked = false;
           }
         });
         setBrandList(array);
-        getNoPick();
+        // getNoPick();
       }
     } catch (error) {
       console.error(error);
@@ -153,7 +228,7 @@ export default function PickingFavoriteBrand() {
               </h6>
               <Button
                 type="primary"
-                onClick={() => navigate("/saved")}
+                onClick={() => navigateHandler()}
                 className="w-100 mt-3"
                 size="large"
               >
@@ -181,7 +256,8 @@ export default function PickingFavoriteBrand() {
           HeadingText={"Pick your favorite brands"}
           subHeading={"Select atleast 3 brands/merchants"}
           filter={
-            !isNoPickResult && (
+            brandResult &&
+            brandResult.length > 0 && (
               <Button
                 type="primary"
                 onClick={() => showModal()}
@@ -199,7 +275,7 @@ export default function PickingFavoriteBrand() {
               <h5 className="fw-bold mb-0">Your Picks</h5>
 
               {/* shows when you haven’t selected any brand ============*/}
-              {isNoPickResult && (
+              {favouriteBrandList && favouriteBrandList.length <= 0 && (
                 <div className="text-center my-4">
                   <img src="/Images/no_coupon.svg" height={150} />
                   <p>You haven’t selected any brand.</p>
@@ -208,33 +284,31 @@ export default function PickingFavoriteBrand() {
 
               {/* shows when you haven’t selected any brand ============*/}
 
-              {brandList && brandList.length > 0 && (
+              {favouriteBrandList && favouriteBrandList.length > 0 && (
                 <Row>
-                  {brandList.map((element, id) => {
-                    if (element.isChecked) {
-                      return (
-                        <Col key={id} span={8} className="p-3">
-                          <div className="selectedBrands">
-                            <span
-                              onClick={() =>
-                                removePickhandler(id, element.merchantId)
-                              }
-                            >
-                              <img
-                                src="/images/close.svg"
-                                className="crossicon"
-                                height={20}
-                              />
-                            </span>
+                  {favouriteBrandList.map((element, id) => {
+                    return (
+                      <Col key={id} span={8} className="p-3">
+                        <div className="selectedBrands">
+                          <span
+                            onClick={() =>
+                              removePickhandler(element.merchantId)
+                            }
+                          >
                             <img
-                              src={`data:image/png;base64,${element.merchantLogo1}`}
-                              className="logoimg"
+                              src="/Images/close.svg"
+                              className="crossicon"
+                              height={20}
                             />
-                            {/* <h5>{element.merchantName}</h5> */}
-                          </div>
-                        </Col>
-                      );
-                    }
+                          </span>
+                          <img
+                            src={`data:image/png;base64,${element.merchantLogo1}`}
+                            className="logoimg"
+                          />
+                          {/* <h5>{element.merchantName}</h5> */}
+                        </div>
+                      </Col>
+                    );
                   })}
                 </Row>
               )}
@@ -263,7 +337,7 @@ export default function PickingFavoriteBrand() {
                         <div className="d-flex align-items-center flex-grow-1">
                           <div>
                             <img
-                              src="/images/logo.png"
+                              src={`data:image/png;base64,${item.merchantLogo1}`}
                               className="dealicon_img_frame_sm"
                             />
                           </div>
@@ -279,7 +353,11 @@ export default function PickingFavoriteBrand() {
                               type="checkbox"
                               checked={item.isChecked}
                               onChange={() =>
-                                handleOnChange(key, item.merchantId)
+                                handleOnChange(
+                                  key,
+                                  item.merchantId,
+                                  item.isChecked
+                                )
                               }
                             />
                             <span className="checkimg"></span>

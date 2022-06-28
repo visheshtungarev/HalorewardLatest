@@ -46,7 +46,7 @@ export default function Login({ goToRegister, forgotPwd, setModalVisibel }) {
           toast.success(res.message);
           setModalVisibel(false);
           setTimeout(() => {
-            window.location.reload()
+            window.location.reload();
           }, 500);
         } else {
           toast.success("something went wrong");

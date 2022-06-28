@@ -153,7 +153,7 @@ export default function AllOffers() {
     let offerResult = getOfferAction();
     offerResult.then((data) => {
       console.log(data);
-      setOfferData(data?.products);
+      setOfferData(data);
     });
   }, []);
 
