@@ -13,6 +13,10 @@ import {
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { getMerchantAction } from "../../../actions/merchantActions";
+import {
+  CutomerInfoCall,
+  getMerchantCall,
+} from "../../../actions/favouriteCall";
 
 // import {
 //     GlobalOutlined,
@@ -37,13 +41,9 @@ export default function PickingFavoriteBrand() {
 
   const getCustomer = useSelector((state) => state.auth.user);
   let customerId = getCustomer?.customer?._id;
-  const brandResult = useSelector((state) => state.auth.merchantById);
-  const [favouriteBrandList, setFavouriteBrandList] = useState(
-    brandResult || []
-  );
+  // const brandResult = useSelector((state) => state.auth.merchantById);
+  const [favouriteBrandList, setFavouriteBrandList] = useState([]);
   const customerDetail = useSelector((state) => state.auth.customerDetail);
-
-  // console.log("brandResult ....", brandResult);
 
   useEffect(() => {
     console.log(window.innerWidth);
@@ -71,14 +71,21 @@ export default function PickingFavoriteBrand() {
     navigate("/saved");
   };
 
-  // console.log(
-  //   "customerDetail?.customer?.brands ..",
-  //   customerDetail?.customer?.brands
-  // );
+  useEffect(() => {
+    let customerId = getCustomer?.customer?._id;
+    let customerresult = CutomerInfoCall(customerId);
+    customerresult.then((res) => {
+      // setCustomerBrandList(res?.customer?.brands || [])
+      let merchantResponse = getMerchantCall(res?.customer?.brands);
+      merchantResponse.then((result) => {
+        setFavouriteBrandList(result || []);
+      });
+    });
+  }, []);
 
   useEffect(() => {
     getBrandList();
-  }, []);
+  }, [favouriteBrandList]);
 
   const getBrandList = async () => {
     var raw =
@@ -135,16 +142,21 @@ export default function PickingFavoriteBrand() {
           });
           setBrandList(array);
 
-          // array2.filter((elem) => {
-          //   if (elem.merchantId = id) {
-          //     elem.merchantId !== id;
-          //   }
-          // });
-          let array2 = favouriteBrandList.filter(
-            (item) => item.merchantId !== id
-          );
-          setFavouriteBrandList(array2);
-          alert("hello");
+          let customerId = getCustomer?.customer?._id;
+          let customerresult = CutomerInfoCall(customerId);
+          customerresult.then((res) => {
+            // setCustomerBrandList(res?.customer?.brands || [])
+            let merchantResponse = getMerchantCall(res?.customer?.brands);
+            merchantResponse.then((result) => {
+              setFavouriteBrandList(result || []);
+            });
+          });
+
+          // let array2 = favouriteBrandList.filter(
+          //   (item) => item.merchantId !== id
+          // );
+          // setFavouriteBrandList(array2);
+
           // getNoPick();
         }
       } catch (error) {
@@ -164,6 +176,15 @@ export default function PickingFavoriteBrand() {
             }
           });
           setBrandList(array);
+          let customerId = getCustomer?.customer?._id;
+          let customerresult = CutomerInfoCall(customerId);
+          customerresult.then((res) => {
+            // setCustomerBrandList(res?.customer?.brands || [])
+            let merchantResponse = getMerchantCall(res?.customer?.brands);
+            merchantResponse.then((result) => {
+              setFavouriteBrandList(result);
+            });
+          });
           // getNoPick();
         }
       } catch (error) {
@@ -201,6 +222,15 @@ export default function PickingFavoriteBrand() {
           }
         });
         setBrandList(array);
+
+        let customerId = getCustomer?.customer?._id;
+        let customerresult = CutomerInfoCall(customerId);
+        customerresult.then((res) => {
+          let merchantResponse = getMerchantCall(res?.customer?.brands);
+          merchantResponse.then((result) => {
+            setFavouriteBrandList(result || []);
+          });
+        });
         // getNoPick();
       }
     } catch (error) {
@@ -256,8 +286,8 @@ export default function PickingFavoriteBrand() {
           HeadingText={"Pick your favorite brands"}
           subHeading={"Select atleast 3 brands/merchants"}
           filter={
-            brandResult &&
-            brandResult.length > 0 && (
+            favouriteBrandList &&
+            favouriteBrandList.length > 0 && (
               <Button
                 type="primary"
                 onClick={() => showModal()}

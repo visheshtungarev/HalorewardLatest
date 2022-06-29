@@ -277,16 +277,15 @@ const Index = () => {
         <Col>
           {systemToken ? (
             <Row align="middle" justify="">
-              {/* <Button className="mr-2" type="primary">
-            User
-          </Button> */}
-              {/* <Button
-                type="primary"
-                onClick={() => handleLogout()}
-                size="large"
-              >
-                Logout
-              </Button> */}
+              <Col>
+                <Link
+                  to="/saved/picking-favorite-brand"
+                  className="text-dark fw-bold"
+                >
+                  <img src="Images/Bookmark_icon_outline.svg" />{" "}
+                  <span>Saved</span>
+                </Link>
+              </Col>
 
               <div className="dropdown">
                 <button

@@ -91,6 +91,10 @@
   display: none;
 }
 
+/* .category li a:hover .category li div {
+
+} */
+
 .category + div:hover,
 .category:hover + div {
   display: flex;

@@ -21,6 +21,7 @@ import {
   //ShopOutlined,
   //ShoppingOutlined
 } from "@ant-design/icons";
+import { featuredCall } from "../../actions/favouriteCall";
 
 // const { Meta } = Card;
 
@@ -28,6 +29,7 @@ const index = () => {
   const dispatch = useDispatch();
   const [expiringCarousel, setExpiringCarousel] = useState([]);
   const [trendingCarousel, setTrendingCarousel] = useState([]);
+  const [featuredData, setFeaturedData] = useState([]);
   const [offerData, setOfferData] = useState([]);
 
   const accessToken = localStorage.getItem("accessToken");
@@ -40,8 +42,12 @@ const index = () => {
 
     let offerResult = getOfferAction();
     offerResult.then((data) => {
-      console.log(data);
       setOfferData(data);
+    });
+
+    let featureResult = featuredCall();
+    featureResult.then((res) => {
+      setFeaturedData(res.data);
     });
   }, []);
 
@@ -69,8 +75,7 @@ const index = () => {
     }
   };
 
-  console.log("expiringCarousel ....", expiringCarousel);
-  // console.log("trendingcarousel .......", trendingCarousel);
+  // console.log("featuredData .......", featuredData);
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -291,7 +296,7 @@ const index = () => {
           actionLink="/all-offers"
           color="text-white"
         />
-        <FeaturedOffers />
+        <FeaturedOffers featuredData={featuredData} />
       </div>
 
       <div className="list_view">

@@ -660,9 +660,11 @@ const AllBrands = () => {
   useEffect(() => {
     let objCategory = [{ name: "All" }];
 
-    categorylist?.data?.map((item) => {
-      return objCategory.push(item);
-    });
+    categorylist?.data &&
+      categorylist?.data.length > 0 &&
+      categorylist.data.map((item) => {
+        return objCategory.push(item);
+      });
     setCategoryData(objCategory);
   }, [categorylist]);
 

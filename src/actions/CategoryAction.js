@@ -6,30 +6,39 @@ const values = env();
 const { getCategoriesByClientID } = values;
 
 export const getCategoryAction = async (dispatch) => {
-    var data =
-      "{\n    categories(siteId: 1)  {\n        categoryId\n        name\n        description\n        status\n    }\n}";
+  var data = `{
+        categories(siteId: 1)  {
+            categoryId
+            name
+            description
+            status
+            subCategories {
+                categoryId
+                name
+                status
+            }
+        }
+    }`;
 
-    try {
-      let response = await Post_call(
-        `${getCategoriesByClientID}/clients/1/categories`,
-        data,
-        false
-      );
-      if (response.status === 200) {
-        dispatch({
-            type: GETCATEGORY,
-            payload: response
-        })
-        // let objCategory = [{ name: "All" }];
-        // response?.data?.map((item) => {
-        //   return objCategory.push(item);
-        // });
-        // setCategoryData(objCategory);
-      }
-    } catch (error) {
-      console.error(error);
-      throw error;
+  try {
+    let response = await Post_call(
+      `${getCategoriesByClientID}/clients/1/categories`,
+      data,
+      false
+    );
+    if (response.status === 200) {
+      dispatch({
+        type: GETCATEGORY,
+        payload: response,
+      });
+      // let objCategory = [{ name: "All" }];
+      // response?.data?.map((item) => {
+      //   return objCategory.push(item);
+      // });
+      // setCategoryData(objCategory);
     }
-
-    
-}
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};

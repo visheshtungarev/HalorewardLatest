@@ -9,6 +9,10 @@ import { Delete_call, Put_call } from "../../../network/networkmanager";
 import { getOfferAction } from "../../../actions/getOfferAction";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import {
+  CutomerInfoCall,
+  getProductfavCall,
+} from "../../../actions/favouriteCall";
 
 const values = env();
 const { customerAuth } = values;
@@ -18,6 +22,7 @@ const { customerAuth } = values;
 export default function PickingFavoriteProduct() {
   const [, setOpenSidePanel] = useState(false);
   const [productList, setProductList] = useState([]);
+  const [favProductList, setFavProductList] = useState([]);
 
   const navigate = useNavigate();
 
@@ -31,7 +36,7 @@ export default function PickingFavoriteProduct() {
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const getCustomer = useSelector((state) => state.auth.user);
-  let customerId = getCustomer?.customer?._id;
+  const customerId = getCustomer?.customer?._id;
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -46,6 +51,19 @@ export default function PickingFavoriteProduct() {
   };
 
   useEffect(() => {
+    let customerresult = CutomerInfoCall(customerId);
+    customerresult.then((res) => {
+      console.log("Res ...", res?.customer?.products);
+      // setCustomerBrandList(res?.customer?.brands || [])
+      let productResponse = getProductfavCall(res?.customer?.products);
+      // console.log("productResponse ....", productResponse);
+      productResponse.then((result) => {
+        setFavProductList(result || []);
+      });
+    });
+  }, []);
+
+  useEffect(() => {
     let offerResult = getOfferAction();
     offerResult.then((data) => {
       data?.products?.products.map((item) => {
@@ -53,45 +71,81 @@ export default function PickingFavoriteProduct() {
       });
       setProductList(data?.products?.products);
     });
-  }, []);
+  }, [favProductList]);
 
-  const handleOnChange = async (key, id) => {
-    try {
-      let response = await Put_call(
-        `${customerAuth}/${customerId}/products/${id}`
-      );
-      if (response.status === 202) {
-        let array = [...productList];
-        array.filter((item, k) => {
-          if (key === k) {
-            item.isChecked = true;
-          }
-        });
-        setProductList(array);
-        getNoPick();
+  const handleOnChange = async (key, id, isFav) => {
+    if (isFav) {
+      try {
+        let response = await Delete_call(`${customerAuth}/18/products/${id}`);
+        if (response.status === 202) {
+          let array = [...productList];
+          array.filter((item, k) => {
+            if (key === k) {
+              item.isChecked = false;
+            }
+          });
+          setProductList(array);
+          let customerresult = CutomerInfoCall(customerId);
+          customerresult.then((res) => {
+            // setCustomerBrandList(res?.customer?.brands || [])
+            let productResponse = getProductfavCall(res?.customer?.products);
+            productResponse.then((result) => {
+              setFavProductList(result || []);
+            });
+          });
+        }
+      } catch (error) {
+        console.error(error);
+        throw error;
       }
-    } catch (error) {
-      console.error(error);
-      throw error;
+    } else {
+      try {
+        let response = await Put_call(
+          `${customerAuth}/${customerId}/products/${id}`
+        );
+        if (response.status === 202) {
+          let array = [...productList];
+          array.filter((item, k) => {
+            if (key === k) {
+              item.isChecked = true;
+            }
+          });
+          setProductList(array);
+
+          let customerresult = CutomerInfoCall(customerId);
+          customerresult.then((res) => {
+            // setCustomerBrandList(res?.customer?.brands || [])
+            let productResponse = getProductfavCall(res?.customer?.products);
+            productResponse.then((result) => {
+              setFavProductList(result || []);
+            });
+          });
+        }
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
     }
   };
 
-  function getNoPick() {
-    let isNoPick = true;
-    productList &&
-      productList.length > 0 &&
-      productList.find((item) => {
-        if (item.isChecked) {
-          isNoPick = false;
-        }
-      });
-    return isNoPick;
-  }
-  const isNoPickResult = getNoPick();
+  // function getNoPick() {
+  //   let isNoPick = true;
+  //   productList &&
+  //     productList.length > 0 &&
+  //     productList.find((item) => {
+  //       if (item.isChecked) {
+  //         isNoPick = false;
+  //       }
+  //     });
+  //   return isNoPick;
+  // }
+  // const isNoPickResult = getNoPick();
 
   const removePickhandler = async (key, id) => {
     try {
-      let response = await Delete_call(`${customerAuth}/18/products/${id}`);
+      let response = await Delete_call(
+        `${customerAuth}/${customerId}/products/${id}`
+      );
       if (response.status === 202) {
         let array = [...productList];
         array.filter((item, k) => {
@@ -100,7 +154,15 @@ export default function PickingFavoriteProduct() {
           }
         });
         setProductList(array);
-        getNoPick();
+
+        let customerresult = CutomerInfoCall(customerId);
+        customerresult.then((res) => {
+          // setCustomerBrandList(res?.customer?.brands || [])
+          let productResponse = getProductfavCall(res?.customer?.products);
+          productResponse.then((result) => {
+            setFavProductList(result || []);
+          });
+        });
       }
     } catch (error) {
       console.error(error);
@@ -108,7 +170,7 @@ export default function PickingFavoriteProduct() {
     }
   };
 
-  // console.log(brandList)
+  console.log(favProductList);
 
   return (
     <div className="home_container">
@@ -155,7 +217,8 @@ export default function PickingFavoriteProduct() {
           HeadingText={"Pick your favorite Offers"}
           subHeading={"Select atleast 3 Offers"}
           filter={
-            !isNoPickResult && (
+            favProductList &&
+            favProductList.length > 0 && (
               <Button
                 type="primary"
                 onClick={() => showModal()}
@@ -173,7 +236,7 @@ export default function PickingFavoriteProduct() {
               <h5 className="fw-bold mb-0">Your Picks</h5>
 
               {/* shows when you haven’t selected any brand ============*/}
-              {isNoPickResult && (
+              {favProductList && favProductList.length <= 0 && (
                 <div className="text-center my-4">
                   <img src="/Images/no_coupon.svg" height={150} />
                   <p>You haven’t selected any Offers.</p>
@@ -182,26 +245,25 @@ export default function PickingFavoriteProduct() {
 
               {/* shows when you haven’t selected any brand ============*/}
 
-              {productList && productList.length > 0 && (
+              {favProductList && favProductList.length > 0 && (
                 <Row>
                   {productList.map((element, id) => {
-                    if (element.isChecked) {
-                      return (
-                        <Col key={id} span={8} className="p-3">
-                          <div className="selectedBrands">
-                            <span onClick={() => removePickhandler(id, 1)}>
-                              <img
-                                src="/Images/close.svg"
-                                className="crossicon"
-                                height={20}
-                              />
-                            </span>
-                            <img src="/Images/nykaa.png" className="logoimg" />
-                            {/* <h5>{element.merchantName}</h5> */}
-                          </div>
-                        </Col>
-                      );
-                    }
+                    console.log(element);
+                    return (
+                      <Col key={id} span={8} className="p-3">
+                        <div className="selectedBrands">
+                          <span onClick={() => removePickhandler(id, 1)}>
+                            <img
+                              src="/Images/close.svg"
+                              className="crossicon"
+                              height={20}
+                            />
+                          </span>
+                          {/* <img src="/Images/nykaa.png" className="logoimg" /> */}
+                          <h5>Offer {id + 1}</h5>
+                        </div>
+                      </Col>
+                    );
                   })}
                 </Row>
               )}
@@ -234,7 +296,7 @@ export default function PickingFavoriteProduct() {
                               className="dealicon_img_frame_sm"
                             />
                           </div>
-                          <h5 className="pl-3">NIke</h5>
+                          <h5 className="pl-3">Nikey</h5>
                         </div>
                         <div>
                           <span

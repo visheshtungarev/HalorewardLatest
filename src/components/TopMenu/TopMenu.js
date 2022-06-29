@@ -2,7 +2,7 @@ import React from "react";
 // import { } from "antd";
 import "./index.css";
 import { Link } from "react-router-dom";
-import TrendingBrands from "../TrendingBrands/TrendingBrands";
+// import TrendingBrands from "../TrendingBrands/TrendingBrands";
 
 export default function TopMenu({ mobileView, category }) {
   return (
@@ -36,26 +36,53 @@ export default function TopMenu({ mobileView, category }) {
 
       <div className="menuItem">
         <ul className="category">
-          <li className="mainListItem">
-            <Link to="">All Brands</Link>
-          </li>
-          <li className="mainListItem">
-            <Link to="">All Offers</Link>
-          </li>
-          <li className="hr"></li>
-          <li>
-            {/* <Link to="">Fashion</Link> */}
-            <ul className="sub-category">
-              {category &&
-                category.length > 0 &&
-                category.map((item, key) => {
-                  return (
-                    <li key={key}>
-                      <Link to="">{item.name}</Link>
-                    </li>
-                  );
-                })}
-              {/* <li>
+          {/* <li className="mainListItem">
+              <Link to="">All Brands</Link>
+              </li>
+              <li className="mainListItem">
+              <Link to="">All Offers</Link>
+            </li> */}
+          {/* <li className="hr"></li> */}
+          {category &&
+            category.length > 0 &&
+            category.map((item, key) => {
+              return (
+                <>
+                  <li key={key}>
+                    <Link className="text-primary fw-bold" to="">
+                      {item.name}
+                    </Link>
+
+                    {/* <div>
+                    <ul className="sub-category"> */}
+
+                    {/* </ul>
+                  </div> */}
+                  </li>
+                  <li>
+                    <ul>
+                      {item?.subCategories &&
+                        item.subCategories.length > 0 &&
+                        item.subCategories.map((element, id) => {
+                          return (
+                            <li className="" key={id}>
+                              <Link to="">{element.name}</Link>
+                            </li>
+                          );
+                        })}
+                    </ul>
+                  </li>
+                </>
+              );
+            })}
+        </ul>
+      </div>
+    </div>
+  );
+}
+
+{
+  /* <li>
                 <Link to="">Footwear</Link>
               </li>
               <li>
@@ -63,10 +90,11 @@ export default function TopMenu({ mobileView, category }) {
               </li>
               <li>
                 <Link to="">Accessories</Link>
-              </li> */}
-            </ul>
-          </li>
-          {/* <li>
+              </li> */
+}
+
+{
+  /* <li>
             <Link to="">Travel</Link>
             <ul className="sub-category">
               <li>
@@ -252,29 +280,5 @@ export default function TopMenu({ mobileView, category }) {
                 <Link to="">Accessories</Link>
               </li>
             </ul>
-          </li> */}
-        </ul>
-        <div>
-          <ul className="sub-category">
-            <li>
-              <Link to="">Fashion</Link>
-            </li>
-            <li>
-              <Link to="">Footwear</Link>
-            </li>
-            <li>
-              <Link to="">Clothing and Apparel</Link>
-            </li>
-            <li>
-              <Link to="">Accessories</Link>
-            </li>
-          </ul>
-          <div className="productMenu">
-            <h4 className="fw-bold my-3">Recommended Brands</h4>
-            <TrendingBrands span={8} />
-          </div>
-        </div>
-      </div>
-    </div>
-  );
+          </li> */
 }

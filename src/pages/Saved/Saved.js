@@ -13,10 +13,15 @@ import { FiClock } from "react-icons/fi";
 // import Badge from "../../components/Badge/Badge";
 import Heading from "../../components/Heading/Heading";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
-import { getMerchantAction } from "../../actions/merchantActions";
-import { getProductAction } from "../../actions/getOfferAction";
-import { getCustomerInfoAction } from "../../actions/userActions";
+import { useSelector } from "react-redux";
+// import { getMerchantAction } from "../../actions/merchantActions";
+// import { getProductAction } from "../../actions/getOfferAction";
+// import { getCustomerInfoAction } from "../../actions/userActions";
+import {
+  CutomerInfoCall,
+  getMerchantCall,
+  getProductfavCall,
+} from "../../actions/favouriteCall";
 // import { render } from "@testing-library/react";
 // const { Meta } = Card;
 
@@ -96,32 +101,47 @@ export default function Saved() {
   const [brandList, setBrandList] = useState([]);
   const [offerListing, setOfferListing] = useState([]);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   const getCustomer = useSelector((state) => state.auth.user);
-  const customerDetail = useSelector((state) => state.auth.customerDetail);
+  // const customerDetail = useSelector((state) => state.auth.customerDetail);
 
   useEffect(() => {
     console.log(window.innerWidth);
     if (window.innerWidth > 993) {
       setOpenSidePanel(true);
     }
+    //  let customerId = getCustomer?.customer?._id;
+    // dispatch(getCustomerInfoAction(customerId));
+  }, []);
+
+  // useEffect(() => {
+  //   dispatch(getMerchantAction(customerDetail?.customer?.brands));
+  //   dispatch(getProductAction(customerDetail?.customer?.products));
+  // }, []);
+
+  // const brandResult = useSelector((state) => state.auth.merchantById);
+  // const offerResult = useSelector((state) => state.auth.productById);
+
+  useEffect(() => {
     let customerId = getCustomer?.customer?._id;
-    dispatch(getCustomerInfoAction(customerId));
+    let customerresult = CutomerInfoCall(customerId);
+    customerresult.then((res) => {
+      // setCustomerBrandList(res?.customer?.brands || [])
+      let merchantResponse = getMerchantCall(res?.customer?.brands);
+      merchantResponse.then((result) => {
+        setBrandList(result || []);
+      });
+
+      let productResponse = getProductfavCall(res?.customer?.brands);
+      productResponse.then((result) => {
+        setOfferListing(result || []);
+      });
+    });
+
+    // setBrandList(brandResult || []);
+    // setOfferListing(offerResult);
   }, []);
-
-  useEffect(() => {
-    dispatch(getMerchantAction(customerDetail?.customer?.brands));
-    dispatch(getProductAction(customerDetail?.customer?.products));
-  }, []);
-
-  const brandResult = useSelector((state) => state.auth.merchantById);
-  const offerResult = useSelector((state) => state.auth.productById);
-
-  useEffect(() => {
-    setBrandList(brandResult || []);
-    setOfferListing(offerResult);
-  }, [brandResult, offerResult]);
 
   //   const navigate = useNavigate()
 

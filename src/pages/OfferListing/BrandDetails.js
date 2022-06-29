@@ -12,6 +12,10 @@ import Cashback from "./CashBack/Cashback";
 import { Link } from "react-scroll";
 import { getOfferAction } from "../../actions/getOfferAction";
 import { useLocation } from "react-router-dom";
+import { Put_call } from "../../network/networkmanager";
+import env from "../../enviroment";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 // import Coupon from './PrizeDraws/PrizeDraw';
 
 const allTredingOffers = [
@@ -121,7 +125,27 @@ export default function BrandDetails() {
     });
   }, []);
 
-  // console.log("offerArrayData.....", offerArrayData);
+  const getCustomer = useSelector((state) => state.auth.user);
+
+  const addTofav = async () => {
+    const values = env();
+    const { customerAuth } = values;
+    let customerId = getCustomer?.customer?._id;
+    try {
+      let response = await Put_call(
+        `${customerAuth}/${customerId}/brands/${offerData?.merchantId}`
+      );
+      if (response.status === 202) {
+        toast.success("Brand has been added to favorite list");
+        // getNoPick();
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
+
+  // console.log("offerData.....", offerData);
 
   return (
     <div className="home_container">
@@ -168,9 +192,21 @@ export default function BrandDetails() {
                 className="dealicon_img_frame d-block d-lg-none mx-auto"
                 src="/Images/myntra.png"
               />
-              <h4 className="fw-bold text-lg-left text-center py-3 py-lg-0">
-                {offerData?.merchantName}
-              </h4>
+              <div className="d-flex mb-2">
+                <h4 className="fw-bold text-lg-left text-center py-3 py-lg-0 text-white m-0">
+                  {offerData?.merchantName}
+                </h4>
+                <span
+                  onClick={() => addTofav()}
+                  style={{
+                    width: "25px",
+                    marginLeft: "10px",
+                    marginBottom: "10px",
+                    cursor: "pointer",
+                  }}
+                  className="checkimg"
+                ></span>
+              </div>
               <p className="align-items-center d-none d-lg-flex">
                 upto {getData.state.totalCashback} cashback{" "}
                 <span className="deviderWhite"></span> {countofOffer?.coupon}{" "}
