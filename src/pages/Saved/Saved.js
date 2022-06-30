@@ -133,7 +133,7 @@ export default function Saved() {
         setBrandList(result || []);
       });
 
-      let productResponse = getProductfavCall(res?.customer?.brands);
+      let productResponse = getProductfavCall(res?.customer?.products);
       productResponse.then((result) => {
         setOfferListing(result || []);
       });
@@ -291,7 +291,7 @@ export default function Saved() {
             </Row>
 
             <Heading
-              HeadingText="Trending"
+              HeadingText="Favourite Brands"
               actionText="View All"
               actionLink="/saved/favorite-brand"
             />

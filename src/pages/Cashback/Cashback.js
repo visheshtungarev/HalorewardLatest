@@ -9,17 +9,47 @@ import { HomeConstant } from "../../Constants";
 import Badge from "../../components/Badge/Badge";
 import { Collapse } from "antd";
 import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
+import {
+  addtoFavProduct,
+  CutomerInfoCall,
+  getProductfavCall,
+} from "../../actions/favouriteCall";
 
 export default function Cashback() {
   const { Panel } = Collapse;
 
   const location = useLocation();
   const objectItem = location?.state?.item;
+  const merchantId = location?.state?.ids;
   const [addBookmark, setAddBookmark] = useState(true);
 
-  const addBookmarkEvent = () => {
-    addBookmark ? setAddBookmark(false) : setAddBookmark(true);
+  console.log("objectItem ....", merchantId);
+
+  const getCustomer = useSelector((state) => state.auth.user);
+  const customerId = getCustomer?.customer?._id;
+
+  const Pickfav = () => {
+    let addtofavCall = addtoFavProduct(customerId, merchantId);
+    addtofavCall.then((res) => {
+      if (res.status === true) {
+        toast.success(res.msg);
+        setAddBookmark(false);
+        let customerresult = CutomerInfoCall(customerId);
+        customerresult.then((res) => {
+          let productResponse = getProductfavCall(res?.customer?.products);
+          productResponse.then((result) => {
+            console.log(result);
+          });
+        });
+      }
+    });
   };
+
+  // const addBookmarkEvent = () => {
+  //   addBookmark ? setAddBookmark(false) : setAddBookmark(true);
+  // };
   function callback(key) {
     console.log(key);
   }
@@ -54,10 +84,7 @@ export default function Cashback() {
           <Row>
             <Col md={{ span: 18 }} className="mx-auto">
               <div className="couponFrame text-center">
-                <span
-                  className="fixed-top-right p-3"
-                  onClick={() => addBookmarkEvent()}
-                >
+                <span className="fixed-top-right p-3" onClick={() => Pickfav()}>
                   {addBookmark ? (
                     <MdBookmarkBorder style={{ fontSize: "2rem" }} />
                   ) : (

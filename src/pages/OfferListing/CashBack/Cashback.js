@@ -50,11 +50,20 @@ const allTredingOffers = [
     time: "1d 2h 21m",
   },
 ];
-export default function Cashback({ idname, cashbackList, brandName }) {
+export default function Cashback({
+  idname,
+  cashbackList,
+  brandName,
+  merchantId,
+}) {
   console.log(allTredingOffers);
   // const [dataArr,] = useState(allTredingOffers)
   const navigate = useNavigate();
   const [isModalVisible, setIsModalVisible] = useState(false);
+
+  console.log("idname ...", idname);
+  // console.log("cashbackList ..", cashbackList);
+  // console.log("brandName ...", brandName);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -160,7 +169,11 @@ export default function Cashback({ idname, cashbackList, brandName }) {
                             className="d-flex align-items-center mr-3"
                             onClick={() =>
                               navigate(`/cashback?id=${item.productId}`, {
-                                state: { item: item, name: brandName },
+                                state: {
+                                  item: item,
+                                  name: brandName,
+                                  ids: merchantId,
+                                },
                               })
                             }
                           >

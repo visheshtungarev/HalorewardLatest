@@ -1,5 +1,5 @@
 import env from "../enviroment";
-import { Post_call } from "../network/networkmanager";
+import { Post_call, Put_call } from "../network/networkmanager";
 
 const values = env();
 
@@ -131,6 +131,23 @@ export const featuredCall = async () => {
       false
     );
     return response.data;
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+};
+
+export const addtoFavProduct = async (customerId, id) => {
+  const { customerAuth } = values;
+  try {
+    let response = await Put_call(
+      `${customerAuth}/${customerId}/products/${id}`
+    );
+    if (response.status === 202) {
+      return { msg: "offer has been added to favorite list", status: true };
+    } else {
+      return { msg: "something went wrong", status: false };
+    }
   } catch (error) {
     console.error(error);
     throw error;

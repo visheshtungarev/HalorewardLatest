@@ -50,8 +50,16 @@ export default function SideBar({
               {data &&
                 data.map((item, i) => {
                   return (
-                    <li key={i} onClick={() => filterPanel(item.categoryId)}>
-                      <a href="#">{item.name}</a>
+                    <li
+                      key={i}
+                      onClick={() => filterPanel(item.categoryId, item.name)}
+                    >
+                      <a
+                        className={item.isActive ? "activethis" : ""}
+                        href="javascript:void(0)"
+                      >
+                        {item.name}
+                      </a>
                     </li>
                   );
                 })}

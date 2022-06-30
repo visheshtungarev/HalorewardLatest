@@ -269,6 +269,7 @@ export default function BrandDetails() {
                 idname={"cashback"}
                 cashbackList={offerArrayData?.cashback}
                 brandName={offerData?.merchantName}
+                merchantId={ids}
               />
               <Coupon
                 idname={"coupon"}

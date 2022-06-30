@@ -1,11 +1,30 @@
 import { Card, Col, Row } from "antd";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import {
+  CutomerInfoCall,
+  getMerchantCall,
+} from "../../../actions/favouriteCall";
 import Breadcurms from "../../../components/Breadcrums/Breadcurms";
 import Heading from "../../../components/Heading/Heading";
 import "./index.css";
 export default function FavoriteBrands() {
-  const brandResult = useSelector((state) => state.auth.merchantById);
+  // const brandResult = useSelector((state) => state.auth.merchantById);
+  const getCustomer = useSelector((state) => state.auth.user);
+
+  const [brandResult, setBrandResult] = useState([]);
+
+  useEffect(() => {
+    let customerId = getCustomer?.customer?._id;
+    let customerresult = CutomerInfoCall(customerId);
+    customerresult.then((res) => {
+      // setCustomerBrandList(res?.customer?.brands || [])
+      let merchantResponse = getMerchantCall(res?.customer?.brands);
+      merchantResponse.then((result) => {
+        setBrandResult(result || []);
+      });
+    });
+  }, []);
 
   return (
     <div className="home_container">
@@ -61,8 +80,6 @@ export default function FavoriteBrands() {
                 </Col>
               );
             })}
-        
-         
         </Row>
       </div>
     </div>

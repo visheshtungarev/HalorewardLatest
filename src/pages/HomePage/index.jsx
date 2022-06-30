@@ -22,6 +22,7 @@ import {
   //ShoppingOutlined
 } from "@ant-design/icons";
 import { featuredCall } from "../../actions/favouriteCall";
+import { useNavigate } from "react-router-dom";
 
 // const { Meta } = Card;
 
@@ -31,6 +32,8 @@ const index = () => {
   const [trendingCarousel, setTrendingCarousel] = useState([]);
   const [featuredData, setFeaturedData] = useState([]);
   const [offerData, setOfferData] = useState([]);
+
+  const navigate = useNavigate();
 
   const accessToken = localStorage.getItem("accessToken");
 
@@ -164,7 +167,20 @@ const index = () => {
               }
               return (
                 <Col key={key} className="deals_box" span={5}>
-                  <Card className="deals_container" actions={[]}>
+                  <Card
+                    className="deals_container"
+                    style={{ cursor: "pointer" }}
+                    actions={[]}
+                    onClick={() =>
+                      navigate(`/cashback?id=${products.productId}`, {
+                        state: {
+                          item: products,
+                          name: item.merchantName,
+                          ids: item.merchantId,
+                        },
+                      })
+                    }
+                  >
                     <>
                       <Badge
                         position={""}

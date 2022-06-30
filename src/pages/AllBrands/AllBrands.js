@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./index.css";
 import { Col, Row, Card, Select } from "antd";
 // import PopularOffers from "../../components/PopularOffers/PopularOffers";
@@ -605,6 +605,7 @@ const { getCategoriesByClientID } = values;
 const AllBrands = () => {
   const { Option } = Select;
   const getMerachandData = useSelector((state) => state.auth?.all_brand);
+  console.log("getMerachandData ....", getMerachandData);
   console.log(sidebarData, allTredingBrandsTwo);
   const [dataArr] = useState(allTredingBrands);
   console.log("dataArr", dataArr);
@@ -615,6 +616,10 @@ const AllBrands = () => {
   const [merchantList, setMerchantList] = useState([]);
   const [trendingCarousel, setTrendingCarousel] = useState([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { state } = useLocation();
+  let categoryId = state?.id;
 
   const closeSidebar = () => {
     !openSidePanel ? setOpenSidePanel(true) : setOpenSidePanel(false);
@@ -647,28 +652,37 @@ const AllBrands = () => {
     }
     dispatch(getCategoryAction);
     // getCategoryList();
-    getBrandList();
+    getBrandList(categoryId || null);
     setMerchantList(getMerachandData);
   }, []);
 
   useEffect(() => {
-    getBrandList();
-  }, [getMerachandData]);
+    getBrandList(categoryId || null);
+  }, [getMerachandData, categoryId]);
 
   const categorylist = useSelector((state) => state.auth.all_category);
 
   useEffect(() => {
     let objCategory = [{ name: "All" }];
-
     categorylist?.data &&
       categorylist?.data.length > 0 &&
       categorylist.data.map((item) => {
-        return objCategory.push(item);
+        if (categoryId) {
+          if (categoryId === item.categoryId) {
+            item["isActive"] = true;
+            return objCategory.push(item);
+          } else {
+            item["isActive"] = false;
+            return objCategory.push(item);
+          }
+        } else {
+          item["isActive"] = false;
+          return objCategory.push(item);
+        }
       });
+    console.log("objCategory ....", objCategory);
     setCategoryData(objCategory);
-  }, [categorylist]);
-
-  // console.log("cateogrydata", categoryData)
+  }, [categoryId]);
 
   const getBrandList = async (value) => {
     var raw =
@@ -694,7 +708,6 @@ const AllBrands = () => {
         filterarray && filterarray.length > 0
           ? setBrandData(filterarray)
           : setBrandData(response.data);
-        console.log(filterarray);
       }
     } catch (error) {
       console.error(error);
@@ -725,10 +738,24 @@ const AllBrands = () => {
   //   }
   // };
 
-  const filterHandler = (key) => {
-    // setMerchantList([])
+  const filterHandler = (key, val) => {
+    navigate(`/all-brands?category=${val}`, {
+      state: {
+        id: key,
+      },
+    });
+    // let array = [...categoryData];
+    // array.filter((item) => {
+    //   if (item.categoryId === key) {
+    //     item.isActive = true;
+    //   } else {
+    //     item.isActive = false;
+    //   }
+    // });
+    // setCategoryData(array);
+    // // setMerchantList([])
     dispatch(resetMerchantAction);
-    getBrandList(key);
+    // getBrandList(key);
 
     // dispatch(brandListAction(key))
   };
@@ -823,7 +850,7 @@ const AllBrands = () => {
                 type="list"
                 mainTitle="Filter"
                 data={categoryData}
-                filterPanel={(k) => filterHandler(k)}
+                filterPanel={(k, e) => filterHandler(k, e)}
               />
             ) : (
               ""

@@ -49,7 +49,11 @@ export default function TopMenu({ mobileView, category }) {
               return (
                 <>
                   <li key={key}>
-                    <Link className="text-primary fw-bold" to="">
+                    <Link
+                      className="text-primary fw-bold"
+                      to={`/all-brands?category=${item.name}`}
+                      state={{ id: item.categoryId }}
+                    >
                       {item.name}
                     </Link>
 

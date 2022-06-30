@@ -8,40 +8,57 @@ import Active from "./Active/Active";
 import Claimed from "./Claimed/Claimed";
 import Expired from "./Expired/Expired";
 import { useSelector } from "react-redux";
+import {
+  CutomerInfoCall,
+  getProductfavCall,
+} from "../../../actions/favouriteCall";
 // import { render } from "@testing-library/react";
 // const { Meta } = Card;
 
 export default function SavedCoupon() {
   const [, setOpenSidePanel] = useState(false);
-  const [activeListing, setActiveListing] = useState([])
+  const [activeListing, setActiveListing] = useState([]);
+
+  const getCustomer = useSelector((state) => state.auth.user);
 
   const { TabPane } = Tabs;
   function callback(key) {
     console.log(key);
   }
 
-  const offerResult = useSelector((state) => state.auth.productById);
+  // const offerResult = useSelector((state) => state.auth.productById);
 
   useEffect(() => {
     console.log(window.innerWidth);
     if (window.innerWidth > 993) {
       setOpenSidePanel(true);
     }
-    let active = getSeparateData()
-    setActiveListing(active)
+    // getSeparateData();
   }, []);
 
-  function getSeparateData() {
+  useEffect(() => {
     let activeArray = [];
-   
-    offerResult.forEach((item) => {
-      if (item.status == "Active") {
-        activeArray.push(item);
-      }
+    let customerId = getCustomer?.customer?._id;
+    let customerresult = CutomerInfoCall(customerId);
+    customerresult.then((res) => {
+      // setCustomerBrandList(res?.customer?.brands || [])
+      let productResponse = getProductfavCall(res?.customer?.products);
+      productResponse.then((result) => {
+        result.forEach((item) => {
+          if (item.status == "Active") {
+            activeArray.push(item);
+          }
+        });
+      });
     });
-    console.log(activeArray)
-    return activeArray;
-  }
+    setActiveListing(activeArray);
+  }, [getCustomer]);
+
+  // function getSeparateData() {
+
+  // }
+
+  console.log("activeListing ....", activeListing);
 
   return (
     <div className="home_container">
@@ -68,7 +85,7 @@ export default function SavedCoupon() {
           }
           key="1"
         >
-          <Active  activeListing={activeListing}/>
+          <Active activeListing={activeListing} />
         </TabPane>
 
         <TabPane
