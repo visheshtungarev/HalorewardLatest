@@ -20,6 +20,7 @@ import SavedPrizeDraws from "./pages/Saved/SavedPrizeDraws/SavedPrizeDraws";
 import PickingFavoriteBrand from "./pages/Saved/FavoriteBrands/PickingFavoriteBrand";
 import LoginPage from "./components/Auth/LoginPage";
 import OfferSearch from "./pages/AllOffers/OfferSearch";
+import PickingFavoriteProduct from "./pages/Saved/FavouriteProduct/PickingFavouriteProduct";
 
 const RouterApp = () => {
   return (
@@ -47,7 +48,10 @@ const RouterApp = () => {
         <Route
           path="/saved/picking-favorite-brand"
           element={<PickingFavoriteBrand />}
-        />
+        /> <Route
+        path="/saved/picking-favorite-product"
+        element={<PickingFavoriteProduct />}
+      />
         <Route path="/login" element={<LoginPage />} />
       </Routes>
       <Footer />

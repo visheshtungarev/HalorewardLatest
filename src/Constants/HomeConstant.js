@@ -3,68 +3,68 @@ import {
   GlobalOutlined,
   CopyOutlined,
   ShopOutlined,
-  ShoppingOutlined
+  ShoppingOutlined,
 } from "@ant-design/icons";
 
 export const singleConstant = {
   trending_brand: "Trending Brands",
-  expiring_deals: "Expiring Deals"
-}
+  expiring_deals: "Expiring Deals",
+};
 
 export const promoList = [
   {
     icon: "/Images/makemytrip.png",
-    title: "makemytrip"
+    title: "makemytrip",
   },
   {
     icon: "/Images/paytm.png",
-    title: "paytm"
+    title: "paytm",
   },
   {
     icon: "/Images/oyo_rooms.png",
-    title: "oyo"
+    title: "oyo",
   },
   {
     icon: "/Images/flipkart.png",
-    title: "flipkart"
-  }
+    title: "flipkart",
+  },
 ];
 export const offerList = [
   {
     logo: "/Images/nike.png",
     image: "/Images/shoes.png",
     offer: "25% OFF",
-    type: "Exclusive Offer"
+    type: "Exclusive Offer",
   },
   {
     logo: "/Images/nike.png",
     image: "/Images/shoes.png",
     offer: "35% OFF",
-    type: "Exclusive Offer"
+    type: "Exclusive Offer",
   },
   {
     logo: "/Images/nike.png",
     image: "/Images/shoes.png",
     offer: "05% OFF",
-    type: "Exclusive Offer"
-  }
+    type: "Exclusive Offer",
+  },
 ];
 export const giftList = [
   {
     image: "/Images/icon.svg",
     title: "Get cashback, coupons, gift cards",
-    description: "simply make the purchase and watch your wallet fill"
+    description: "simply make the purchase and watch your wallet fill",
   },
   {
     image: "/Images/icon.svg",
     title: "Get cashback, coupons, gift cards 2",
-    description: "simply make the purchase and watch your wallet fill"
+    description: "simply make the purchase and watch your wallet fill",
   },
   {
     image: "/Images/icon.svg",
     title: "Get cashback, coupons, gift cards 3",
-    description: "simply make the purchase and watch your wallet fill"
-  }
+    description: "simply make the purchase and watch your wallet fill",
+  },
 ];
 
 export const expiringDeals = [
@@ -75,7 +75,7 @@ export const expiringDeals = [
     title: "Win a chance to get voucher of worth £280",
     time: "1d 2h 21m",
     offerIcon: <CopyOutlined />,
-    modeIcon: <GlobalOutlined />
+    modeIcon: <GlobalOutlined />,
   },
   {
     offer: "Cashback",
@@ -84,7 +84,7 @@ export const expiringDeals = [
     title: "Win a chance to get voucher of worth £280",
     time: "1d 2h 21m",
     offerIcon: <ShoppingOutlined />,
-    modeIcon: <ShopOutlined />
+    modeIcon: <ShopOutlined />,
   },
   {
     offer: "Prize Draw",
@@ -93,7 +93,7 @@ export const expiringDeals = [
     title: "Win a chance to get voucher of worth £280",
     time: "1d 2h 21m",
     offerIcon: <CopyOutlined />,
-    modeIcon: <GlobalOutlined />
+    modeIcon: <GlobalOutlined />,
   },
   {
     offer: "Coupon",
@@ -102,7 +102,7 @@ export const expiringDeals = [
     title: "Win a chance to get voucher of worth £280",
     time: "1d 2h 21m",
     offerIcon: <CopyOutlined />,
-    modeIcon: <GlobalOutlined />
+    modeIcon: <GlobalOutlined />,
   },
   {
     offer: "Cashback",
@@ -111,7 +111,7 @@ export const expiringDeals = [
     title: "Win a chance to get voucher of worth £280",
     time: "1d 2h 21m",
     offerIcon: <CopyOutlined />,
-    modeIcon: <GlobalOutlined />
+    modeIcon: <GlobalOutlined />,
   },
   {
     offer: "Prize Draw",
@@ -120,51 +120,41 @@ export const expiringDeals = [
     title: "Win a chance to get voucher of worth £280",
     time: "1d 2h 21m",
     offerIcon: <ShoppingOutlined />,
-    modeIcon: <ShopOutlined />
-  }
+    modeIcon: <ShopOutlined />,
+  },
 ];
 export const trendingBrands = [
   {
     image: "/Images/flipkart.png",
     title: "Flipkart",
     cashback: "upto 11% cashback",
-
   },
   {
-
     image: "/Images/nykaa.png",
     title: "Nykaa",
     cashback: "upto 11% cashback",
-
   },
   {
-
     image: "/Images/flipkart.png",
     title: "Flipkart",
     cashback: "upto 11% cashback",
   },
   {
-
     image: "/Images/nykaa.png",
     title: "Nykaa",
     cashback: "upto 11% cashback",
-
   },
   {
-
     image: "/Images/flipkart.png",
     title: "Flipkart",
     cashback: "upto 11% cashback",
-
   },
   {
-
     image: "/Images/nykaa.png",
     title: "Nykaa",
     cashback: "upto 11% cashback",
-
-  }
-]
+  },
+];
 export const featureOffers = [
   {
     offer: "Coupon",
@@ -174,7 +164,7 @@ export const featureOffers = [
     time: "Expires Sep 4, 2021",
     brand: "Flipkart",
     offerIcon: <CopyOutlined />,
-    modeIcon: <GlobalOutlined />
+    modeIcon: <GlobalOutlined />,
   },
   {
     offer: "Cashback",
@@ -184,7 +174,7 @@ export const featureOffers = [
     time: "Expires Sep 4, 2021",
     brand: "Flipkart",
     offerIcon: <ShoppingOutlined />,
-    modeIcon: <ShopOutlined />
+    modeIcon: <ShopOutlined />,
   },
   {
     offer: "Prize Draw",
@@ -194,10 +184,9 @@ export const featureOffers = [
     time: "Expires Sep 4, 2021",
     brand: "Flipkart",
     offerIcon: <CopyOutlined />,
-    modeIcon: <GlobalOutlined />
-  }
+    modeIcon: <GlobalOutlined />,
+  },
 ];
-
 
 export const popularOffers = [
   {
@@ -208,7 +197,7 @@ export const popularOffers = [
     viewAll: "view all offers (24)",
     brand: "Flipkart",
     offerIcon: <ShoppingOutlined />,
-    modeIcon: <ShopOutlined />
+    modeIcon: <ShopOutlined />,
   },
   {
     offer: "Coupon",
@@ -218,7 +207,7 @@ export const popularOffers = [
     viewAll: "view all offers (24)",
     brand: "Flipkart",
     offerIcon: <CopyOutlined />,
-    modeIcon: <GlobalOutlined />
+    modeIcon: <GlobalOutlined />,
   },
   {
     offer: "Coupon",
@@ -228,7 +217,7 @@ export const popularOffers = [
     viewAll: "view all offers (24)",
     brand: "Flipkart",
     offerIcon: <CopyOutlined />,
-    modeIcon: <GlobalOutlined />
+    modeIcon: <GlobalOutlined />,
   },
   {
     offer: "Coupon",
@@ -238,7 +227,7 @@ export const popularOffers = [
     viewAll: "view all offers (24)",
     brand: "Flipkart",
     offerIcon: <CopyOutlined />,
-    modeIcon: <GlobalOutlined />
+    modeIcon: <GlobalOutlined />,
   },
   {
     offer: "Coupon",
@@ -248,7 +237,7 @@ export const popularOffers = [
     viewAll: "view all offers (24)",
     brand: "Flipkart",
     offerIcon: <CopyOutlined />,
-    modeIcon: <GlobalOutlined />
+    modeIcon: <GlobalOutlined />,
   },
   {
     offer: "Coupon",
@@ -258,16 +247,7 @@ export const popularOffers = [
     viewAll: "view all offers (24)",
     brand: "Flipkart",
     offerIcon: <CopyOutlined />,
-    modeIcon: <GlobalOutlined />
-  }, {
-    offer: "Coupon",
-    mode: "Online",
-    image: "/Images/flipkart.png",
-    title: "Sitewide Savings: up to 50% off + extra 20% off £50+ purchase!",
-    viewAll: "view all offers (24)",
-    brand: "Flipkart",
-    offerIcon: <CopyOutlined />,
-    modeIcon: <GlobalOutlined />
+    modeIcon: <GlobalOutlined />,
   },
   {
     offer: "Coupon",
@@ -277,8 +257,9 @@ export const popularOffers = [
     viewAll: "view all offers (24)",
     brand: "Flipkart",
     offerIcon: <CopyOutlined />,
-    modeIcon: <GlobalOutlined />
-  }, {
+    modeIcon: <GlobalOutlined />,
+  },
+  {
     offer: "Coupon",
     mode: "Online",
     image: "/Images/flipkart.png",
@@ -286,8 +267,9 @@ export const popularOffers = [
     viewAll: "view all offers (24)",
     brand: "Flipkart",
     offerIcon: <CopyOutlined />,
-    modeIcon: <GlobalOutlined />
-  }, {
+    modeIcon: <GlobalOutlined />,
+  },
+  {
     offer: "Coupon",
     mode: "Online",
     image: "/Images/flipkart.png",
@@ -295,6 +277,16 @@ export const popularOffers = [
     viewAll: "view all offers (24)",
     brand: "Flipkart",
     offerIcon: <CopyOutlined />,
-    modeIcon: <GlobalOutlined />
-  }
+    modeIcon: <GlobalOutlined />,
+  },
+  {
+    offer: "Coupon",
+    mode: "Online",
+    image: "/Images/flipkart.png",
+    title: "Sitewide Savings: up to 50% off + extra 20% off £50+ purchase!",
+    viewAll: "view all offers (24)",
+    brand: "Flipkart",
+    offerIcon: <CopyOutlined />,
+    modeIcon: <GlobalOutlined />,
+  },
 ];

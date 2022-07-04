@@ -9,6 +9,8 @@ import SideBar from "../../components/Sidebar/SideBar";
 // import { Post_call } from '../../network/networkmanager';
 // import env from '../../enviroment';
 import { getOfferAction } from "../../actions/getOfferAction";
+import { useDispatch, useSelector } from "react-redux";
+import { getCategoryAction } from "../../actions/CategoryAction";
 const allTredingOffers = [
   {
     image: "/Images/flipkart.png",
@@ -60,72 +62,72 @@ const allTredingOffers = [
   },
 ];
 
-const sidebarData = [
-  {
-    title: "Accessories",
-    link: "",
-  },
-  {
-    title: "Auto & Tires",
-    link: "",
-  },
-  {
-    title: "Baby & Kids Gear",
-    link: "",
-  },
-  {
-    title: "Books & Media",
-    link: "",
-  },
-  {
-    title: "Clothing",
-    link: "",
-  },
-  {
-    title: "Electronics",
-    link: "",
-  },
-  {
-    title: "Events & Activities",
-    link: "",
-  },
-  {
-    title: "Flowers & Florists",
-    link: "",
-  },
-  {
-    title: "Food & Restaurants",
-    link: "",
-  },
-  {
-    title: "Gifts & Occasions",
-    link: "",
-  },
-  {
-    title: "Pet Supplies",
-    link: "",
-  },
-  {
-    title: "Books & Media",
-    link: "",
-  },
-  {
-    title: "Food & Restaurants",
-    link: "",
-  },
-  {
-    title: "Gifts & Occasions",
-    link: "",
-  },
-  {
-    title: "Health & Beauty",
-    link: "",
-  },
-  {
-    title: "Events & Activities",
-    link: "",
-  },
-];
+// const sidebarData = [
+//   {
+//     title: "Accessories",
+//     link: "",
+//   },
+//   {
+//     title: "Auto & Tires",
+//     link: "",
+//   },
+//   {
+//     title: "Baby & Kids Gear",
+//     link: "",
+//   },
+//   {
+//     title: "Books & Media",
+//     link: "",
+//   },
+//   {
+//     title: "Clothing",
+//     link: "",
+//   },
+//   {
+//     title: "Electronics",
+//     link: "",
+//   },
+//   {
+//     title: "Events & Activities",
+//     link: "",
+//   },
+//   {
+//     title: "Flowers & Florists",
+//     link: "",
+//   },
+//   {
+//     title: "Food & Restaurants",
+//     link: "",
+//   },
+//   {
+//     title: "Gifts & Occasions",
+//     link: "",
+//   },
+//   {
+//     title: "Pet Supplies",
+//     link: "",
+//   },
+//   {
+//     title: "Books & Media",
+//     link: "",
+//   },
+//   {
+//     title: "Food & Restaurants",
+//     link: "",
+//   },
+//   {
+//     title: "Gifts & Occasions",
+//     link: "",
+//   },
+//   {
+//     title: "Health & Beauty",
+//     link: "",
+//   },
+//   {
+//     title: "Events & Activities",
+//     link: "",
+//   },
+// ];
 
 // const values = env();
 // const { getCategoriesByClientID } = values;
@@ -133,9 +135,10 @@ const sidebarData = [
 export default function AllOffers() {
   const [dataArr] = useState(allTredingOffers);
 
-  const [sideMenuItems] = useState(sidebarData);
+  // const [sideMenuItems] = useState(sidebarData);
   const [openSidePanel, setOpenSidePanel] = useState(false);
   const [offerData, setOfferData] = useState([]);
+  const dispatch = useDispatch();
 
   const { Option } = Select;
   const closeSidebar = () => {
@@ -146,17 +149,20 @@ export default function AllOffers() {
     if (window.innerWidth > 993) {
       setOpenSidePanel(true);
     }
-
+    dispatch(getCategoryAction);
     let offerResult = getOfferAction();
     offerResult.then((data) => {
       console.log(data);
-      setOfferData(data?.products);
+      setOfferData(data);
     });
   }, []);
 
-  console.log("offerdata.....", offerData);
+  // console.log("sideMenuItems.....", sideMenuItems);
 
-  console.log("dataarr ....", dataArr);
+  const categoryList = useSelector((state) => state.auth.all_category);
+
+  console.log("dataArr ...", dataArr);
+
   return (
     <div className="home_container">
       <Row align="middle" className="list_view mb-0 pb-0">
@@ -232,12 +238,12 @@ export default function AllOffers() {
         />
         <Row justify="space-around" gutter={30}>
           <Col span={24} lg={{ span: 6 }}>
-            {openSidePanel ? (
+            {categoryList ? (
               <SideBar
                 closePanel={() => closeSidebar()}
                 type="checklist"
                 mainTitle="Filter"
-                data={sideMenuItems}
+                data={categoryList?.data}
               />
             ) : (
               ""

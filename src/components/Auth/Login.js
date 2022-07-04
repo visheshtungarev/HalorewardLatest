@@ -37,7 +37,7 @@ export default function Login({ goToRegister, forgotPwd, setModalVisibel }) {
       let result = actions.Login({
         emailId: values.email,
         password: values.password,
-        username: "sb22",
+        username: "halorewards@test.com",
       });
 
       result.then((res) => {
@@ -46,7 +46,7 @@ export default function Login({ goToRegister, forgotPwd, setModalVisibel }) {
           toast.success(res.message);
           setModalVisibel(false);
           setTimeout(() => {
-            window.location.reload()
+            window.location.reload();
           }, 500);
         } else {
           toast.success("something went wrong");

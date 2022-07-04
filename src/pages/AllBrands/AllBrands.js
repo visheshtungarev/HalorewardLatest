@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import "./index.css";
 import { Col, Row, Card, Select } from "antd";
 // import PopularOffers from "../../components/PopularOffers/PopularOffers";
@@ -17,6 +17,7 @@ import { Post_call } from "../../network/networkmanager";
 import { useDispatch, useSelector } from "react-redux";
 import { resetMerchantAction } from "../../actions/brandAction";
 import { singleConstant } from "../../Constants/HomeConstant";
+import { getCategoryAction } from "../../actions/CategoryAction";
 // import { brandListAction } from "../../actions/brandAction";
 // import actions from "../../actions";
 // import { render } from "@testing-library/react";
@@ -604,9 +605,10 @@ const { getCategoriesByClientID } = values;
 const AllBrands = () => {
   const { Option } = Select;
   const getMerachandData = useSelector((state) => state.auth?.all_brand);
+  console.log("getMerachandData ....", getMerachandData);
   console.log(sidebarData, allTredingBrandsTwo);
   const [dataArr] = useState(allTredingBrands);
-  console.log("dataArr", dataArr)
+  console.log("dataArr", dataArr);
   const [openSidePanel, setOpenSidePanel] = useState(false);
   // const [brandBoolean, setBrandBoolean] = useState(false);
   const [brandData, setBrandData] = useState([]);
@@ -614,6 +616,10 @@ const AllBrands = () => {
   const [merchantList, setMerchantList] = useState([]);
   const [trendingCarousel, setTrendingCarousel] = useState([]);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const { state } = useLocation();
+  let categoryId = state?.id;
 
   const closeSidebar = () => {
     !openSidePanel ? setOpenSidePanel(true) : setOpenSidePanel(false);
@@ -639,21 +645,44 @@ const AllBrands = () => {
     }
   };
 
-
   useEffect(() => {
     console.log(window.innerWidth);
     if (window.innerWidth > 993) {
       setOpenSidePanel(true);
     }
-    getCategoryList();
-    getBrandList();
+    dispatch(getCategoryAction);
+    // getCategoryList();
+    getBrandList(categoryId || null);
     setMerchantList(getMerachandData);
   }, []);
 
   useEffect(() => {
-    getBrandList();
-  }, [getMerachandData]);
+    getBrandList(categoryId || null);
+  }, [getMerachandData, categoryId]);
 
+  const categorylist = useSelector((state) => state.auth.all_category);
+
+  useEffect(() => {
+    let objCategory = [{ name: "All" }];
+    categorylist?.data &&
+      categorylist?.data.length > 0 &&
+      categorylist.data.map((item) => {
+        if (categoryId) {
+          if (categoryId === item.categoryId) {
+            item["isActive"] = true;
+            return objCategory.push(item);
+          } else {
+            item["isActive"] = false;
+            return objCategory.push(item);
+          }
+        } else {
+          item["isActive"] = false;
+          return objCategory.push(item);
+        }
+      });
+    console.log("objCategory ....", objCategory);
+    setCategoryData(objCategory);
+  }, [categoryId]);
 
   const getBrandList = async (value) => {
     var raw =
@@ -679,7 +708,6 @@ const AllBrands = () => {
         filterarray && filterarray.length > 0
           ? setBrandData(filterarray)
           : setBrandData(response.data);
-        console.log(filterarray);
       }
     } catch (error) {
       console.error(error);
@@ -687,33 +715,47 @@ const AllBrands = () => {
     }
   };
 
-  const getCategoryList = async () => {
-    var data =
-      "{\n    categories(siteId: 1)  {\n        categoryId\n        name\n        description\n        status\n    }\n}";
+  // const getCategoryList = async () => {
+  //   var data =
+  //     "{\n    categories(siteId: 1)  {\n        categoryId\n        name\n        description\n        status\n    }\n}";
 
-    try {
-      let response = await Post_call(
-        `${getCategoriesByClientID}/clients/1/categories`,
-        data,
-        false
-      );
-      if (response.status === 200) {
-        let objCategory = [{ name: "All" }];
-        response?.data?.map((item) => {
-          return objCategory.push(item);
-        });
-        setCategoryData(objCategory);
-      }
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  };
+  //   try {
+  //     let response = await Post_call(
+  //       `${getCategoriesByClientID}/clients/1/categories`,
+  //       data,
+  //       false
+  //     );
+  //     if (response.status === 200) {
+  //       let objCategory = [{ name: "All" }];
+  //       response?.data?.map((item) => {
+  //         return objCategory.push(item);
+  //       });
+  //       setCategoryData(objCategory);
+  //     }
+  //   } catch (error) {
+  //     console.error(error);
+  //     throw error;
+  //   }
+  // };
 
-  const filterHandler = (key) => {
-    // setMerchantList([])
+  const filterHandler = (key, val) => {
+    navigate(`/all-brands?category=${val}`, {
+      state: {
+        id: key,
+      },
+    });
+    // let array = [...categoryData];
+    // array.filter((item) => {
+    //   if (item.categoryId === key) {
+    //     item.isActive = true;
+    //   } else {
+    //     item.isActive = false;
+    //   }
+    // });
+    // setCategoryData(array);
+    // // setMerchantList([])
     dispatch(resetMerchantAction);
-    getBrandList(key);
+    // getBrandList(key);
 
     // dispatch(brandListAction(key))
   };
@@ -761,7 +803,10 @@ const AllBrands = () => {
                     badgeIcon={"ON CARD"}
                   />
                   <>
-                    <img className="dealicon " src={`data:image/png;base64,${item.merchantLogo1}`} />
+                    <img
+                      className="dealicon "
+                      src={`data:image/png;base64,${item.merchantLogo1}`}
+                    />
                     <p
                       className="deals_title text-center"
                       style={{ minHeight: "auto" }}
@@ -805,7 +850,7 @@ const AllBrands = () => {
                 type="list"
                 mainTitle="Filter"
                 data={categoryData}
-                filterPanel={(k) => filterHandler(k)}
+                filterPanel={(k, e) => filterHandler(k, e)}
               />
             ) : (
               ""
@@ -824,7 +869,11 @@ const AllBrands = () => {
                     >
                       <Link
                         to={`/brand?id=${item.merchantId}`}
-                        state={{totalCashback: item.customerRebate, description: item.merchantDescription, ids: item.merchantId}}
+                        state={{
+                          totalCashback: item.customerRebate,
+                          description: item.merchantDescription,
+                          ids: item.merchantId,
+                        }}
                       >
                         <Card className="deals_container popularOffers rounded1">
                           <Row align="middle" className="w-100 flex-nowrap">

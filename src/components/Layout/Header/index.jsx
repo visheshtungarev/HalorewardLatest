@@ -25,6 +25,7 @@ import {
   resetMerchantAction,
 } from "../../../actions/brandAction";
 import { TOGGLELOADING } from "../../../Constants/ActionsConstants";
+import { getCategoryAction } from "../../../actions/CategoryAction";
 const { Search } = Input;
 
 const Index = () => {
@@ -41,6 +42,7 @@ const Index = () => {
 
   useEffect(() => {
     getAuthentication();
+    dispatch(getCategoryAction);
   }, []);
 
   const dispatch = useDispatch();
@@ -56,6 +58,10 @@ const Index = () => {
   const isLoading = useSelector((state) => state.auth?.isLoading);
 
   console.log("isLoading ...", isLoading);
+
+  const categorylist = useSelector((state) => state.auth.all_category);
+
+  console.log("categorylist ....", categorylist?.data);
 
   const urlLocation = window.location.pathname;
   let params = new URLSearchParams(urlLocation);
@@ -112,6 +118,7 @@ const Index = () => {
       }
     }
   });
+
   const joinModal = () => {
     setIsModalVisible(true);
     setModalChange("register");
@@ -169,11 +176,13 @@ const Index = () => {
         <div className="headerSm">
           <div className="d-flex">
             <div>
-              <img
-                src="/Images/arrow_back.svg"
-                onClick={() => navigate(-1)}
-                height={20}
-              />
+              <Link to="/">
+                <img
+                  src="/Images/arrow_back.svg"
+                  onClick={() => navigate(-1)}
+                  height={20}
+                />
+              </Link>
             </div>
             <div className="flex-grow-1 pageTitle pl-3">{pageTitle}</div>
             {location.pathname === "/brand" ? (
@@ -203,13 +212,13 @@ const Index = () => {
             </Col>
             <Col className="d-flex align-items-center">
               <span className="d-inline-block px-2">
-                <TopMenu mobileView={false} />
+                <TopMenu mobileView={false} category={categorylist?.data} />
               </span>
               <span className="d-inline-block px-2">
-                <img src="/images/Bookmark_icon_outline.svg" />
+                <img src="/Images/Bookmark_icon_outline.svg" />
               </span>
               <Link to={"/login"} className="d-inline-block px-2">
-                <img src="/images/user_icon_outline.svg" />
+                <img src="/Images/user_icon_outline.svg" />
               </Link>
             </Col>
             <Col xs={24} className="mt-3">
@@ -230,16 +239,18 @@ const Index = () => {
         justify="space-between"
       >
         <Col>
-          <img width={100} src="/Images/logo.png" />
+          <Link to="/">
+            <img width={100} src="/Images/logo.png" />
+          </Link>
         </Col>
         <Col>
           <Row align="middle" justify="center">
-            <TopMenu mobileView={true} />
+            <TopMenu mobileView={true} category={categorylist?.data} />
           </Row>
         </Col>
         <Col>
           <Search
-            suffix={<img src="/images/arrow_up.svg" />}
+            suffix={<img src="/Images/arrow_up.svg" />}
             size="large"
             placeholder="Search stores"
             enterButton
@@ -266,16 +277,15 @@ const Index = () => {
         <Col>
           {systemToken ? (
             <Row align="middle" justify="">
-              {/* <Button className="mr-2" type="primary">
-            User
-          </Button> */}
-              {/* <Button
-                type="primary"
-                onClick={() => handleLogout()}
-                size="large"
-              >
-                Logout
-              </Button> */}
+              <Col>
+                <Link
+                  to="/saved/picking-favorite-brand"
+                  className="text-dark fw-bold"
+                >
+                  <img src="Images/Bookmark_icon_outline.svg" />{" "}
+                  <span>Saved</span>
+                </Link>
+              </Col>
 
               <div className="dropdown">
                 <button
@@ -287,14 +297,20 @@ const Index = () => {
                 >
                   Account
                 </button>
-                <div className="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <div
+                  className="dropdown-menu"
+                  aria-labelledby="dropdownMenuButton"
+                >
                   <Link className="dropdown-item" to="/saved">
                     My Profile
                   </Link>
-                  <a className="dropdown-item" href="javascript:void(0)" onClick={() => handleLogout()}>
-                   Logout
+                  <a
+                    className="dropdown-item"
+                    href="javascript:void(0)"
+                    onClick={() => handleLogout()}
+                  >
+                    Logout
                   </a>
-                
                 </div>
               </div>
             </Row>

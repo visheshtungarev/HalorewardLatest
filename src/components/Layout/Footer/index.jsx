@@ -1,9 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  Row, Col,
-  Form
-} from 'antd';
+import { Row, Col, Form } from "antd";
 import "./index.css";
 
 export const Index = () => {
@@ -18,16 +15,18 @@ export const Index = () => {
               <div className="customInputGroup">
                 <span className="countryCode">(+44)</span>
                 <input type="text" placeholder="Enter mobile phone number" />
-                <button><img src="/images/arrow_next.svg" height={15} /></button>
+                <button>
+                  <img src="/Images/arrow_next.svg" height={15} />
+                </button>
               </div>
             </Form>
 
             <Row gutter={10} className="mt-4">
               <Col span={10} className="px-2">
-                <img src="/images/gplay.png" className="w-100" />
+                <img src="/Images/gplay.png" className="w-100" />
               </Col>
               <Col span={10} className="px-2">
-                <img src="/images/appstore.png" className="w-100" />
+                <img src="/Images/appstore.png" className="w-100" />
               </Col>
             </Row>
           </Col>
@@ -114,7 +113,6 @@ export const Index = () => {
                   <li>
                     <Link to="#">Accessories</Link>
                   </li>
-
                 </ul>
               </Col>
             </Row>
@@ -126,33 +124,45 @@ export const Index = () => {
               <div className="customInputGroup">
                 <span className="countryCode">(+44)</span>
                 <input type="text" placeholder="Enter mobile phone number" />
-                <button><img src="/images/arrow_next.svg" height={15} /></button>
+                <button>
+                  <img src="/Images/arrow_next.svg" height={15} />
+                </button>
               </div>
             </Form>
 
             <Row gutter={10} className="mt-4">
               <Col span={10} className="px-2">
-                <img src="/images/gplay.png" className="w-100" />
+                <img src="/Images/gplay.png" className="w-100" />
               </Col>
               <Col span={10} className="px-2">
-                <img src="/images/appstore.png" className="w-100" />
+                <img src="/Images/appstore.png" className="w-100" />
               </Col>
             </Row>
           </Col>
           <Col md={18} xs={24} className="mt-5">
             <Row>
-              <Link to="#" className="fw-bold text-white mr-5">Advertising Disclosure</Link>
-              <p className="text-white mb-0">© 2021 Ebates Performance Marketing Inc., d/b/a HalloRewards</p>
+              <Link to="#" className="fw-bold text-white mr-5">
+                Advertising Disclosure
+              </Link>
+              <p className="text-white mb-0">
+                © 2021 Ebates Performance Marketing Inc., d/b/a HalloRewards
+              </p>
             </Row>
           </Col>
           <Col md={6} xs={24} className="mt-5 text-md-right text-center">
-            <Link to="#" className="ml-3"><img src="/images/facebook.png" /></Link>
-            <Link to="#" className="ml-3"><img src="/images/instagram.png" /></Link>
-            <Link to="#" className="ml-3"><img src="/images/youtube.png" /></Link>
+            <Link to="#" className="ml-3">
+              <img src="/Images/facebook.png" />
+            </Link>
+            <Link to="#" className="ml-3">
+              <img src="/Images/instagram.png" />
+            </Link>
+            <Link to="#" className="ml-3">
+              <img src="/Images/youtube.png" />
+            </Link>
           </Col>
         </Row>
       </div>
-    </footer >
+    </footer>
   );
 };
 

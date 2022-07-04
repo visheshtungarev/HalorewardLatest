@@ -1,5 +1,5 @@
-import { Button, Checkbox, Col,  Input, Row } from "antd";
-import React,{useState} from "react";
+import { Button, Checkbox, Col, Input, Row } from "antd";
+import React, { useState } from "react";
 import "./index.css";
 import { Link } from "react-router-dom";
 import actions from "../../actions";
@@ -12,7 +12,6 @@ export default function Register({ goToLogin, forgotPwd }) {
     console.log(`checked = ${e.target.checked}`);
   }
 
- 
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const initvalues = {
@@ -56,7 +55,7 @@ export default function Register({ goToLogin, forgotPwd }) {
   const { values, handleChange, handleBlur, handleSubmit, touched, errors } =
     formik;
 
-    console.log("values .....", values)
+  console.log("values .....", values);
 
   return (
     <form autoComplete="new-password" onSubmit={handleSubmit}>
@@ -111,7 +110,13 @@ export default function Register({ goToLogin, forgotPwd }) {
         </Col>
       </Row>
       <div className="mb-4">
-        <Button type="primary" htmlType="submit" className="w-100" size="large" loading={isSubmitting}>
+        <Button
+          type="primary"
+          htmlType="submit"
+          className="w-100"
+          size="large"
+          loading={isSubmitting}
+        >
           Register
         </Button>
       </div>

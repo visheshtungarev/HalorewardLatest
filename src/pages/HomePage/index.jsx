@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import Carousel from "../../components/Carousel";
 import "./index.css";
-import { Card, Col, Divider, Row } from "antd";
+import { Card, Col, Divider, Row, Button } from "antd";
 import { ClockCircleOutlined } from "@ant-design/icons";
 import { HomeConstant } from "../../Constants";
 import FeaturedOffers from "../../components/FeaturedOffers/FeaturedOffers";
 // import TrendingBrands from "../../components/TrendingBrands/TrendingBrands";
-import PopularOffers from "../../components/PopularOffers/PopularOffers";
+// import PopularOffers from "../../components/PopularOffers/PopularOffers";
 import Badge from "../../components/Badge/Badge";
 import Heading from "../../components/Heading/Heading";
 import { useDispatch, useSelector } from "react-redux";
@@ -14,6 +14,15 @@ import { useEffect } from "react";
 import { getCarousel } from "../../actions/getCarouselAction";
 import { singleConstant } from "../../Constants/HomeConstant";
 import TrendingBlock from "../../components/TrendingBrands/TrendingBlock";
+import { getOfferAction } from "../../actions/getOfferAction";
+import {
+  GlobalOutlined,
+  CopyOutlined,
+  //ShopOutlined,
+  //ShoppingOutlined
+} from "@ant-design/icons";
+import { featuredCall } from "../../actions/favouriteCall";
+import { useNavigate } from "react-router-dom";
 
 // const { Meta } = Card;
 
@@ -21,14 +30,32 @@ const index = () => {
   const dispatch = useDispatch();
   const [expiringCarousel, setExpiringCarousel] = useState([]);
   const [trendingCarousel, setTrendingCarousel] = useState([]);
+  const [featuredData, setFeaturedData] = useState([]);
+  const [offerData, setOfferData] = useState([]);
 
-  const accessToken = localStorage.getItem("accessToken")
+  const navigate = useNavigate();
+
+  const accessToken = localStorage.getItem("accessToken");
+
+  const getCustomer = useSelector((state) => state.auth.user);
+  let customerId = getCustomer?.customer?._id;
 
   useEffect(() => {
-    accessToken && dispatch(getCarousel());
+    accessToken && dispatch(getCarousel(customerId));
+
+    let offerResult = getOfferAction();
+    offerResult.then((data) => {
+      setOfferData(data);
+    });
+
+    let featureResult = featuredCall();
+    featureResult.then((res) => {
+      setFeaturedData(res.data);
+    });
   }, []);
 
   const carouselState = useSelector((state) => state.auth.carousel);
+  // console.log("carouselState ....", carouselState);
 
   useEffect(() => {
     getCarouseItem();
@@ -51,8 +78,7 @@ const index = () => {
     }
   };
 
-  console.log("expiringCarousel ....", expiringCarousel);
-  // console.log("trendingcarousel .......", trendingCarousel);
+  // console.log("featuredData .......", featuredData);
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -131,51 +157,67 @@ const index = () => {
           justify="space-around"
           gutter={30}
         >
-          {trendingCarousel &&
-            trendingCarousel.length &&
-            trendingCarousel[0].products &&
-            trendingCarousel[0].products.length > 0 &&
-            trendingCarousel[0].products.splice(1, 6).map((item, key) => {
-            return  (
-                <Col key={key} className="deals_box" span={4}>
-                  <Card className="deals_container" actions={[]}>
+          {expiringCarousel &&
+            expiringCarousel.length &&
+            expiringCarousel[0].brands &&
+            expiringCarousel[0].brands.length > 0 &&
+            expiringCarousel[0].brands.map((item, key) => {
+              if (item.products && item.products.length >= 0) {
+                var products = item.products[0];
+              }
+              return (
+                <Col key={key} className="deals_box" span={5}>
+                  <Card
+                    className="deals_container"
+                    style={{ cursor: "pointer" }}
+                    actions={[]}
+                    onClick={() =>
+                      navigate(`/cashback?id=${products.productId}`, {
+                        state: {
+                          item: products,
+                          name: item.merchantName,
+                          ids: item.merchantId,
+                        },
+                      })
+                    }
+                  >
                     <>
                       <Badge
                         position={""}
-                        badgeType={capitalizeFirstLetter(
-                          item.contentType
-                        )}
-                        badgeText={item.contentType}
-                        badgeIcon={item.contentType}
+                        badgeType={capitalizeFirstLetter(products.contentType)}
+                        badgeText={products.contentType}
+                        badgeIcon={products.contentType}
                       />
-  
+
                       <Badge
                         position={""}
-                        badgeType={capitalizeFirstLetter(item.subcontentType)}
-                        badgeText={item.subcontentType}
-                        badgeIcon={item.subcontentType}
+                        badgeType={capitalizeFirstLetter(
+                          products.subcontentType
+                        )}
+                        badgeText={products.subcontentType}
+                        badgeIcon={products.subcontentType}
                       />
-  
+
                       <img
                         className="dealicon"
-                        src="/Images/flipkart.png"
+                        src={`data:image/png;base64,${item.merchantLogo1}`}
                       />
-                      <p className="deals_title">{
-                        item?.productMetaData?.map((element)=>{
-                          if(element.key === "title"){
-                            return element.value
+                      <p className="deals_title">
+                        {products?.productMetaData?.map((element) => {
+                          if (element.key === "title") {
+                            return element.value;
                           }
-                        })
-                      }</p>
+                        })}
+                      </p>
                     </>
                     <Divider />
                     <Row align="middle" key="time" className="deals_action">
                       <ClockCircleOutlined className="deals_offer_title" />
-                      <span>{item.expirationDate}</span>
+                      <span>{products.expirationDate}</span>
                     </Row>
                   </Card>
                 </Col>
-              )
+              );
             })}
         </Row>
       </div>
@@ -196,15 +238,18 @@ const index = () => {
             trendingCarousel.length &&
             trendingCarousel[0].brands &&
             trendingCarousel[0].brands.length > 0 &&
-            trendingCarousel[0].brands.map((item, i) => (
-              <TrendingBlock
-                key={i}
-                span={"span"}
-                brandImage={`data:image/png;base64,${item.merchantLogo1}`}
-                brandTitle={item.merchantName}
-                brandOfferText={"upto 11% cashback"}
-              />
-            ))}
+            trendingCarousel[0].brands
+              .slice(0, 5)
+              .map((item, i) => (
+                <TrendingBlock
+                  obj={item}
+                  key={i}
+                  span={"span"}
+                  brandImage={`data:image/png;base64,${item.merchantLogo1}`}
+                  brandTitle={item.merchantName}
+                  brandOfferText={"upto 11% cashback"}
+                />
+              ))}
         </Row>
       </div>
 
@@ -260,7 +305,6 @@ const index = () => {
         <TrendingBrands span={4} />
       </div> */}
 
-
       <div className="list_view themeBg">
         <Heading
           HeadingText="Featured Offers"
@@ -268,7 +312,7 @@ const index = () => {
           actionLink="/all-offers"
           color="text-white"
         />
-        <FeaturedOffers />
+        <FeaturedOffers featuredData={featuredData} />
       </div>
 
       <div className="list_view">
@@ -277,7 +321,77 @@ const index = () => {
           actionText="View All"
           actionLink="/all-offers"
         />
-        <PopularOffers />
+        <Row align="middle" justify="space-around" gutter={30}>
+          {offerData?.products &&
+            offerData.products.products &&
+            offerData.products.products.length > 0 &&
+            offerData.products.products.slice(0, 3).map((item, key) => (
+              <Col
+                key={key}
+                className="deals_box featuredOffers mb-4"
+                span={6}
+                lg={{ span: 6 }}
+              >
+                <Card className="deals_container popularOffers" actions={[]}>
+                  <div className="d-flex w-100 ">
+                    <div>
+                      <p>
+                        Image not available <br />
+                        from database
+                      </p>
+                      <p className="deals_title">
+                        {offerData.products.merchantName}
+                      </p>
+                      {/* <img
+                    className="dealicon_img_frame_lg"
+                    src="/Images/flipkart.png"
+                  /> */}
+                    </div>
+                    <div className="flex-grow-1">
+                      <div>
+                        <div className="w-100 d-flex align-items-center justify-content-between">
+                          <div className="d-md-flex">
+                            <Badge
+                              position={""}
+                              badgeType={item.contentType}
+                              badgeText={item.contentType}
+                              badgeIcon={<CopyOutlined />}
+                            />
+                            <Badge
+                              position={""}
+                              badgeType={item.subcontentType}
+                              badgeText={item.subcontentType}
+                              badgeIcon={<GlobalOutlined />}
+                            />
+                          </div>
+                          <p className="mb-0 viewAllOffer">{`view all offer (${item.productMetaData.length})`}</p>
+                        </div>
+                        <div className="py-3 py-md-0">
+                          <img
+                            className="dealicon_img_frame_lg_mobile"
+                            src="/Images/flipkart.png"
+                          />
+                        </div>
+                        <p className="deals_title">
+                          {item.productMetaData.map((element) => {
+                            if (element.key === "productDescription") {
+                              return element.value;
+                            }
+                          })}
+                        </p>
+                      </div>
+                      {/* <Row key="time" className="featured_offer_action ">
+                                    <span>{item.time}</span>
+                                </Row> */}
+                      <Button type="primary" className="w-100">
+                        Reveal Code
+                      </Button>
+                    </div>
+                  </div>
+                </Card>
+              </Col>
+            ))}
+        </Row>
       </div>
       {/* <Footer /> */}
     </div>

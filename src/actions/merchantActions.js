@@ -1,26 +1,44 @@
-import { constVariable } from "../constants/String";
+import { GETMERCHANTBYID } from "../Constants/ActionsConstants";
+import { constVariable } from "../Constants/String";
 import env from "../enviroment";
 import {
   Get_Call,
   Patch_call,
   Post_call,
-  Put_call
+  Put_call,
 } from "../network/networkmanager";
 
 const values = env();
-const getMerchantAction = async (payload, callBack) => {
+
+const getMerchantAction = (payload) => async (dispatch) => {
   const { merchantquerry } = values;
+
+  var raw = `{
+    merchantsById(id: [${payload}]) {
+        merchantId 
+        merchantName 
+        merchantDescription 
+        merchantRank 
+        status 
+        customerMaxRebate 
+        provider
+        externalMaxRebate 
+        modifiedDate 
+        merchantLogo1 
+        merchantUrl 
+        createdDate
+    }
+}`;
   try {
     //start loader with dispatch
-    let response = await Post_call(`${merchantquerry}/merchants`, payload);
-    if (response.status === 200) {
-      callBack(response.data);
-    }
+    let response = await Post_call(`${merchantquerry}/merchants`, raw, false);
+    dispatch({
+      type: GETMERCHANTBYID,
+      payload: response.data,
+    });
   } catch (error) {
     console.error(error);
     throw error;
-  } finally {
-    //end the loader with dispatch
   }
 };
 
@@ -85,7 +103,6 @@ const updateMerchantAction = async (payload, callBack) => {
   } catch (error) {
     console.error(error);
     throw error;
-  } finally {
   }
 };
 
@@ -110,7 +127,6 @@ const publishMerchantAction = async (payload, callBack) => {
   } catch (error) {
     console.error(error);
     throw error;
-  } finally {
   }
 };
 
@@ -226,7 +242,6 @@ const updateCategoriesStatusAction = async (payload, callBack) => {
   } catch (error) {
     console.error(error);
     throw error;
-  } finally {
   }
 };
 
@@ -266,5 +281,5 @@ export {
   updateCategoriesStatusAction,
   getMerchantsById,
   getCategories,
-  getReviewMerchantsByClientId
+  getReviewMerchantsByClientId,
 };
