@@ -1,0 +1,101 @@
+.account-wallet-container .balance-wrapper .balance-card{
+    background: #8338EC;
+    border-radius: 12px;
+}
+.account-wallet-container .balance-container .unit{
+    width:50%;
+}
+.account-wallet-container .balance-container {
+    width:100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.account-wallet-container .balance-container .unit label.title{
+    width: 100%;
+    color: #fff;
+    margin-bottom: 0;
+    display: block;
+}
+.account-wallet-container .balance-container .unit label.value{
+    width: 100%;
+    color:#fff;
+    font-size: 1.25rem;
+    font-weight: 500;
+    margin-bottom: 0;
+}
+.account-wallet-container .balance-container .unit.total-earned label.value {
+    font-size: 1rem;
+}
+.paypal-details .ant-card{
+    background: #FFFFFF;
+    box-shadow: 0px 4px 20px rgba(0, 0, 0, 0.04);
+    border-radius: 12px;
+}
+.paypal-details .paypal-title{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 15px;
+}
+.paypal-details .paypal-title .title{
+    color: #1D1C24;
+    font-size: 1.25rem;
+    width:50%;
+    margin-bottom: 0;
+    font-weight: 500;
+}
+.paypal-details .paypal-title .link{
+    color: #3A86FF;
+    font-size:0.75rem;
+    width:50%;
+    margin-bottom: 0;
+    cursor: pointer;
+    font-weight: 500;
+}
+.paypal-details .paypal-detail{
+    display: flex;
+    flex-wrap: wrap;
+}
+.paypal-details .paypal-detail .icon{
+    width: 68px;
+    height: 68px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    margin-right:10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+}
+.paypal-details .paypal-detail .icon img{
+    max-width: 100%;
+}
+
+.account-wallet-container .account-label {
+    width: 100%;
+    font-size: 0.875rem;
+    margin-bottom: 0px;
+    display: block;
+}
+
+.account-wallet-container .account-name {
+    font-size: 1.125rem;
+}
+
+.account-wallet-container input,
+.account-wallet-container input:focus {
+    border: unset;
+    border-color: unset;
+    box-shadow: unset;
+    padding: 0;
+}
+
+.account-wallet-container .ant-row-middle {
+    padding-bottom: 0.625rem;
+    margin-bottom: 1rem;
+}
+
+.account-wallet-container .ant-row-middle:last-child {
+    border-bottom: unset;
+    padding-bottom: 0px;
+    margin-bottom: 0;
+}

@@ -1,0 +1,278 @@
+.account-sidebar .deals_content {
+    color: #595860;
+}
+
+.account-sidebar .sideMenu {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.account-sidebar .sideMenu a {
+    display: block;
+    padding: 1rem;
+    color: #000;
+    font-weight: 500;
+    padding-left: 0;
+
+}
+
+.account-sidebar .sideMenu a:hover {
+    color: #40a9ff;
+}
+
+.account-sidebar .sub-heading {
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+    color: #3A86FF;
+    padding: 1rem;
+    padding-left: 0;
+}
+
+.account-sidebar .logout a {
+    color: #FB5607;
+}
+
+.account-sidebar .logout {
+    padding: 1rem 1rem 0 0;
+    margin-bottom: 0;
+}
+
+.account-sidebar .sideMenu li {
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+.account-sidebar .sideMenu li.active a{
+    color: #3A86FF;
+    font-weight: 600;
+    font-size: 1rem;
+}
+.account-sidebar .sideMenu li.active label{
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.account-sidebar .sideMenu li label {
+    color: #000;
+    font-weight: 500;
+    width: 48%;
+    margin: 0;
+    padding: 1rem 0;
+}
+
+.account-sidebar .sideMenu li label a {
+    padding: 0;
+}
+
+.ta-right {
+    text-align: right;
+}
+
+.fw-500 {
+    font-weight: 500;
+}
+
+.account-profile .account-label {
+    width: 100%;
+    font-size: 0.875rem;
+    margin-bottom: 0px;
+    display: block;
+}
+
+.account-profile .account-name {
+    font-size: 1.125rem;
+}
+
+.account-profile input,
+.account-profile input:focus {
+    border: unset;
+    border-color: unset;
+    box-shadow: unset;
+    padding: 0;
+}
+
+.account-profile .ant-row-middle {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 0.625rem;
+    margin-bottom: 1rem;
+}
+
+.account-profile .ant-row-middle:last-child {
+    border-bottom: unset;
+    padding-bottom: 0px;
+    margin-bottom: 0;
+}
+
+.account-profile-component .list_bar {
+    padding: 0 0.6rem 1.25rem 0.6rem;
+    height: auto;
+    align-content: flex-start;
+}
+
+.account-profile-component a.see-all-offer {
+    color: #3A86FF;
+    font-size: 1rem;
+}
+
+a.see-all-offer .anticon {
+    display: none;
+}
+
+ .ant-switch-checked {
+    background-color: #2EC193!important;
+}
+
+.account-profile-component .imagepre-text {
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.account-modal h5 {
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+
+.account-modal .ant-modal-body {
+    padding: 10px 5px 20px 5px;
+}
+
+.account-modal .ant-modal-header {
+    padding: 5px;
+}
+
+.account-modal.ant-modal {
+    padding-bottom: 0;
+    max-width: 400px;
+}
+@media screen and (max-width: 480px) {
+    .account-modal.ant-modal {
+        max-width: 310px;
+    }
+}
+
+.account-modal .ant-modal-footer button {
+    font-size: 0.875rem;
+}
+
+.list_action .showModal-label {
+    color: #3A86FF;
+    cursor: pointer;
+}
+
+.account-modal form .form-label label {
+    font-size: 0.875rem;
+    color: #858585;
+}
+
+.account-modal form .form-label input,
+.account-modal form .form-label .ant-input-affix-wrapper {
+    font-size: 0.875rem;
+    color: #1D1C24;
+    border: unset;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.account-modal form .form-label input[type='password'] {
+    border: none;
+}
+
+form .form-label input:focus,
+.account-modal form .ant-input-affix-wrapper:focus,
+form .ant-input-status-error:not(.ant-input-disabled):not(.ant-input-borderless).ant-input:focus {
+    border-color: unset;
+    box-shadow: unset;
+    border-right-width: unset;
+    outline: unset;
+}
+
+form .label-text {
+    color: #6E6C7B;
+    size: 1rem;
+    line-height: 1.25rem;
+}
+
+form .ant-form-item {
+    margin-bottom: 10px;
+}
+
+form .ant-col-24.ant-form-item-label {
+    padding: 0px;
+}
+
+form .remember-password .reset-password {
+    color: #3A86FF;
+}
+
+form .remember-password {
+    color: #1D1C24;
+    font-weight: 500;
+}
+
+form.confirm-form {
+    text-align: center;
+}
+
+form.confirm-form h2 {
+    color: #120078;
+    font-size: 1.25rem;
+    font-weight: 700;
+}
+
+.account-tab-container .ant-tabs-tab {
+    width: 50%;
+    text-align: center;
+    display: inline-block;
+}
+
+.account-tab-container .ant-tabs-nav-list {
+    width: 100%;
+}
+/* Account card offer */
+.account-searchbox .seacrhbox {
+    position: relative;
+    margin-bottom: 15px;
+}
+
+.account-searchbox .seacrhbox .search-icon {
+    position: absolute;
+    top: 6px;
+    z-index: 1;
+    left: 10px;
+}
+.account-searchbox .seacrhbox input {
+    background: #f6f6f6;
+    border-radius: 8px;
+    padding: 8px 30px;
+}
+
+
+.account-card-container{
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding:15px 12px;
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 10px;
+}
+.account-card-container .icon-container{
+    width: 46px;
+    height: 46px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    box-shadow: 0px 0px 22px rgb(30 35 37 / 1%);
+    border-radius: 8px;
+    padding: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 10px;
+    align-items: center;
+}
+.account-card-container .icon-container img{
+    max-width: 100%;
+}
+.account-card-container .switch-box{
+    width: 50px;
+    text-align: right;
+}
+.account-card-container .brand-description {
+    width: calc(100% - 106px);
+}

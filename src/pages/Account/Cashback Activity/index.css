@@ -1,0 +1,228 @@
+
+.cashback-activity .ant-tabs{
+     width:100%;
+}
+.cashback-activity .ant-tabs .ant-tabs-nav {
+    background-color: #fff;
+    border-radius: 12px;
+    padding: 0px 20px;
+    border-bottom: unset;
+    margin-bottom: 40px;
+}
+.cashback-activity .ant-tabs-tab{
+    padding: 21px 0;
+}
+.cashback-activity .ant-tabs-tab-btn{
+    color: #6E6C7B;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1.125rem;
+}
+@media screen and (max-width: 480px) {
+    .cashback-activity .ant-tabs-tab-btn{
+        color: #6E6C7B;
+        font-weight: 500;
+        font-size: .85rem;
+        line-height: .8rem;
+    } 
+    .cashback-activity .ant-tabs-tab{
+        padding: 15px 0;
+    } 
+}
+.cashback-activity .ant-tabs-tab.ant-tabs-tab-active .ant-tabs-tab-btn {
+    color: #1D1C24;
+}
+
+.cashback-activity .tab-container {
+    margin-bottom: 40px;
+    width:100%;
+}
+.cashback-activity .tab-container h5{
+margin-bottom: 15px;
+}
+.cashback-activity .tab-container .tab-cards .tab-card{
+    background: #FFFFFF;
+    border-radius: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    padding: 15px 20px;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    cursor: pointer;
+}
+.cashback-activity .tab-container .tab-cards .tab-card .icon{
+    width:50px;
+    height:50px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+}
+.cashback-activity .tab-container .tab-cards .tab-card .icon img{
+    max-width:100%;
+}
+.cashback-activity .tab-container .tab-cards .tab-card .tab-info{
+    width: calc(100% - 160px);
+    cursor: pointer;
+}
+.cashback-activity .tab-container .tab-cards .tab-card .tab-info .title{
+    width:100%;
+    margin-bottom: 0;
+    color: #1D1C24;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+}
+.cashback-activity .tab-container .tab-cards .tab-card .tab-info .date{
+    width:100%;
+    margin-bottom: 0;
+    font-size: 0.875rem;
+    cursor: pointer;
+}
+.cashback-activity .tab-container .tab-cards .tab-card  .tab-status{
+    width:100px;
+}
+.cashback-activity .tab-container .tab-cards .tab-card  .tab-status .price{
+    color: #000000;
+    font-weight: 600;
+    font-size: 1.125rem;
+    margin-bottom: 0;
+}
+.cashback-activity .tab-container .tab-cards .tab-card  .tab-status .price.profit{
+    color: #2EC193;
+}
+.cashback-activity .tab-container .tab-cards .tab-card  .tab-status .price.loss{
+    color: #FB0707;
+}
+.status{
+    padding: 5px;
+    text-transform: uppercase;
+    font-size: .75rem;
+    border-radius: 4px;
+    margin-bottom: 0;
+    width:auto!important;
+}
+ .status.confirmed,.status.resolved{
+    background: rgba(46, 193, 147, 0.07);
+    color: #2EC193;
+
+}
+ .status.tracked,.status.pending{
+    color: #FFBE0B;
+    background: rgba(255, 190, 11, 0.07);
+}
+ .status.diclined {
+    color: #FB0707;
+    background: rgba(251, 7, 7, 0.07);
+}
+/* brand detail popup */
+.account-modal .ant-modal-body .brand-detail-wrapper{
+    padding:0;
+}
+.brand-detail-wrapper{
+    background-color: #fff;
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding:1.25rem;
+}
+.brand-detail-wrapper .brand-detail{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    padding-bottom: 1.25rem;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+.brand-detail-wrapper .brand-detail .brand-icon{
+    width: 50px;
+    height: 50px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px;
+}
+.brand-detail-wrapper .brand-detail .brand-icon img{
+    max-width: 100%;
+}
+.brand-detail-wrapper .brand-detail label{
+    width:100px;
+    font-size: 1.125rem;
+}
+.brand-detail-wrapper .brand-detail .brand-id{
+    width: calc(100% - 160px);
+    text-align: right;
+    font-weight: 600;
+}
+.brand-detail-wrapper .form-container form{
+display: flex;
+flex-wrap: wrap;
+padding: 1.25rem 0px 0px 0px;
+}
+.brand-detail-wrapper .form-container .form-unit{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1.25rem;
+}
+.brand-detail-wrapper .form-container .form-unit.w-50{
+    width:50%;
+}
+.brand-detail-wrapper .form-container .form-unit label{
+    width:100%;
+    margin-bottom: 0px;
+}
+.brand-detail-wrapper .form-container .form-unit label.title{
+    color: #1D1C24;
+    font-size: 1rem;
+    font-weight: 500;
+}
+.brand-detail-wrapper .form-container .form-unit input{
+    width:100%;
+    color: #1D1C24;
+    font-size: 1rem;
+    border:unset;
+}
+.brand-detail-wrapper .form-container .form-unit input:focus-visible {
+    outline: -webkit-focus-ring-color auto 0px;
+}
+.confirm-btn .ant-btn-primary{
+    width:100%;
+    text-transform: uppercase;
+    background: #3A86FF;
+}
+
+
+
+
+.card-with-border{
+    border: 0.5px solid rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding:1.25rem;
+}
+/* claim final wrapper */
+.claim-final-wrapper .card-with-border{
+    margin-bottom: 1.25rem;
+}
+.claim-final-wrapper .claim-box h5{
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+.border-bottom-with-padding {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom:1.25rem;
+}
+.brand-detail-wrapper textarea {
+    color: #8F8F8F;
+    border-radius: 8px;
+    background-color:#f6f6f6;
+    font-size: 0.75rem;
+    line-height:0.938rem;
+}

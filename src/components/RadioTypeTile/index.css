@@ -1,0 +1,30 @@
+.claim-type-wrapper {
+    margin-top:1.125rem;
+}
+.claim-type-wrapper .claim-unit{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 1.125rem;
+    align-items: center;
+}
+.claim-type-wrapper .claim-unit .claimtype-content {
+    width:80%;
+}
+.claim-type-wrapper .claim-unit .claimtype-content .title{
+    font-weight: 500;
+    font-size: .875rem;
+    line-height: 1.125rem;
+    margin-bottom: 0.5rem;
+    color: #000000;
+ 
+}
+.claim-type-wrapper .claim-unit .claimtype-content .sub-title{
+    font-weight: 400;
+    font-size: .75rem;
+    line-height: 1.063rem;
+    color: #858585;
+}
+.claim-type-wrapper .claim-unit .claimtype-radio {
+    width:20%;
+    text-align: right;
+}

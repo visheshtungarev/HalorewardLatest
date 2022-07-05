@@ -1,0 +1,92 @@
+.widraw-wallet .sub-title{
+    color: #6E6C7B;
+    font-size: 1rem;
+    margin-bottom: 20px;
+}
+.widraw-wallet .account-details{
+    background: #FFFFFF;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+}
+.widraw-wallet .encash-label{
+    width:100%;
+    margin-bottom: 5px;
+    font-size: 0.75rem;
+    color: rgba(133, 133, 133, 0.8);
+}
+.widraw-wallet .encash-container{
+    width: 100%;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.25rem;
+}
+.widraw-wallet .encash-container .encash-icon{
+    padding-right: 10px;
+    border-right: 0.5px solid rgba(0, 0, 0, 0.3);
+    color: #1D1C24;
+}
+.widraw-wallet .encash-container .encash-amount{
+    padding-left: 10px;
+    font-size: .875rem;
+    font-weight: 500;
+}
+.widraw-wallet .account-details .account-icon{
+    width: 39px;
+    height: 39px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    color: #FFBE0B;
+    font-size: 20px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-right: 10px;
+}
+.widraw-wallet .account-details .account-icon img{
+    max-width: 100%;
+    padding: 4px;
+}
+.widraw-wallet .account-detail{
+    width: calc(100% - 49px);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    
+}
+.widraw-wallet .account-detail .account-name {
+    color: #858585;
+    font-size: 0.75rem;
+    width: 100%;
+    margin-bottom: 0;
+}
+.widraw-wallet .account-detail .account-number {
+    color: #1D1C24;
+    font-size: 1rem;
+    margin-bottom: 0;
+    font-weight: 500;
+}
+.widraw-wallet .remaining-balance{
+    font-size: 0.875rem;
+}
+.widraw-wallet .remaining-balance .remaining-amount{
+    color: #1D1C24;
+    font-weight: 500;
+}
+.widraw-wallet  .terms-condition{
+    margin: 30px 0px 20px;
+    display: flex;
+    align-items: flex-start;
+}
+.widraw-wallet  .terms-condition input{
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+}
+.widraw-wallet .confirm-btn button {
+    width: 100%;
+    background: #3A86FF;
+    font-size: .75rem;
+}
