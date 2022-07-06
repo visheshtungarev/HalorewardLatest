@@ -3,14 +3,15 @@ import Heading from "../../components/Heading/Heading";
 import PopularOffers from "../../components/PopularOffers/PopularOffers";
 import { CreditCardOutlined } from "@ant-design/icons";
 import Breadcurms from "../../components/Breadcrums/Breadcurms";
-import { Row, Col, Card, Select } from "antd";
-import Badge from "../../components/Badge/Badge";
+import { Row, Col, Select } from "antd";
+// import Badge from "../../components/Badge/Badge";
 import SideBar from "../../components/Sidebar/SideBar";
 // import { Post_call } from '../../network/networkmanager';
 // import env from '../../enviroment';
 import { getOfferAction } from "../../actions/getOfferAction";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoryAction } from "../../actions/CategoryAction";
+import { helperFunction } from "../../Helpers/helperFunction";
 const allTredingOffers = [
   {
     image: "/Images/flipkart.png",
@@ -152,10 +153,24 @@ export default function AllOffers() {
     dispatch(getCategoryAction);
     let offerResult = getOfferAction();
     offerResult.then((data) => {
-      console.log(data);
       setOfferData(data);
     });
   }, []);
+
+  const filterHandler = (id) => {
+    let array = [];
+    array.push(id);
+    helperFunction.getFilterDataList(
+      offerData?.products?.products,
+      [{ key: "categoryId", value: array }],
+      callbackFunc
+    );
+  };
+
+  function callbackFunc(dataArr) {
+    console.log("dataArr ....", dataArr);
+    return dataArr;
+  }
 
   // console.log("sideMenuItems.....", sideMenuItems);
 
@@ -180,7 +195,7 @@ export default function AllOffers() {
         />
       </Row>
 
-      <div className="list_view">
+      {/* <div className="list_view">
         <Heading
           HeadingText="Trending"
           actionText="View All"
@@ -216,7 +231,7 @@ export default function AllOffers() {
               </Col>
             ))}
         </Row>
-      </div>
+      </div> */}
       <div className="list_view">
         <Heading
           HeadingText="All Offers"
@@ -244,6 +259,7 @@ export default function AllOffers() {
                 type="checklist"
                 mainTitle="Filter"
                 data={categoryList?.data}
+                filterPanel={(id) => filterHandler(id)}
               />
             ) : (
               ""

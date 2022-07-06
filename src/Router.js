@@ -33,8 +33,6 @@ const RouterApp = () => {
         <Route path="/popular-offers" element={<AllPopularOffers />} />
         <Route path="/all-offers" element={<AllOffers />} />
         <Route path="/search-offers/:id" element={<OfferSearch />} />
-
-        
         <Route path="/all-brands/category" element={<BrandCategory />} />
         <Route path="/brand" element={<BrandDetails />} />
         <Route path="/coupon" element={<Coupon />} />
@@ -43,15 +41,18 @@ const RouterApp = () => {
         <Route path="/oncardOffer" element={<OnCardoffer />} />
         <Route path="/saved" element={<Saved />} />
         <Route path="/saved/saved-coupon" element={<SavedCoupon />} />
+        <Route path="/saved/saved-cashback" element={<SavedCoupon />} />
+        <Route path="/saved/saved-prizedraw" element={<SavedCoupon />} />
         <Route path="/saved/favorite-brand" element={<FavoriteBrands />} />
         <Route path="/saved/prize-draws" element={<SavedPrizeDraws />} />
         <Route
           path="/saved/picking-favorite-brand"
           element={<PickingFavoriteBrand />}
-        /> <Route
-        path="/saved/picking-favorite-product"
-        element={<PickingFavoriteProduct />}
-      />
+        />{" "}
+        <Route
+          path="/saved/picking-favorite-product"
+          element={<PickingFavoriteProduct />}
+        />
         <Route path="/login" element={<LoginPage />} />
       </Routes>
       <Footer />

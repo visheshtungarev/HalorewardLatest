@@ -19,6 +19,9 @@ export default function SavedCoupon() {
   const [, setOpenSidePanel] = useState(false);
   const [activeListing, setActiveListing] = useState([]);
 
+  const getUrl = window.location.pathname;
+  // console.log("getUrl ...", getUrl);
+
   const getCustomer = useSelector((state) => state.auth.user);
 
   const { TabPane } = Tabs;
@@ -37,26 +40,31 @@ export default function SavedCoupon() {
   }, []);
 
   useEffect(() => {
-    let activeArray = [];
     let customerId = getCustomer?.customer?._id;
     let customerresult = CutomerInfoCall(customerId);
     customerresult.then((res) => {
       // setCustomerBrandList(res?.customer?.brands || [])
       let productResponse = getProductfavCall(res?.customer?.products);
       productResponse.then((result) => {
-        result.forEach((item) => {
-          if (item.status == "Active") {
-            activeArray.push(item);
+        let activeArray = [];
+        result.map((item) => {
+          if (getUrl === "/saved/saved-coupon") {
+            if (item.status == "Active" && item.contentType === "coupon") {
+              activeArray.push(item);
+            }
+          }
+          if (getUrl === "/saved/saved-cashback") {
+            if (item.status == "Active" && item.contentType === "cashback") {
+              activeArray.push(item);
+            }
           }
         });
+        setActiveListing(activeArray);
       });
     });
-    setActiveListing(activeArray);
+
+    // console.log("activeArray ....", activeArray);
   }, [getCustomer]);
-
-  // function getSeparateData() {
-
-  // }
 
   console.log("activeListing ....", activeListing);
 
@@ -70,8 +78,12 @@ export default function SavedCoupon() {
               pageLink: "/saved",
             },
             {
-              pageName: "Coupons",
-              pageLink: "/coupons",
+              pageName:
+                getUrl === "/saved/saved-coupon" ? "Coupons" : "Cashback",
+              pageLink:
+                getUrl === "/saved/saved-coupon"
+                  ? "/saved/saved-coupon"
+                  : "/saved/saved-cashback",
             },
           ]}
         />

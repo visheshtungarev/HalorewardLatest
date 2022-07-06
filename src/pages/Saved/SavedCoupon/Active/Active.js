@@ -64,7 +64,7 @@ import React from "react";
 export default function Active({ activeListing }) {
   return (
     <div className="list_view">
-      <Row align="middle" className="" justify="space-around" gutter={30}>
+      <Row align="middle" className="" justify="flex-start" gutter={30}>
         {activeListing &&
           activeListing.length > 0 &&
           activeListing.map((item, i) => {
@@ -80,7 +80,7 @@ export default function Active({ activeListing }) {
                     <img src="/Images/logo (3).png" height={50} />
                   </div>
                   <div className="flex-grow-1 pl-3 ">
-                    <p className="mb-0">Grofers</p>
+                    {/* <p className="mb-0">Grofers</p> */}
                     <p
                       className="fw-bold h6 my-2"
                       style={{ minHeight: "auto" }}

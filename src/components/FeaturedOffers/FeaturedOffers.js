@@ -3,9 +3,10 @@ import "./index.css";
 import { Card, Col, Row, Button } from "antd";
 // import { HomeConstant } from "../../Constants";
 import Badge from "../Badge/Badge";
+import { useNavigate } from "react-router-dom";
 
 export default function FeaturedOffers({ featuredData }) {
-  console.log("featuredData ....", featuredData);
+  const navigate = useNavigate();
 
   return (
     <Row
@@ -18,7 +19,7 @@ export default function FeaturedOffers({ featuredData }) {
         featuredData?.products?.products.length > 0 &&
         featuredData?.products?.products.map((item, key) => (
           <Col key={key} className="deals_box featuredOffers" span={8}>
-            <Card className="deals_container" actions={[]}>
+            <Card className="deals_container">
               <>
                 <div className="badges">
                   <Badge
@@ -36,10 +37,7 @@ export default function FeaturedOffers({ featuredData }) {
                   />
                 </div>
                 <Row className="w-100 d-flex align-items-center" justify="">
-                  <img
-                    className="dealicon_img_frame"
-                    src="/Images/flipkart.png"
-                  />
+                  <img className="dealicon_img_frame" src="" alt="no-image" />
 
                   <h5 className=" pl-3 my-0 ">
                     {featuredData?.products?.merchantName}
@@ -56,7 +54,19 @@ export default function FeaturedOffers({ featuredData }) {
               <Row key="time" className="featured_offer_action mb-3">
                 <span>{item.expirationDate}</span>
               </Row>
-              <Button type="primary" block>
+              <Button
+                type="primary"
+                onClick={() =>
+                  navigate(`/coupon?id=${item.productId}`, {
+                    state: {
+                      item: item,
+                      name: featuredData?.products.merchantName,
+                      ids: featuredData?.products.merchantId,
+                    },
+                  })
+                }
+                block
+              >
                 Go to site
               </Button>
             </Card>

@@ -25,7 +25,7 @@ export default function Cashback() {
   const merchantId = location?.state?.ids;
   const [addBookmark, setAddBookmark] = useState(true);
 
-  console.log("objectItem ....", merchantId);
+  // console.log("objectItem ....", merchantId);
 
   const getCustomer = useSelector((state) => state.auth.user);
   const customerId = getCustomer?.customer?._id;
@@ -84,7 +84,11 @@ export default function Cashback() {
           <Row>
             <Col md={{ span: 18 }} className="mx-auto">
               <div className="couponFrame text-center">
-                <span className="fixed-top-right p-3" onClick={() => Pickfav()}>
+                <span
+                  className="fixed-top-right p-3"
+                  style={{ cursor: "pointer" }}
+                  onClick={() => Pickfav()}
+                >
                   {addBookmark ? (
                     <MdBookmarkBorder style={{ fontSize: "2rem" }} />
                   ) : (

@@ -796,12 +796,12 @@ const AllBrands = () => {
             trendingCarousel[0].brands.map((item, i) => (
               <Col key={i} className="deals_box trending_brands mb-3 " span={4}>
                 <Card className="deals_container">
-                  <Badge
+                  {/* <Badge
                     position={"mx-auto"}
                     badgeType={"oncard"}
                     badgeText={"ON CARD"}
                     badgeIcon={"ON CARD"}
-                  />
+                  /> */}
                   <>
                     <img
                       className="dealicon "
@@ -873,6 +873,7 @@ const AllBrands = () => {
                           totalCashback: item.customerRebate,
                           description: item.merchantDescription,
                           ids: item.merchantId,
+                          isCard: item.onCard,
                         }}
                       >
                         <Card className="deals_container popularOffers rounded1">

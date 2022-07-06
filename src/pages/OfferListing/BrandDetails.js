@@ -85,6 +85,7 @@ export default function BrandDetails() {
 
   const getData = useLocation();
   let ids = getData?.state?.ids;
+  let onCard = getData?.state?.isCard;
 
   useEffect(() => {
     let offerResult = getOfferAction(ids);
@@ -257,13 +258,14 @@ export default function BrandDetails() {
                   </Link>
                 </li>
               </ul>
-
-              <div className="onCardOfferBanner mb-4">
-                <h4 className="mb-2">On Card Offers</h4>
-                <p className="mb-4">Upfront cost must be £50+</p>
-                <h3 className="d-inline-block">10% OFF </h3>{" "}
-                <small>Terms and Conditions*</small>
-              </div>
+              {onCard && (
+                <div className="onCardOfferBanner mb-4">
+                  <h4 className="mb-2">On Card Offers</h4>
+                  <p className="mb-4">Upfront cost must be £50+</p>
+                  <h3 className="d-inline-block">10% OFF </h3>{" "}
+                  <small>Terms and Conditions*</small>
+                </div>
+              )}
 
               <Cashback
                 idname={"cashback"}
@@ -275,11 +277,13 @@ export default function BrandDetails() {
                 idname={"coupon"}
                 couponList={offerArrayData?.coupon}
                 brandName={offerData?.merchantName}
+                merchantId={ids}
               />
               <PrizeDraw
                 idname={"prizedraw"}
                 prizeList={offerArrayData?.prize}
                 brandName={offerData?.merchantName}
+                merchantId={ids}
               />
             </Col>
           </Row>
