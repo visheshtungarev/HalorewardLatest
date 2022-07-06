@@ -22,6 +22,7 @@ import {
   getMerchantCall,
   getProductfavCall,
 } from "../../actions/favouriteCall";
+import SideMenu from "../../components/SideMenu";
 // import { render } from "@testing-library/react";
 // const { Meta } = Card;
 
@@ -146,50 +147,7 @@ export default function Saved() {
       <div className="list_view">
         <Row justify="space-around" gutter={20}>
           <Col span={24} lg={{ span: 6 }}>
-            <Card className="deals_container popularOffers rounded1">
-              <ul className="sideMenu devider">
-                <li>
-                  <Link to={""}>Account Settings</Link>
-                </li>
-                <li>
-                  <Link className="d-flex justify-content-between" to={""}>
-                    <span>Wallet</span>
-                    <span className="fw-bold">£12.65</span>
-                  </Link>
-                </li>
-                <li>
-                  <Link to={""}>Cashback Activity</Link>
-                </li>
-                <li>
-                  <Link to={""}>Account Statement</Link>
-                </li>
-                <li>
-                  <Link to={""}>Gift Cards</Link>
-                </li>
-                <li>
-                  <Link to={""}>Personalized</Link>
-                </li>
-                <li>
-                  <Link to={""}>Claims</Link>
-                </li>
-                <li>
-                  <Link
-                    className="savedcolor"
-                    to={"/saved/picking-favorite-brand"}
-                  >
-                    Saved
-                  </Link>
-                </li>
-                <li>
-                  <Link to={""}>Help & Support</Link>
-                </li>
-                <li>
-                  <a className="logoutColor" href="javascript:void(0)">
-                    Logout
-                  </a>
-                </li>
-              </ul>
-            </Card>
+            <SideMenu/>
           </Col>
           <Col span={24} lg={{ span: 18 }}>
             {/* <Row gutter={30} className="mb-4">

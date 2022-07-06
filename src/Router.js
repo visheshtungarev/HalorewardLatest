@@ -21,6 +21,14 @@ import PickingFavoriteBrand from "./pages/Saved/FavoriteBrands/PickingFavoriteBr
 import LoginPage from "./components/Auth/LoginPage";
 import OfferSearch from "./pages/AllOffers/OfferSearch";
 import PickingFavoriteProduct from "./pages/Saved/FavouriteProduct/PickingFavouriteProduct";
+import Account from "./pages/Account/Account Profile/Account";
+import AccountWallet from "./pages/Account/Account Wallet/AccountWallet";
+import CashBackActivity from "./pages/Account/Cashback Activity/CashbackActivity";
+import WalletStatement from "./pages/Account/Wallet Statement/WalletStatement";
+import AccpountClaims from "./pages/Account/Account Claims/AccountClaims";
+import AccountPersonalize from "./pages/Account/Account Personalize/AccountPersonlize";
+import Help from "./pages/Account/Help/Help";
+import EarnCash from "./pages/Account/EarnCash/EarnCash";
 
 const RouterApp = () => {
   return (
@@ -54,6 +62,14 @@ const RouterApp = () => {
           element={<PickingFavoriteProduct />}
         />
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/account-profile" element={<Account/>}/>
+        <Route path="/wallet" element={<AccountWallet/>}/>
+        <Route path="/cashback-activity" element={<CashBackActivity/>}/>
+        <Route path="/wallet-statement" element={<WalletStatement/>}/>
+        <Route path="/claims" element={<AccpountClaims/>}/>
+        <Route path="/personalized" element={<AccountPersonalize/>}/>
+        <Route path="/Help-Support" element={<Help/>}/>
+        <Route path="/earn-cash" element={<EarnCash/>}/>
       </Routes>
       <Footer />
     </React.Fragment>

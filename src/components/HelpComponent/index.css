@@ -1,0 +1,34 @@
+.help-container .help-contents .help-container{
+    background-color: #fff;
+    padding: 1.25rem;
+    border-radius: 0.75rem;
+}
+.help-container .help-contents .related-article {
+    background-color: #fff;
+    padding: 1.25rem;
+    border-radius: 0.75rem;
+}
+.help-container .help-contents h5{
+    margin-bottom: 1.25rem;
+}
+.help-container .help-contents .help-content{
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 1.375rem;
+    display: flex;
+    align-items: center;
+    color: #000000;
+}
+.help-container .help-contents .related-article .link-container{
+    width:100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+.help-container .help-contents .related-article .link-container a {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.375rem;
+    color: #3A86FF;
+    margin-bottom:0.938rem;
+    width: 100%;
+}
