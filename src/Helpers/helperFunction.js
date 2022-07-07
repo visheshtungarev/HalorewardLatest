@@ -1,5 +1,8 @@
 export const helperFunction = {
   getFilterDataList: (listArray, filterObj, callBack) => {
+    // console.log("list ....", listArray);
+    // console.log("list ....", filterObj);
+    // console.log("list ....", listArray)
     let newArry = [];
     const fun = (ele) => {
       let isValueArray = [];
@@ -16,6 +19,7 @@ export const helperFunction = {
 
     listArray.map((item) => {
       let funAraay = fun(item);
+      console.log("funaaray", funAraay);
       if (!funAraay.includes(false)) {
         newArry.push(item);
       }

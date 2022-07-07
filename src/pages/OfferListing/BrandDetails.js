@@ -319,7 +319,7 @@ export default function BrandDetails() {
                     <p className="deals_title" style={{ minHeight: "auto" }}>
                       {item.title}
                     </p>
-                    {/* <p>{item.content}</p> */}
+
                     <Row className=" cashback_info">upto 11% cashback</Row>
                   </>
                 </Card>

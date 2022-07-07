@@ -147,7 +147,7 @@ export default function Saved() {
       <div className="list_view">
         <Row justify="space-around" gutter={20}>
           <Col span={24} lg={{ span: 6 }}>
-            <SideMenu/>
+            <SideMenu />
           </Col>
           <Col span={24} lg={{ span: 18 }}>
             {/* <Row gutter={30} className="mb-4">
@@ -217,10 +217,19 @@ export default function Saved() {
                     <Card
                       className="deals_container"
                       // onClick={()=>navigate("/saved/saved-coupon")}
+                      // onClick={() =>
+                      //   navigate(`/coupon?id=${item.productId}`, {
+                      //     state: {
+                      //       item: item,
+                      //       name: brandName,
+                      //       ids: merchantId,
+                      //     },
+                      //   })
+                      // }
                     >
                       <>
                         <img className="dealicon" src="/Images/flipkart.png" />
-                        <p className="deals_title">
+                        <p className="deals_title" style={{ height: "60px" }}>
                           {item?.productMetaData?.map((element) => {
                             if (element.key === "title") {
                               return element.value;
@@ -366,24 +375,34 @@ export default function Saved() {
                       className="deals_box trending_brands mb-3 text-left"
                       span={6}
                     >
-                      <Card
-                        className="deals_container"
-                        // onClick={()=>navigate('/saved/favorite-brand')}
+                      <Link
+                        to={`/brand?id=${item.merchantId}`}
+                        state={{
+                          totalCashback: item.customerRebate,
+                          description: item.merchantDescription,
+                          ids: item.merchantId,
+                          isCard: item.onCard,
+                        }}
                       >
-                        <>
-                          <img
-                            className="dealicon_img_frame "
-                            src={`data:image/png;base64,${item.merchantLogo1}`}
-                          />
-                          <p
-                            className="deals_title mb-0 mt-0"
-                            style={{ minHeight: "auto" }}
-                          >
-                            {item.merchantName}
-                          </p>
-                          <p>upto 7% cashback, 2 Prize Draw</p>
-                        </>
-                      </Card>
+                        <Card
+                          className="deals_container"
+                          // onClick={()=>navigate('/saved/favorite-brand')}
+                        >
+                          <>
+                            <img
+                              className="dealicon_img_frame "
+                              src={`data:image/png;base64,${item.merchantLogo1}`}
+                            />
+                            <p
+                              className="deals_title mb-0 mt-0"
+                              style={{ minHeight: "auto" }}
+                            >
+                              {item.merchantName}
+                            </p>
+                            <p>upto 7% cashback, 2 Prize Draw</p>
+                          </>
+                        </Card>
+                      </Link>
                     </Col>
                   );
                 })}

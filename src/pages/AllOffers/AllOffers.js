@@ -158,11 +158,12 @@ export default function AllOffers() {
   }, []);
 
   const filterHandler = (id) => {
+    console.log("id ,,,", id);
     let array = [];
     array.push(id);
     helperFunction.getFilterDataList(
       offerData?.products?.products,
-      [{ key: "categoryId", value: array }],
+      [{ key: "productId", value: array }],
       callbackFunc
     );
   };

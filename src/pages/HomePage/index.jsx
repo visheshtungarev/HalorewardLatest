@@ -395,6 +395,9 @@ const index = () => {
                                 </Row> */}
                         <Button type="primary">
                           <a
+                            // rel="noreferrer"
+                            rel="noopener noreferrer"
+                            target="_blank"
                             href={
                               (item.contentType === "coupon" ||
                                 item.contentType === "cashback") &&
