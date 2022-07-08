@@ -5,6 +5,7 @@ import { Col, Row, Card, Select } from "antd";
 // import PopularOffers from "../../components/PopularOffers/PopularOffers";
 import Breadcurms from "../../components/Breadcrums/Breadcurms";
 import env from "../../enviroment";
+import { RightOutlined } from "@ant-design/icons";
 import {
   CreditCardOutlined,
   // ShopOutlined,
@@ -778,11 +779,30 @@ const AllBrands = () => {
       </Row>
 
       <div className="list_view">
-        <Heading
+        {/* <Heading
           HeadingText="Trending Brands"
           actionText="View All"
-          actionLink="/all-brands"
-        />
+          actionLink="/brand-list"
+          type={"trending-brand"}
+        /> */}
+        <Row
+          className="headingFancy mt-md-4"
+          align="middle"
+          justify="space-between"
+        >
+          <Col className="list_title">Trending Brands</Col>
+
+          <Col className="list_action">
+            <Link
+              className="d-flex align-items-center"
+              to="/list?=trending-brand"
+              state={{ type: "trending-brand" }}
+            >
+              View All
+              <RightOutlined />
+            </Link>
+          </Col>
+        </Row>
         <Row
           align="middle"
           className="scrolledView"
@@ -795,26 +815,36 @@ const AllBrands = () => {
             trendingCarousel[0].brands.length > 0 &&
             trendingCarousel[0].brands.map((item, i) => (
               <Col key={i} className="deals_box trending_brands mb-3 " span={4}>
-                <Card className="deals_container">
-                  {/* <Badge
+                <Link
+                  to={`/brand?id=${item.merchantId}`}
+                  state={{
+                    totalCashback: item?.customerRebate,
+                    description: trendingCarousel[0]?.description,
+                    ids: item?.merchantId,
+                    isCard: item?.onCard,
+                  }}
+                >
+                  <Card className="deals_container">
+                    {/* <Badge
                     position={"mx-auto"}
                     badgeType={"oncard"}
                     badgeText={"ON CARD"}
                     badgeIcon={"ON CARD"}
                   /> */}
-                  <>
-                    <img
-                      className="dealicon "
-                      src={`data:image/png;base64,${item.merchantLogo1}`}
-                    />
-                    <p
-                      className="deals_title text-center"
-                      style={{ minHeight: "auto" }}
-                    >
-                      {item.merchantName}
-                    </p>
-                  </>
-                </Card>
+                    <>
+                      <img
+                        className="dealicon "
+                        src={`data:image/png;base64,${item.merchantLogo1}`}
+                      />
+                      <p
+                        className="deals_title text-center"
+                        style={{ minHeight: "auto" }}
+                      >
+                        {item.merchantName}
+                      </p>
+                    </>
+                  </Card>
+                </Link>
               </Col>
             ))}
         </Row>
@@ -881,7 +911,8 @@ const AllBrands = () => {
                             <div>
                               <img
                                 className="dealicon_img_frame"
-                                src="/Images/logo.png"
+                                // src="/Images/logo.png"
+                                src={`data:image/png;base64,${item.merchantLogo1}`}
                               />
                             </div>
                             <Col className="flex-grow-1">

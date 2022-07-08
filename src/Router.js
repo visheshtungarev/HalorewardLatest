@@ -29,6 +29,7 @@ import AccpountClaims from "./pages/Account/Account Claims/AccountClaims";
 import AccountPersonalize from "./pages/Account/Account Personalize/AccountPersonlize";
 import Help from "./pages/Account/Help/Help";
 import EarnCash from "./pages/Account/EarnCash/EarnCash";
+import BrandList from "./pages/CommonBrand/BrandList";
 
 const RouterApp = () => {
   return (
@@ -42,6 +43,7 @@ const RouterApp = () => {
         <Route path="/all-offers" element={<AllOffers />} />
         <Route path="/search-offers/:id" element={<OfferSearch />} />
         <Route path="/all-brands/category" element={<BrandCategory />} />
+        <Route path="/list" element={<BrandList />} />
         <Route path="/brand" element={<BrandDetails />} />
         <Route path="/coupon" element={<Coupon />} />
         <Route path="/cashback" element={<Cashback />} />
@@ -62,14 +64,14 @@ const RouterApp = () => {
           element={<PickingFavoriteProduct />}
         />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/account-profile" element={<Account/>}/>
-        <Route path="/wallet" element={<AccountWallet/>}/>
-        <Route path="/cashback-activity" element={<CashBackActivity/>}/>
-        <Route path="/wallet-statement" element={<WalletStatement/>}/>
-        <Route path="/claims" element={<AccpountClaims/>}/>
-        <Route path="/personalized" element={<AccountPersonalize/>}/>
-        <Route path="/Help-Support" element={<Help/>}/>
-        <Route path="/earn-cash" element={<EarnCash/>}/>
+        <Route path="/account-profile" element={<Account />} />
+        <Route path="/wallet" element={<AccountWallet />} />
+        <Route path="/cashback-activity" element={<CashBackActivity />} />
+        <Route path="/wallet-statement" element={<WalletStatement />} />
+        <Route path="/claims" element={<AccpountClaims />} />
+        <Route path="/personalized" element={<AccountPersonalize />} />
+        <Route path="/Help-Support" element={<Help />} />
+        <Route path="/earn-cash" element={<EarnCash />} />
       </Routes>
       <Footer />
     </React.Fragment>

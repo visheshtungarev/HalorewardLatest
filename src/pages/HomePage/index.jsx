@@ -18,11 +18,11 @@ import { getOfferAction } from "../../actions/getOfferAction";
 import {
   GlobalOutlined,
   CopyOutlined,
-  //ShopOutlined,
+  RightOutlined,
   //ShoppingOutlined
 } from "@ant-design/icons";
 import { featuredCall } from "../../actions/favouriteCall";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 // const { Meta } = Card;
 
@@ -318,11 +318,24 @@ const index = () => {
       </div>
 
       <div className="list_view">
-        <Heading
-          HeadingText="Popular Offers"
-          actionText="View All"
-          actionLink="/all-offers"
-        />
+        <Row
+          className="headingFancy mt-md-4"
+          align="middle"
+          justify="space-between"
+        >
+          <Col className="list_title">Popular offers</Col>
+
+          <Col className="list_action">
+            <Link
+              className="d-flex align-items-center"
+              to="/list?=popular-offer"
+              state={{ type: "popular-offer" }}
+            >
+              View All
+              <RightOutlined />
+            </Link>
+          </Col>
+        </Row>
         <Row align="middle" justify="space-around" gutter={30}>
           {offerData?.products &&
             offerData.products.products &&

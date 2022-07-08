@@ -70,7 +70,10 @@ export default function TopMenu({ mobileView, category }) {
                         item.subCategories.map((element, id) => {
                           return (
                             <li className="" key={id}>
-                              <Link to={`/all-brands?category=${item.name}`}>
+                              <Link
+                                to={`/all-brands?category=${item.name}`}
+                                state={{ id: item.categoryId }}
+                              >
                                 {element.name}
                               </Link>
                             </li>
