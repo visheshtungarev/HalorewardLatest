@@ -18,6 +18,7 @@ import {
 export default function SavedCoupon() {
   const [, setOpenSidePanel] = useState(false);
   const [activeListing, setActiveListing] = useState([]);
+  const [claimedListing, setClaimedListing] = useState([]);
 
   const getUrl = window.location.pathname;
   // console.log("getUrl ...", getUrl);
@@ -46,27 +47,33 @@ export default function SavedCoupon() {
       // setCustomerBrandList(res?.customer?.brands || [])
       let productResponse = getProductfavCall(res?.customer?.products);
       productResponse.then((result) => {
-        let activeArray = [];
+        let activeArray = [],
+          claimedArray = [];
         result.map((item) => {
           if (getUrl === "/saved/saved-coupon") {
             if (item.status == "Active" && item.contentType === "coupon") {
               activeArray.push(item);
+            }
+            if (item.status == "Enabled" && item.contentType === "coupon") {
+              claimedArray.push(item);
             }
           }
           if (getUrl === "/saved/saved-cashback") {
             if (item.status == "Active" && item.contentType === "cashback") {
               activeArray.push(item);
             }
+            if (item.status == "Enabled" && item.contentType === "cashback") {
+              claimedArray.push(item);
+            }
           }
         });
         setActiveListing(activeArray);
+        setClaimedListing(claimedArray);
       });
     });
-
-    // console.log("activeArray ....", activeArray);
   }, [getCustomer]);
 
-  console.log("activeListing ....", activeListing);
+  // console.log("claimedListing ....", claimedListing);
 
   return (
     <div className="home_container">
@@ -108,7 +115,7 @@ export default function SavedCoupon() {
           }
           key="2"
         >
-          <Claimed />
+          <Claimed claimedListing={claimedListing} />
         </TabPane>
 
         <TabPane

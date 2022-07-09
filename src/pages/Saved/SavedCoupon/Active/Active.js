@@ -77,7 +77,7 @@ export default function Active({ activeListing }) {
               >
                 <Card className="couponContainer">
                   <div className="couponLogo">
-                    <img src="/Images/logo (3).png" height={50} />
+                    <img src="" height={50} alt="no-image" />
                   </div>
                   <div className="flex-grow-1 pl-3 ">
                     {/* <p className="mb-0">Grofers</p> */}
@@ -100,6 +100,10 @@ export default function Active({ activeListing }) {
             );
           })}
       </Row>
+
+      {activeListing && activeListing.length <= 0 && (
+        <h4>No active coupon found</h4>
+      )}
     </div>
   );
 }

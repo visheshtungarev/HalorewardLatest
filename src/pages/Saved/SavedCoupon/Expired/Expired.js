@@ -64,6 +64,7 @@ export default function Expired() {
               className="deals_box trending_brands mb-3 text-left expiredCard"
               span={24}
               lg={{ span: 8 }}
+              style={{ display: "none" }}
             >
               <Card className="couponContainer">
                 <span className="fixedTopRight">
@@ -91,6 +92,7 @@ export default function Expired() {
             </Col>
           ))}
       </Row>
+      <h4>No Coupon expired data coming from api yet</h4>
     </div>
   );
 }

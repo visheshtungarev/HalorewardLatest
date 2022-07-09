@@ -117,8 +117,15 @@ export default function Cashback() {
                 <Button
                   type="primary"
                   className="px-5 justify-content-center align-items-center d-flex mx-auto"
+                  // onClick={()=>navigate()}
                 >
-                  Apply & GO to site
+                  <a
+                    rel="noopener noreferrer"
+                    target="_blank"
+                    href="www.google.com"
+                  >
+                    Apply & GO to site
+                  </a>
                 </Button>
               </div>
             </Col>

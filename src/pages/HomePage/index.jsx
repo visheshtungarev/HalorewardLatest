@@ -23,8 +23,11 @@ import {
 } from "@ant-design/icons";
 import { featuredCall } from "../../actions/favouriteCall";
 import { useNavigate, Link } from "react-router-dom";
+import env from "../../enviroment";
+import { Post_call } from "../../network/networkmanager";
 
-// const { Meta } = Card;
+const values = env();
+const { getCategoriesByClientID } = values;
 
 const index = () => {
   const dispatch = useDispatch();
@@ -32,6 +35,7 @@ const index = () => {
   const [trendingCarousel, setTrendingCarousel] = useState([]);
   const [featuredData, setFeaturedData] = useState([]);
   const [offerData, setOfferData] = useState([]);
+  const [brandData, setBrandData] = useState([]);
 
   const navigate = useNavigate();
 
@@ -59,6 +63,7 @@ const index = () => {
 
   useEffect(() => {
     getCarouseItem();
+    getBrandList();
   }, [carouselState]);
 
   const getCarouseItem = () => {
@@ -78,7 +83,45 @@ const index = () => {
     }
   };
 
-  // console.log("featuredData .......", featuredData);
+  const getBrandList = async () => {
+    var raw = `{
+      brands(siteId: 1, featured: true) {
+          merchantId
+          merchantRank
+          merchantDescription
+          merchantName
+          status
+          onCard
+          provider
+          modifiedDate
+          customerRebate
+          merchantLogo1
+          merchantUrl
+          categories {
+              categoryId
+              name
+          }
+          contentTypes {
+              name
+              size
+          }
+      }
+  }`;
+    try {
+      let response = await Post_call(
+        `${getCategoriesByClientID}/clients/1/brands`,
+        raw,
+        false
+      );
+      if (response.status === 200) {
+        // setBrandBoolean(true)
+        setBrandData(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -223,11 +266,31 @@ const index = () => {
       </div>
 
       <div className="list_view">
-        <Heading
+        {/* <Heading
           HeadingText="Trending Brands"
           actionText={trendingCarousel[0]?.brands?.length > 6 ? "View All" : ""}
           actionLink="/all-brands"
-        />
+        /> */}
+        <Row
+          className="headingFancy mt-md-4"
+          align="middle"
+          justify="space-between"
+        >
+          <Col className="list_title">Trending Brands</Col>
+
+          <Col className="list_action">
+            {trendingCarousel[0]?.brands?.length < 6 && (
+              <Link
+                className="d-flex align-items-center"
+                to="/list?=trending-brand"
+                state={{ type: "trending-brand" }}
+              >
+                View All
+                <RightOutlined />
+              </Link>
+            )}
+          </Col>
+        </Row>
         <Row
           align="middle"
           className="scrolledView"
@@ -443,6 +506,113 @@ const index = () => {
             })}
         </Row>
       </div>
+
+      <div className="list_view">
+        <Row
+          className="headingFancy mt-md-4"
+          align="middle"
+          justify="space-between"
+        >
+          <Col className="list_title">Featured Brand</Col>
+
+          <Col className="list_action">
+            <Link
+              className="d-flex align-items-center"
+              to="/list?=feature-brand"
+              state={{ type: "featured-brand" }}
+            >
+              View All
+              <RightOutlined />
+            </Link>
+          </Col>
+        </Row>
+        <Row align="middle" justify="flex-start" gutter={30}>
+          {brandData &&
+            brandData.length > 0 &&
+            brandData?.map((item, key) => {
+              return (
+                <Col
+                  key={key}
+                  className="deals_box featuredOffers mb-4"
+                  span={12}
+                  lg={{ span: 12 }}
+                >
+                  <Link
+                    to={`/brand?id=${item.merchantId}`}
+                    state={{
+                      totalCashback: item.customerRebate,
+                      description: item.merchantDescription,
+                      ids: item.merchantId,
+                      isCard: item.onCard,
+                    }}
+                  >
+                    <Card className="deals_container popularOffers rounded1">
+                      <Row align="middle" className="w-100 flex-nowrap">
+                        <div>
+                          <img
+                            className="dealicon_img_frame"
+                            // src="/Images/logo.png"
+                            src={`data:image/png;base64,${item.merchantLogo1}`}
+                          />
+                        </div>
+                        <Col className="flex-grow-1">
+                          <Row align="middle" justify="around">
+                            <Col
+                              span={24}
+                              md={{ span: 6 }}
+                              className="d-flex align-items-center"
+                            >
+                              <p className="deals_title ml-3 my-0">
+                                {item.merchantName}
+                              </p>
+                            </Col>
+                            <Col
+                              span={24}
+                              md={{ span: 18 }}
+                              className="flex-grow-1"
+                            >
+                              <p className="deals_content ml-3 mb-0">
+                                {item?.contentTypes.map((val) => {
+                                  if (val.name === "Cashbacks") {
+                                    return (
+                                      <span>
+                                        {"Upto " +
+                                          val.size +
+                                          "%" +
+                                          " " +
+                                          val.name}
+                                        ,{" "}
+                                      </span>
+                                    );
+                                  } else {
+                                    return (
+                                      <span>{val.size + " " + val.name}, </span>
+                                    );
+                                  }
+                                })}
+                              </p>
+                            </Col>
+                          </Row>
+                        </Col>
+                        {item.onCard && (
+                          <div className="fixed-top-right">
+                            <Badge
+                              position={""}
+                              badgeType={item?.modeType}
+                              badgeText={item?.modeText}
+                              badgeIcon={item.modeIcon}
+                            />
+                          </div>
+                        )}
+                      </Row>
+                    </Card>
+                  </Link>
+                </Col>
+              );
+            })}
+        </Row>
+      </div>
+
       {/* <Footer /> */}
     </div>
   );

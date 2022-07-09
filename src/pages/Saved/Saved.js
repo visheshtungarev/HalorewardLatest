@@ -170,8 +170,8 @@ export default function Saved() {
             </Row> */}
             <Heading
               HeadingText="Coupons"
-              actionText={couponListing.length > 4 ? "View All" : ""}
-              // actionText="View All"
+              // actionText={couponListing.length > 4 ? "View All" : ""}
+              actionText="View All"
               actionLink="/saved/saved-coupon"
             />
             <Row
