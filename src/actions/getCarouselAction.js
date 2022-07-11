@@ -7,54 +7,54 @@ const { getCategoriesByClientID } = values;
 
 export const getCarousel = (payload) => async (dispatch) => {
   var raw = `{
-    carousels(siteId: 1, customerId: ${payload}){
-        pageName
-        carousels {
-            carouselName
-            status
-            carouselType
-            description
-            offerType
-            itemLimit
-            startDate
-            endDate
-            modifiedBy
-            metadata {
-                key
-                value
-            }
-            categoryType{
-                categoryType
-                categories{
-                    categoryId
-                    name
-                    isSelected
-                }
-            }
-            arrangement{
-                arrangement
-            }
-            brands {
-                merchantId
-                merchantRank
-                merchantName
-                provider
-                merchantLogo1
-                merchantUrl
-                products {
-                    productId
-                    contentType
-                    subcontentType
-                    expirationDate
-                    productMetaData {
-                        key
-                        value
-                    }
-                }
-            }
-            
-        }
-    }
+  carousels(siteId: 1, customerId: ${payload}){
+      pageName
+      carousels {
+          carouselName
+          status
+          carouselType
+          description
+          offerType
+          itemLimit
+          startDate
+          endDate
+          modifiedBy
+          metadata {
+              key
+              value
+          }
+          categoryType{
+              categoryType
+              categories{
+                  categoryId
+                  name
+                  isSelected
+              }
+          }
+          arrangement{
+              arrangement
+          }
+          brands {
+              merchantId
+              merchantRank
+              merchantName
+              provider
+              merchantLogo1
+              merchantUrl
+              products {
+                  productId
+                  contentType
+                  subcontentType
+                  expirationDate
+                  productMetaData {
+                      key
+                      value
+                  }
+              }
+          }
+          
+      }
+  }
 }`;
 
   try {

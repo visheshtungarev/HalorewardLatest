@@ -53,7 +53,7 @@ const allTredingOffers = [
   },
 ];
 
-export default function Coupon({ idname, couponList, brandName }) {
+export default function Coupon({ idname, couponList, brandName, merchantId }) {
   console.log(allTredingOffers);
   // const [dataArr,] = useState(allTredingOffers)
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -189,7 +189,11 @@ export default function Coupon({ idname, couponList, brandName }) {
                             className="d-flex align-items-center mr-3"
                             onClick={() =>
                               navigate(`/coupon?id=${item.productId}`, {
-                                state: { item: item, name: brandName },
+                                state: {
+                                  item: item,
+                                  name: brandName,
+                                  ids: merchantId,
+                                },
                               })
                             }
                           >

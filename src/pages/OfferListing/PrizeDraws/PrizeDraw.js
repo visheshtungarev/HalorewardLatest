@@ -61,7 +61,12 @@ const allTredingOffers = [
   },
 ];
 
-export default function PrizeDraw({ idname, prizeList, brandName }) {
+export default function PrizeDraw({
+  idname,
+  prizeList,
+  brandName,
+  merchantId,
+}) {
   // const [dataArr,] = useState(allTredingOffers)
   console.log(allTredingOffers);
   const navigate = useNavigate();
@@ -173,7 +178,11 @@ export default function PrizeDraw({ idname, prizeList, brandName }) {
                             href="javascript:void(0)"
                             onClick={() =>
                               navigate(`/prizedraw?id=${item.productId}`, {
-                                state: { item: item, name: brandName },
+                                state: {
+                                  item: item,
+                                  name: brandName,
+                                  ids: merchantId,
+                                },
                               })
                             }
                             className="d-flex align-items-center mr-3"

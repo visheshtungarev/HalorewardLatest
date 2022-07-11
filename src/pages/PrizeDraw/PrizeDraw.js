@@ -8,15 +8,44 @@ import Heading from "../../components/Heading/Heading";
 import { HomeConstant } from "../../Constants";
 import Badge from "../../components/Badge/Badge";
 import { useLocation } from "react-router-dom";
+import {
+  addtoFavProduct,
+  CutomerInfoCall,
+  getProductfavCall,
+} from "../../actions/favouriteCall";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 
 export default function PrizeDraw() {
   const location = useLocation();
   console.log("getdetail.......", location.state);
   const objectItem = location?.state?.item;
+  const merchantId = location?.state?.ids;
+
   const [addBookmark, setAddBookmark] = useState(true);
 
-  const addBookmarkEvent = () => {
-    addBookmark ? setAddBookmark(false) : setAddBookmark(true);
+  // const addBookmarkEvent = () => {
+  //   addBookmark ? setAddBookmark(false) : setAddBookmark(true);
+  // };
+
+  const getCustomer = useSelector((state) => state.auth.user);
+  const customerId = getCustomer?.customer?._id;
+
+  const Pickfav = () => {
+    let addtofavCall = addtoFavProduct(customerId, merchantId);
+    addtofavCall.then((res) => {
+      if (res.status === true) {
+        toast.success(res.msg);
+        setAddBookmark(false);
+        let customerresult = CutomerInfoCall(customerId);
+        customerresult.then((res) => {
+          let productResponse = getProductfavCall(res?.customer?.products);
+          productResponse.then((result) => {
+            console.log(result);
+          });
+        });
+      }
+    });
   };
 
   return (
@@ -52,7 +81,8 @@ export default function PrizeDraw() {
               <div className="couponFrame text-center">
                 <span
                   className="fixed-top-right p-3"
-                  onClick={() => addBookmarkEvent()}
+                  style={{ cursor: "pointer" }}
+                  onClick={() => Pickfav()}
                 >
                   {addBookmark ? (
                     <MdBookmarkBorder style={{ fontSize: "2rem" }} />

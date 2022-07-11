@@ -45,8 +45,8 @@ export default function FavoriteBrands() {
 
       <div className="list_view">
         <Heading
-          HeadingText="Trending"
-          actionText="View All"
+          HeadingText="Favourite"
+          // actionText="View All"
           actionLink="/Trending-offers"
         />
         <Row

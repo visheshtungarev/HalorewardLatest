@@ -2,8 +2,11 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Row, Col, Form } from "antd";
 import "./index.css";
+import { useSelector } from "react-redux";
 
 export const Index = () => {
+  const categorylist = useSelector((state) => state.auth.all_category);
+
   return (
     <footer>
       <div className="list_view themeBg mt-0 pt-4">
@@ -36,10 +39,10 @@ export const Index = () => {
                 <p className="text-yellow">About</p>
                 <ul>
                   <li>
-                    <Link to="#">Hallo Rewards</Link>
+                    <Link to="/">Hallo Rewards</Link>
                   </li>
                   <li>
-                    <Link to="#">Getting Started</Link>
+                    <Link to="/">Getting Started</Link>
                   </li>
                   <li>
                     <Link to="#">Terms & Conditions</Link>
@@ -51,7 +54,7 @@ export const Index = () => {
                     <Link to="#">Cookie Policy</Link>
                   </li>
                   <li>
-                    <Link to="#">Help & Support</Link>
+                    <Link to="/Help-Support">Help & Support</Link>
                   </li>
                   <li>
                     <Link to="#">Careers</Link>
@@ -82,26 +85,37 @@ export const Index = () => {
                 <p className="text-yellow">Rewards</p>
                 <ul>
                   <li>
-                    <Link to="#">Cashback</Link>
+                    <Link to="/saved">Cashback</Link>
                   </li>
                   <li>
-                    <Link to="#">Coupons</Link>
+                    <Link to="/saved">Coupons</Link>
                   </li>
                   <li>
-                    <Link to="#">Prize Draws</Link>
+                    <Link to="/saved">Prize Draws</Link>
                   </li>
                   <li>
-                    <Link to="#">Prize Draws</Link>
+                    <Link to="/saved">Prize Draws</Link>
                   </li>
                 </ul>
               </Col>
               <Col md={6} xs={12}>
                 <p className="text-yellow">Categories</p>
                 <ul>
-                  <li>
-                    <Link to="#">Clothing</Link>
-                  </li>
-                  <li>
+                  {categorylist?.data &&
+                    categorylist?.data.length > 0 &&
+                    categorylist?.data.slice(0, 5).map((item, key) => {
+                      return (
+                        <li key={key}>
+                          <Link
+                            to={`/all-brands?category=${item.name}`}
+                            state={{ id: item.categoryId }}
+                          >
+                            {item.name}
+                          </Link>
+                        </li>
+                      );
+                    })}
+                  {/* <li>
                     <Link to="#">Electronics</Link>
                   </li>
                   <li>
@@ -112,7 +126,7 @@ export const Index = () => {
                   </li>
                   <li>
                     <Link to="#">Accessories</Link>
-                  </li>
+                  </li> */}
                 </ul>
               </Col>
             </Row>

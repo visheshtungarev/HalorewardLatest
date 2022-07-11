@@ -74,7 +74,12 @@ export default function SideBar({
                   return (
                     <li key={i} className="pl-2">
                       <label className="customCheckbox">
-                        <input type="checkbox" /> {item.name}
+                        <input
+                          type="checkbox"
+                          value={item.categoryId}
+                          onClick={() => filterPanel(item.categoryId)}
+                        />{" "}
+                        {item.name}
                       </label>
                     </li>
                   );

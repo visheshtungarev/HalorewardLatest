@@ -18,13 +18,16 @@ import { getOfferAction } from "../../actions/getOfferAction";
 import {
   GlobalOutlined,
   CopyOutlined,
-  //ShopOutlined,
+  RightOutlined,
   //ShoppingOutlined
 } from "@ant-design/icons";
 import { featuredCall } from "../../actions/favouriteCall";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
+import env from "../../enviroment";
+import { Post_call } from "../../network/networkmanager";
 
-// const { Meta } = Card;
+const values = env();
+const { getCategoriesByClientID } = values;
 
 const index = () => {
   const dispatch = useDispatch();
@@ -32,6 +35,7 @@ const index = () => {
   const [trendingCarousel, setTrendingCarousel] = useState([]);
   const [featuredData, setFeaturedData] = useState([]);
   const [offerData, setOfferData] = useState([]);
+  const [brandData, setBrandData] = useState([]);
 
   const navigate = useNavigate();
 
@@ -59,6 +63,7 @@ const index = () => {
 
   useEffect(() => {
     getCarouseItem();
+    getBrandList();
   }, [carouselState]);
 
   const getCarouseItem = () => {
@@ -78,7 +83,45 @@ const index = () => {
     }
   };
 
-  // console.log("featuredData .......", featuredData);
+  const getBrandList = async () => {
+    var raw = `{
+      brands(siteId: 1, featured: true) {
+          merchantId
+          merchantRank
+          merchantDescription
+          merchantName
+          status
+          onCard
+          provider
+          modifiedDate
+          customerRebate
+          merchantLogo1
+          merchantUrl
+          categories {
+              categoryId
+              name
+          }
+          contentTypes {
+              name
+              size
+          }
+      }
+  }`;
+    try {
+      let response = await Post_call(
+        `${getCategoriesByClientID}/clients/1/brands`,
+        raw,
+        false
+      );
+      if (response.status === 200) {
+        // setBrandBoolean(true)
+        setBrandData(response.data);
+      }
+    } catch (error) {
+      console.error(error);
+      throw error;
+    }
+  };
 
   function capitalizeFirstLetter(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);
@@ -148,13 +191,13 @@ const index = () => {
       <div className="list_view">
         <Heading
           HeadingText="Expiring Deals"
-          actionText="View All"
+          actionText={expiringCarousel[0]?.brands?.length > 5 ? "View All" : ""}
           actionLink="/all-offers"
         />
         <Row
           align="middle"
           className="scrolledView"
-          justify="space-around"
+          justify="flex-start"
           gutter={30}
         >
           {expiringCarousel &&
@@ -223,15 +266,35 @@ const index = () => {
       </div>
 
       <div className="list_view">
-        <Heading
+        {/* <Heading
           HeadingText="Trending Brands"
-          actionText="View All"
+          actionText={trendingCarousel[0]?.brands?.length > 6 ? "View All" : ""}
           actionLink="/all-brands"
-        />
+        /> */}
+        <Row
+          className="headingFancy mt-md-4"
+          align="middle"
+          justify="space-between"
+        >
+          <Col className="list_title">Trending Brands</Col>
+
+          <Col className="list_action">
+            {trendingCarousel[0]?.brands?.length < 6 && (
+              <Link
+                className="d-flex align-items-center"
+                to="/list?=trending-brand"
+                state={{ type: "trending-brand" }}
+              >
+                View All
+                <RightOutlined />
+              </Link>
+            )}
+          </Col>
+        </Row>
         <Row
           align="middle"
           className="scrolledView"
-          justify="space-around"
+          justify="flex-start"
           gutter={30}
         >
           {trendingCarousel &&
@@ -239,7 +302,7 @@ const index = () => {
             trendingCarousel[0].brands &&
             trendingCarousel[0].brands.length > 0 &&
             trendingCarousel[0].brands
-              .slice(0, 5)
+              .slice(0, 6)
               .map((item, i) => (
                 <TrendingBlock
                   obj={item}
@@ -308,7 +371,9 @@ const index = () => {
       <div className="list_view themeBg">
         <Heading
           HeadingText="Featured Offers"
-          actionText="View All"
+          actionText={
+            featuredData?.products?.products.length > 3 ? "View All" : ""
+          }
           actionLink="/all-offers"
           color="text-white"
         />
@@ -316,83 +381,238 @@ const index = () => {
       </div>
 
       <div className="list_view">
-        <Heading
-          HeadingText="Popular Offers"
-          actionText="View All"
-          actionLink="/all-offers"
-        />
+        <Row
+          className="headingFancy mt-md-4"
+          align="middle"
+          justify="space-between"
+        >
+          <Col className="list_title">Popular offers</Col>
+
+          <Col className="list_action">
+            <Link
+              className="d-flex align-items-center"
+              to="/list?=popular-offer"
+              state={{ type: "popular-offer" }}
+            >
+              View All
+              <RightOutlined />
+            </Link>
+          </Col>
+        </Row>
         <Row align="middle" justify="space-around" gutter={30}>
           {offerData?.products &&
             offerData.products.products &&
             offerData.products.products.length > 0 &&
-            offerData.products.products.slice(0, 3).map((item, key) => (
-              <Col
-                key={key}
-                className="deals_box featuredOffers mb-4"
-                span={6}
-                lg={{ span: 6 }}
-              >
-                <Card className="deals_container popularOffers" actions={[]}>
-                  <div className="d-flex w-100 ">
-                    <div>
-                      <p>
+            offerData.products.products.slice(0, 12).map((item, key) => {
+              let url = "";
+              item.productMetaData.map((element) => {
+                if (element.key === "productUrl") {
+                  return (url = element.value);
+                }
+              });
+              return (
+                <Col
+                  key={key}
+                  className="deals_box featuredOffers mb-4"
+                  span={12}
+                  lg={{ span: 12 }}
+                >
+                  <Card className="deals_container popularOffers">
+                    <div className="d-flex w-100 ">
+                      <div>
+                        {/* <p>
                         Image not available <br />
                         from database
-                      </p>
-                      <p className="deals_title">
+                      </p> */}
+                        <img
+                          className="dealicon_img_frame_lg"
+                          src=""
+                          alt="no-image"
+                        />
+                        {/* <p className="deals_title">
                         {offerData.products.merchantName}
-                      </p>
-                      {/* <img
-                    className="dealicon_img_frame_lg"
-                    src="/Images/flipkart.png"
-                  /> */}
-                    </div>
-                    <div className="flex-grow-1">
-                      <div>
-                        <div className="w-100 d-flex align-items-center justify-content-between">
-                          <div className="d-md-flex">
-                            <Badge
-                              position={""}
-                              badgeType={item.contentType}
-                              badgeText={item.contentType}
-                              badgeIcon={<CopyOutlined />}
-                            />
-                            <Badge
-                              position={""}
-                              badgeType={item.subcontentType}
-                              badgeText={item.subcontentType}
-                              badgeIcon={<GlobalOutlined />}
+                      </p> */}
+                      </div>
+                      <div className="flex-grow-1">
+                        <div>
+                          <div className="w-100 d-flex align-items-center justify-content-between">
+                            <div className="d-md-flex">
+                              <Badge
+                                position={""}
+                                badgeType={item.contentType}
+                                badgeText={item.contentType}
+                                badgeIcon={<CopyOutlined />}
+                              />
+                              <Badge
+                                position={""}
+                                badgeType={item.subcontentType}
+                                badgeText={item.subcontentType}
+                                badgeIcon={<GlobalOutlined />}
+                              />
+                            </div>
+                            <p className="mb-0 viewAllOffer">{`view all offer (${item.productMetaData.length})`}</p>
+                          </div>
+                          <div className="py-3 py-md-0">
+                            <img
+                              className="dealicon_img_frame_lg_mobile"
+                              src="/Images/flipkart.png"
                             />
                           </div>
-                          <p className="mb-0 viewAllOffer">{`view all offer (${item.productMetaData.length})`}</p>
+                          <p className="deals_title">
+                            {item.productMetaData.map((element) => {
+                              if (element.key === "productDescription") {
+                                return element.value;
+                              }
+                            })}
+                          </p>
                         </div>
-                        <div className="py-3 py-md-0">
-                          <img
-                            className="dealicon_img_frame_lg_mobile"
-                            src="/Images/flipkart.png"
-                          />
-                        </div>
-                        <p className="deals_title">
-                          {item.productMetaData.map((element) => {
-                            if (element.key === "productDescription") {
-                              return element.value;
-                            }
-                          })}
-                        </p>
-                      </div>
-                      {/* <Row key="time" className="featured_offer_action ">
+                        {/* <Row key="time" className="featured_offer_action ">
                                     <span>{item.time}</span>
                                 </Row> */}
-                      <Button type="primary" className="w-100">
-                        Reveal Code
-                      </Button>
+                        <Button type="primary">
+                          <a
+                            // rel="noreferrer"
+                            rel="noopener noreferrer"
+                            target="_blank"
+                            href={
+                              (item.contentType === "coupon" ||
+                                item.contentType === "cashback") &&
+                              (item.subcontentType === "online" ||
+                                item.subcontentType === "store")
+                                ? `${url}`
+                                : "javascript:void(0)"
+                            }
+                          >
+                            {item.contentType === "prize draw"
+                              ? "Enter Draw"
+                              : (item.contentType === "coupon" ||
+                                  item.contentType === "cashback") &&
+                                (item.subcontentType === "online" ||
+                                  item.subcontentType === "store")
+                              ? "Go to site"
+                              : (item.contentType === "coupon" ||
+                                  item.contentType === "cashback") &&
+                                item.subcontentType === "instore"
+                              ? "Reveal code"
+                              : ""}
+                            {/* Reveal Code */}
+                          </a>
+                        </Button>
+                      </div>
                     </div>
-                  </div>
-                </Card>
-              </Col>
-            ))}
+                  </Card>
+                </Col>
+              );
+            })}
         </Row>
       </div>
+
+      <div className="list_view">
+        <Row
+          className="headingFancy mt-md-4"
+          align="middle"
+          justify="space-between"
+        >
+          <Col className="list_title">Featured Brand</Col>
+
+          <Col className="list_action">
+            <Link
+              className="d-flex align-items-center"
+              to="/list?=feature-brand"
+              state={{ type: "featured-brand" }}
+            >
+              View All
+              <RightOutlined />
+            </Link>
+          </Col>
+        </Row>
+        <Row align="middle" justify="flex-start" gutter={30}>
+          {brandData &&
+            brandData.length > 0 &&
+            brandData?.map((item, key) => {
+              return (
+                <Col
+                  key={key}
+                  className="deals_box featuredOffers mb-4"
+                  span={12}
+                  lg={{ span: 12 }}
+                >
+                  <Link
+                    to={`/brand?id=${item.merchantId}`}
+                    state={{
+                      totalCashback: item.customerRebate,
+                      description: item.merchantDescription,
+                      ids: item.merchantId,
+                      isCard: item.onCard,
+                    }}
+                  >
+                    <Card className="deals_container popularOffers rounded1">
+                      <Row align="middle" className="w-100 flex-nowrap">
+                        <div>
+                          <img
+                            className="dealicon_img_frame"
+                            // src="/Images/logo.png"
+                            src={`data:image/png;base64,${item.merchantLogo1}`}
+                          />
+                        </div>
+                        <Col className="flex-grow-1">
+                          <Row align="middle" justify="around">
+                            <Col
+                              span={24}
+                              md={{ span: 6 }}
+                              className="d-flex align-items-center"
+                            >
+                              <p className="deals_title ml-3 my-0">
+                                {item.merchantName}
+                              </p>
+                            </Col>
+                            <Col
+                              span={24}
+                              md={{ span: 18 }}
+                              className="flex-grow-1"
+                            >
+                              <p className="deals_content ml-3 mb-0">
+                                {item?.contentTypes.map((val) => {
+                                  if (val.name === "Cashbacks") {
+                                    return (
+                                      <span>
+                                        {"Upto " +
+                                          val.size +
+                                          "%" +
+                                          " " +
+                                          val.name}
+                                        ,{" "}
+                                      </span>
+                                    );
+                                  } else {
+                                    return (
+                                      <span>{val.size + " " + val.name}, </span>
+                                    );
+                                  }
+                                })}
+                              </p>
+                            </Col>
+                          </Row>
+                        </Col>
+                        {item.onCard && (
+                          <div className="fixed-top-right">
+                            <Badge
+                              position={""}
+                              badgeType={item?.modeType}
+                              badgeText={item?.modeText}
+                              badgeIcon={item.modeIcon}
+                            />
+                          </div>
+                        )}
+                      </Row>
+                    </Card>
+                  </Link>
+                </Col>
+              );
+            })}
+        </Row>
+      </div>
+
       {/* <Footer /> */}
     </div>
   );

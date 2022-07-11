@@ -100,33 +100,23 @@ export default function Saved() {
   const [, setOpenSidePanel] = useState(false);
 
   const [brandList, setBrandList] = useState([]);
-  const [offerListing, setOfferListing] = useState([]);
-
-  // const dispatch = useDispatch();
+  const [couponListing, setCouponListing] = useState([]);
+  const [cashbackListing, setCashbackListing] = useState([]);
 
   const getCustomer = useSelector((state) => state.auth.user);
-  // const customerDetail = useSelector((state) => state.auth.customerDetail);
 
   useEffect(() => {
     console.log(window.innerWidth);
     if (window.innerWidth > 993) {
       setOpenSidePanel(true);
     }
-    //  let customerId = getCustomer?.customer?._id;
-    // dispatch(getCustomerInfoAction(customerId));
   }, []);
-
-  // useEffect(() => {
-  //   dispatch(getMerchantAction(customerDetail?.customer?.brands));
-  //   dispatch(getProductAction(customerDetail?.customer?.products));
-  // }, []);
-
-  // const brandResult = useSelector((state) => state.auth.merchantById);
-  // const offerResult = useSelector((state) => state.auth.productById);
 
   useEffect(() => {
     let customerId = getCustomer?.customer?._id;
     let customerresult = CutomerInfoCall(customerId);
+    let coupon = [],
+      cashback = [];
     customerresult.then((res) => {
       // setCustomerBrandList(res?.customer?.brands || [])
       let merchantResponse = getMerchantCall(res?.customer?.brands);
@@ -136,29 +126,31 @@ export default function Saved() {
 
       let productResponse = getProductfavCall(res?.customer?.products);
       productResponse.then((result) => {
-        setOfferListing(result || []);
+        result &&
+          result.length > 0 &&
+          result.map((item) => {
+            if (item.contentType === "coupon") {
+              coupon.push(item);
+            }
+            if (item.contentType === "cashback") {
+              cashback.push(item);
+            }
+          });
+        setCouponListing(coupon || []);
+        setCashbackListing(cashback || []);
       });
     });
-
-    // setBrandList(brandResult || []);
-    // setOfferListing(offerResult);
   }, []);
-
-  //   const navigate = useNavigate()
-
-  // console.log("offerListing ....", offerListing);
-  // console.log("offerResult ....", offerResult);
-  console.log("brandList ....", brandList);
 
   return (
     <div className="home_container">
       <div className="list_view">
         <Row justify="space-around" gutter={20}>
           <Col span={24} lg={{ span: 6 }}>
-            <SideMenu/>
+            <SideMenu />
           </Col>
           <Col span={24} lg={{ span: 18 }}>
-            <Row gutter={30} className="mb-4">
+            {/* <Row gutter={30} className="mb-4">
               <Col className="deals_box" span={24}>
                 <Card className="deals_container">
                   <div className="d-flex align-items-center">
@@ -175,19 +167,20 @@ export default function Saved() {
                   </div>
                 </Card>
               </Col>
-            </Row>
+            </Row> */}
             <Heading
               HeadingText="Coupons"
+              // actionText={couponListing.length > 4 ? "View All" : ""}
               actionText="View All"
               actionLink="/saved/saved-coupon"
             />
             <Row
               align="middle"
               className="scrolledView mb-4"
-              justify="space-around"
+              justify="flex-start"
               gutter={30}
             >
-              {offerListing && offerListing.length <= 0 && (
+              {couponListing && couponListing.length <= 0 && (
                 <Col className="deals_box" span={24}>
                   <Card className="deals_container">
                     <Row align="middle">
@@ -217,9 +210,91 @@ export default function Saved() {
 
               {/* when no offer found ====================*/}
 
-              {offerListing &&
-                offerListing.length > 0 &&
-                offerListing.map((item, key) => (
+              {couponListing &&
+                couponListing.length > 0 &&
+                couponListing.map((item, key) => (
+                  <Col key={key} className="deals_box" span={6}>
+                    <Card
+                      className="deals_container"
+                      // onClick={()=>navigate("/saved/saved-coupon")}
+                      // onClick={() =>
+                      //   navigate(`/coupon?id=${item.productId}`, {
+                      //     state: {
+                      //       item: item,
+                      //       name: brandName,
+                      //       ids: merchantId,
+                      //     },
+                      //   })
+                      // }
+                    >
+                      <>
+                        <img className="dealicon" src="/Images/flipkart.png" />
+                        <p className="deals_title" style={{ height: "60px" }}>
+                          {item?.productMetaData?.map((element) => {
+                            if (element.key === "title") {
+                              return element.value;
+                            }
+                          })}
+                        </p>
+                      </>
+                      <Divider />
+                      <Row align="middle" key="time" className="deals_action">
+                        {/* <ClockCir className="deals_offer_title" /> */}
+                        <span className="d-flex align-items-center timer fw-bold">
+                          {" "}
+                          <FiClock /> &nbsp; {item.expirationDate}
+                        </span>
+                      </Row>
+                    </Card>
+                  </Col>
+                ))}
+            </Row>
+
+            <Heading
+              HeadingText="Cashback"
+              actionText={cashbackListing.length > 4 ? "View All" : ""}
+              // actionText="View All"
+              actionLink="/saved/saved-cashback"
+            />
+            <Row
+              align="middle"
+              className="scrolledView mb-4"
+              justify="flex-start"
+              gutter={30}
+            >
+              {cashbackListing && cashbackListing.length <= 0 && (
+                <Col className="deals_box" span={24}>
+                  <Card className="deals_container">
+                    <Row align="middle">
+                      <Col span={12} className="py-4 ">
+                        <img
+                          src="/Images/no_offer.svg"
+                          height={200}
+                          style={{ width: "70%" }}
+                        />
+                      </Col>
+                      <Col span={12}>
+                        <h5>You haven’t pinned any offers</h5>
+                        <p>
+                          Your preferences will help us keep you updated on
+                          offers relevant to your taste.
+                        </p>
+                        <Link to="/all-brands">
+                          <Button type="primary" size="large">
+                            View All offers
+                          </Button>
+                        </Link>
+                      </Col>
+                    </Row>
+                  </Card>
+                </Col>
+              )}
+
+              {/* when no offer found ====================*/}
+
+              {cashbackListing &&
+                cashbackListing.length > 0 &&
+                cashbackListing.map((item, key) => (
                   <Col key={key} className="deals_box" span={6}>
                     <Card
                       className="deals_container"
@@ -300,24 +375,34 @@ export default function Saved() {
                       className="deals_box trending_brands mb-3 text-left"
                       span={6}
                     >
-                      <Card
-                        className="deals_container"
-                        // onClick={()=>navigate('/saved/favorite-brand')}
+                      <Link
+                        to={`/brand?id=${item.merchantId}`}
+                        state={{
+                          totalCashback: item.customerRebate,
+                          description: item.merchantDescription,
+                          ids: item.merchantId,
+                          isCard: item.onCard,
+                        }}
                       >
-                        <>
-                          <img
-                            className="dealicon_img_frame "
-                            src={`data:image/png;base64,${item.merchantLogo1}`}
-                          />
-                          <p
-                            className="deals_title mb-0 mt-0"
-                            style={{ minHeight: "auto" }}
-                          >
-                            {item.merchantName}
-                          </p>
-                          <p>upto 7% cashback, 2 Prize Draw</p>
-                        </>
-                      </Card>
+                        <Card
+                          className="deals_container"
+                          // onClick={()=>navigate('/saved/favorite-brand')}
+                        >
+                          <>
+                            <img
+                              className="dealicon_img_frame "
+                              src={`data:image/png;base64,${item.merchantLogo1}`}
+                            />
+                            <p
+                              className="deals_title mb-0 mt-0"
+                              style={{ minHeight: "auto" }}
+                            >
+                              {item.merchantName}
+                            </p>
+                            <p>upto 7% cashback, 2 Prize Draw</p>
+                          </>
+                        </Card>
+                      </Link>
                     </Col>
                   );
                 })}
