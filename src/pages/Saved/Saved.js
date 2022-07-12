@@ -13,7 +13,7 @@ import { FiClock } from "react-icons/fi";
 // import Badge from "../../components/Badge/Badge";
 import Heading from "../../components/Heading/Heading";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 // import { getMerchantAction } from "../../actions/merchantActions";
 // import { getProductAction } from "../../actions/getOfferAction";
 // import { getCustomerInfoAction } from "../../actions/userActions";
@@ -23,6 +23,7 @@ import {
   getProductfavCall,
 } from "../../actions/favouriteCall";
 import SideMenu from "../../components/SideMenu";
+import { getFavouriteBrand } from "../../actions/brandAction";
 // import { render } from "@testing-library/react";
 // const { Meta } = Card;
 
@@ -102,6 +103,7 @@ export default function Saved() {
   const [brandList, setBrandList] = useState([]);
   const [couponListing, setCouponListing] = useState([]);
   const [cashbackListing, setCashbackListing] = useState([]);
+  const dispatch = useDispatch();
 
   const getCustomer = useSelector((state) => state.auth.user);
 
@@ -122,6 +124,7 @@ export default function Saved() {
       let merchantResponse = getMerchantCall(res?.customer?.brands);
       merchantResponse.then((result) => {
         setBrandList(result || []);
+        dispatch(getFavouriteBrand(result || []));
       });
 
       let productResponse = getProductfavCall(res?.customer?.products);
@@ -141,6 +144,7 @@ export default function Saved() {
       });
     });
   }, []);
+  console.log(cashbackListing);
 
   return (
     <div className="home_container">
@@ -212,7 +216,7 @@ export default function Saved() {
 
               {couponListing &&
                 couponListing.length > 0 &&
-                couponListing.map((item, key) => (
+                couponListing.slice(0, 4).map((item, key) => (
                   <Col key={key} className="deals_box" span={6}>
                     <Card
                       className="deals_container"
@@ -250,7 +254,7 @@ export default function Saved() {
                 ))}
             </Row>
 
-            <Heading
+            {/* <Heading
               HeadingText="Cashback"
               actionText={cashbackListing.length > 4 ? "View All" : ""}
               // actionText="View All"
@@ -290,15 +294,12 @@ export default function Saved() {
                 </Col>
               )}
 
-              {/* when no offer found ====================*/}
-
               {cashbackListing &&
                 cashbackListing.length > 0 &&
                 cashbackListing.map((item, key) => (
                   <Col key={key} className="deals_box" span={6}>
                     <Card
                       className="deals_container"
-                      // onClick={()=>navigate("/saved/saved-coupon")}
                     >
                       <>
                         <img className="dealicon" src="/Images/flipkart.png" />
@@ -312,7 +313,6 @@ export default function Saved() {
                       </>
                       <Divider />
                       <Row align="middle" key="time" className="deals_action">
-                        {/* <ClockCir className="deals_offer_title" /> */}
                         <span className="d-flex align-items-center timer fw-bold">
                           {" "}
                           <FiClock /> &nbsp; {item.expirationDate}
@@ -321,7 +321,7 @@ export default function Saved() {
                     </Card>
                   </Col>
                 ))}
-            </Row>
+            </Row> */}
 
             <Heading
               HeadingText="Favourite Brands"
@@ -368,7 +368,7 @@ export default function Saved() {
 
               {brandList &&
                 brandList.length > 0 &&
-                brandList.map((item, i) => {
+                brandList.slice(0, 4).map((item, i) => {
                   return (
                     <Col
                       key={i}

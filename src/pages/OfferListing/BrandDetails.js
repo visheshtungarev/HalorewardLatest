@@ -11,7 +11,7 @@ import PrizeDraw from "./PrizeDraws/PrizeDraw";
 import Cashback from "./CashBack/Cashback";
 import { Link } from "react-scroll";
 import { getOfferAction } from "../../actions/getOfferAction";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Put_call } from "../../network/networkmanager";
 import env from "../../enviroment";
 import { toast } from "react-toastify";
@@ -73,6 +73,7 @@ export default function BrandDetails() {
   // function callback(key) {
   //   console.log(key);
   // }
+  const navigate = useNavigate();
   const [dataArr] = useState(allTredingOffers);
   const [offerData, setOfferData] = useState(allTredingOffers);
   const [countofOffer, setCountofOffer] = useState({});
@@ -259,7 +260,11 @@ export default function BrandDetails() {
                 </li>
               </ul>
               {onCard && (
-                <div className="onCardOfferBanner mb-4">
+                <div
+                  className="onCardOfferBanner mb-4"
+                  onClick={() => navigate("/oncardOffer")}
+                  style={{ cursor: "pointer" }}
+                >
                   <h4 className="mb-2">On Card Offers</h4>
                   <p className="mb-4">Upfront cost must be £50+</p>
                   <h3 className="d-inline-block">10% OFF </h3>{" "}

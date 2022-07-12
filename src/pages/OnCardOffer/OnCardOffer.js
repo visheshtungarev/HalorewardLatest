@@ -34,8 +34,8 @@ export default function PrizeDraw() {
                 pageLink: "/Myntra",
               },
               {
-                pageName: "Prize Draw",
-                pageLink: "/prizedraw",
+                pageName: "On Card Offer",
+                pageLink: "/brand-detail",
               },
             ]}
           />

@@ -1,4 +1,10 @@
-import { BRANDENTER, BRANDLIST, BRANDSEARCH, RESETBRAND } from "../Constants/ActionsConstants";
+import {
+  BRANDENTER,
+  BRANDLIST,
+  BRANDSEARCH,
+  GETFAVOURITEBRAND,
+  RESETBRAND,
+} from "../Constants/ActionsConstants";
 // import { constVariable } from "../constants/String";
 import env from "../enviroment";
 import { Post_call } from "../network/networkmanager";
@@ -11,19 +17,18 @@ export const brandSearchAction = (payload, actionType) => async (dispatch) => {
   try {
     let response = await Post_call(`${merchantquerry}/merchants`, raw, false);
     if (response.status === 200) {
-      if (actionType === "search"){
+      if (actionType === "search") {
         dispatch({
           type: BRANDSEARCH,
           payload: response.data,
         });
       }
-      if(actionType === "enter"){
+      if (actionType === "enter") {
         dispatch({
           type: BRANDENTER,
           payload: response.data,
         });
       }
-      
     }
   } catch (error) {
     console.error(error);
@@ -58,4 +63,11 @@ export const resetMerchantAction = (dispatch) => {
     type: RESETBRAND,
     payload: "",
   });
-}
+};
+
+export const getFavouriteBrand = (data) => async (dispatch) => {
+  dispatch({
+    type: GETFAVOURITEBRAND,
+    payload: data,
+  });
+};

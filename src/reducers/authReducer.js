@@ -10,6 +10,7 @@ import {
   GETPRODUCTBYID,
   GETCATEGORY,
   GETCUSTOMERDETAIL,
+  GETFAVOURITEBRAND,
 } from "../Constants/ActionsConstants";
 
 const INITIAL_STATE = {
@@ -23,6 +24,7 @@ const INITIAL_STATE = {
   productById: [],
   all_category: [],
   customerDetail: {},
+  fav_brand: [],
 };
 
 const AuthReducer = (state = INITIAL_STATE, action) => {
@@ -64,6 +66,9 @@ const AuthReducer = (state = INITIAL_STATE, action) => {
     }
     case GETCUSTOMERDETAIL: {
       return { ...state, customerDetail: action.payload };
+    }
+    case GETFAVOURITEBRAND: {
+      return { ...state, fav_brand: action.payload };
     }
     default:
       return state;
