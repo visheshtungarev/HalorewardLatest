@@ -3,6 +3,7 @@ import {
   BRANDLIST,
   BRANDSEARCH,
   GETFAVOURITEBRAND,
+  GETTOGGLE,
   RESETBRAND,
 } from "../Constants/ActionsConstants";
 // import { constVariable } from "../constants/String";
@@ -68,6 +69,15 @@ export const resetMerchantAction = (dispatch) => {
 export const getFavouriteBrand = (data) => async (dispatch) => {
   dispatch({
     type: GETFAVOURITEBRAND,
+    payload: data,
+  });
+};
+
+export const toggleCategory = (data) => async (dispatch) => {
+  alert("hello");
+  console.log("data", data);
+  dispatch({
+    type: GETTOGGLE,
     payload: data,
   });
 };

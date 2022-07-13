@@ -619,6 +619,9 @@ const AllBrands = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  const getToggle = useSelector((state) => state.auth);
+  console.log("state.....", getToggle);
+
   const { state } = useLocation();
   let categoryId = state?.id;
 
@@ -699,11 +702,12 @@ const AllBrands = () => {
         let filterarray = [];
         if (value) {
           response?.data?.forEach((val) => {
-            val.categories.filter((itm) => {
-              if (itm.categoryId === value) {
-                filterarray.push(val);
-              }
-            });
+            val?.categories &&
+              val.categories.filter((itm) => {
+                if (itm.categoryId === value) {
+                  filterarray.push(val);
+                }
+              });
           });
         }
         filterarray && filterarray.length > 0
@@ -932,26 +936,27 @@ const AllBrands = () => {
                                   className="flex-grow-1"
                                 >
                                   <p className="deals_content ml-3 mb-0">
-                                    {item?.contentTypes.map((val) => {
-                                      if (val.name === "Cashbacks") {
-                                        return (
-                                          <span>
-                                            {"Upto " +
-                                              val.size +
-                                              "%" +
-                                              " " +
-                                              val.name}
-                                            ,{" "}
-                                          </span>
-                                        );
-                                      } else {
-                                        return (
-                                          <span>
-                                            {val.size + " " + val.name},{" "}
-                                          </span>
-                                        );
-                                      }
-                                    })}
+                                    {item?.contentTypes &&
+                                      item?.contentTypes.map((val) => {
+                                        if (val.name === "Cashbacks") {
+                                          return (
+                                            <span>
+                                              {"Upto " +
+                                                val.size +
+                                                "%" +
+                                                " " +
+                                                val.name}
+                                              ,{" "}
+                                            </span>
+                                          );
+                                        } else {
+                                          return (
+                                            <span>
+                                              {val.size + " " + val.name},{" "}
+                                            </span>
+                                          );
+                                        }
+                                      })}
                                   </p>
                                 </Col>
                               </Row>

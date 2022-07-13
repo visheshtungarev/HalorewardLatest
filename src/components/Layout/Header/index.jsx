@@ -293,7 +293,7 @@ const Index = () => {
                 <Link
                   to={
                     getFavouriteBrand && getFavouriteBrand.length > 0
-                      ? "/saved/favorite-brand"
+                      ? "/saved"
                       : "/saved/picking-favorite-brand"
                   }
                   className="text-dark fw-bold"

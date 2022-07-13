@@ -353,7 +353,7 @@ export default function Saved() {
                           Your preferences will help us keep you updated on
                           offers relevant to your taste.
                         </p>
-                        <Link to="/all-offers">
+                        <Link to="/saved/picking-favorite-brand">
                           <Button type="primary" size="large">
                             View All Brand
                           </Button>
