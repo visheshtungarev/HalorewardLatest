@@ -518,8 +518,9 @@ const index = () => {
           <Col className="list_action">
             <Link
               className="d-flex align-items-center"
-              to="/list?=feature-brand"
-              state={{ type: "featured-brand" }}
+              //to="/list?=feature-brand"
+              to="/all-brands"
+              // state={{ type: "featured-brand" }}
             >
               View All
               <RightOutlined />

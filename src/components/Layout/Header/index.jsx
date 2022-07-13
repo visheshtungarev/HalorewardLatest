@@ -26,6 +26,7 @@ import {
 } from "../../../actions/brandAction";
 import { TOGGLELOADING } from "../../../Constants/ActionsConstants";
 import { getCategoryAction } from "../../../actions/CategoryAction";
+import { useRef } from "react";
 const { Search } = Input;
 
 const Index = () => {
@@ -60,8 +61,9 @@ const Index = () => {
   console.log("isLoading ...", isLoading);
 
   const categorylist = useSelector((state) => state.auth.all_category);
+  const getFavouriteBrand = useSelector((state) => state.auth.fav_brand);
 
-  console.log("categorylist ....", categorylist?.data);
+  console.log("getFavouriteBrand ....", getFavouriteBrand);
 
   const urlLocation = window.location.pathname;
   let params = new URLSearchParams(urlLocation);
@@ -161,14 +163,24 @@ const Index = () => {
     window.location.href = "/";
   };
 
-  // const searchClickHandler = () => {
-  //   if (currentUrl) {
-  //     dispatch(brandSearchAction(searchValue, "enter"));
-  //   } else {
-  //     dispatch(brandSearchAction(searchValue, "enter"));
-  //     navigate("/all-brands");
-  //   }
-  // };
+  const ref = useRef();
+
+  useEffect(() => {
+    const checkIfClickedOutside = (e) => {
+      // If the menu is open and the clicked target is not within the menu,
+      // then close the menu
+      if (searchValue && ref.current && !ref.current.contains(e.target)) {
+        setSearchValue("")(false);
+      }
+    };
+
+    document.addEventListener("mousedown", checkIfClickedOutside);
+
+    return () => {
+      // Cleanup the event listener
+      document.removeEventListener("mousedown", checkIfClickedOutside);
+    };
+  }, [searchValue]);
 
   return (
     <>
@@ -248,7 +260,7 @@ const Index = () => {
             <TopMenu mobileView={true} category={categorylist?.data} />
           </Row>
         </Col>
-        <Col>
+        <Col ref={ref}>
           <Search
             suffix={<img src="/Images/arrow_up.svg" />}
             size="large"
@@ -279,7 +291,11 @@ const Index = () => {
             <Row align="middle" justify="">
               <Col>
                 <Link
-                  to="/saved/picking-favorite-brand"
+                  to={
+                    getFavouriteBrand && getFavouriteBrand.length > 0
+                      ? "/saved"
+                      : "/saved/picking-favorite-brand"
+                  }
                   className="text-dark fw-bold"
                 >
                   <img src="Images/Bookmark_icon_outline.svg" />{" "}

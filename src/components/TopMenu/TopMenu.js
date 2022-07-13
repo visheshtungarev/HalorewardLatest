@@ -1,13 +1,13 @@
-import React from "react";
-// import { } from "antd";
+import React, { useState } from "react";
 import "./index.css";
 import { Link } from "react-router-dom";
-// import TrendingBrands from "../TrendingBrands/TrendingBrands";
 
 export default function TopMenu({ mobileView, category }) {
+  const [showDropdown, setShowDropdown] = useState(true);
+
   return (
     <div className="customSelectMenu">
-      <div className="menuHeader">
+      <div className="menuHeader" onClick={() => setShowDropdown(true)}>
         <img className="filledCategory" src="/Images/categories.svg" />
         <img
           className="outlineCategory"
@@ -15,7 +15,7 @@ export default function TopMenu({ mobileView, category }) {
         />
         {mobileView === true ? (
           <>
-            <span>Categories</span>
+            <span onMouseEnter={() => setShowDropdown(true)}>Categories</span>
             <span>
               <svg x="0px" y="0px" width="9px" height="5px" viewBox="0 0 9 5">
                 <path
@@ -33,59 +33,64 @@ export default function TopMenu({ mobileView, category }) {
           ""
         )}
       </div>
+      {showDropdown && (
+        <div className="menuItem">
+          <ul className="category">
+            <li className="mainListItem" onClick={() => setShowDropdown(false)}>
+              <Link to="/all-brands">All Brands</Link>
+            </li>
+            <li className="mainListItem" onClick={() => setShowDropdown(false)}>
+              <Link to="/all-offers">All Offers</Link>
+            </li>
+            <li className="hr"></li>
+            {category &&
+              category.length > 0 &&
+              category.map((item, key) => {
+                return (
+                  <>
+                    <li key={key} onClick={() => setShowDropdown(false)}>
+                      <Link
+                        className="text-primary fw-bold"
+                        to={`/all-brands?category=${item.name}`}
+                        state={{ id: item.categoryId }}
+                      >
+                        {item.name}
+                      </Link>
 
-      <div className="menuItem">
-        <ul className="category">
-          {/* <li className="mainListItem">
-              <Link to="">All Brands</Link>
-              </li>
-              <li className="mainListItem">
-              <Link to="">All Offers</Link>
-            </li> */}
-          {/* <li className="hr"></li> */}
-          {category &&
-            category.length > 0 &&
-            category.map((item, key) => {
-              return (
-                <>
-                  <li key={key}>
-                    <Link
-                      className="text-primary fw-bold"
-                      to={`/all-brands?category=${item.name}`}
-                      state={{ id: item.categoryId }}
-                    >
-                      {item.name}
-                    </Link>
-
-                    {/* <div>
+                      {/* <div>
                     <ul className="sub-category"> */}
 
-                    {/* </ul>
+                      {/* </ul>
                   </div> */}
-                  </li>
-                  <li>
-                    <ul>
-                      {item?.subCategories &&
-                        item.subCategories.length > 0 &&
-                        item.subCategories.map((element, id) => {
-                          return (
-                            <li className="" key={id}>
-                              <Link
-                                to={`/all-brands?category=${item.name}`}
-                                state={{ id: item.categoryId }}
+                    </li>
+                    <li>
+                      <ul className="sub-category">
+                        {item?.subCategories &&
+                          item.subCategories.length > 0 &&
+                          item.subCategories.map((element, id) => {
+                            return (
+                              <li
+                                className=""
+                                key={id}
+                                onClick={() => setShowDropdown(false)}
                               >
-                                {element.name}
-                              </Link>
-                            </li>
-                          );
-                        })}
-                    </ul>
-                  </li>
-                </>
-              );
-            })}
-        </ul>
-      </div>
+                                <Link
+                                  to={`/all-brands?category=${item.name}`}
+                                  state={{ id: item.categoryId }}
+                                >
+                                  {element.name}
+                                </Link>
+                              </li>
+                            );
+                          })}
+                      </ul>
+                    </li>
+                  </>
+                );
+              })}
+          </ul>
+        </div>
+      )}
     </div>
   );
 }
