@@ -159,8 +159,8 @@ export default function OfferSearch() {
         <Breadcurms
           data={[
             {
-              pageName: "Categories",
-              pageLink: "/categories",
+              pageName: "Home",
+              pageLink: "/",
             },
             {
               pageName: `All Results With '${id}'`,

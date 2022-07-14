@@ -378,10 +378,12 @@ export default function Saved() {
                       <Link
                         to={`/brand?id=${item.merchantId}`}
                         state={{
-                          totalCashback: item.customerRebate,
+                          totalCashback: item.customerMaxRebate,
                           description: item.merchantDescription,
                           ids: item.merchantId,
                           isCard: item.onCard,
+                          brandName: item?.merchantName,
+                          brandLogo: item?.merchantLogo1,
                         }}
                       >
                         <Card

@@ -17,6 +17,9 @@ export default function TrendingBlock({
         totalCashback: obj?.customerRebate,
         description: obj?.merchantDescription,
         ids: obj?.merchantId,
+        isCard: obj.onCard,
+        brandName: obj?.merchantName,
+        brandLogo: obj?.merchantLogo1,
       }}
     >
       <Col className="deals_box trending_brands mb-3" span={span}>

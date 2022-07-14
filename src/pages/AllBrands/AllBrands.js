@@ -689,8 +689,30 @@ const AllBrands = () => {
   }, [categoryId]);
 
   const getBrandList = async (value) => {
-    var raw =
-      "{\n    brands(siteId: 1) {\n        merchantId\n        merchantRank\n        merchantName\n        merchantDescription\n        status\n        onCard\n        provider\n        modifiedDate\n        customerRebate\n        merchantLogo1\n        merchantUrl\n        categories {\n            categoryId\n            name\n        }\n        contentTypes {\n            name\n            size\n        }\n    }\n}\n";
+    var raw = `{
+      brands(siteId: 1) {
+          merchantId
+          merchantRank
+          shortTitle
+          merchantDescription
+          merchantName
+          status
+          onCard
+          provider
+          modifiedDate
+          customerMaxRebate
+          merchantLogo1
+          merchantUrl
+          categories {
+              categoryId
+              name
+          }
+          contentTypes {
+              name
+              size
+          }
+      }
+  }`;
     try {
       let response = await Post_call(
         `${getCategoriesByClientID}/clients/1/brands`,
@@ -904,10 +926,12 @@ const AllBrands = () => {
                       <Link
                         to={`/brand?id=${item.merchantId}`}
                         state={{
-                          totalCashback: item.customerRebate,
+                          totalCashback: item.customerMaxRebate,
                           description: item.merchantDescription,
                           ids: item.merchantId,
                           isCard: item.onCard,
+                          brandName: item?.merchantName,
+                          brandLogo: item?.merchantLogo1,
                         }}
                       >
                         <Card className="deals_container popularOffers rounded1">

@@ -545,6 +545,8 @@ const index = () => {
                       description: item.merchantDescription,
                       ids: item.merchantId,
                       isCard: item.onCard,
+                      brandName: item?.merchantName,
+                      brandLogo: item?.merchantLogo1,
                     }}
                   >
                     <Card className="deals_container popularOffers rounded1">

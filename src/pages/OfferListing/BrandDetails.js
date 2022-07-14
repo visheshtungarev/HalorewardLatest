@@ -69,14 +69,16 @@ const allTredingOffers = [
   },
 ];
 export default function BrandDetails() {
-  // const { TabPane } = Tabs;
-  // function callback(key) {
-  //   console.log(key);
-  // }
+  // const getSearchData = useSelector((state) => state.auth?.brand);
+
+  const getData = useLocation();
+  let ids = getData?.state?.ids;
+  let onCard = getData?.state?.isCard;
   const navigate = useNavigate();
   const [dataArr] = useState(allTredingOffers);
   const [offerData, setOfferData] = useState(allTredingOffers);
   const [countofOffer, setCountofOffer] = useState({});
+  const [brandName, setBrandName] = useState(getData?.state?.brandName);
   const [offerArrayData, setOfferArrayData] = useState({
     cashback: [],
     coupon: [],
@@ -84,9 +86,7 @@ export default function BrandDetails() {
   });
   console.log(dataArr);
 
-  const getData = useLocation();
-  let ids = getData?.state?.ids;
-  let onCard = getData?.state?.isCard;
+  console.log("ids .....", ids);
 
   useEffect(() => {
     let offerResult = getOfferAction(ids);
@@ -125,7 +125,8 @@ export default function BrandDetails() {
       });
       setOfferData(data?.products);
     });
-  }, []);
+    setBrandName(getData?.state?.brandName);
+  }, [ids]);
 
   const getCustomer = useSelector((state) => state.auth.user);
 
@@ -147,27 +148,37 @@ export default function BrandDetails() {
     }
   };
 
+  useEffect(() => {
+    getBreadCrum();
+  }, [ids, brandName]);
+
+  const getBreadCrum = () => {
+    return (
+      <Breadcurms
+        data={[
+          {
+            pageName: "Home",
+            pageLink: "/",
+          },
+          {
+            pageName: "All Brands",
+            pageLink: "/all-brands",
+          },
+          {
+            pageName: brandName,
+            pageLink: `/${brandName}`,
+          },
+        ]}
+      />
+    );
+  };
+
   // console.log("offerData.....", offerData);
 
   return (
     <div className="home_container">
       <Row align="middle" className="list_view mb-0 pb-0">
-        <Breadcurms
-          data={[
-            {
-              pageName: "Home",
-              pageLink: "/",
-            },
-            {
-              pageName: "All Brands",
-              pageLink: "/all-brands",
-            },
-            {
-              pageName: "Myntra",
-              pageLink: "/myntra",
-            },
-          ]}
-        />
+        {getBreadCrum()}
       </Row>
       <div className="position-relative ">
         <Row
@@ -181,10 +192,14 @@ export default function BrandDetails() {
           <Row className=" brandProfile" gutter={30} lg={{ gutter: 0 }}>
             <Col span={6} className="d-none d-lg-block">
               <div className="brandImage">
-                <img src="/Images/myntra.png" alt="img" />
+                <img
+                  src={`data:image/png;base64,${getData?.state?.brandLogo}`}
+                  alt="img"
+                  // src="/Images/myntra.png"
+                />
               </div>
               <div className="whiteFrame">
-                <h5>About {offerData?.merchantName}</h5>
+                <h5>About {getData.state?.brandName}</h5>
                 <p>{getData.state.description}</p>
                 {/* <Link to="">Show more</Link> */}
               </div>
@@ -192,11 +207,11 @@ export default function BrandDetails() {
             <Col className="brandInfo" span={24} lg={{ span: 18 }}>
               <img
                 className="dealicon_img_frame d-block d-lg-none mx-auto"
-                src="/Images/myntra.png"
+                // src="/Images/myntra.png"
               />
               <div className="d-flex mb-2">
                 <h4 className="fw-bold text-lg-left text-center py-3 py-lg-0 text-white m-0">
-                  {offerData?.merchantName}
+                  {getData.state?.brandName}
                 </h4>
                 <span
                   onClick={() => addTofav()}
@@ -210,7 +225,7 @@ export default function BrandDetails() {
                 ></span>
               </div>
               <p className="align-items-center d-none d-lg-flex">
-                upto {getData.state.totalCashback} cashback{" "}
+                upto {getData.state.totalCashback || 0 + "%"} cashback{" "}
                 <span className="deviderWhite"></span> {countofOffer?.coupon}{" "}
                 coupons <span className="deviderWhite"></span>{" "}
                 {countofOffer?.prize} prize draws

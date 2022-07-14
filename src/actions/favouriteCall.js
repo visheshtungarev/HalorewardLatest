@@ -45,18 +45,18 @@ export const getMerchantCall = async (payload) => {
 
   var raw = `{
     merchantsById(id: [${payload}]) {
-        merchantId 
-        merchantName 
-        merchantDescription 
-        merchantRank 
-        status 
-        customerMaxRebate 
-        provider
-        externalMaxRebate 
-        modifiedDate 
-        merchantLogo1 
-        merchantUrl 
-        createdDate
+      merchantId 
+      merchantName 
+      merchantDescription 
+      merchantRank 
+      status 
+      customerMaxRebate 
+      provider
+      externalMaxRebate 
+      modifiedDate 
+      merchantLogo1 
+      merchantUrl 
+      createdDate
     }
 }`;
   try {

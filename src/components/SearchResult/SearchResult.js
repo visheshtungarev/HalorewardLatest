@@ -129,6 +129,9 @@ export default function SearchResult({
                         totalCashback: "",
                         description: "",
                         ids: element.merchantId,
+                        isCard: element.onCard,
+                        brandName: element?.merchantName,
+                        brandLogo: element?.merchantLogo1,
                       }}
                       onClick={() => setValue("")}
                     >
