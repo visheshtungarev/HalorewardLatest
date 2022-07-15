@@ -94,7 +94,8 @@ const index = () => {
           onCard
           provider
           modifiedDate
-          customerRebate
+          shortTitle
+          customerMaxRebate
           merchantLogo1
           merchantUrl
           categories {
@@ -191,7 +192,11 @@ const index = () => {
       <div className="list_view">
         <Heading
           HeadingText="Expiring Deals"
-          actionText={expiringCarousel[0]?.brands?.length > 5 ? "View All" : ""}
+          actionText={
+            expiringCarousel && expiringCarousel[0]?.brands?.length > 5
+              ? "View All"
+              : ""
+          }
           actionLink="/all-offers"
         />
         <Row
@@ -201,7 +206,7 @@ const index = () => {
           gutter={30}
         >
           {expiringCarousel &&
-            expiringCarousel.length &&
+            expiringCarousel.length > 0 &&
             expiringCarousel[0].brands &&
             expiringCarousel[0].brands.length > 0 &&
             expiringCarousel[0].brands.map((item, key) => {
@@ -298,7 +303,7 @@ const index = () => {
           gutter={30}
         >
           {trendingCarousel &&
-            trendingCarousel.length &&
+            trendingCarousel.length > 0 &&
             trendingCarousel[0].brands &&
             trendingCarousel[0].brands.length > 0 &&
             trendingCarousel[0].brands
@@ -389,14 +394,18 @@ const index = () => {
           <Col className="list_title">Popular offers</Col>
 
           <Col className="list_action">
-            <Link
-              className="d-flex align-items-center"
-              to="/list?=popular-offer"
-              state={{ type: "popular-offer" }}
-            >
-              View All
-              <RightOutlined />
-            </Link>
+            {offerData?.products &&
+              offerData.products.products &&
+              offerData.products.products.length > 0 && (
+                <Link
+                  className="d-flex align-items-center"
+                  to="/list?=popular-offer"
+                  state={{ type: "popular-offer" }}
+                >
+                  View All
+                  <RightOutlined />
+                </Link>
+              )}
           </Col>
         </Row>
         <Row align="middle" justify="space-around" gutter={30}>
@@ -516,15 +525,17 @@ const index = () => {
           <Col className="list_title">Featured Brand</Col>
 
           <Col className="list_action">
-            <Link
-              className="d-flex align-items-center"
-              //to="/list?=feature-brand"
-              to="/all-brands"
-              // state={{ type: "featured-brand" }}
-            >
-              View All
-              <RightOutlined />
-            </Link>
+            {brandData && brandData.length > 0 && (
+              <Link
+                className="d-flex align-items-center"
+                //to="/list?=feature-brand"
+                to="/all-brands"
+                // state={{ type: "featured-brand" }}
+              >
+                View All
+                <RightOutlined />
+              </Link>
+            )}
           </Col>
         </Row>
         <Row align="middle" justify="flex-start" gutter={30}>
@@ -541,7 +552,7 @@ const index = () => {
                   <Link
                     to={`/brand?id=${item.merchantId}`}
                     state={{
-                      totalCashback: item.customerRebate,
+                      totalCashback: item.shortTitle,
                       description: item.merchantDescription,
                       ids: item.merchantId,
                       isCard: item.onCard,

@@ -35,6 +35,10 @@ export const getCarousel = (payload) => async (dispatch) => {
               arrangement
           }
           brands {
+              onCard
+              merchantDescription
+              customerMaxRebate
+              shortTitle
               merchantId
               merchantRank
               merchantName

@@ -926,7 +926,7 @@ const AllBrands = () => {
                       <Link
                         to={`/brand?id=${item.merchantId}`}
                         state={{
-                          totalCashback: item.customerMaxRebate,
+                          totalCashback: item.shortTitle,
                           description: item.merchantDescription,
                           ids: item.merchantId,
                           isCard: item.onCard,

@@ -14,7 +14,24 @@ const values = env();
 const { merchantquerry, getCategoriesByClientID } = values;
 
 export const brandSearchAction = (payload, actionType) => async (dispatch) => {
-  var raw = `{\n    merchantsByName(merchantName: "${payload}") {\n        merchantId\n        merchantName\n        status\n        rewardType\n        provider\n        categories\n        merchantRank\n        merchantLogo1\n        merchantUrl\n        merchantImage1\n    }\n}\n`;
+  var raw = `{
+    merchantsByName(merchantName: "${payload}") {
+        merchantId
+        merchantName
+        status
+        rewardType
+        provider
+        categories
+        merchantRank
+        merchantLogo1
+        merchantUrl
+        merchantImage1
+        merchantDescription
+        customerMaxRebate
+    }
+}
+`;
+
   try {
     let response = await Post_call(`${merchantquerry}/merchants`, raw, false);
     if (response.status === 200) {

@@ -225,7 +225,7 @@ export default function BrandDetails() {
                 ></span>
               </div>
               <p className="align-items-center d-none d-lg-flex">
-                upto {getData.state.totalCashback || 0 + "%"} cashback{" "}
+                {getData.state.totalCashback}
                 <span className="deviderWhite"></span> {countofOffer?.coupon}{" "}
                 coupons <span className="deviderWhite"></span>{" "}
                 {countofOffer?.prize} prize draws

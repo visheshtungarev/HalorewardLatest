@@ -126,8 +126,8 @@ export default function SearchResult({
                     <Link
                       to={`/brand?id=${element.merchantId}`}
                       state={{
-                        totalCashback: "",
-                        description: "",
+                        totalCashback: element.shortTitle,
+                        description: element.merchantDescription,
                         ids: element.merchantId,
                         isCard: element.onCard,
                         brandName: element?.merchantName,

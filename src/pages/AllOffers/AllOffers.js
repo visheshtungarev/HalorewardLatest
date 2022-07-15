@@ -161,15 +161,16 @@ export default function AllOffers() {
     console.log("id ,,,", id);
     let array = [];
     array.push(id);
+    // console.log("categoryId ...", array);
     helperFunction.getFilterDataList(
       offerData?.products?.products,
-      [{ key: "productId", value: array }],
+      [{ key: "categoryId", value: array }],
       callbackFunc
     );
   };
 
   function callbackFunc(dataArr) {
-    console.log("dataArr ....", dataArr);
+    // console.log("dataArr ....", dataArr);
     return dataArr;
   }
 
