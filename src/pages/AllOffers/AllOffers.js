@@ -1,144 +1,24 @@
 import React, { useEffect, useState } from "react";
 import Heading from "../../components/Heading/Heading";
 import PopularOffers from "../../components/PopularOffers/PopularOffers";
-import { CreditCardOutlined } from "@ant-design/icons";
+
 import Breadcurms from "../../components/Breadcrums/Breadcurms";
 import { Row, Col, Select } from "antd";
-// import Badge from "../../components/Badge/Badge";
 import SideBar from "../../components/Sidebar/SideBar";
-// import { Post_call } from '../../network/networkmanager';
-// import env from '../../enviroment';
 import { getOfferAction } from "../../actions/getOfferAction";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoryAction } from "../../actions/CategoryAction";
-import { helperFunction } from "../../Helpers/helperFunction";
-const allTredingOffers = [
-  {
-    image: "/Images/flipkart.png",
-    title: "Flipkart",
-    modeIcon: <CreditCardOutlined />,
-    modeType: "oncard",
-    modeText: "ON CARD",
-    content: "upto 70% cashback, 4 coupons, 2 Prize Draw...",
-  },
-  {
-    image: "/Images/nykaa.png",
-    title: "Nykaa",
-    modeIcon: <CreditCardOutlined />,
-    modeType: "oncard",
-    modeText: "ON CARD",
-    content: "upto 70% cashback, 4 coupons, 2 Prize Draw...",
-  },
-  {
-    image: "/Images/flipkart.png",
-    title: "Flipkart",
-    modeIcon: <CreditCardOutlined />,
-    modeType: "oncard",
-    modeText: "ON CARD",
-    content: "upto 70% cashback, 4 coupons, 2 Prize Draw...",
-  },
-  {
-    image: "/Images/nykaa.png",
-    title: "Nykaa",
-    modeIcon: <CreditCardOutlined />,
-    modeType: "oncard",
-    modeText: "ON CARD",
-    content: "upto 70% cashback, 4 coupons, 2 Prize Draw...",
-  },
-  {
-    image: "/Images/flipkart.png",
-    title: "Flipkart",
-    modeIcon: <CreditCardOutlined />,
-    modeType: "oncard",
-    modeText: "ON CARD",
-    content: "upto 70% cashback, 4 coupons, 2 Prize Draw...",
-  },
-  {
-    image: "/Images/nykaa.png",
-    title: "Nykaa",
-    modeIcon: <CreditCardOutlined />,
-    modeType: "oncard",
-    modeText: "ON CARD",
-    content: "upto 70% cashback, 4 coupons, 2 Prize Draw...",
-  },
-];
-
-// const sidebarData = [
-//   {
-//     title: "Accessories",
-//     link: "",
-//   },
-//   {
-//     title: "Auto & Tires",
-//     link: "",
-//   },
-//   {
-//     title: "Baby & Kids Gear",
-//     link: "",
-//   },
-//   {
-//     title: "Books & Media",
-//     link: "",
-//   },
-//   {
-//     title: "Clothing",
-//     link: "",
-//   },
-//   {
-//     title: "Electronics",
-//     link: "",
-//   },
-//   {
-//     title: "Events & Activities",
-//     link: "",
-//   },
-//   {
-//     title: "Flowers & Florists",
-//     link: "",
-//   },
-//   {
-//     title: "Food & Restaurants",
-//     link: "",
-//   },
-//   {
-//     title: "Gifts & Occasions",
-//     link: "",
-//   },
-//   {
-//     title: "Pet Supplies",
-//     link: "",
-//   },
-//   {
-//     title: "Books & Media",
-//     link: "",
-//   },
-//   {
-//     title: "Food & Restaurants",
-//     link: "",
-//   },
-//   {
-//     title: "Gifts & Occasions",
-//     link: "",
-//   },
-//   {
-//     title: "Health & Beauty",
-//     link: "",
-//   },
-//   {
-//     title: "Events & Activities",
-//     link: "",
-//   },
-// ];
-
-// const values = env();
-// const { getCategoriesByClientID } = values;
 
 export default function AllOffers() {
-  const [dataArr] = useState(allTredingOffers);
-
-  // const [sideMenuItems] = useState(sidebarData);
+  const categoryList = useSelector((state) => state.auth.all_category);
   const [openSidePanel, setOpenSidePanel] = useState(false);
   const [offerData, setOfferData] = useState([]);
+  const [categoryListing, setCategoryListing] = useState([]);
+
+  const [filterArrayCategory, setFilterArrayCategory] = useState([]);
+
+  const [offerObject, setOfferObject] = useState();
+
   const dispatch = useDispatch();
 
   const { Option } = Select;
@@ -153,32 +33,18 @@ export default function AllOffers() {
     dispatch(getCategoryAction);
     let offerResult = getOfferAction();
     offerResult.then((data) => {
-      setOfferData(data);
+      setOfferObject(data);
+      if (data.products?.products.length > 0) {
+        setOfferData(data.products.products);
+      } else {
+        setOfferData([]);
+      }
     });
+
+    if (categoryList && categoryList?.data && categoryList.data.length > 0) {
+      setCategoryListing(categoryList?.data || []);
+    }
   }, []);
-
-  const filterHandler = (id) => {
-    console.log("id ,,,", id);
-    let array = [];
-    array.push(id);
-    // console.log("categoryId ...", array);
-    helperFunction.getFilterDataList(
-      offerData?.products?.products,
-      [{ key: "categoryId", value: array }],
-      callbackFunc
-    );
-  };
-
-  function callbackFunc(dataArr) {
-    // console.log("dataArr ....", dataArr);
-    return dataArr;
-  }
-
-  // console.log("sideMenuItems.....", sideMenuItems);
-
-  const categoryList = useSelector((state) => state.auth.all_category);
-
-  console.log("dataArr ...", dataArr);
 
   return (
     <div className="home_container">
@@ -197,43 +63,6 @@ export default function AllOffers() {
         />
       </Row>
 
-      {/* <div className="list_view">
-        <Heading
-          HeadingText="Trending"
-          actionText="View All"
-          actionLink="/Trending-offers"
-        />
-        <Row
-          align="middle"
-          className="scrolledView"
-          justify="space-around"
-          gutter={30}
-        >
-          {dataArr &&
-            dataArr.map((item, i) => (
-              <Col
-                key={i}
-                className="deals_box trending_brands mb-3 text-left"
-                span={4}
-              >
-                <Card className="deals_container">
-                  <Badge
-                    badgeType={item?.modeType}
-                    badgeText={item?.modeText}
-                    badgeIcon={item.modeIcon}
-                  />
-                  <>
-                    <img className="dealicon " src={item.image} />
-                    <p className="deals_title" style={{ minHeight: "auto" }}>
-                      {item.title}
-                    </p>
-                    <p>{item.content}</p>
-                  </>
-                </Card>
-              </Col>
-            ))}
-        </Row>
-      </div> */}
       <div className="list_view">
         <Heading
           HeadingText="All Offers"
@@ -255,20 +84,32 @@ export default function AllOffers() {
         />
         <Row justify="space-around" gutter={30}>
           <Col span={24} lg={{ span: 6 }}>
-            {categoryList ? (
+            {categoryListing ? (
               <SideBar
                 closePanel={() => closeSidebar()}
                 type="checklist"
                 mainTitle="Filter"
-                data={categoryList?.data}
-                filterPanel={(id) => filterHandler(id)}
+                data={categoryListing}
+                filterPanel={(categoryId) => {
+                  const fac = [...filterArrayCategory];
+                  if (!fac.includes(categoryId)) {
+                    fac.push(categoryId);
+                  } else {
+                    fac.splice(fac.indexOf(categoryId), 1);
+                  }
+                  setFilterArrayCategory(fac);
+                }}
               />
             ) : (
               ""
             )}
           </Col>
           <Col span={24} lg={{ span: 18 }}>
-            <PopularOffers offerData={offerData} />
+            <PopularOffers
+              filterArrayCategory={filterArrayCategory}
+              offerData={offerData}
+              offerObject={offerObject}
+            />
           </Col>
         </Row>
       </div>

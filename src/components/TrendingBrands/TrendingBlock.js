@@ -14,7 +14,7 @@ export default function TrendingBlock({
     <Link
       to={`/brand?id=${obj?.merchantId}`}
       state={{
-        totalCashback: obj?.customerRebate,
+        totalCashback: obj?.shortTitle,
         description: obj?.merchantDescription,
         ids: obj?.merchantId,
         isCard: obj.onCard,
