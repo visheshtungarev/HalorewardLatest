@@ -226,9 +226,12 @@ export default function BrandDetails() {
               </div>
               <p className="align-items-center d-none d-lg-flex">
                 {getData.state.totalCashback}
-                <span className="deviderWhite"></span> {countofOffer?.coupon}{" "}
-                coupons <span className="deviderWhite"></span>{" "}
-                {countofOffer?.prize} prize draws
+                {getData.state.totalCashback && (
+                  <span className="deviderWhite"></span>
+                )}{" "}
+                {countofOffer?.coupon} coupons{" "}
+                <span className="deviderWhite"></span> {countofOffer?.prize}{" "}
+                prize draws
               </p>
 
               <ul className="list-group list-group-horizontal p-0">

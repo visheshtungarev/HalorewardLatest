@@ -174,8 +174,8 @@ export default function Saved() {
             </Row> */}
             <Heading
               HeadingText="Coupons"
-              // actionText={couponListing.length > 4 ? "View All" : ""}
-              actionText="View All"
+              actionText={couponListing.length > 4 ? "View All" : ""}
+              // actionText="View All"
               actionLink="/saved/saved-coupon"
             />
             <Row
@@ -254,78 +254,10 @@ export default function Saved() {
                 ))}
             </Row>
 
-            {/* <Heading
-              HeadingText="Cashback"
-              actionText={cashbackListing.length > 4 ? "View All" : ""}
-              // actionText="View All"
-              actionLink="/saved/saved-cashback"
-            />
-            <Row
-              align="middle"
-              className="scrolledView mb-4"
-              justify="flex-start"
-              gutter={30}
-            >
-              {cashbackListing && cashbackListing.length <= 0 && (
-                <Col className="deals_box" span={24}>
-                  <Card className="deals_container">
-                    <Row align="middle">
-                      <Col span={12} className="py-4 ">
-                        <img
-                          src="/Images/no_offer.svg"
-                          height={200}
-                          style={{ width: "70%" }}
-                        />
-                      </Col>
-                      <Col span={12}>
-                        <h5>You haven’t pinned any offers</h5>
-                        <p>
-                          Your preferences will help us keep you updated on
-                          offers relevant to your taste.
-                        </p>
-                        <Link to="/all-brands">
-                          <Button type="primary" size="large">
-                            View All offers
-                          </Button>
-                        </Link>
-                      </Col>
-                    </Row>
-                  </Card>
-                </Col>
-              )}
-
-              {cashbackListing &&
-                cashbackListing.length > 0 &&
-                cashbackListing.map((item, key) => (
-                  <Col key={key} className="deals_box" span={6}>
-                    <Card
-                      className="deals_container"
-                    >
-                      <>
-                        <img className="dealicon" src="/Images/flipkart.png" />
-                        <p className="deals_title">
-                          {item?.productMetaData?.map((element) => {
-                            if (element.key === "title") {
-                              return element.value;
-                            }
-                          })}
-                        </p>
-                      </>
-                      <Divider />
-                      <Row align="middle" key="time" className="deals_action">
-                        <span className="d-flex align-items-center timer fw-bold">
-                          {" "}
-                          <FiClock /> &nbsp; {item.expirationDate}
-                        </span>
-                      </Row>
-                    </Card>
-                  </Col>
-                ))}
-            </Row> */}
-
             <Heading
               HeadingText="Favourite Brands"
-              actionText="View All"
+              // actionText="View All"
+              actionText={brandList.length > 4 ? "View All" : ""}
               actionLink="/saved/favorite-brand"
             />
             <Row

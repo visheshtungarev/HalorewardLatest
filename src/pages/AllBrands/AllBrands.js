@@ -848,6 +848,8 @@ const AllBrands = () => {
                     description: trendingCarousel[0]?.description,
                     ids: item?.merchantId,
                     isCard: item?.onCard,
+                    brandName: item?.merchantName,
+                    brandLogo: item?.merchantLogo1,
                   }}
                 >
                   <Card className="deals_container">
