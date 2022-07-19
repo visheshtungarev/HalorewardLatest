@@ -291,11 +291,12 @@ const Index = () => {
             <Row align="middle" justify="">
               <Col>
                 <Link
-                  to={
-                    getFavouriteBrand && getFavouriteBrand.length > 0
-                      ? "/saved"
-                      : "/saved/picking-favorite-brand"
-                  }
+                  // to={
+                  //   getFavouriteBrand && getFavouriteBrand.length > 0
+                  //     ? "/saved"
+                  //     : "/saved/picking-favorite-brand"
+                  // }
+                  to="/saved/picking-favorite-brand"
                   className="text-dark fw-bold"
                 >
                   <img src="Images/Bookmark_icon_outline.svg" />{" "}
