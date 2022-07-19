@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./index.css";
 import { Button, Card, Col, Divider, Row } from "antd";
 import { MdBookmarkBorder, MdBookmark } from "react-icons/md";
@@ -15,6 +15,11 @@ import {
 } from "../../actions/favouriteCall";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import env from "../../enviroment";
+import { Delete_call } from "../../network/networkmanager";
+
+const values = env();
+const { customerAuth } = values;
 
 export default function PrizeDraw() {
   const location = useLocation();
@@ -24,28 +29,57 @@ export default function PrizeDraw() {
 
   const [addBookmark, setAddBookmark] = useState(true);
 
-  // const addBookmarkEvent = () => {
-  //   addBookmark ? setAddBookmark(false) : setAddBookmark(true);
-  // };
-
   const getCustomer = useSelector((state) => state.auth.user);
   const customerId = getCustomer?.customer?._id;
 
-  const Pickfav = () => {
-    let addtofavCall = addtoFavProduct(customerId, merchantId);
-    addtofavCall.then((res) => {
-      if (res.status === true) {
-        toast.success(res.msg);
-        setAddBookmark(false);
-        let customerresult = CutomerInfoCall(customerId);
-        customerresult.then((res) => {
-          let productResponse = getProductfavCall(res?.customer?.products);
-          productResponse.then((result) => {
-            console.log(result);
-          });
-        });
-      }
+  useEffect(() => {
+    let customerresult = CutomerInfoCall(customerId);
+    customerresult.then((res) => {
+      // setCustomerBrandList(res?.customer?.brands || [])
+      let merchantResponse = getProductfavCall(res?.customer?.products);
+      merchantResponse.then((result) => {
+        if (result && result.length > 0) {
+          var isFav =
+            result.filter(function (val) {
+              return Number(val.productId) === merchantId;
+            }).length > 0;
+
+          setAddBookmark(isFav);
+        }
+      });
     });
+  }, []);
+
+  const Pickfav = async () => {
+    if (addBookmark) {
+      try {
+        let response = await Delete_call(
+          `${customerAuth}/${customerId}/products/${merchantId}`
+        );
+        if (response.status === 202) {
+          toast.success("Offer has been remove from favorite");
+          setAddBookmark(false);
+        }
+      } catch (error) {
+        console.leg(error);
+        throw error;
+      }
+    } else {
+      let addtofavCall = addtoFavProduct(customerId, merchantId);
+      addtofavCall.then((res) => {
+        if (res.status === true) {
+          toast.success("Offer has been added to favorite");
+          setAddBookmark(true);
+          let customerresult = CutomerInfoCall(customerId);
+          customerresult.then((res) => {
+            let productResponse = getProductfavCall(res?.customer?.products);
+            productResponse.then((result) => {
+              console.log(result);
+            });
+          });
+        }
+      });
+    }
   };
 
   return (
@@ -85,11 +119,11 @@ export default function PrizeDraw() {
                   onClick={() => Pickfav()}
                 >
                   {addBookmark ? (
-                    <MdBookmarkBorder style={{ fontSize: "2rem" }} />
-                  ) : (
                     <MdBookmark
                       style={{ fontSize: "2rem", color: "#120078" }}
                     />
+                  ) : (
+                    <MdBookmarkBorder style={{ fontSize: "2rem" }} />
                   )}
                 </span>
                 <div className="text-center d-flex align-items-center justify-content-center">

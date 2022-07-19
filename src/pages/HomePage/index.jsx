@@ -21,10 +21,15 @@ import {
   RightOutlined,
   //ShoppingOutlined
 } from "@ant-design/icons";
-import { featuredCall } from "../../actions/favouriteCall";
+import {
+  CutomerInfoCall,
+  featuredCall,
+  getMerchantCall,
+} from "../../actions/favouriteCall";
 import { useNavigate, Link } from "react-router-dom";
 import env from "../../enviroment";
 import { Post_call } from "../../network/networkmanager";
+import { getFavouriteBrand } from "../../actions/brandAction";
 
 const values = env();
 const { getCategoriesByClientID } = values;
@@ -55,6 +60,15 @@ const index = () => {
     let featureResult = featuredCall();
     featureResult.then((res) => {
       setFeaturedData(res.data);
+    });
+
+    let customerresult = CutomerInfoCall(customerId);
+    customerresult.then((res) => {
+      // setCustomerBrandList(res?.customer?.brands || [])
+      let merchantResponse = getMerchantCall(res?.customer?.brands);
+      merchantResponse.then((result) => {
+        dispatch(getFavouriteBrand(result || []));
+      });
     });
   }, []);
 

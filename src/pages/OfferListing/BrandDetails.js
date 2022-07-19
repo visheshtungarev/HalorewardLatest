@@ -12,10 +12,11 @@ import Cashback from "./CashBack/Cashback";
 import { Link } from "react-scroll";
 import { getOfferAction } from "../../actions/getOfferAction";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Put_call } from "../../network/networkmanager";
+import { Delete_call, Put_call } from "../../network/networkmanager";
 import env from "../../enviroment";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
+import { CutomerInfoCall, getMerchantCall } from "../../actions/favouriteCall";
 // import Coupon from './PrizeDraws/PrizeDraw';
 
 const allTredingOffers = [
@@ -78,15 +79,34 @@ export default function BrandDetails() {
   const [dataArr] = useState(allTredingOffers);
   const [offerData, setOfferData] = useState(allTredingOffers);
   const [countofOffer, setCountofOffer] = useState({});
+  const [isFavourite, setIsFavourite] = useState(false);
   const [brandName, setBrandName] = useState(getData?.state?.brandName);
   const [offerArrayData, setOfferArrayData] = useState({
     cashback: [],
     coupon: [],
     prize: [],
   });
-  console.log(dataArr);
 
-  console.log("ids .....", ids);
+  const getCustomer = useSelector((state) => state.auth.user);
+
+  useEffect(() => {
+    let customerId = getCustomer?.customer?._id;
+    let customerresult = CutomerInfoCall(customerId);
+    customerresult.then((res) => {
+      // setCustomerBrandList(res?.customer?.brands || [])
+      let merchantResponse = getMerchantCall(res?.customer?.brands);
+      merchantResponse.then((result) => {
+        if (result && result.length > 0) {
+          var isFav =
+            result.filter(function (val) {
+              return val.merchantId === ids;
+            }).length > 0;
+
+          setIsFavourite(isFav);
+        }
+      });
+    });
+  }, []);
 
   useEffect(() => {
     let offerResult = getOfferAction(ids);
@@ -128,23 +148,37 @@ export default function BrandDetails() {
     setBrandName(getData?.state?.brandName);
   }, [ids]);
 
-  const getCustomer = useSelector((state) => state.auth.user);
-
   const addTofav = async () => {
     const values = env();
     const { customerAuth } = values;
     let customerId = getCustomer?.customer?._id;
-    try {
-      let response = await Put_call(
-        `${customerAuth}/${customerId}/brands/${offerData?.merchantId}`
-      );
-      if (response.status === 202) {
-        toast.success("Brand has been added to favorite list");
-        // getNoPick();
+
+    if (isFavourite) {
+      try {
+        let response = await Delete_call(
+          `${customerAuth}/${customerId}/brands/${ids}`
+        );
+        if (response.status === 202) {
+          toast.success("Brand has been remove from favorite");
+          setIsFavourite(false);
+        }
+      } catch (error) {
+        console.leg(error);
+        throw error;
       }
-    } catch (error) {
-      console.error(error);
-      throw error;
+    } else {
+      try {
+        let response = await Put_call(
+          `${customerAuth}/${customerId}/brands/${ids}`
+        );
+        if (response.status === 202) {
+          toast.success("Brand has been added to favorite");
+          setIsFavourite(true);
+        }
+      } catch (error) {
+        console.error(error);
+        throw error;
+      }
     }
   };
 
@@ -213,7 +247,7 @@ export default function BrandDetails() {
                 <h4 className="fw-bold text-lg-left text-center py-3 py-lg-0 text-white m-0">
                   {getData.state?.brandName}
                 </h4>
-                <span
+                {/* <span
                   onClick={() => addTofav()}
                   style={{
                     width: "25px",
@@ -222,7 +256,20 @@ export default function BrandDetails() {
                     cursor: "pointer",
                   }}
                   className="checkimg"
-                ></span>
+                ></span> */}
+                <span
+                  className="favoriteBtn"
+                  style={{ margin: "5px 10px", cursor: "pointer" }}
+                >
+                  <input
+                    style={{ cursor: "pointer" }}
+                    name="makeFav"
+                    type="checkbox"
+                    checked={isFavourite}
+                    onChange={() => addTofav()}
+                  />
+                  <span className="checkimg"></span>
+                </span>
               </div>
               <p className="align-items-center d-none d-lg-flex">
                 {getData.state.totalCashback}

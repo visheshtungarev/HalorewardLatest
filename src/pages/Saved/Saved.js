@@ -178,6 +178,7 @@ export default function Saved() {
               // actionText="View All"
               actionLink="/saved/saved-coupon"
             />
+
             <Row
               align="middle"
               className="scrolledView mb-4"
@@ -232,7 +233,7 @@ export default function Saved() {
                       // }
                     >
                       <>
-                        <img className="dealicon" src="/Images/flipkart.png" />
+                        <img className="dealicon" src="" alt="no-image" />
                         <p className="deals_title" style={{ height: "60px" }}>
                           {item?.productMetaData?.map((element) => {
                             if (element.key === "title") {
@@ -263,7 +264,7 @@ export default function Saved() {
             <Row
               align="middle"
               className="scrolledView"
-              justify="space-around"
+              justify="flex-start"
               gutter={30}
             >
               {/* when no coupon found ====================*/}
@@ -287,7 +288,7 @@ export default function Saved() {
                         </p>
                         <Link to="/saved/picking-favorite-brand">
                           <Button type="primary" size="large">
-                            View All Brand
+                            Choose Your Favourite
                           </Button>
                         </Link>
                       </Col>
@@ -310,7 +311,7 @@ export default function Saved() {
                       <Link
                         to={`/brand?id=${item.merchantId}`}
                         state={{
-                          totalCashback: item.customerMaxRebate,
+                          totalCashback: item.shortTitle,
                           description: item.merchantDescription,
                           ids: item.merchantId,
                           isCard: item.onCard,

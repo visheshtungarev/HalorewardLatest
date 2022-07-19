@@ -36,7 +36,7 @@ export default function PickingFavoriteBrand() {
   const navigate = useNavigate();
   const [, setOpenSidePanel] = useState(false);
   const [brandList, setBrandList] = useState([]);
-
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const dispatch = useDispatch();
 
   const getCustomer = useSelector((state) => state.auth.user);
@@ -104,9 +104,6 @@ export default function PickingFavoriteBrand() {
             }
           });
         });
-        // response.data.map((item) => {
-        //   item["isChecked"] = false;
-        // });
         setBrandList(response.data);
       }
     } catch (error) {
@@ -114,19 +111,6 @@ export default function PickingFavoriteBrand() {
       throw error;
     }
   };
-
-  // useEffect(()=>{
-  //   brandResult.forEach((item) => {
-  //     response.data.filter((element) => {
-  //       if (item.merchantId === element.merchantId) {
-  //         alert("hello");
-  //         element["isChecked"] = false;
-  //       }
-  //     });
-  //   });
-  //   setBrandList()
-  // },[brandList])
-
   const handleOnChange = async (key, id, isFav) => {
     if (isFav === true) {
       try {
@@ -149,21 +133,17 @@ export default function PickingFavoriteBrand() {
             let merchantResponse = getMerchantCall(res?.customer?.brands);
             merchantResponse.then((result) => {
               setFavouriteBrandList(result || []);
+              setIsSubmitting(false);
             });
           });
-
-          // let array2 = favouriteBrandList.filter(
-          //   (item) => item.merchantId !== id
-          // );
-          // setFavouriteBrandList(array2);
-
-          // getNoPick();
         }
       } catch (error) {
+        setIsSubmitting(false);
         console.error(error);
         throw error;
       }
     } else {
+      setIsSubmitting(true);
       try {
         let response = await Put_call(
           `${customerAuth}/${customerId}/brands/${id}`
@@ -183,33 +163,23 @@ export default function PickingFavoriteBrand() {
             let merchantResponse = getMerchantCall(res?.customer?.brands);
             merchantResponse.then((result) => {
               setFavouriteBrandList(result);
+              setIsSubmitting(false);
             });
           });
           // getNoPick();
         }
       } catch (error) {
+        setIsSubmitting(false);
         console.error(error);
         throw error;
       }
     }
   };
 
-  console.log("favouriteBrandList  ....", favouriteBrandList);
-
-  // function getNoPick() {
-  //   let isNoPick = true;
-  //   brandList &&
-  //     brandList.length > 0 &&
-  //     brandList.find((item) => {
-  //       if (item.isChecked) {
-  //         isNoPick = false;
-  //       }
-  //     });
-  //   return isNoPick;
-  // }
-  // const isNoPickResult = getNoPick();
+  // console.log("isSubmitting  ....", isSubmitting);
 
   const removePickhandler = async (id) => {
+    setIsSubmitting(true);
     try {
       let response = await Delete_call(
         `${customerAuth}/${customerId}/brands/${id}`
@@ -229,11 +199,13 @@ export default function PickingFavoriteBrand() {
           let merchantResponse = getMerchantCall(res?.customer?.brands);
           merchantResponse.then((result) => {
             setFavouriteBrandList(result || []);
+            setIsSubmitting(false);
           });
         });
         // getNoPick();
       }
     } catch (error) {
+      setIsSubmitting(false);
       console.error(error);
       throw error;
     }
@@ -324,6 +296,7 @@ export default function PickingFavoriteBrand() {
                             onClick={() =>
                               removePickhandler(element.merchantId)
                             }
+                            style={{ cursor: "pointer" }}
                           >
                             <img
                               src="/Images/close.svg"
@@ -376,9 +349,10 @@ export default function PickingFavoriteBrand() {
                         <div>
                           <span
                             className="favoriteBtn"
-                            // onClick={() => pickBrandHandler(item.merchantId)}
+                            style={{ cursor: "pointer" }}
                           >
                             <input
+                              style={{ cursor: "pointer" }}
                               name="makeFav"
                               type="checkbox"
                               checked={item.isChecked}
@@ -401,25 +375,7 @@ export default function PickingFavoriteBrand() {
           </Col>
         </Row>
       </div>
+      {isSubmitting && <div className="loading"></div>}
     </div>
   );
 }
-
-// let response = await fetch(
-//   "https://customers-service.dxxrewards.click/api/customers/18/brands/1",
-//   {
-//     method: "put",
-//     body: "",
-//     headers: {
-//       Authorization:
-//         "Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICIxOFBWV1JRdFMzOVdoVFdxa0dWSUd0SUVRcWJIZWJESXlTOTI0dXFtMC1rIn0.eyJleHAiOjE2NTYwMzU2MzYsImlhdCI6MTY1NjAwNjgzNiwianRpIjoiY2VhZDYwNDItOTFiYy00Y2RhLTk0OWQtZWUwMDAwZmQ3MjE1IiwiaXNzIjoiaHR0cDovLzU0LjgzLjI4LjEwNDo4MDgwL2F1dGgvcmVhbG1zL21hc3RlciIsImF1ZCI6WyJtYXN0ZXItcmVhbG0iLCJhY2NvdW50Il0sInN1YiI6ImQ4NjVkZGViLTcyZTMtNDQ1YS1iMTA5LTQ4NGNlMzA5YTUyYyIsInR5cCI6IkJlYXJlciIsImF6cCI6InN6ZWxscy1zZXJ2ZXIiLCJzZXNzaW9uX3N0YXRlIjoiOWQzMDk2OTMtZDBiNC00YjkyLWIyYzctMDAzNjczYTU0YzU0IiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJjcmVhdGUtcmVhbG0iLCJkZWZhdWx0LXJvbGVzLW1hc3RlciIsIm9mZmxpbmVfYWNjZXNzIiwiYWRtaW4iLCJ1bWFfYXV0aG9yaXphdGlvbiJdfSwicmVzb3VyY2VfYWNjZXNzIjp7Im1hc3Rlci1yZWFsbSI6eyJyb2xlcyI6WyJ2aWV3LXJlYWxtIiwidmlldy1pZGVudGl0eS1wcm92aWRlcnMiLCJtYW5hZ2UtaWRlbnRpdHktcHJvdmlkZXJzIiwiaW1wZXJzb25hdGlvbiIsImNyZWF0ZS1jbGllbnQiLCJtYW5hZ2UtdXNlcnMiLCJxdWVyeS1yZWFsbXMiLCJ2aWV3LWF1dGhvcml6YXRpb24iLCJxdWVyeS1jbGllbnRzIiwicXVlcnktdXNlcnMiLCJtYW5hZ2UtZXZlbnRzIiwibWFuYWdlLXJlYWxtIiwidmlldy1ldmVudHMiLCJ2aWV3LXVzZXJzIiwidmlldy1jbGllbnRzIiwibWFuYWdlLWF1dGhvcml6YXRpb24iLCJtYW5hZ2UtY2xpZW50cyIsInF1ZXJ5LWdyb3VwcyJdfSwiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJwcm9maWxlIGVtYWlsIiwic2lkIjoiOWQzMDk2OTMtZDBiNC00YjkyLWIyYzctMDAzNjczYTU0YzU0IiwiZW1haWxfdmVyaWZpZWQiOnRydWUsInByZWZlcnJlZF91c2VybmFtZSI6ImhhbG9yZXdhcmRzQHRlc3QuY29tIn0.HZr7Vd3rq-N6mWNbfVvfIbZpb9dv8EB21qqXHZ0PcP5V2-GqNQOTVinEHzfcd_rLhOWJ98e9z42tDvYm9-S4zKeG1Hi0ozBYXVCl9r06qtlXc6GoXTOAPTTsxldNTmfceuy4z3RfB2rr2XBRx8616PRYnq1Aoooqc3cDAKqjad6KmuFNjMOqG4IyPIp1oIT_LiqFfcqpTXjnGsQDccuoLxJ0_FRqJd2q9SOEwA48e7PalA785TWvytDIAF1UCE_MZ97VTsNrMC2F06zJ6nwE4Vq0KneogOibtYbvIMjz1vbLQn6P8_Kv2vn3kSGJ9hcJnFzZNJ6ND2837czWn5JnEg",
-//       // "Content-Length": 0,
-//       accepts: "*/*",
-//       // "Accept-Encoding":"gzip, deflate, br"
-//     },
-//   }
-// )
-//   .then((response) => response.text())
-//   .then((result) => console.log(result))
-//   .catch((error) => console.log("error", error));
-// console.log("response", response);

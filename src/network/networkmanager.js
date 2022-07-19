@@ -105,10 +105,10 @@ export const getConfig = async (config) => {
   ) {
     console.log("config", config);
   }
-  let token = (await localStorage.getItem("accessToken"))
+  (await localStorage.getItem("accessToken"))
     ? localStorage.getItem("accessToken")
     : "Basic YXBpLXVzZXI6YWRtaW4xMjM=";
-  console.log("token", token);
+  // console.log("token", token);
   config.headers = {
     // Accept: "application/json",
     Accept: "*/*",
