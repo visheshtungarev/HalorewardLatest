@@ -296,7 +296,8 @@ const Index = () => {
                   //     ? "/saved"
                   //     : "/saved/picking-favorite-brand"
                   // }
-                  to="/saved/picking-favorite-brand"
+                  // to="/saved/picking-favorite-brand"
+                  to="/saved"
                   className="text-dark fw-bold"
                 >
                   <img src="Images/Bookmark_icon_outline.svg" />{" "}
