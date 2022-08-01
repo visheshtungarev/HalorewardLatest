@@ -8,16 +8,18 @@ import Heading from "../../components/Heading/Heading";
 import { HomeConstant } from "../../Constants";
 import Badge from "../../components/Badge/Badge";
 import { Collapse } from "antd";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { useSelector } from "react-redux";
 import {
   addtoFavProduct,
   CutomerInfoCall,
-  getProductfavCall,
+  getProductfavCall
 } from "../../actions/favouriteCall";
 import { Delete_call } from "../../network/networkmanager";
 import env from "../../enviroment";
+import { getMerchantsById } from "../../actions/merchantActions";
+import { helperFunction } from "../../Helpers/helperFunction";
 
 const values = env();
 const { customerAuth } = values;
@@ -26,14 +28,20 @@ export default function Cashback() {
   const { Panel } = Collapse;
 
   const location = useLocation();
+  const navigate = useNavigate();
   const objectItem = location?.state?.item;
   const merchantId = location?.state?.ids;
-  const [addBookmark, setAddBookmark] = useState(true);
-
   const getCustomer = useSelector((state) => state.auth.user);
   const customerId = getCustomer?.customer?._id;
 
+  const [addBookmark, setAddBookmark] = useState(false);
+  const [isLoader, setIsLoader] = useState(true);
+  const [brandDetails, setBrandDetails] = useState({
+    merchantId: location?.state?.ids
+  });
+
   useEffect(() => {
+    getMerchanDetails();
     let customerresult = CutomerInfoCall(customerId);
     customerresult.then((res) => {
       // setCustomerBrandList(res?.customer?.brands || [])
@@ -50,6 +58,14 @@ export default function Cashback() {
       });
     });
   }, []);
+
+  const getMerchanDetails = () => {
+    let callBack = (res) => {
+      setBrandDetails(res?.[0] ? res[0] : {});
+      setIsLoader(false);
+    };
+    getMerchantsById(location?.state?.ids, callBack);
+  };
 
   const Pickfav = async () => {
     if (addBookmark) {
@@ -83,37 +99,34 @@ export default function Cashback() {
     }
   };
 
-  console.log("merchantId", merchantId);
-
-  function callback(key) {
-    console.log(key);
-  }
   return (
     <>
-      <div className="home_container">
-        <Row align="middle" className="list_view mb-0 pb-0">
-          <Breadcurms
-            data={[
-              {
-                pageName: "Home",
-                pageLink: "/",
-              },
-              {
-                pageName: "All Brands",
-                pageLink: "/all-brands",
-              },
-              {
-                pageName: "Myntra",
-                pageLink: "/Myntra",
-              },
-              {
-                pageName: "Cashback",
-                pageLink: "/cashback",
-              },
-            ]}
-          />
-        </Row>
-      </div>
+      {!isLoader && (
+        <div className="home_container">
+          <Row align="middle" className="list_view mb-0 pb-0">
+            <Breadcurms
+              data={[
+                {
+                  pageName: "Home",
+                  pageLink: "/"
+                },
+                {
+                  pageName: "All Brands",
+                  pageLink: "/all-brands"
+                },
+                {
+                  pageName: brandDetails?.merchantName,
+                  onClick: () => navigate(-1)
+                },
+                {
+                  pageName: "Cashback",
+                  pageLink: ""
+                }
+              ]}
+            />
+          </Row>
+        </div>
+      )}
       <div className="home_container bg-white">
         <div className="list_view ">
           <Row>
@@ -135,9 +148,18 @@ export default function Cashback() {
                 <div className="text-center d-flex align-items-center justify-content-center">
                   <div className="d-flex align-items-center">
                     <div className="logo">
-                      <img src="Images/myntra.png" width="100%" />
+                      <img
+                        src={helperFunction?.appendImageURL(
+                          brandDetails.merchantLogo1
+                        )}
+                        width="100%"
+                      />
                     </div>
-                    <h5 className="mb-0 ml-3">{location?.state?.name}</h5>
+                    <h5 className="mb-0 ml-3">
+                      {helperFunction?.firstLatterCapital(
+                        brandDetails?.merchantName
+                      )}
+                    </h5>
                   </div>
                 </div>
                 <h5 className="text-center fw-bold py-4">
@@ -230,7 +252,6 @@ export default function Cashback() {
                 <Collapse
                   className="d-lg-none d-block"
                   defaultActiveKey={["1"]}
-                  onChange={callback}
                 >
                   <Panel
                     header={<h5 className=" mb-0">Terms & Conditions</h5>}

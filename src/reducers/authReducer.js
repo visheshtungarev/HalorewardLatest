@@ -11,7 +11,7 @@ import {
   GETCATEGORY,
   GETCUSTOMERDETAIL,
   GETFAVOURITEBRAND,
-  GETTOGGLE,
+  GETTOGGLE
 } from "../Constants/ActionsConstants";
 
 const INITIAL_STATE = {
@@ -26,7 +26,7 @@ const INITIAL_STATE = {
   all_category: [],
   customerDetail: {},
   fav_brand: [],
-  isToggle: false,
+  isToggle: false
 };
 
 const AuthReducer = (state = INITIAL_STATE, action) => {
@@ -34,7 +34,7 @@ const AuthReducer = (state = INITIAL_STATE, action) => {
     return state;
   }
 
-  console.log(action);
+  // console.log(action);
   switch (action.type) {
     case TOGGLELOADING: {
       return { ...state, isLoading: !state.isLoading };

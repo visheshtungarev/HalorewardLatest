@@ -8,11 +8,13 @@ import SideBar from "../../components/Sidebar/SideBar";
 import { getOfferAction } from "../../actions/getOfferAction";
 import { useDispatch, useSelector } from "react-redux";
 import { getCategoryAction } from "../../actions/CategoryAction";
+import { useNavigate } from "react-router-dom";
 
 export default function AllOffers() {
   const categoryList = useSelector((state) => state.auth.all_category);
   const [openSidePanel, setOpenSidePanel] = useState(false);
   const [offerData, setOfferData] = useState([]);
+  const [merchantId, setMerchantId] = useState(1);
   const [categoryListing, setCategoryListing] = useState([]);
 
   const [filterArrayCategory, setFilterArrayCategory] = useState([]);
@@ -20,7 +22,7 @@ export default function AllOffers() {
   const [offerObject, setOfferObject] = useState();
 
   const dispatch = useDispatch();
-
+  const navigate = useNavigate();
   const { Option } = Select;
   const closeSidebar = () => {
     !openSidePanel ? setOpenSidePanel(true) : setOpenSidePanel(false);
@@ -33,6 +35,7 @@ export default function AllOffers() {
     dispatch(getCategoryAction);
     let offerResult = getOfferAction();
     offerResult.then((data) => {
+      setMerchantId(data.products?.merchantId ? data.products?.merchantId : 1);
       setOfferObject(data);
       if (data.products?.products.length > 0) {
         setOfferData(data.products.products);
@@ -53,12 +56,12 @@ export default function AllOffers() {
           data={[
             {
               pageName: "Categories",
-              pageLink: "/categories",
+              pageLink: "/categories"
             },
             {
               pageName: "All Offers",
-              pageLink: "/all-offers",
-            },
+              pageLink: "/all-offers"
+            }
           ]}
         />
       </Row>
@@ -106,9 +109,11 @@ export default function AllOffers() {
           </Col>
           <Col span={24} lg={{ span: 18 }}>
             <PopularOffers
+              merchantId={merchantId}
               filterArrayCategory={filterArrayCategory}
               offerData={offerData}
               offerObject={offerObject}
+              navigate={navigate}
             />
           </Col>
         </Row>

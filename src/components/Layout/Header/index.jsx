@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   AiOutlineHeart,
   AiFillHeart,
-  AiOutlineInfoCircle,
+  AiOutlineInfoCircle
 } from "react-icons/ai";
 import "./index.css";
 import TopMenu from "../../TopMenu/TopMenu";
@@ -18,11 +18,11 @@ import LinkExpired from "../../Auth/LinkExpired";
 import SetPwd from "../../Auth/SetPwd";
 import ResetPwd from "../../Auth/ResetPwd";
 import PwdChangedSuccsessfully from "../../Auth/PwdChangedSuccsessfully";
-import action from "../../../actions";
+// import action from "../../../actions";
 import { useDispatch, useSelector } from "react-redux";
 import {
   brandSearchAction,
-  resetMerchantAction,
+  resetMerchantAction
 } from "../../../actions/brandAction";
 import { TOGGLELOADING } from "../../../Constants/ActionsConstants";
 import { getCategoryAction } from "../../../actions/CategoryAction";
@@ -32,8 +32,8 @@ const { Search } = Input;
 const Index = () => {
   const getAuthentication = async () => {
     try {
-      let resp = await action.getSystemToken();
-      console.log("response>>>", resp);
+      // let resp = await action.getSystemToken();
+      // console.log("response>>>", resp);
     } catch (error) {
       console.log("error", error);
     }
@@ -58,12 +58,12 @@ const Index = () => {
   const getSearchData = useSelector((state) => state.auth?.brand);
   const isLoading = useSelector((state) => state.auth?.isLoading);
 
-  console.log("isLoading ...", isLoading);
+  // console.log("isLoading ...", isLoading);
 
   const categorylist = useSelector((state) => state.auth.all_category);
-  const getFavouriteBrand = useSelector((state) => state.auth.fav_brand);
+  // const getFavouriteBrand = useSelector((state) => state.auth.fav_brand);
 
-  console.log("getFavouriteBrand ....", getFavouriteBrand);
+  // console.log("getFavouriteBrand ....", getFavouriteBrand);
 
   const urlLocation = window.location.pathname;
   let params = new URLSearchParams(urlLocation);
@@ -74,7 +74,7 @@ const Index = () => {
   const [searchValue, setSearchValue] = useState();
 
   const location = useLocation();
-  console.log(location.pathname.split("/")[1]);
+  // console.log(location.pathname.split("/")[1]);
 
   const pageTitle = location.pathname
     .split("/")[1]

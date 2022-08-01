@@ -6,64 +6,15 @@ import "./index.css";
 import Heading from "../../../components/Heading/Heading";
 import ModalComp from "../../../components/Modals/ModalComp";
 import { useNavigate } from "react-router-dom";
-const allTredingOffers = [
-  {
-    image: "/Images/nykaa.png",
-    title: "Nykaa",
-    tag: "Generic",
-    content: "upto 70% cashback, 4 coupons, 2 Prize Draw...",
-    time: "1d 2h 21m",
-  },
-  {
-    image: "/Images/nykaa.png",
-    title: "Nykaa",
-    tag: "Site wide",
-    content: "upto 70% cashback, 4 coupons, 2 Prize Draw...",
-    time: "1d 2h 21m",
-  },
-  {
-    image: "/Images/nykaa.png",
-    title: "Nykaa",
-    tag: "Category",
-    content: "upto 70% cashback, 4 coupons, 2 Prize Draw...",
-    time: "1d 2h 21m",
-  },
-  {
-    image: "/Images/nykaa.png",
-    title: "Nykaa",
-    tag: "Category",
-    content: "upto 70% cashback, 4 coupons, 2 Prize Draw...",
-    time: "1d 2h 21m",
-  },
-  {
-    image: "/Images/nykaa.png",
-    title: "Nykaa",
-    tag: "Generic",
-    content: "upto 70% cashback, 4 coupons, 2 Prize Draw...",
-    time: "1d 2h 21m",
-  },
-  {
-    image: "/Images/nykaa.png",
-    title: "Nykaa",
-    tag: "Generic",
-    content: "upto 70% cashback, 4 coupons, 2 Prize Draw...",
-    time: "1d 2h 21m",
-  },
-];
+
 export default function Cashback({
   idname,
   cashbackList,
   brandName,
-  merchantId,
+  merchantId
 }) {
-  console.log(allTredingOffers);
-  // const [dataArr,] = useState(allTredingOffers)
   const navigate = useNavigate();
   const [isModalVisible, setIsModalVisible] = useState(false);
-
-  console.log("idname ...", idname);
-  // console.log("cashbackList ..", cashbackList);
-  // console.log("brandName ...", brandName);
 
   const showModal = () => {
     setIsModalVisible(true);
@@ -76,8 +27,6 @@ export default function Cashback({
   const handleCancel = () => {
     setIsModalVisible(false);
   };
-
-  // console.log("cashbackList.........", cashbackList)
 
   return (
     <>
@@ -172,8 +121,8 @@ export default function Cashback({
                                 state: {
                                   item: item,
                                   name: brandName,
-                                  ids: merchantId,
-                                },
+                                  ids: merchantId
+                                }
                               })
                             }
                           >

@@ -12,7 +12,7 @@ export const Post_call = async (
       url: endpoint,
       method: "POST",
       // data: payload ? { query: JSON.stringify(payload) } : {}
-      data: payload,
+      data: payload
     });
     return response;
   } catch (error) {
@@ -26,7 +26,7 @@ export const Put_call = async (endpoint, payload = {}) => {
     const response = await Axios({
       url: endpoint,
       method: "put",
-      data: payload ? JSON.stringify(payload) : {},
+      data: payload ? JSON.stringify(payload) : {}
     });
     return response;
   } catch (error) {
@@ -40,7 +40,7 @@ export const Delete_call = async (endpoint, payload = {}) => {
     const response = await Axios({
       url: endpoint,
       method: "delete",
-      data: payload ? JSON.stringify(payload) : {},
+      data: payload ? JSON.stringify(payload) : {}
     });
     return response;
   } catch (error) {
@@ -55,7 +55,7 @@ export const Get_Call = async (endpoint, payload = {}) => {
     const response = await Axios({
       url: endpoint,
       method: "GET",
-      params: { query: payload },
+      params: { query: payload }
       // data:{payload}
     });
     return response;
@@ -70,7 +70,7 @@ export const Patch_call = async (endpoint, payload = {}) => {
     const response = await Axios({
       url: endpoint,
       method: "patch",
-      data: payload ? JSON.stringify(payload) : {},
+      data: payload ? JSON.stringify(payload) : {}
     });
     return response;
   } catch (error) {
@@ -86,7 +86,7 @@ export const setToken = async (type, token) => {
 };
 
 const getToken = async (url) => {
-  console.log("url ....", url);
+  // console.log("url ....", url);
   if (url.includes("auth/login")) {
     return "Basic YXBpLXVzZXI6YWRtaW4xMjM=";
   } else if (url.includes("customers/signup")) {
@@ -98,12 +98,12 @@ const getToken = async (url) => {
   }
 };
 export const getConfig = async (config) => {
-  console.log(">>>>>>>>>>>>>>>>>", config);
+  // console.log(">>>>>>>>>>>>>>>>>", config);
   if (
     config.url ==
     "https://tenant-products-query.dxxrewards.click/api/clients/1/brands"
   ) {
-    console.log("config", config);
+    // console.log("config", config);
   }
   (await localStorage.getItem("accessToken"))
     ? localStorage.getItem("accessToken")
@@ -130,7 +130,7 @@ export const getConfig = async (config) => {
         "https://tenant-products-query.dxxrewards.click/api/clients/1/products"
         ? "text/plain"
         : "application/json",
-    "tenant-id": "1",
+    "tenant-id": "1"
     // redirect: 'follow'
   };
   if (

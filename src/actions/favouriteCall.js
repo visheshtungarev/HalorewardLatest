@@ -82,6 +82,7 @@ export const getProductfavCall = async (payload) => {
                   key
                   value
               }
+              merchantId
               
           }
       }`;

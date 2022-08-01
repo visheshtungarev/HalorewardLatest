@@ -9,7 +9,7 @@ import "../AllBrands/index.css";
 import { getOfferAction } from "../../actions/getOfferAction";
 import {
   GlobalOutlined,
-  CopyOutlined,
+  CopyOutlined
   //ShopOutlined,
   //ShoppingOutlined
 } from "@ant-design/icons";
@@ -106,12 +106,12 @@ export default function BrandList() {
             data={[
               {
                 pageName: "Trending Brand",
-                pageLink: "/all-brands",
+                pageLink: "/all-brands"
               },
               {
                 pageName: "Trending Brands",
-                pageLink: "/list?=trending-brands",
-              },
+                pageLink: "/list?=trending-brands"
+              }
             ]}
           />
         )}
@@ -121,12 +121,12 @@ export default function BrandList() {
             data={[
               {
                 pageName: "Home",
-                pageLink: "/",
+                pageLink: "/"
               },
               {
                 pageName: "Popular Offers",
-                pageLink: "/list?=popular-offer",
-              },
+                pageLink: "/list?=popular-offer"
+              }
             ]}
           />
         )}
@@ -136,12 +136,12 @@ export default function BrandList() {
             data={[
               {
                 pageName: "Home",
-                pageLink: "/",
+                pageLink: "/"
               },
               {
                 pageName: "Featured Brands",
-                pageLink: "/list?=feature-brand",
-              },
+                pageLink: "/list?=feature-brand"
+              }
             ]}
           />
         )}
@@ -190,7 +190,7 @@ export default function BrandList() {
                       totalCashback: item?.customerRebate,
                       description: trendingCarousel[0]?.description,
                       ids: item?.merchantId,
-                      isCard: item?.onCard,
+                      isCard: item?.onCard
                     }}
                   >
                     <Card className="deals_container">
@@ -360,7 +360,7 @@ export default function BrandList() {
                         totalCashback: item.customerRebate,
                         description: item.merchantDescription,
                         ids: item.merchantId,
-                        isCard: item.onCard,
+                        isCard: item.onCard
                       }}
                     >
                       <Card className="deals_container popularOffers rounded1">

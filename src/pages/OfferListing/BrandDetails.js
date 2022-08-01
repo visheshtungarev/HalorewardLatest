@@ -5,7 +5,6 @@ import { CreditCardOutlined } from "@ant-design/icons";
 import Breadcurms from "../../components/Breadcrums/Breadcurms";
 import { Row, Col, Card } from "antd";
 import Badge from "../../components/Badge/Badge";
-// import { Link } from "react-router-dom";
 import Coupon from "./Coupon/Coupon";
 import PrizeDraw from "./PrizeDraws/PrizeDraw";
 import Cashback from "./CashBack/Cashback";
@@ -26,7 +25,7 @@ const allTredingOffers = [
     modeIcon: <CreditCardOutlined />,
     modeType: "oncard",
     modeText: "ON CARD",
-    content: "upto 70% cashback, 4 coupons, 2 Prize Draw...",
+    content: "upto 70% cashback, 4 coupons, 2 Prize Draw..."
   },
   {
     image: "/Images/nykaa.png",
@@ -34,7 +33,7 @@ const allTredingOffers = [
     modeIcon: <CreditCardOutlined />,
     modeType: "oncard",
     modeText: "ON CARD",
-    content: "upto 70% cashback, 4 coupons, 2 Prize Draw...",
+    content: "upto 70% cashback, 4 coupons, 2 Prize Draw..."
   },
   {
     image: "/Images/flipkart.png",
@@ -42,7 +41,7 @@ const allTredingOffers = [
     modeIcon: <CreditCardOutlined />,
     modeType: "oncard",
     modeText: "ON CARD",
-    content: "upto 70% cashback, 4 coupons, 2 Prize Draw...",
+    content: "upto 70% cashback, 4 coupons, 2 Prize Draw..."
   },
   {
     image: "/Images/nykaa.png",
@@ -50,7 +49,7 @@ const allTredingOffers = [
     modeIcon: <CreditCardOutlined />,
     modeType: "oncard",
     modeText: "ON CARD",
-    content: "upto 70% cashback, 4 coupons, 2 Prize Draw...",
+    content: "upto 70% cashback, 4 coupons, 2 Prize Draw..."
   },
   {
     image: "/Images/flipkart.png",
@@ -58,7 +57,7 @@ const allTredingOffers = [
     modeIcon: <CreditCardOutlined />,
     modeType: "oncard",
     modeText: "ON CARD",
-    content: "upto 70% cashback, 4 coupons, 2 Prize Draw...",
+    content: "upto 70% cashback, 4 coupons, 2 Prize Draw..."
   },
   {
     image: "/Images/nykaa.png",
@@ -66,8 +65,8 @@ const allTredingOffers = [
     modeIcon: <CreditCardOutlined />,
     modeType: "oncard",
     modeText: "ON CARD",
-    content: "upto 70% cashback, 4 coupons, 2 Prize Draw...",
-  },
+    content: "upto 70% cashback, 4 coupons, 2 Prize Draw..."
+  }
 ];
 export default function BrandDetails() {
   // const getSearchData = useSelector((state) => state.auth?.brand);
@@ -84,7 +83,7 @@ export default function BrandDetails() {
   const [offerArrayData, setOfferArrayData] = useState({
     cashback: [],
     coupon: [],
-    prize: [],
+    prize: []
   });
 
   const getCustomer = useSelector((state) => state.auth.user);
@@ -136,12 +135,12 @@ export default function BrandDetails() {
       setOfferArrayData({
         cashback: cashbackArray,
         coupon: couponArray,
-        prize: prizeDrawArray,
+        prize: prizeDrawArray
       });
       setCountofOffer({
         prize: prizeDrawCount,
         coupon: couponCount,
-        cashback: cashbackCount,
+        cashback: cashbackCount
       });
       setOfferData(data?.products);
     });
@@ -192,16 +191,16 @@ export default function BrandDetails() {
         data={[
           {
             pageName: "Home",
-            pageLink: "/",
+            pageLink: "/"
           },
           {
             pageName: "All Brands",
-            pageLink: "/all-brands",
+            pageLink: "/all-brands"
           },
           {
             pageName: brandName,
-            pageLink: `/${brandName}`,
-          },
+            pageLink: `/${brandName}`
+          }
         ]}
       />
     );
@@ -219,7 +218,7 @@ export default function BrandDetails() {
           align="middle"
           className="mb-0 pb-0 brandWall d-none d-lg-block"
           style={{
-            background: "url('/Images/offerBanner.jpg')",
+            background: "url('/Images/offerBanner.jpg')"
           }}
         ></Row>
         <div className="list_view">
@@ -229,13 +228,11 @@ export default function BrandDetails() {
                 <img
                   src={`data:image/png;base64,${getData?.state?.brandLogo}`}
                   alt="img"
-                  // src="/Images/myntra.png"
                 />
               </div>
               <div className="whiteFrame">
                 <h5>About {getData.state?.brandName}</h5>
                 <p>{getData.state.description}</p>
-                {/* <Link to="">Show more</Link> */}
               </div>
             </Col>
             <Col className="brandInfo" span={24} lg={{ span: 18 }}>
@@ -247,16 +244,6 @@ export default function BrandDetails() {
                 <h4 className="fw-bold text-lg-left text-center py-3 py-lg-0 text-white m-0">
                   {getData.state?.brandName}
                 </h4>
-                {/* <span
-                  onClick={() => addTofav()}
-                  style={{
-                    width: "25px",
-                    marginLeft: "10px",
-                    marginBottom: "10px",
-                    cursor: "pointer",
-                  }}
-                  className="checkimg"
-                ></span> */}
                 <span
                   className="favoriteBtn"
                   style={{ margin: "5px 10px", cursor: "pointer" }}
@@ -399,34 +386,4 @@ export default function BrandDetails() {
       </div>
     </div>
   );
-}
-
-{
-  /* <Tabs defaultActiveKey="1" onChange={callback}>
-<TabPane
-  tab={
-   
-  }
-  key="2"
->
-
-</TabPane>
-
-  <TabPane
-    tab={
-    
-    }
-    key="3"
-  >
-  </TabPane>
-
-  <TabPane
-    tab={
-      
-    }
-    key="1"
-  >
-    
-  </TabPane>
-</Tabs> */
 }

@@ -5,7 +5,7 @@ import { Card, Col, Row, Button } from "antd";
 import Badge from "../Badge/Badge";
 import {
   GlobalOutlined,
-  CopyOutlined,
+  CopyOutlined
   //ShopOutlined,
   //ShoppingOutlined
 } from "@ant-design/icons";
@@ -14,6 +14,8 @@ export default function PopularOffers({
   filterArrayCategory,
   offerData,
   offerObject,
+  navigate,
+  merchantId
 }) {
   return (
     <Row align="middle" justify="flex-start" gutter={30}>
@@ -36,9 +38,22 @@ export default function PopularOffers({
             return (
               <Col
                 key={key}
-                className="deals_box featuredOffers mb-4"
+                className="deals_box featuredOffers mb-4 btn"
                 span={12}
                 lg={{ span: 12 }}
+                onClick={() =>
+                  navigate(
+                    `/${
+                      item.productId === "coupon" ? "coupon" : "cashback"
+                    }?id=${item.productId}`,
+                    {
+                      state: {
+                        item: item,
+                        ids: merchantId
+                      }
+                    }
+                  )
+                }
               >
                 <Card className="deals_container popularOffers" actions={[]}>
                   <div className="d-flex w-100 ">

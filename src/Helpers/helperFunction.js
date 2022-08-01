@@ -26,4 +26,9 @@ export const helperFunction = {
     });
     callBack(newArry);
   },
+  firstLatterCapital: (str) =>
+    str ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() : "",
+  appendImageURL: (img) => {
+    return img ? "data:image/png;base64, " + img : "assets/images/logo_sm.svg";
+  }
 };

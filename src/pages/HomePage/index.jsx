@@ -18,13 +18,13 @@ import { getOfferAction } from "../../actions/getOfferAction";
 import {
   GlobalOutlined,
   CopyOutlined,
-  RightOutlined,
+  RightOutlined
   //ShoppingOutlined
 } from "@ant-design/icons";
 import {
   CutomerInfoCall,
   featuredCall,
-  getMerchantCall,
+  getMerchantCall
 } from "../../actions/favouriteCall";
 import { useNavigate, Link } from "react-router-dom";
 import env from "../../enviroment";
@@ -70,6 +70,7 @@ const index = () => {
         dispatch(getFavouriteBrand(result || []));
       });
     });
+    getBrandList();
   }, []);
 
   const carouselState = useSelector((state) => state.auth.carousel);
@@ -77,7 +78,6 @@ const index = () => {
 
   useEffect(() => {
     getCarouseItem();
-    getBrandList();
   }, [carouselState]);
 
   const getCarouseItem = () => {
@@ -170,6 +170,7 @@ const index = () => {
       </Card>
     );
   };
+
   return (
     <div className="home_container">
       <Row align="middle" className="carousel_container">
@@ -238,8 +239,8 @@ const index = () => {
                         state: {
                           item: products,
                           name: item.merchantName,
-                          ids: item.merchantId,
-                        },
+                          ids: item.merchantId
+                        }
                       })
                     }
                   >
@@ -285,11 +286,6 @@ const index = () => {
       </div>
 
       <div className="list_view">
-        {/* <Heading
-          HeadingText="Trending Brands"
-          actionText={trendingCarousel[0]?.brands?.length > 6 ? "View All" : ""}
-          actionLink="/all-brands"
-        /> */}
         <Row
           className="headingFancy mt-md-4"
           align="middle"
@@ -334,58 +330,6 @@ const index = () => {
               ))}
         </Row>
       </div>
-
-      {/* <div className="list_view">
-        <Heading
-          HeadingText="Expiring Deals"
-          actionText="View All"
-          actionLink="/all-offers"
-        />
-        <Row
-          align="middle"
-          className="scrolledView"
-          justify="space-around"
-          gutter={30}
-        >
-          {HomeConstant?.expiringDeals?.map((item, key) => (
-            <Col key={key} className="deals_box" span={4}>
-              <Card className="deals_container" actions={[]}>
-                <>
-                  <Badge
-                    position={""}
-                    badgeType={item.offer}
-                    badgeText={item.offer}
-                    badgeIcon={item.offerIcon}
-                  />
-
-                  <Badge
-                    position={""}
-                    badgeType={item.mode}
-                    badgeText={item.mode}
-                    badgeIcon={item.modeIcon}
-                  />
-
-                  <img className="dealicon" src={item.image} />
-                  <p className="deals_title">{item.title}</p>
-                </>
-                <Divider />
-                <Row align="middle" key="time" className="deals_action">
-                  <ClockCircleOutlined className="deals_offer_title" />
-                  <span>{item.time}</span>
-                </Row>
-              </Card>
-            </Col>
-          ))}
-        </Row>
-      </div>
-      <div className="list_view">
-        <Heading
-          HeadingText="Trending Brands"
-          actionText="View All"
-          actionLink="/all-brands"
-        />
-        <TrendingBrands span={4} />
-      </div> */}
 
       <div className="list_view themeBg">
         <Heading
@@ -436,25 +380,27 @@ const index = () => {
               return (
                 <Col
                   key={key}
-                  className="deals_box featuredOffers mb-4"
+                  className="deals_box featuredOffers mb-4 btn"
                   span={12}
                   lg={{ span: 12 }}
+                  onClick={() =>
+                    navigate(`/${item.productId === "coupon" ? "coupon" : "cashback"}?id=${item.productId}`, {
+                      state: {
+                        item: item,
+                        isCard: item.onCard,
+                        ids: offerData?.products?.merchantId
+                      }
+                    })
+                  }
                 >
                   <Card className="deals_container popularOffers">
                     <div className="d-flex w-100 ">
                       <div>
-                        {/* <p>
-                        Image not available <br />
-                        from database
-                      </p> */}
                         <img
                           className="dealicon_img_frame_lg"
                           src=""
                           alt="no-image"
                         />
-                        {/* <p className="deals_title">
-                        {offerData.products.merchantName}
-                      </p> */}
                       </div>
                       <div className="flex-grow-1">
                         <div>
@@ -489,11 +435,36 @@ const index = () => {
                             })}
                           </p>
                         </div>
-                        {/* <Row key="time" className="featured_offer_action ">
-                                    <span>{item.time}</span>
-                                </Row> */}
-                        <Button type="primary">
-                          <a
+
+                        {item.contentType == "coupon" && (
+                          <Button type="primary">
+                            <Link
+                              className="d-flex align-items-center"
+                              to={`/coupon?id=${item.productId}`}
+                              state={{ item: item }}
+                            >
+                              Reveal code
+                            </Link>
+                          </Button>
+                        )}
+                        {item.contentType == "cashback" && (
+                          <Button type="primary">
+                            <a
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              href={url}
+                            >
+                              go to site
+                            </a>
+                          </Button>
+                        )}
+
+                        {/* <Button type="primary">
+                          {item.contentType}{url} */}
+
+                        {/* caseback - go to site
+                          coupon - Reveal */}
+                        {/* <a
                             // rel="noreferrer"
                             rel="noopener noreferrer"
                             target="_blank"
@@ -518,9 +489,8 @@ const index = () => {
                                 item.subcontentType === "instore"
                               ? "Reveal code"
                               : ""}
-                            {/* Reveal Code */}
-                          </a>
-                        </Button>
+                          </a> */}
+                        {/* </Button> */}
                       </div>
                     </div>
                   </Card>
@@ -540,12 +510,7 @@ const index = () => {
 
           <Col className="list_action">
             {brandData && brandData.length > 0 && (
-              <Link
-                className="d-flex align-items-center"
-                //to="/list?=feature-brand"
-                to="/all-brands"
-                // state={{ type: "featured-brand" }}
-              >
+              <Link className="d-flex align-items-center" to="/all-brands">
                 View All
                 <RightOutlined />
               </Link>
@@ -571,7 +536,7 @@ const index = () => {
                       ids: item.merchantId,
                       isCard: item.onCard,
                       brandName: item?.merchantName,
-                      brandLogo: item?.merchantLogo1,
+                      brandLogo: item?.merchantLogo1
                     }}
                   >
                     <Card className="deals_container popularOffers rounded1">
@@ -640,8 +605,6 @@ const index = () => {
             })}
         </Row>
       </div>
-
-      {/* <Footer /> */}
     </div>
   );
 };
