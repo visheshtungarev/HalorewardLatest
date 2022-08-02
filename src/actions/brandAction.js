@@ -4,47 +4,68 @@ import {
   BRANDSEARCH,
   GETFAVOURITEBRAND,
   GETTOGGLE,
-  RESETBRAND,
+  RESETBRAND
 } from "../Constants/ActionsConstants";
 // import { constVariable } from "../constants/String";
 import env from "../enviroment";
 import { Post_call } from "../network/networkmanager";
 
 const values = env();
-const { merchantquerry, getCategoriesByClientID } = values;
+const { featureOfferQuery, getCategoriesByClientID } = values;
 
-export const brandSearchAction = (payload, actionType) => async (dispatch) => {
+export const brandSearchAction = (name, actionType) => async (dispatch) => {
   var raw = `{
-    merchantsByName(merchantName: "${payload}") {
+    brandsByName(name: "${name}") {
         merchantId
-        merchantName
-        status
-        rewardType
-        provider
-        categories
         merchantRank
-        merchantLogo1
-        merchantUrl
-        merchantImage1
+        merchantName
+        totalProductCount
         merchantDescription
+        status
+        shortTitle
+        onCard
+        provider
         customerMaxRebate
+        merchantUrl
+        products {
+            productId
+        }
+        contentTypes {
+            name
+            size
+        }
     }
-}
-`;
+  }`;
 
   try {
-    let response = await Post_call(`${merchantquerry}/merchants`, raw, false);
+    let response = await Post_call(
+      `${featureOfferQuery}/1/brands/byName`,
+      raw,
+      false
+    );
     if (response.status === 200) {
+      let filterArray = [];
+      response?.data?.map((item) => {
+        if (
+          item?.contentTypes &&
+          (item.contentTypes.length > 0) &
+            (item.contentTypes.filter((content) => parseInt(content.size) > 0)
+              .length >
+              0)
+        ) {
+          filterArray.push(item);
+        }
+      });
       if (actionType === "search") {
         dispatch({
           type: BRANDSEARCH,
-          payload: response.data,
+          payload: filterArray
         });
       }
       if (actionType === "enter") {
         dispatch({
           type: BRANDENTER,
-          payload: response.data,
+          payload: filterArray
         });
       }
     }
@@ -67,7 +88,7 @@ export const brandListAction = (payload) => async (dispatch) => {
     if (response.status === 200) {
       dispatch({
         type: BRANDLIST,
-        payload: response.data,
+        payload: response.data
       });
     }
   } catch (error) {
@@ -79,14 +100,14 @@ export const brandListAction = (payload) => async (dispatch) => {
 export const resetMerchantAction = (dispatch) => {
   dispatch({
     type: RESETBRAND,
-    payload: "",
+    payload: ""
   });
 };
 
 export const getFavouriteBrand = (data) => async (dispatch) => {
   dispatch({
     type: GETFAVOURITEBRAND,
-    payload: data,
+    payload: data
   });
 };
 
@@ -95,6 +116,6 @@ export const toggleCategory = (data) => async (dispatch) => {
   console.log("data", data);
   dispatch({
     type: GETTOGGLE,
-    payload: data,
+    payload: data
   });
 };

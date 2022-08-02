@@ -13,7 +13,7 @@ export default function Breadcurms({ data }) {
           return item.onClick || Boolean(currentRoute.length === i + 1) ? (
             <span
               className={`navLink ${
-                Boolean(currentRoute.length === i + 1) ? "" : "btn"
+                currentRoute.length === i + 1 ? " " : " btn"
               }`}
               key={i}
               onClick={() =>

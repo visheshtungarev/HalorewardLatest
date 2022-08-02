@@ -70,33 +70,11 @@ export const getCarousel = (payload) => async (dispatch) => {
     if (response.status === 200) {
       dispatch({
         type: GETCAROUSEL,
-        payload: response.data,
+        payload: response.data
       });
     }
   } catch (error) {
     console.error(error);
     throw error;
   }
-
-  // var myHeaders = new Headers();
-  // myHeaders.append("tenant-id", "1");
-  // myHeaders.append("Content-Type", "text/plain");
-  // myHeaders.append("Cookie", "JSESSIONID=522DB001151C8D5A7557921CE9F6C63D");
-
-  // var requestOptions = {
-  //   method: 'POST',
-  //   headers: myHeaders,
-  //   body: raw,
-  //   redirect: 'follow'
-  // };
-
-  // fetch("https://tenant-products-query.dxxrewards.click/api/clients/carousels", requestOptions)
-  //   .then(response => response.text())
-  //   .then(result => console.log(
-  //     dispatch({
-  //       type: GETCAROUSEL,
-  //       payload: result,
-  //     })
-  //   ))
-  //   .catch(error => console.log('error', error));
 };

@@ -9,7 +9,7 @@ export default function SearchResult({
   getSearchData,
   value,
   setValue,
-  currentUrl,
+  currentUrl
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -131,7 +131,7 @@ export default function SearchResult({
                         ids: element.merchantId,
                         isCard: element.onCard,
                         brandName: element?.merchantName,
-                        brandLogo: element?.merchantLogo1,
+                        brandLogo: element?.merchantLogo1
                       }}
                       onClick={() => setValue("")}
                     >
@@ -147,7 +147,19 @@ export default function SearchResult({
                             <img src="/Images/arrow_up_.svg" height={15} />
                           </div>
                           <p className="mb-0">
-                            upto 70% cashback, 4 coupons, 2 Prize Draws
+                            {element?.contentTypes.map((val) => {
+                              if (val.name === "Cashbacks") {
+                                return (
+                                  <span>
+                                    {"Upto " + val.size + "%" + " " + val.name},{" "}
+                                  </span>
+                                );
+                              } else {
+                                return (
+                                  <span>{val.size + " " + val.name}, </span>
+                                );
+                              }
+                            })}
                           </p>
                         </div>
                       </Card>

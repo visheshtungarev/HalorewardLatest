@@ -141,15 +141,26 @@ const AllBrands = () => {
           response?.data?.forEach((val) => {
             val?.categories &&
               val.categories.filter((itm) => {
-                if (itm.categoryId === value) {
+                if (val?.contentTypes && itm.categoryId === value) {
                   filterarray.push(val);
                 }
               });
           });
+        } else {
+          response?.data?.map((item) => {
+            if (
+              item?.contentTypes &&
+              (item.contentTypes.length > 0) &
+                (item.contentTypes.filter(
+                  (content) => parseInt(content.size) > 0
+                ).length >
+                  0)
+            ) {
+              filterarray.push(item);
+            }
+          });
         }
-        filterarray && filterarray.length > 0
-          ? setBrandData(filterarray)
-          : setBrandData(response.data);
+        setBrandData(filterarray);
       }
     } catch (error) {
       console.error(error);

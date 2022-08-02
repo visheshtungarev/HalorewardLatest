@@ -127,7 +127,8 @@ export const getConfig = async (config) => {
       config.url == "https://customer-query.dxxrewards.click/api/customers" ||
       config.url == "https://products-query.dxxrewards.click/api/products" ||
       config.url ==
-        "https://tenant-products-query.dxxrewards.click/api/clients/1/products"
+        "https://tenant-products-query.dxxrewards.click/api/clients/1/products" ||
+      config.url.includes("api/clients/1/brands/byName")
         ? "text/plain"
         : "application/json",
     "tenant-id": "1"
@@ -150,6 +151,7 @@ export const getConfig = async (config) => {
     config.url == "https://products-query.dxxrewards.click/api/products" ||
     config.url.includes("api/customers/34/brands") ||
     config.url.includes("api/customers/34/product") ||
+    config.url.includes("api/clients/1/brands/byName") ||
     config.url.includes("/1/products")
   ) {
     config.headers["Authorization"] = await getToken(config?.url);
