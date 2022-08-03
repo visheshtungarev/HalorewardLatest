@@ -7,7 +7,7 @@ const { getCategoriesByClientID } = values;
 
 const getOfferAction = async (ids) => {
   var data = `{
-    products(siteId: 1, merchantId: ${ids ? ids : 1}) {
+    products(siteId: 1, merchantId: ${ids ? ids : 1}, status: ["Enabled"]) {
         merchantId
         merchantName
         provider
