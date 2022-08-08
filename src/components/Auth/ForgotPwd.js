@@ -1,6 +1,6 @@
 import { Button, Form, Input } from 'antd'
 import React from 'react'
-import { EyeOutlined } from '@ant-design/icons'
+// import { EyeOutlined } from '@ant-design/icons'
 import "./index.css"
 
 export default function ForgotPwd({ sendRequestLink }) {
@@ -10,7 +10,8 @@ export default function ForgotPwd({ sendRequestLink }) {
                 <p className='text-muted'>Enter registered email</p>
                 <label>Email</label>
                 <div className='lineinput'>
-                    <Input placeholder="Email" autoComplete="new-password" type={'email'} suffix={<EyeOutlined />} />
+                    {/* <Input placeholder="Email" autoComplete="new-password" type={'email'} suffix={<EyeOutlined />} /> */}
+                    <Input placeholder="Email" autoComplete="new-password" type={'email'} />
                 </div>
             </div>
 

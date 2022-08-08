@@ -105,7 +105,7 @@ const AllBrands = () => {
 
   const getBrandList = async (value) => {
     var raw = `{
-      brands(siteId: 1) {
+      brands(siteId: 1, status: ["Enabled"]) {
           merchantId
           merchantRank
           shortTitle

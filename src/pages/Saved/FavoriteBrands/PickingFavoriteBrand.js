@@ -88,9 +88,33 @@ export default function PickingFavoriteBrand() {
   }, [favouriteBrandList]);
 
   const getBrandList = async () => {
-    var raw =
-      "{\n    brands(siteId: 1) {\n        merchantId\n        merchantRank\n        merchantName\n        status\n        onCard\n        provider\n        modifiedDate\n        customerRebate\n        merchantLogo1\n        merchantUrl\n        categories {\n            categoryId\n            name\n        }\n        contentTypes {\n            name\n            size\n        }\n    }\n}\n\n";
-    try {
+    // var raw1 =
+    //   "{\n    brands(siteId: 1) {\n        merchantId\n        merchantRank\n        merchantName\n        status\n        onCard\n        provider\n        modifiedDate\n        customerRebate\n        merchantLogo1\n        merchantUrl\n        categories {\n            categoryId\n            name\n        }\n        contentTypes {\n            name\n            size\n        }\n    }\n}\n\n";
+    // console.log(raw1)
+    var raw = `{
+      brands(siteId: 1, status: ["Enabled"]) {
+          merchantId
+          merchantRank
+          merchantName
+          status
+          onCard
+          provider
+          modifiedDate
+          customerRebate
+          merchantLogo1
+          merchantUrl
+          categories {
+              categoryId
+              name
+          }
+          contentTypes {
+              name
+              size
+          }
+      }
+  }`
+    
+      try {
       let response = await Post_call(
         `${getCategoriesByClientID}/clients/1/brands`,
         raw,

@@ -40,18 +40,18 @@ export default function LoginPage() {
     <Col span={24} className="bg-white px-3 pb-4">
       <div className="mb-4 pt-3 auth-title">
         {modalChange === "login"
-          ? '<img src="/Images/mainLogo.svg" height={40} /> &nbsp; Welcome!'
+          ? <><img src="/Images/mainLogo.svg" height={40} /> &nbsp; Welcome!</>
           : modalChange === "register"
-          ? '<img src="/Images/mainLogo.svg" height={40} /> &nbsp; Register'
+          ? <><img src="/Images/mainLogo.svg" height={40} /> &nbsp; Register</>
           : modalChange === "forgotPwd"
-          ? "Forgot Password"
+          ? <>Forgot Password</>
           : modalChange === "sendRequestLink"
-          ? "Link Sent"
+          ? <>Link Sent</>
           : modalChange === "sendRequestLink"
-          ? "Link Sent"
+          ? <>Link Sent</>
           : modalChange === "linkExpired"
-          ? ""
-          : ""}
+          ? <></>
+          : <></>}
       </div>
       {modalChange === "login" ? (
         <Login

@@ -77,8 +77,37 @@ export const brandSearchAction = (name, actionType) => async (dispatch) => {
 
 export const brandListAction = (payload) => async (dispatch) => {
   console.log(payload);
-  var data =
-    "{\n    brands(siteId: 1) {\n        merchantId\n        merchantRank\n        merchantName\n        status\n        onCard\n        provider\n        modifiedDate\n        customerRebate\n        merchantLogo1\n        merchantUrl\n        categories {\n            categoryId\n            name\n        }\n        contentTypes {\n            name\n            size\n        }\n    }\n}\n\n";
+  // var data =
+  //   "{\n    brands(siteId: 1) {\n       
+  //      merchantId\n        merchantRank\n        merchantName\n    
+  //          status\n        onCard\n        provider\n        modifiedDate\n      
+  //            customerRebate\n        merchantLogo1\n        merchantUrl\n      
+  //              categories {\n            categoryId\n            name\n        }\n    
+  //                  contentTypes {\n            name\n            size\n        }\n    }\n}\n\n";
+
+  var data = `{
+      brands(siteId: 1, status: ["Enabled"]) {
+          merchantId
+          merchantRank
+          merchantName
+          status
+          onCard
+          provider
+          modifiedDate
+          customerRebate
+          merchantLogo1
+          merchantUrl
+          categories {
+              categoryId
+              name
+          }
+          contentTypes {
+              name
+              size
+          }
+      }
+  }`;
+
   try {
     let response = await Post_call(
       `${getCategoriesByClientID}/clients/1/brands`,
