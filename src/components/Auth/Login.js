@@ -44,9 +44,9 @@ export default function Login({ goToRegister, forgotPwd, setModalVisibel }) {
         if (res.success === true) {
           setIsSubmitting(false);
           toast.success(res.message);
-          setModalVisibel(false);
+          setModalVisibel ? setModalVisibel(false) : null;
           setTimeout(() => {
-            window.location.reload();
+            window.location.href = "/";
           }, 500);
         } else {
           toast.success("something went wrong");
@@ -86,7 +86,7 @@ export default function Login({ goToRegister, forgotPwd, setModalVisibel }) {
   return (
     <form onSubmit={handleSubmit}>
       <div className="mb-4">
-        <label>Email</label>
+        <label>Email modi</label>
         <div className="lineinput">
           <Input
             placeholder="Email"

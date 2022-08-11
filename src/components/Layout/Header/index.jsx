@@ -4,7 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import {
   AiOutlineHeart,
   AiFillHeart,
-  AiOutlineInfoCircle
+  AiOutlineInfoCircle,
 } from "react-icons/ai";
 import "./index.css";
 import TopMenu from "../../TopMenu/TopMenu";
@@ -22,7 +22,7 @@ import PwdChangedSuccsessfully from "../../Auth/PwdChangedSuccsessfully";
 import { useDispatch, useSelector } from "react-redux";
 import {
   brandSearchAction,
-  resetMerchantAction
+  resetMerchantAction,
 } from "../../../actions/brandAction";
 import { TOGGLELOADING } from "../../../Constants/ActionsConstants";
 import { getCategoryAction } from "../../../actions/CategoryAction";
@@ -222,6 +222,7 @@ const Index = () => {
             <Col>
               <img width={100} src="/Images/logo.png" />
             </Col>
+
             <Col className="d-flex align-items-center">
               <span className="d-inline-block px-2">
                 <TopMenu mobileView={false} category={categorylist?.data} />
@@ -229,10 +230,17 @@ const Index = () => {
               <span className="d-inline-block px-2">
                 <img src="/Images/Bookmark_icon_outline.svg" />
               </span>
-              <Link to={"/login"} className="d-inline-block px-2">
-                <img src="/Images/user_icon_outline.svg" />
-              </Link>
+              {systemToken ? (
+                <Link to={"/account-profile"} className="d-inline-block px-2">
+                  <img src="/Images/user_icon_outline.svg" />
+                </Link>
+              ) : (
+                <Link to={"/login"} className="d-inline-block px-2">
+                  <img src="/Images/user_icon_outline.svg" />
+                </Link>
+              )}
             </Col>
+
             <Col xs={24} className="mt-3">
               <Search
                 size="large"
@@ -290,16 +298,7 @@ const Index = () => {
           {systemToken ? (
             <Row align="middle" justify="">
               <Col>
-                <Link
-                  // to={
-                  //   getFavouriteBrand && getFavouriteBrand.length > 0
-                  //     ? "/saved"
-                  //     : "/saved/picking-favorite-brand"
-                  // }
-                  // to="/saved/picking-favorite-brand"
-                  to="/saved"
-                  className="text-dark fw-bold"
-                >
+                <Link to="/saved" className="text-dark fw-bold">
                   <img src="Images/Bookmark_icon_outline.svg" />{" "}
                   <span>Saved</span>
                 </Link>

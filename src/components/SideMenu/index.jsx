@@ -39,7 +39,14 @@ const SideMenu = () => {
           <Link to={"/Help-Support"}>Help & Support</Link>
         </li>
         <li>
-          <a className="logoutColor" href="javascript:void(0)">
+          <a
+            onClick={() => {
+              localStorage.clear();
+              window.location.href = "/";
+            }}
+            className="logoutColor"
+            href="javascript:void(0)"
+          >
             Logout
           </a>
         </li>
